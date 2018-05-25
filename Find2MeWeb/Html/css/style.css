@@ -1,0 +1,217 @@
+body
+{
+  font-family: 'Lato', sans-serif !important;
+}
+
+html,
+body {
+	font-size: 14px !important;
+}
+h1 {
+	font-size: 1.602em;
+}
+h2 {
+	font-size: 1.424em;
+}
+h3 {
+	font-size: 1.266em;
+}
+h4 {
+	font-size: 1.125em;
+}
+h5 {
+	font-size: 0.889em;
+}
+h6 {
+	font-size: 0.79em;
+}
+.display-1 {
+	font-size: 3.906em;
+}
+.display-2 {
+	font-size: 3.125em;
+}
+.display-3 {
+	font-size: 2.5em;
+}
+.display-4 {
+	font-size: 2em;
+}
+@media (min-width: 48em) {
+  h1 {
+    font-size: 2.441em;
+  }
+  h2 {
+    font-size: 1.953em;
+  }
+  h3 {
+    font-size: 1.563em;
+  }
+  h4 {
+    font-size: 1.25em;
+  }
+  .display-1 {
+		font-size: 6em;
+	}
+	.display-2 {
+		font-size: 5.5em;
+	}
+	.display-3 {
+		font-size: 4.5em;
+	}
+	.display-4 {
+		font-size: 3.5em;
+	}
+}
+// Large devices (desktops, 62em and up)
+@media (min-width: 62em) {
+	html,
+	body {
+		font-size: 16px !important;
+	}
+}
+
+// Extra large devices (large desktops, 75em and up)
+@media (min-width: 75em) {
+	html,
+	body {
+		font-size: 18px !important;
+	}
+}
+
+
+.qq { display: block; position: fixed; bottom: 0px; left: 0px; height: 20px; background-color: rgba(0,0,87,0.4); z-index: 9999; width: 100%; color: white; text-align: center;}
+@media (max-width: 576px) { .qq:before { content: "xs (max-width: 576px)" } }
+
+@media (min-width: 576px) and (max-width: 768px) { .qq:before { content: "sm (max-width: 768px)" } }
+
+
+@media (min-width: 769px) and (max-width: 992px) { .qq:before { content: "md (max-width: 992px)" } }
+
+@media (min-width: 993px) and (max-width: 1200px) { .qq:before { content: "lg (max-width: 1200px)" } }
+
+
+@media (min-width: 1201px) { .qq:before { content: "xl (min-width: 1200px)" } }
+
+
+/*
+
+Navigation
+
+*/
+nav.navbar a, input , select{
+   font-family: 'Lato light', sans-serif !important;
+}
+
+.nav-background{ background-color: rgba(0, 0, 87, 0.01); border-bottom: 1px solid rgba(0,0,87,0.4); }
+
+/* Navigation End */
+
+/*
+
+Other elements
+
+*/
+hr { border-top: 1px solid rgba(0,0,87,0.4);}
+
+
+/* Other elements end */
+
+/*
+
+Ad section frontpage
+
+*/
+.ad-section a.avatar {
+  background-color: #fafafa;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 30;
+  height: 30px;
+
+}
+.ad-section .card-img-top { border-radius: 0px;}
+.ad-section a img { width: 100%; height: 100%;}
+.ad-section .ad-header { border-bottom:0; border-radius: 5px 5px 0px 0px; background-color: #fff;}
+.ad-section .card.ad { border-radius: 0px 0px 5px 5px;}
+.ad-section .card-footer { background-color: #fff;}
+button.btn.expire, button.btn.reward  { font-size: 0.9370rem; border: 0.5px solid #fff; }
+button.btn.expire { background: rgba(221,221,221,0.85); border-radius: 5px;color: #000;}
+button.btn.reward { background: rgba(151,151,151,0.85); border-radius: 5px; color: #fff; }
+.ad-section .row + .row2 {margin-top: 2rem;}
+
+
+.relation a.avatar {
+  background-color: #fafafa;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  /*width: 45px;
+  height: 45px;*/
+
+}
+.relation a img { width: 100%; height: 100%;}
+
+
+.addetail-section a.avatar {
+  background-color: #fafafa;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 70px;
+  height: 70px;
+}
+@media (max-width: 575px) {
+  .addetail-section a.avatar{
+    width: 45px;
+    height: 45px;
+  }
+}
+.addetail-section a img { width: 100%; height: 100%;}
+
+
+#msg .tread-item {  }
+#msg .tread-item .tread-border { border-left: 2px solid #34495E; }
+#msg a.avatar {
+  background-color: #fafafa;
+  border-radius: 50%;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  cursor: pointer;
+  display: block;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+  -ms-flex: 0 0 auto;
+  flex: 0 0 auto;
+  overflow: hidden;
+  position: relative;
+  width: 45px;
+  height: 45px;
+
+}
+#msg a img { width: 100%; height: 100%;}
