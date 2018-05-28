@@ -1,7 +1,15 @@
-﻿
+﻿@model Find2MeWeb.ViewModels.FullViewModel
+
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create Ad</h2>
 
+<div>
+
+    
+  @Html.Raw(@Model.CreateAd)
+
+<p>@Model.CreationDateTime.ToString()</p>
+</div>

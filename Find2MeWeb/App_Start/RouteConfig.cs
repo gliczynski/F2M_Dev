@@ -13,6 +13,21 @@ namespace Find2MeWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            // Localization route - it will be used as a route of the first priority 
+            routes.MapRoute(
+                name: "DefaultLocalized",
+                url: "{lang}/{controller}/{action}/{id}",
+                defaults: new
+                {
+                    controller = "Home",
+                    action = "Index",
+                    id = UrlParameter.Optional,
+                    lang = "da"
+                });
+
+
+
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",

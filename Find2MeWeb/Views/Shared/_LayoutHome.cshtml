@@ -14,11 +14,34 @@
     <link rel="stylesheet" href="~/Html/css/font-awesome4/css/font-awesome.min.css">
     <link rel="stylesheet" href="~/Html/css/style.css">
     <link rel="stylesheet" href="~/Html/css/bootstrap-social.css">
-
-
-   
-
 </head>
+
+@helper english()
+    {
+
+        var targetPath = string.Format("/{0}/{1}{2}",
+                                   ViewContext.RouteData.Values["controller"].ToString(),
+                                   ViewContext.RouteData.Values["action"].ToString(),
+                                   Request.Url.Query);
+        var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+        var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
+        <a class="nav-link" href="@(string.Format(targetUrlMask, "en"))">EN</a>
+}
+@helper langSelector()
+    {
+      
+
+        var targetPath = string.Format("/{0}/{1}{2}",
+            ViewContext.RouteData.Values["controller"].ToString(),
+            ViewContext.RouteData.Values["action"].ToString(),
+            Request.Url.Query);
+        var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+        var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
+
+        
+        <a class="nav-link" href="@(string.Format(targetUrlMask, "da"))">DK</a>
+               
+}
 <body>
 
 
@@ -37,25 +60,30 @@
                     <div class="collapse navbar-collapse" id="navbarNavDropdown">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item active mr-3">
-                                <a class="nav-item nav-link" href="#"><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
+                                <a class="nav-item nav-link" href=@Url.Action("Create", "Ad" )><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-item nav-link" href="#"><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
+                                <a class="nav-item nav-link" href=@Url.Action("Index", "Ad" )><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav ml-auto ">
                             <li class="nav-item justify-content-end ">
-                                <a class="nav-link">DK</a>
+                                @*<a class="nav-link">DK</a>*@
+
+                                @langSelector()
+
                             </li>
                             <li class="nav-item justify-content-end mr-3">
-                                <a class="nav-link">EN</a>
+                                @*<a class="nav-link">EN</a>*@
+
+                                @english()
                             </li>
                             <!--  <li class="nav-item mr-3">
-                                <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
-                              </li>
-                              <li class="nav-item mr-3">
-                                <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
-                              </li> -->
+                              <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
+                            </li>
+                            <li class="nav-item mr-3">
+                              <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
+                            </li> -->
 
                             <li class="nav-item justify-content-end mr-3">
                                 <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal" role="button">
@@ -80,16 +108,16 @@
         </div>
     </div>
 
+    @*Header End Here*@
 
-    <!-- header end-->
+    @*Body Start Here*@
 
-    <!-- Body Start ->
     @RenderBody()
     @RenderSection("SPAViews", required: false)
 
-         <!-- Body END ->
+    <!-- Body END ->
 
-    <!-- Footer Start-->
+     <!-- Footer Start-->
 
     <style>
 

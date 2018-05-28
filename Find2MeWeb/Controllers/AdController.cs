@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Find2MeWeb.ActionFilters;
+using Find2MeWeb.Resources;
+using Find2MeWeb.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -6,6 +9,7 @@ using System.Web.Mvc;
 
 namespace Find2MeWeb.Controllers
 {
+    [Internationalization]
     public class AdController : Controller
     {
         // GET: Ad
@@ -21,9 +25,14 @@ namespace Find2MeWeb.Controllers
         }
 
         // GET: Ad/Create
+       // [Internationalization]
         public ActionResult Create()
-        {
-            return View();
+        { // Get string from strongly typed localzation resources
+            var vm = new FullViewModel { CreateAd = Strings.CreateAd ,LocalisedString = Strings.SomeLocalisedString};
+
+
+            return View(vm);
+            //return View();
         }
 
         // POST: Ad/Create
