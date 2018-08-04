@@ -290,6 +290,9 @@
     <Content Include="Html\img\Bitmap%402x.png" />
     <Content Include="Html\img\Bitmap.png" />
     <Content Include="Html\img\CommericalBannerSlideImage1.png" />
+    <Content Include="Html\img\default-profile.png" />
+    <Content Include="Html\img\icon-ad%402x.png" />
+    <Content Include="Html\img\icon-ad.png" />
     <Content Include="Html\img\icon-money%402x.png" />
     <Content Include="Html\img\icon-money.png" />
     <Content Include="Html\img\icon-shape%402x.png" />
@@ -342,6 +345,12 @@
     <Content Include="Html\img\Thumbnail9.png" />
     <Content Include="Html\img\ThumbUploadImage%402x.png" />
     <Content Include="Html\img\ThumbUploadImage.png" />
+    <Content Include="Html\index_loggedin.html" />
+    <Content Include="Html\profile_page_editor.html" />
+    <Content Include="Html\profile_page_public.html" />
+    <Content Include="Html\profile_start_wizard_page_3.html" />
+    <Content Include="Html\profile_start_wizard_page_2.html" />
+    <Content Include="Html\profile_start_wizard_page_1.html" />
     <Content Include="Html\index.html" />
     <Content Include="Html\js\adwizard.html" />
     <Content Include="Html\js\bootstrap-tagsinput.js" />
@@ -393,6 +402,7 @@
     <Content Include="Html\img\.DS_Store" />
     <Content Include="Html\js\.DS_Store" />
     <Content Include="Html\js\cities.json" />
+    <Content Include="Html\image_cropper.zip" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

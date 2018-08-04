@@ -1,0 +1,325 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Find2Me</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,500|Lato:300,400,700">
+    <link rel="stylesheet" href="css/iconic/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome4/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+
+</head>
+<body>
+    <div class="container-fluid mb-md-5 nav-background sticky-top">
+        <div class="row">
+            <div class="container">
+
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                    <a class="navbar-brand d-lg-none" href="#"><img src="img/Logo@1x.png" width="75%" alt="Find2Me Logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active mr-3">
+                                <a class="nav-item nav-link" href="#"><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="#"><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto ">
+                            <li class="nav-item justify-content-end ">
+                                <a class="nav-link">DK</a>
+
+                            </li>
+                            <li class="nav-item justify-content-end mr-3">
+                                <a class="nav-link">EN</a>
+
+                            </li>
+
+                            <!--  <li class="nav-item mr-3">
+                              <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
+                            </li>
+                            <li class="nav-item mr-3">
+                              <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
+                            </li> -->
+
+
+                            <li class="nav-item justify-content-end mr-3">
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal" role="button">
+                                    Login
+                                </button>
+
+                            </li>
+                            <li class="nav-item dropdown  justify-content-end">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menu
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    <section class="adwizard-section">
+        <div class="container mt-3">
+            <div class="row">
+
+                <!-- Headline of the page -->
+                <div class="col-12 d-flex justify-content-md-between align-items-center">
+                    <div>
+                        <h1 class="d-inline-flex pr-3">Profile setup wizard</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <hr class="pt-0 mt-0 mb-0" />
+                </div>
+            </div>
+
+            
+            <div class="row mt-5">
+                <div class="col">
+
+                    <!-- TABS FOR WIZARD -->
+
+                    <div class="row">
+                        <div class="col-11 mr-0 col-xl-6 offset-xl-3">
+                            <div class="stepwizard-row"> </div>
+                        </div>
+                    </div>
+                    <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
+
+                        <div class="col-4 col-xl-2 stepwizard-step">
+                            <a href="#step-1" type="button" class="btn btn-dark btn-circle">1</a>
+                            <p>Profile image</p>
+                        </div>
+                        <div class="col-4 col-xl-2 stepwizard-step">
+                            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                            <p>Profile info</p>
+                        </div>
+                        <div class="col-4 col-xl-2 stepwizard-step ">
+                            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                            <p>Done</p>
+                        </div>
+                    </div>
+
+                    <!-- Upload profile image section -->
+                    <div class="row mt-1">
+                        <div class="col text-center">
+                            <p>
+                                <strong>Your profile is almost ready.</strong><br />Please add your profile image to your profile. You will allways be able to change it later.<br />
+                                The profile image is shown together with your add, comments and other things.
+                            </p>
+                            <p class="profile-section d-flex justify-content-center mt-5">
+                                <a class="avatar">
+                                    <img src="img/default-profile.png" />
+                                </a>
+                            </p>
+                            <p class="mt-2">
+                                <button class="btn btn-dark">Edit image</button>
+                                <button class="btn btn-dark">Upload profile image</button>
+                            </p>
+                        </div>
+                    </div>
+
+
+
+
+                    <!-- Navigation of the wizard -->
+                    <hr class="mt-5" />
+
+                    <div class="form-group row d-flex justify-content-center">
+
+                        <a href="profile_start_wizard_page_2.html" class="btn btn-dark" role="button">Next</a>
+                    </div>
+
+
+
+                    </form>
+                </div>
+
+            </div>
+
+        </div> <!-- container -->
+    </section><!-- adwizard-section -->
+
+
+
+
+    <style>
+        footer {
+            background-color: rgba(0,0,0,.03);
+            border-top: 1px solid #979797;
+            border-bottom: 1px solid #979797;
+        }
+
+            footer a {
+                color: #212529;
+                line-height: 2rem
+            }
+    </style>
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col">
+                    <h6>Categories</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Fashion</a></small></li>
+                        <li><small><a href="">Electronics</a></small></li>
+                        <li><small><a href="">Collectibles & Art</a></small></li>
+                        <li><small><a href="">Home & Garden</a></small></li>
+                        <li><small><a href="">Sporting Goods</a></small></li>
+                        <li><small><a href="">Motors</a></small></li>
+                        <li><small><a href="">Relation</a></small></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6>Relations</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Bla Bla</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6>Make Mooney With Us</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Our concept</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                    </ul>
+                    <h6 class="mt-3">Find With Us</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Our concept</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+
+                    </ul>
+                    <h6 class="mt-3">Find2Me Agent Service</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Our concept</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6>Let Us Help You</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Your Account</a></small></li>
+                        <li><small><a href="">Your Ads</a></small></li>
+                        <li><small><a href="">Your connection and rewards</a></small></li>
+
+                    </ul>
+                    <h6 class="mt-3">Get To Know Us</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">About Find2Me</a></small></li>
+                        <li><small><a href="">Contact</a></small></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
+    <div class="container mt-3 mb-3">
+        <div class="row justify-content-sm-center">
+            <div class="col-md-auto">
+                <small>Conditions of Use</small>
+            </div>
+            <div class="col-md-auto">
+                <small>Privacy Notice</small>
+            </div>
+            <div class="col-md-auto">
+                <small>Cookies</small>
+            </div>
+            <div class="col-md-auto">
+                <small>Copyright © 2017, find2me.org  All Rights Reserved.</small>
+            </div>
+        </div>
+    </div>
+
+    <style media="screen">
+        #loginModal a.btn {
+            color: white;
+        }
+    </style>
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="loginModalLabel">Log in</h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center mt-3">
+                        <p>Connect with one of your favorite social account</p>
+                        </br/>
+                        </br/>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4  ">
+                            <a class="btn btn-block btn-social btn-facebook">
+                                <span class="fa fa-facebook"></span> Sign in with Facebook
+                            </a>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4 mt-3 ">
+                            <a class="btn btn-block btn-social btn-google">
+                                <span class="fa fa-google"></span> Sign in with Google
+                            </a>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4 mt-3">
+                            <a class="btn btn-block btn-social btn-instagram">
+                                <span class="fa fa-instagram"></span> Sign in with Instagram
+                            </a>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4 mt-3 mb-5">
+                            <a class="btn btn-block btn-social btn-twitter">
+                                <span class="fa fa-twitter"></span> Sign in with Twitter
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,1540 @@
+﻿<!doctype html>
+<html lang="en">
+  <head>
+    <title>Find2Me</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,500|Lato:300,400,700">
+    <link rel="stylesheet" href="css/iconic/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome4/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+
+  </head>
+  <body>
+<div class="container-fluid mb-md-5 nav-background sticky-top">
+    <div class="row">
+        <div class="container">
+
+
+     
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <a class="navbar-brand d-lg-none" href="#"><img src="img/Logo@1x.png" width="75%" alt="Find2Me Logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active mr-3">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto ">
+            <li class="nav-item justify-content-end ">
+                <a class="nav-link">DK</a>
+
+            </li>
+            <li class="nav-item justify-content-end mr-3">
+                <a class="nav-link">EN</a>
+
+            </li>
+
+            <li class="nav-item mr-3">
+                <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
+            </li>
+            <!--
+    <li class="nav-item mr-3">
+      <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
+    </li> -->
+
+
+            <li class="nav-item dropdown justify-content-end mr-3">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    johndoe
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#" data-i18n="MENUITEM_SUB_ITEM1">My profile</a>
+                    <a class="dropdown-item" href="#" data-i18n="MENUITEM_SUB_ITEM2">My ads</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="/common/logoff/" data-i18n="MENUITEM_SUB_LOGOFF">Log out</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown  justify-content-end">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Menu
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Action</a>
+                    <a class="dropdown-item" href="#">Another action</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+        </ul>
+      </div>
+    </nav>
+
+      </div>
+  </div>
+</div>
+
+  <div class="container">
+      <div class="jumbotron jumbotron-fluid bg-white text-center pt-2 pb-2 d-none d-lg-block">
+        <div class="container ">
+          <div class="row">
+            <div class="col">
+              <img src="img/Logo@2x.png" class="mx-auto d-block" alt="Find2Me logo">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="jumbotron jumbotron-fluid bg-white text-center pt-md-4 mt-0 pb-md-2 mb-0 pb-0 ">
+        <div class="container">
+            <div class="row justify-content-md-center">
+              <div class="col">
+
+
+                <form>
+                  <div class="form-row justify-content-md-center">
+                    <div class="form-group col-sm-12 col-md-5">
+                      <select class="form-control form-control-lg" id="exampleSelect1">
+                        <option selected>Select category</option>
+                        <option>Fashion</option>
+                        <option>Electronics</option>
+                        <option>Collectibles & Art</option>
+                        <option>Home & Garden</option>
+                        <option>Sporting Goods</option>
+                        <option>Motors</option>
+                        <option>Relation</option>
+                      </select>
+                    </div>
+                    <div class="form-group col-md-7">
+                      <div class="input-group input-group-lg">
+                        <input class="form-control" type="text" value="Search" id="">
+                        <span class="input-group-btn">
+                          <button type="button" class="btn btn-dark btn-lg ">Search</button>
+                        </span>
+                      </div>
+                      <small id="emailHelp" class="form-text text-muted">Search by tags, divided by space and you’ll find!</small>
+                    </div>
+                  </div>
+                </form>
+
+              </div>
+            </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col">
+            <hr class="mb-md-5 mb-sm-1"/>
+        </div>
+      </div>
+
+
+
+      <div class="row">
+        <div class="col-12 mb-5">
+          <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+            <ol class="carousel-indicators">
+              <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+              <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+            </ol>
+            <div class="carousel-inner">
+              <div class="carousel-item active">
+                <img class="d-block w-100" src="img/slideimage_1@2x.png" alt="First slide">
+                 <div class="carousel-caption  d-md-block align-items-start">
+                   <h3 class="d-inline-flex    display-3">Let people find<br/> the things you can’t find</h3>
+                   <p class="d-flex pull-left">Click here</p>
+                 </div>
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="img/slideimage_2@2x.png" alt="First slide">
+              </div>
+              <div class="carousel-item">
+                <img class="d-block w-100" src="img/slideimage_3@2x.png" alt="First slide">
+              </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="sr-only">Next</span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+            <h2 class="d-inline-flex pr-3">Exclusive ads </h2><small class="text-muted d-inline-flex">See even more</small>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+            <hr class="pt-0 mt-0 mb-3"/>
+        </div>
+      </div>
+
+  </div> <!-- container -->
+  <style>
+
+
+  </style>
+  <section class="ad-section">
+    <div class="container ">
+      <div class="row">
+
+        <!-- Ad 1 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4" onclick="location.href='ad.html'" style="cursor:pointer;">
+          <div class="card ad-header p-0 m-0">
+            <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                <div class="row no-gutters nowrap">
+                  <div class="col-xs-auto">
+                    <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                  </div>
+                  <div class="col pl-2 pr-2 text-truncate align-self-center">
+                    <p class="m-0 text-truncate ">
+                      John Doe
+                    </p>
+
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="card ad">
+
+            <img src="img/Thumbnail1@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+          <div class="card-footer pl-3 pr-3">
+
+            <div class="row no-gutters nowrap">
+              <div class="col pl-0 pr-0 text-truncate ">
+                <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                  Beer bottles with closure tab and more too come
+                </p>
+                <small class="text-muted font-weight-light">Home & garden</small>
+              </div>
+
+            </div>
+            <div class="row">
+              <div class="col-1">
+                <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+              </div>
+
+              <div class="col-1">
+                <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+              </div>
+              <div class="col-1 ml-auto mr-3">
+                <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Ad 1 End -->
+      <!-- Ad 2 -->
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+        <div class="card ad-header p-0 m-0">
+          <div class="card-body pl-3 pr-3 pt-2 pb-2">
+              <div class="row no-gutters nowrap">
+                <div class="col-xs-auto">
+                  <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <div class="col pl-2 pr-2 text-truncate align-self-center">
+                  <p class="m-0 text-truncate ">
+                    John Doe
+                  </p>
+
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card ad">
+
+          <img src="img/Thumbnail2@2x.png" class="card-img-top img-fluid" />
+          <div class="card-img-overlay p-3">
+            <div class="d-flex">
+              <div class="p-0 mr-auto">
+                <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                <!-- <small class="text-muted">expires in</small> -->
+              </div>
+              <div class="p-0">
+              <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+              <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer pl-3 pr-3">
+
+          <div class="row no-gutters nowrap">
+            <div class="col pl-0 pr-0 text-truncate ">
+              <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                Beer bottles with closure tab and more too come
+              </p>
+              <small class="text-muted font-weight-light">Home & garden</small>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+            </div>
+
+            <div class="col-1">
+              <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+            </div>
+            <div class="col-1 ml-auto mr-3">
+              <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+      <!-- Ad 2 End -->
+      <!-- Ad 3 -->
+      <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+        <div class="card ad-header p-0 m-0">
+          <div class="card-body pl-3 pr-3 pt-2 pb-2">
+              <div class="row no-gutters nowrap">
+                <div class="col-xs-auto">
+                  <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <div class="col pl-2 pr-2 text-truncate align-self-center">
+                  <p class="m-0 text-truncate ">
+                    John Doe
+                  </p>
+
+                </div>
+            </div>
+          </div>
+        </div>
+        <div class="card ad">
+
+          <img src="img/Thumbnail3@2x.png" class="card-img-top img-fluid" />
+          <div class="card-img-overlay p-3">
+            <div class="d-flex">
+              <div class="p-0 mr-auto">
+                <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                <!-- <small class="text-muted">expires in</small> -->
+              </div>
+              <div class="p-0">
+              <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+              <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+            </div>
+          </div>
+        </div>
+
+        <div class="card-footer pl-3 pr-3">
+
+          <div class="row no-gutters nowrap">
+            <div class="col pl-0 pr-0 text-truncate ">
+              <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                Beer bottles with closure tab and more too come
+              </p>
+              <small class="text-muted font-weight-light">Home & garden</small>
+            </div>
+
+          </div>
+          <div class="row">
+            <div class="col-1">
+              <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+            </div>
+
+            <div class="col-1">
+              <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+            </div>
+            <div class="col-1 ml-auto mr-3">
+              <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Ad 3 End -->
+
+
+
+    <!-- Ad 4 -->
+    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+      <div class="card ad-header p-0 m-0">
+        <div class="card-body pl-3 pr-3 pt-2 pb-2">
+            <div class="row no-gutters nowrap">
+              <div class="col-xs-auto">
+                <a class="avatar"><img src="img/avatar1.jpg" /></a>
+              </div>
+              <div class="col pl-2 pr-2 text-truncate align-self-center">
+                <p class="m-0 text-truncate ">
+                  John Doe
+                </p>
+
+              </div>
+          </div>
+        </div>
+      </div>
+      <div class="card ad">
+
+        <img src="img/Thumbnail4@2x.png" class="card-img-top img-fluid" />
+        <div class="card-img-overlay p-3">
+          <div class="d-flex">
+            <div class="p-0 mr-auto">
+              <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+              <!-- <small class="text-muted">expires in</small> -->
+            </div>
+            <div class="p-0">
+            <button class="btn btn-secondary reward ">200,00 kr.</button><br/>
+            <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+          </div>
+        </div>
+      </div>
+
+      <div class="card-footer pl-3 pr-3">
+
+        <div class="row no-gutters nowrap">
+          <div class="col pl-0 pr-0 text-truncate ">
+            <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+              Beer bottles with closure tab and more too come
+            </p>
+            <small class="text-muted font-weight-light">Home & garden</small>
+          </div>
+
+        </div>
+        <div class="row">
+          <div class="col-1">
+            <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+          </div>
+
+          <div class="col-1">
+            <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+          </div>
+          <div class="col-1 ml-auto mr-3">
+            <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Ad 4 End -->
+  <!-- Ad 5 -->
+  <div class=" col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+    <div class="card ad-header p-0 m-0">
+      <div class="card-body pl-3 pr-3 pt-2 pb-2">
+          <div class="row no-gutters nowrap">
+            <div class="col-xs-auto">
+              <a class="avatar"><img src="img/avatar1.jpg" /></a>
+            </div>
+            <div class="col pl-2 pr-2 text-truncate align-self-center">
+              <p class="m-0 text-truncate ">
+                John Doe
+              </p>
+
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="card ad">
+
+      <img src="img/Thumbnail5@2x.png" class="card-img-top img-fluid" />
+      <div class="card-img-overlay p-3">
+        <div class="d-flex">
+          <div class="p-0 mr-auto">
+            <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+            <!-- <small class="text-muted">expires in</small> -->
+          </div>
+          <div class="p-0">
+          <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+          <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer pl-3 pr-3">
+
+      <div class="row no-gutters nowrap">
+        <div class="col pl-0 pr-0 text-truncate ">
+          <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+            Beer bottles with closure tab and more too come
+          </p>
+          <small class="text-muted font-weight-light">Home & garden</small>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-1">
+          <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+        </div>
+
+        <div class="col-1">
+          <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+        </div>
+        <div class="col-1 ml-auto mr-3">
+          <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Ad 5 End -->
+  <!-- Ad 6 -->
+  <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+    <div class="card ad-header p-0 m-0">
+      <div class="card-body pl-3 pr-3 pt-2 pb-2">
+          <div class="row no-gutters nowrap">
+            <div class="col-xs-auto">
+              <a class="avatar"><img src="img/avatar1.jpg" /></a>
+            </div>
+            <div class="col pl-2 pr-2 text-truncate align-self-center">
+              <p class="m-0 text-truncate ">
+                John Doe
+              </p>
+
+            </div>
+        </div>
+      </div>
+    </div>
+    <div class="card ad">
+
+      <img src="img/Thumbnail6@2x.png" class="card-img-top img-fluid" />
+      <div class="card-img-overlay p-3">
+        <div class="d-flex">
+          <div class="p-0 mr-auto">
+            <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+            <!-- <small class="text-muted">expires in</small> -->
+          </div>
+          <div class="p-0">
+          <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+          <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+        </div>
+      </div>
+    </div>
+
+    <div class="card-footer pl-3 pr-3">
+
+      <div class="row no-gutters nowrap">
+        <div class="col pl-0 pr-0 text-truncate ">
+          <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+            Beer bottles with closure tab and more too come
+          </p>
+          <small class="text-muted font-weight-light">Home & garden</small>
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col-1">
+          <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+        </div>
+
+        <div class="col-1">
+          <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+        </div>
+        <div class="col-1 ml-auto mr-3">
+          <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  <!-- Ad 6 End -->
+
+
+  </div>
+</section>
+<style media="screen">
+.thumbnail {
+  position: relative;
+}
+
+.caption {
+  position: absolute;
+  top: 45%;
+  left: 0;
+  width: 100%;
+}
+</style>
+<section class="advertise mt-5">
+  <div class="container">
+
+
+    <div class="row">
+      <div class="col-sm-12 col-lg-12 col-xl-8 mb-3">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+          <!--<ol class="carousel-indicators">
+            <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+            <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+          </ol>-->
+          <div class="carousel-inner">
+            <div class="carousel-item active">
+              <img class="d-block w-100" src="img/CommericalBannerSlideImage1.png" alt="First slide">
+               <div class="carousel-caption  d-md-block align-items-start">
+                 <!--<h3 class="d-inline-flex display-2">Let people find<br/> the things you can’t find</h3>
+                 <p class="d-flex pull-left">Click here</p>-->
+               </div>
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img/slideimage_2@2x.png" alt="First slide">
+            </div>
+            <div class="carousel-item">
+              <img class="d-block w-100" src="img/slideimage_3@2x.png" alt="First slide">
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="col-sm-12 col-md-12 col-lg-12 col-xl-4">
+        <div class="container">
+          <div class="row">
+            <div class="col-12 col-md-8 offset-md-2 col-xs-8 col-xl-12 offset-xl-0 p-0 mb-3">
+              <div class="card">
+                <div class="card-body pt-3 pb-3">
+                  <div class="contaimer">
+
+
+                  <div class="row">
+                    <div class="col-2 no-gutters text-center">
+                      <img src="img/icon-money.png" class="responsive img-fluid" alt="">
+                    </div>
+                    <div class="col-10 pl-0 no-gutters">
+                        <h6 class="mb-0">HELP FIND AND EARN</h6>
+                        <p class="mb-1" style="line-height:1.1">
+                          <small class="text-muted">Help your fellows and find what they are looing for and earn money</small>
+                        </p>
+                        <a href="#">Go to reward given ads</a>
+                    </div>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-8 offset-md-2 col-xs-4 col-xl-12 offset-xl-0 p-0 mb-3">
+              <div class="card">
+                <div class="card-body pt-3 pb-3">
+                  <div class="row">
+                    <div class="col-2 no-gutters text-center">
+                      <img src="img/icon-shape.png" class="responsive img-fluid" alt="">
+                    </div>
+                    <div class="col-10 pl-0 no-gutters">
+                        <h6 class="mb-0">FIND A RELATION</h6>
+                        <p class="mb-1" style="line-height:1.1">
+                          <small class="text-muted">Looking for a shopping friend, a nanny, a study body or another kind of relation</small>
+                        </p>
+                        <a href="#">Find it here</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-8 offset-md-2 col-xs-4 col-xl-12 offset-xl-0 p-0 mb-3">
+              <div class="card">
+                <div class="card-body pt-3 pb-3">
+                  <div class="row">
+                    <div class="col-2 no-gutters text-center">
+                      <img src="img/icon-star.png" class="responsive img-fluid" alt="">
+                    </div>
+                    <div class="col-10 pl-0 no-gutters">
+                        <h6 class="mb-0">LET OUR AGENT NOTIFY YOU</h6>
+                        <p class="mb-1" style="line-height:1.05">
+                          <small class="text-muted">Use our agent and let us notify you when an item is wanted</small>
+                        </p>
+                        <a href="#">Start here</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="container mt-lg-5 mt-md-3 mt-1">
+  <div class="row">
+    <div class="col-12">
+        <h2 class="d-inline-flex pr-3">Todays ads </h2><small class="text-muted d-inline-flex">See even more</small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <hr class="pt-0 mt-0 mb-3"/>
+    </div>
+  </div>
+</div>
+<section class="ad-section">
+  <div class="container ">
+    <div class="row">
+        <!-- Todays ad 1 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail10@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 1 end -->
+        <!-- Todays ad 2 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail9@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 2 end -->
+        <!-- Todays ad 3 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail8@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 3 end -->
+        <!-- Todays ad 4 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail7@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 4 end -->
+        <!-- Todays ad 5 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail11@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 5 end -->
+        <!-- Todays ad 6 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail12@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 6 end -->
+        <!-- Todays ad 7 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail13@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 7 end -->
+        <!-- Todays ad 8 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail14@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Todays ad 8 end -->
+    </div>
+  </div>
+</section>
+
+
+<div class="container mt-lg-5 mt-md-3 mt-1">
+  <div class="row">
+    <div class="col-12">
+        <h2 class="d-inline-flex pr-3">Recent ads with reward </h2><small class="text-muted d-inline-flex">See even more</small>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+        <hr class="pt-0 mt-0 mb-3"/>
+    </div>
+  </div>
+</div>
+
+<section class="ad-section">
+  <div class="container ">
+    <div class="row">
+        <!-- Recent ads 1 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail15@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recent ads 1 end -->
+        <!-- Recent ads 2 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail16@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recent ads 2 end -->
+        <!-- Recent ads 3 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail17@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recent ads 3 end -->
+        <!-- Recent ads 4 -->
+        <div class="col-12 col-sm-6 col-md-6 col-lg-3 mt-4 mb-4">
+
+          <div class="card ad">
+
+            <img src="img/Thumbnail18@2x.png" class="card-img-top img-fluid" />
+            <div class="card-img-overlay p-3">
+              <div class="d-flex">
+                <div class="p-0 mr-auto">
+                  <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br/>
+                  <!-- <small class="text-muted">expires in</small> -->
+                </div>
+                <div class="p-0">
+                  <button class="btn btn-secondary reward ">100,00 kr.</button><br/>
+                  <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                </div>
+              </div>
+            </div>
+
+            <div class="card-footer pl-3 pr-3">
+
+              <div class="row no-gutters nowrap">
+                <div class="col pl-0 pr-0 text-truncate ">
+                  <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                    Beer bottles with closure tab and more too come
+                  </p>
+                  <small class="text-muted font-weight-light">Home & garden</small>
+                </div>
+
+              </div>
+              <div class="row">
+                <div class="col-1">
+                  <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+
+                <div class="col-1">
+                  <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                </div>
+                <div class="col-1 ml-auto mr-3">
+                  <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Recent ads 4 end -->
+      </div>
+    </div>
+  </section>
+
+  <div class="container mt-lg-5 mt-md-3 mt-1">
+    <div class="row">
+      <div class="col-12">
+          <h2 class="d-inline-flex pr-3">Relations ads  </h2><small class="text-muted d-inline-flex">See even more</small>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+          <hr class="pt-0 mt-0 mb-3"/>
+      </div>
+    </div>
+  </div>
+
+<section class="relation">
+  <div class="container mt-lg-5 mt-md-3 mt-1">
+    <div class="row">
+      <div class="col-lg-4 offset-lg-1 p-0">
+        <div class="card">
+          <div class="card-header">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-auto">
+                  <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <div class="col pl-3 pr-2 text-truncate align-self-center">
+                  <p class="m-0 text-truncate ">
+                    Pickup ride to Copenhagen
+                  </p>
+                  <p>
+                    <small>Posted today 3:40pm</small>
+                  </p>
+                  <p class="">
+                    <small><i class="fa fa-map-marker fa-1x text-muted pr-1" aria-hidden="true"></i>Copenhagen</small>&nbsp;&nbsp;
+                    <small><i class="fa fa-clock-o fa-1x text-muted pr-1" aria-hidden="true"></i>Two times  a week</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-2 p-0">
+        <div class="card">
+          <div class="card-header">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-auto">
+                  <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <div class="col pl-3 pr-2 text-truncate align-self-center">
+                  <p class="m-0 text-truncate ">
+                    Looking for housecleaning
+                  </p>
+                  <p>
+                    <small>Posted yesterday 7:10am</small>
+                  </p>
+                  <p class="">
+                    <small><i class="fa fa-map-marker fa-1x text-muted pr-1" aria-hidden="true"></i>Aarhus N</small>&nbsp;&nbsp;
+                    <small><i class="fa fa-clock-o fa-1x text-muted pr-1" aria-hidden="true"></i>Once a week</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-5">
+      <div class="col-lg-4 offset-lg-1 p-0">
+        <div class="card">
+          <div class="card-header">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-auto">
+                  <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <div class="col pl-3 pr-2 text-truncate align-self-center">
+                  <p class="m-0 text-truncate ">
+                    Pickup ride to Copenhagen
+                  </p>
+                  <p>
+                    <small>Posted today 3:40pm</small>
+                  </p>
+                  <p class="">
+                    <small><i class="fa fa-map-marker fa-1x text-muted pr-1" aria-hidden="true"></i>Copenhagen</small>&nbsp;&nbsp;
+                    <small><i class="fa fa-clock-o fa-1x text-muted pr-1" aria-hidden="true"></i>Two times  a week</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-4 offset-lg-2 p-0">
+        <div class="card">
+          <div class="card-header">
+            <div class="container">
+              <div class="row">
+                <div class="col-xs-auto">
+                  <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <div class="col pl-3 pr-2 text-truncate align-self-center">
+                  <p class="m-0 text-truncate ">
+                    Looking for housecleaning
+                  </p>
+                  <p>
+                    <small>Posted yesterday 7:10am</small>
+                  </p>
+                  <p class="">
+                    <small><i class="fa fa-map-marker fa-1x text-muted pr-1" aria-hidden="true"></i>Aarhus N</small>&nbsp;&nbsp;
+                    <small><i class="fa fa-clock-o fa-1x text-muted pr-1" aria-hidden="true"></i>Once a week</small>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<style>
+footer { background-color: rgba(0,0,0,.03); border-top: 1px solid #979797;border-bottom: 1px solid #979797; }
+footer a { color: #212529; line-height: 2rem}
+</style>
+<footer class="mt-5">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col">
+        <h6>Categories</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Fashion</a></small></li>
+          <li><small><a href="">Electronics</a></small></li>
+          <li><small><a href="">Collectibles & Art</a></small></li>
+          <li><small><a href="">Home & Garden</a></small></li>
+          <li><small><a href="">Sporting Goods</a></small></li>
+          <li><small><a href="">Motors</a></small></li>
+          <li><small><a href="">Relation</a></small></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Relations</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Bla Bla</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Make Mooney With Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+        </ul>
+        <h6 class="mt-3">Find With Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+
+        </ul>
+        <h6 class="mt-3">Find2Me Agent Service</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Let Us Help You</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Your Account</a></small></li>
+          <li><small><a href="">Your Ads</a></small></li>
+          <li><small><a href="">Your connection and rewards</a></small></li>
+
+        </ul>
+        <h6 class="mt-3">Get To Know Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">About Find2Me</a></small></li>
+          <li><small><a href="">Contact</a></small></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</footer>
+<div class="container mt-3 mb-3">
+  <div class="row justify-content-sm-center">
+    <div class="col-md-auto">
+      <small>Conditions of Use</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Privacy Notice</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Cookies</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Copyright © 2017, find2me.org  All Rights Reserved.</small>
+    </div>
+  </div>
+</div>
+
+<style media="screen">
+  #loginModal a.btn { color: white; }
+</style>
+<!-- Modal -->
+<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="loginModalLabel">Log in</h4>
+
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row d-flex justify-content-center mt-3">
+          <p>Connect with one of your favorite social account</p>
+        </br/>
+        </br/>
+            <div class="w-100"></div>
+          <div class="col-4 col-md-4  ">
+            <a class="btn btn-block btn-social btn-facebook">
+              <span class="fa fa-facebook"></span> Sign in with Facebook
+            </a>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-4 col-md-4 mt-3 ">
+            <a class="btn btn-block btn-social btn-google">
+              <span class="fa fa-google"></span> Sign in with Google
+            </a>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-4 col-md-4 mt-3">
+            <a class="btn btn-block btn-social btn-instagram">
+              <span class="fa fa-instagram"></span> Sign in with Instagram
+            </a>
+          </div>
+          <div class="w-100"></div>
+          <div class="col-4 col-md-4 mt-3 mb-5">
+            <a class="btn btn-block btn-social btn-twitter">
+              <span class="fa fa-twitter"></span> Sign in with Twitter
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>

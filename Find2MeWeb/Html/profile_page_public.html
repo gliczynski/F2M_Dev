@@ -1,0 +1,545 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <title>Find2Me</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,500|Lato:300,400,700">
+    <link rel="stylesheet" href="css/iconic/css/open-iconic-bootstrap.css">
+    <link rel="stylesheet" href="css/font-awesome4/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap-social.css">
+
+</head>
+<body>
+    <!-- responsive helper -->
+    <div class="qq"></div>
+
+    <!-- Navigation section -->
+    <div class="container-fluid mb-md-5 nav-background sticky-top">
+        <div class="row">
+            <div class="container">
+
+
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+                    <a class="navbar-brand d-lg-none" href="#"><img src="img/Logo@1x.png" width="75%" alt="Find2Me Logo"></a>
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active mr-3">
+                                <a class="nav-item nav-link" href="#"><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-item nav-link" href="#"><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-nav ml-auto ">
+                            <li class="nav-item justify-content-end ">
+                                <a class="nav-link">DK</a>
+
+                            </li>
+                            <li class="nav-item justify-content-end mr-3">
+                                <a class="nav-link">EN</a>
+
+                            </li>
+
+                            <!--  <li class="nav-item mr-3">
+                              <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
+                            </li>
+                            <li class="nav-item mr-3">
+                              <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
+                            </li> -->
+
+
+                            <li class="nav-item justify-content-end mr-3">
+                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal" role="button">
+                                    Login
+                                </button>
+
+                            </li>
+                            <li class="nav-item dropdown  justify-content-end">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menu
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#">Action</a>
+                                    <a class="dropdown-item" href="#">Another action</a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#">Something else here</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+
+            </div>
+        </div>
+    </div>
+    
+    <!-- Profile section -->
+    <section class="profile-section">
+        <div class="container mt-3">
+            <div class="row">
+                <div class="col-12 d-flex justify-content-md-between align-items-center">
+                    <div>
+                        <h1 class="d-inline-flex pr-3 mb-0">John Doe</h1>
+                        <small class="text-muted d-inline-flex">has been here since May 2018</small>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <hr class="pt-0 mt-0 mb-0" />
+                </div>
+            </div>
+           
+            <div class="row no-gutters nowrap mt-3">
+                <!-- Profile image-->
+                <div class="col-sm-auto col-md-4 d-inline-flex justify-content-center mt-4">
+                    <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                </div>
+                <!-- Profile data -->
+                <div class="col pl-2 pr-2 text-truncate align-self-center">
+
+
+                    <div class="container mt-4">
+                        <dl class="row">
+                            <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">13</dt>
+                            <dd class="col-9 col-sm-11 mb-3">ads online <a href="" class="ml-3">see them here</a></dd>
+                            <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">8,459</dt>
+                            <dd class="col-9 col-sm-11 mb-3 ">followers</dd>
+                            <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">15</dt>
+                            <dd class="col-9 col-sm-11 mb-3 ">findings completed</dd>
+                        </dl>
+                    </div>
+
+                </div>
+            </div>
+            <!-- Follow me button -->
+            <div class="row">
+                <div class="col-4 offset-4 offset-md-4">
+                    <button class="btn btn-dark">Follow me</button>
+                </div>
+
+            </div>
+        </div>
+    </section><!-- Profile-section end s 
+                  -->
+    <!-- Tab navigation for the ads and private messages -->
+    <div class="container">
+        <div class="row">
+
+            <nav id="tabs" class="mt-5">
+                <div class="nav navi" role="tablist">
+                    <a class="flex-sm-fill text-sm-center items lead active ml-3 ml-sm-3" id="nav-ad-tab" data-toggle="tab" href="#nav-ads" role="tab" aria-controls="nav-ads" aria-selected="true">JOHN DOES ADS</a>
+                    <a class="flex-sm-fill text-sm-center items lead ml-0 text-muted" id="nav-pmsg-tab" data-toggle="tab" href="#nav-pmsg" role="tab" aria-controls="nav-pmsg" aria-selected="false">PRIVATE MESSAGE</a>
+                </div>
+            </nav>
+
+        </div>
+    </div>
+    <!-- Tab content for the 2 nagivation tabs above -->
+    <div class="tab-content" id="nav-tabContent">
+        <!-- Tab Content for ads on profile -->
+        <div class="tab-pane fade show active" id="nav-ads" role="tabpanel" aria-labelledby="nav-ad-tab">
+            <div class="ad-section">
+                <div class="container ">
+                    <div class="row">
+
+                        <!-- Ad 1 -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4" onclick="location.href='ad.html'" style="cursor:pointer;">
+                            <div class="card ad-header p-0 m-0">
+                                <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                                    <div class="row no-gutters nowrap">
+                                        <div class="col-xs-auto">
+                                            <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                                        </div>
+                                        <div class="col pl-2 pr-2 text-truncate align-self-center">
+                                            <p class="m-0 text-truncate ">
+                                                John Doe
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card ad">
+
+                                <img src="img/Thumbnail1@2x.png" class="card-img-top img-fluid" />
+                                <div class="card-img-overlay p-3">
+                                    <div class="d-flex">
+                                        <div class="p-0 mr-auto">
+                                            <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br />
+                                            <!-- <small class="text-muted">expires in</small> -->
+                                        </div>
+                                        <div class="p-0">
+                                            <button class="btn btn-secondary reward ">100,00 kr.</button><br />
+                                            <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer pl-3 pr-3">
+
+                                    <div class="row no-gutters nowrap">
+                                        <div class="col pl-0 pr-0 text-truncate ">
+                                            <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                                                Beer bottles with closure tab and more too come
+                                            </p>
+                                            <small class="text-muted font-weight-light">Home & garden</small>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-1 ml-auto mr-3">
+                                            <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ad 1 End -->
+                        <!-- Ad 2 -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+                            <div class="card ad-header p-0 m-0">
+                                <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                                    <div class="row no-gutters nowrap">
+                                        <div class="col-xs-auto">
+                                            <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                                        </div>
+                                        <div class="col pl-2 pr-2 text-truncate align-self-center">
+                                            <p class="m-0 text-truncate ">
+                                                John Doe
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card ad">
+
+                                <img src="img/Thumbnail2@2x.png" class="card-img-top img-fluid" />
+                                <div class="card-img-overlay p-3">
+                                    <div class="d-flex">
+                                        <div class="p-0 mr-auto">
+                                            <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br />
+                                            <!-- <small class="text-muted">expires in</small> -->
+                                        </div>
+                                        <div class="p-0">
+                                            <button class="btn btn-secondary reward ">100,00 kr.</button><br />
+                                            <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer pl-3 pr-3">
+
+                                    <div class="row no-gutters nowrap">
+                                        <div class="col pl-0 pr-0 text-truncate ">
+                                            <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                                                Beer bottles with closure tab and more too come
+                                            </p>
+                                            <small class="text-muted font-weight-light">Home & garden</small>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-1 ml-auto mr-3">
+                                            <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ad 2 End -->
+                        <!-- Ad 3 -->
+                        <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+                            <div class="card ad-header p-0 m-0">
+                                <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                                    <div class="row no-gutters nowrap">
+                                        <div class="col-xs-auto">
+                                            <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                                        </div>
+                                        <div class="col pl-2 pr-2 text-truncate align-self-center">
+                                            <p class="m-0 text-truncate ">
+                                                John Doe
+                                            </p>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card ad">
+
+                                <img src="img/Thumbnail3@2x.png" class="card-img-top img-fluid" />
+                                <div class="card-img-overlay p-3">
+                                    <div class="d-flex">
+                                        <div class="p-0 mr-auto">
+                                            <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br />
+                                            <!-- <small class="text-muted">expires in</small> -->
+                                        </div>
+                                        <div class="p-0">
+                                            <button class="btn btn-secondary reward ">100,00 kr.</button><br />
+                                            <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-footer pl-3 pr-3">
+
+                                    <div class="row no-gutters nowrap">
+                                        <div class="col pl-0 pr-0 text-truncate ">
+                                            <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                                                Beer bottles with closure tab and more too come
+                                            </p>
+                                            <small class="text-muted font-weight-light">Home & garden</small>
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-1">
+                                            <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                                        </div>
+
+                                        <div class="col-1">
+                                            <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                                        </div>
+                                        <div class="col-1 ml-auto mr-3">
+                                            <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- Ad 3 End -->
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+        <!-- Tab content for ads on profile ends-->
+        <!-- Tab content for private message -->
+        <div class="tab-pane fade" id="nav-pmsg" role="tabpanel" aria-labelledby="nav-pmsg-tab">
+              <div class="container">
+                <div class="row mt-5" id="msg">
+                    <div class="col tread-item">
+                        <div class="row mt-2 ml-1 align-items-center tread-border mb-5">
+                            <div class="col-auto p-0 pl-3 col-sm-auto col-md-auto col-lg-auto pr-lg-0 col-xl-auto">
+                                <a class="avatar"><img src="img/avatar2.jpg" /></a>
+                            </div>
+                            <div class="col-9 col-sm-8 col-md-7 col-lg-7 col-xl-8 mr-lg-2 pr-xl-0 mr-xl-0">
+                                <h4>James Jackson</h4>
+                                <small class="text-muted align-top">12/03/2017 2:40pm</small><br />
+                            </div>
+                            <div class="col-12">
+                                <p class="mb-0">
+                                    Grumpy wizards make toxic brew for the evil Queen and Jack. One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row mt-2 ml-1 align-items-center tread-border mb-5">
+                            <div class=" col-auto p-0 pl-3 col-sm-auto col-md-auto col-lg-auto pr-lg-0 col-xl-auto">
+                                <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                            </div>
+                            <div class="col-9 col-sm-8 col-md-7 col-lg-7 col-xl-8 mr-lg-2 pr-xl-0 mr-xl-0">
+                                <h4>John Doe</h4>
+                                <small class="text-muted align-top">12/03/2017 2:40pm</small><br />
+                            </div>
+                            <div class="col-12">
+                                <p class="mb-0">
+                                    Grumpy wizards make toxic brew for the evil Queen and Jack. One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <form class="form">
+                                    <div class="row d-flex">
+                                        <div class="col-12 col-sm-10 col-md-11">
+                                            <textarea class="form-control" id="" rows="3" placeholder="Type your message here"></textarea>
+                                            
+                                        </div>
+                                        <div class="col-12 col-sm-2 col-md-1 d-flex align-self-end mt-3 justify-content-end">
+                                            <button type="submit" class="btn btn-dark">Send</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <!-- Tab content for private message ends -->
+    </div>
+
+    <!-- Tab content end here -->
+
+    <!-- footer section -->
+    <footer class="mt-5">
+        <div class="container">
+            <div class="row mt-5">
+                <div class="col">
+                    <h6>Categories</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Fashion</a></small></li>
+                        <li><small><a href="">Electronics</a></small></li>
+                        <li><small><a href="">Collectibles & Art</a></small></li>
+                        <li><small><a href="">Home & Garden</a></small></li>
+                        <li><small><a href="">Sporting Goods</a></small></li>
+                        <li><small><a href="">Motors</a></small></li>
+                        <li><small><a href="">Relation</a></small></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6>Relations</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Bla Bla</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6>Make Mooney With Us</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Our concept</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                        <li><small><a href=""></a></small></li>
+                    </ul>
+                    <h6 class="mt-3">Find With Us</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Our concept</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+
+                    </ul>
+                    <h6 class="mt-3">Find2Me Agent Service</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Our concept</a></small></li>
+                        <li><small><a href="">Bla bla</a></small></li>
+
+                    </ul>
+                </div>
+                <div class="col">
+                    <h6>Let Us Help You</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">Your Account</a></small></li>
+                        <li><small><a href="">Your Ads</a></small></li>
+                        <li><small><a href="">Your connection and rewards</a></small></li>
+
+                    </ul>
+                    <h6 class="mt-3">Get To Know Us</h6>
+                    <ul class="list-unstyled">
+                        <li><small><a href="">About Find2Me</a></small></li>
+                        <li><small><a href="">Contact</a></small></li>
+
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+    </footer>
+    <div class="container mt-3 mb-3">
+        <div class="row justify-content-sm-center">
+            <div class="col-md-auto">
+                <small>Conditions of Use</small>
+            </div>
+            <div class="col-md-auto">
+                <small>Privacy Notice</small>
+            </div>
+            <div class="col-md-auto">
+                <small>Cookies</small>
+            </div>
+            <div class="col-md-auto">
+                <small>Copyright © 2017, find2me.org  All Rights Reserved.</small>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="loginModalLabel">Log in</h4>
+
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row d-flex justify-content-center mt-3">
+                        <p>Connect with one of your favorite social account</p>
+                        </br/>
+                        </br/>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4  ">
+                            <a class="btn btn-block btn-social btn-facebook">
+                                <span class="fa fa-facebook"></span> Sign in with Facebook
+                            </a>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4 mt-3 ">
+                            <a class="btn btn-block btn-social btn-google">
+                                <span class="fa fa-google"></span> Sign in with Google
+                            </a>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4 mt-3">
+                            <a class="btn btn-block btn-social btn-instagram">
+                                <span class="fa fa-instagram"></span> Sign in with Instagram
+                            </a>
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-4 col-md-4 mt-3 mb-5">
+                            <a class="btn btn-block btn-social btn-twitter">
+                                <span class="fa fa-twitter"></span> Sign in with Twitter
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>
