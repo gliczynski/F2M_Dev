@@ -11,6 +11,7 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Find2MeWeb.Models;
+using Find2Me.Infrastructure.DbModels;
 
 namespace Find2MeWeb
 {

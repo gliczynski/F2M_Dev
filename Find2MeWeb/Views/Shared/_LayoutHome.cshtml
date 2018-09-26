@@ -29,7 +29,7 @@
 }
 @helper langSelector()
     {
-      
+
 
         var targetPath = string.Format("/{0}/{1}{2}",
             ViewContext.RouteData.Values["controller"].ToString(),
@@ -38,9 +38,9 @@
         var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
         var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
 
-        
+
         <a class="nav-link" href="@(string.Format(targetUrlMask, "da"))">DK</a>
-               
+
 }
 <body>
 
@@ -75,7 +75,6 @@
                             </li>
                             <li class="nav-item justify-content-end mr-3">
                                 @*<a class="nav-link">EN</a>*@
-
                                 @english()
                             </li>
                             <!--  <li class="nav-item mr-3">
@@ -117,7 +116,7 @@
 
     <!-- Body END ->
 
-     <!-- Footer Start-->
+    <!-- Footer Start-->
 
     <style>
 
@@ -225,7 +224,7 @@
     </style>
 
 
-    <!-- Modal -->
+    <!-- Login Modal Modal -->
     <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -236,39 +235,64 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <div class="row d-flex justify-content-center mt-3">
-                        <p>Connect with one of your favorite social account</p>
-                        </br/>
-                        </br/>
+                    @Html.Partial("_ExternalLoginsListPartial", new Find2MeWeb.Models.ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
+
+                    @* <div class="row d-flex justify-content-center mt-3">
+                         <p>Connect with one of your favorite social account</p>
+                         </br/>
+                         </br/>
                         <div class="w-100"></div>
-                        <div class="col-4 col-md-4  ">
-                            <a class="btn btn-block btn-social btn-facebook">
-                                <span class="fa fa-facebook"></span> Sign in with Facebook
-                            </a>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-4 col-md-4 mt-3 ">
-                            <a class="btn btn-block btn-social btn-google">
-                                <span class="fa fa-google"></span> Sign in with Google
-                            </a>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-4 col-md-4 mt-3">
-                            <a class="btn btn-block btn-social btn-instagram">
-                                <span class="fa fa-instagram"></span> Sign in with Instagram
-                            </a>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-4 col-md-4 mt-3 mb-5">
-                            <a class="btn btn-block btn-social btn-twitter">
-                                <span class="fa fa-twitter"></span> Sign in with Twitter
-                            </a>
-                        </div>
-                    </div>
+                             <div class="col-4 col-md-4  ">
+                                 <a class="btn btn-block btn-social btn-facebook">
+                                     <span class="fa fa-facebook"></span> Sign in with Facebook
+                                 </a>
+                             </div>
+                             <div class="w-100"></div>
+                             <div class="col-4 col-md-4 mt-3 ">
+                                 <a class="btn btn-block btn-social btn-google">
+                                     <span class="fa fa-google"></span> Sign in with Google
+                                 </a>
+                             </div>
+                             <div class="w-100"></div>
+                             <div class="col-4 col-md-4 mt-3">
+                                 <a class="btn btn-block btn-social btn-instagram">
+                                     <span class="fa fa-instagram"></span> Sign in with Instagram
+                                 </a>
+                             </div>
+                             <div class="w-100"></div>
+                             <div class="col-4 col-md-4 mt-3 mb-5">
+                                 <a class="btn btn-block btn-social btn-twitter">
+                                     <span class="fa fa-twitter"></span> Sign in with Twitter
+                                 </a>
+                             </div>
+                                </div>*@
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Error Alert Model -->
+    <div class="modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Login attempt failed.</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        The email is already registered on another account. Please try another login provider.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
@@ -276,5 +300,6 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("Scripts", required: false)
+
 </body>
 </html>

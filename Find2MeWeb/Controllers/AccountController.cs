@@ -9,6 +9,8 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using Find2MeWeb.Models;
+using Find2Me.Infrastructure.DbModels;
+using Find2Me.Infrastructure;
 
 namespace Find2MeWeb.Controllers
 {
@@ -163,7 +165,7 @@ namespace Find2MeWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Hometown = model.Hometown };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -291,7 +293,8 @@ namespace Find2MeWeb.Controllers
         public ActionResult ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
-            return new ChallengeResult(provider, Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl }));
+            string challangeUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
+            return new ChallengeResult(provider, challangeUrl);
         }
 
         //
@@ -353,9 +356,67 @@ namespace Find2MeWeb.Controllers
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
+                    /*
                     ViewBag.ReturnUrl = returnUrl;
                     ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
                     return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
+                    */
+                    //Create a New User and SignIn
+
+                    var user = new ApplicationUser
+                    {
+                        UserName = loginInfo.Email,
+                        Email = loginInfo.Email,
+                    };
+
+                    //Check the Login Provider. We need to Extract the user data based on the LoginProvider
+                    switch (loginInfo.Login.LoginProvider)
+                    {
+                        case "Facebook":
+                            //Get Facebook User Data from the Saved Claim
+                            OAuthReponseUserFacebook userData = loginInfo.ExternalIdentity.GetFacebookUserData();
+                            if (userData != null)
+                            {
+                                //Save the Profile Image
+                                if (userData.Picture.Data != null)
+                                {
+                                    string fileName = DateTime.UtcNow.ToString("yyyyddmmhhmmss_profile_original");
+                                    string filePath = Server.MapPath(_FileSavingPaths.ProfileImage + "/" + fileName);
+                                    if (UtilityExtension.DownloadImage(userData.Picture.Data.URL, filePath))
+                                    {
+                                        user.ProfileImageOriginal = fileName;
+                                        user.ProfileImageSelected = fileName;
+                                    }
+                                }
+
+                                //Get the other Data
+                                user.FullName = user.FullName;
+                            }
+                            break;
+                    }
+
+                    //Set the User Profile Create and Update Date
+                    user.CreatedOn = DateTime.UtcNow;
+                    user.UpdatedOn = DateTime.UtcNow;
+
+                    //Create a User
+                    var createUserResult = await UserManager.CreateAsync(user);
+                    if (createUserResult.Succeeded)
+                    {
+                        //Add Login Infor based on the Login Provider
+                        createUserResult = await UserManager.AddLoginAsync(user.Id, loginInfo.Login);
+                        if (createUserResult.Succeeded)
+                        {
+                            //Login the current User
+                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                            //Redirec to Profile Wizard Step 1
+                            return RedirectToLocal("profile_wizard_step_1");
+                        }
+                    }
+
+                    TempData["SignUpError"] = result;
+                    return RedirectToAction("");
             }
         }
 
@@ -379,7 +440,8 @@ namespace Find2MeWeb.Controllers
                 {
                     return View("ExternalLoginFailure");
                 }
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email, Hometown = model.Hometown };
+
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
                 var result = await UserManager.CreateAsync(user);
                 if (result.Succeeded)
                 {

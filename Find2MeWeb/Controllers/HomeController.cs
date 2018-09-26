@@ -16,7 +16,6 @@ namespace Find2MeWeb.Controllers
         [Internationalization]
         public ActionResult Index()
         {
-
             // Get string from strongly typed localzation resources
             var vm = new FullViewModel { LocalisedString = Strings.SomeLocalisedString };
             return View(vm);

@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Find2Me.Infrastructure.DbModels.Logs">
+    <Position X="1" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAiAAAgAAAQACAAAAAAAEAEAAAAAACAAAAAAA=</HashCode>
+      <FileName>DbModels\Logs.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Find2Me.Infrastructure.DbModels.ApplicationUser">
+    <Position X="1" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQAAACAAADICAIAAAAAAACAACAAAAIAAAAAQAAAA=</HashCode>
+      <FileName>DbModels\IdentityModels.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Find2Me.Infrastructure.DbModels.Currency">
+    <Position X="4.75" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAIAAAAgAAUAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>DbModels\Currency.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

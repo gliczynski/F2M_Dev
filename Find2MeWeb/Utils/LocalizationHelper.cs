@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Linq;
 using System.Collections.Generic;
+using Find2Me.Infrastructure;
 
 namespace Find2MeWeb.Utils
 {
     public static class LocalizationHelper
     {
-        private readonly static IList<string> _supportedLocalesList = new List<string> { "da","en" };
+        private readonly static IList<string> _supportedLocalesList = _SupportedLocale.GetLocales();
 
         public static IList<string> GetSupportedLocales()
         {
