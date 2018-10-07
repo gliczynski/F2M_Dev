@@ -11,14 +11,17 @@ using Microsoft.Owin.Security;
 using Find2MeWeb.Models;
 using Find2Me.Infrastructure.DbModels;
 using Find2Me.Infrastructure;
+using Find2Me.Services;
 
 namespace Find2MeWeb.Controllers
 {
     [Authorize]
+    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ApplicationDbContext _dbContext;
 
         public AccountController()
         {
@@ -290,11 +293,12 @@ namespace Find2MeWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public ActionResult ExternalLogin(string provider, string returnUrl)
+        public async Task<ActionResult> ExternalLogin(string provider, string returnUrl)
         {
             // Request a redirect to the external login provider
             string challangeUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
-            return new ChallengeResult(provider, challangeUrl);
+            var result = new ChallengeResult(provider, challangeUrl);
+            return result;
         }
 
         //
@@ -348,7 +352,10 @@ namespace Find2MeWeb.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    //TempData External Identity, After login, we will need some of these Claims
+                    TempData["ExternalLoginInfo"] = loginInfo.ExternalIdentity;
+                    return RedirectToAction("AddingClaims", new { returnUrl = returnUrl });
+
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -356,70 +363,175 @@ namespace Find2MeWeb.Controllers
                 case SignInStatus.Failure:
                 default:
                     // If the user does not have an account, then prompt the user to create an account
-                    /*
-                    ViewBag.ReturnUrl = returnUrl;
-                    ViewBag.LoginProvider = loginInfo.Login.LoginProvider;
-                    return View("ExternalLoginConfirmation", new ExternalLoginConfirmationViewModel { Email = loginInfo.Email });
-                    */
+
                     //Create a New User and SignIn
+                    return await CreateExternalProviderUserAsync(loginInfo);
 
-                    var user = new ApplicationUser
-                    {
-                        UserName = loginInfo.Email,
-                        Email = loginInfo.Email,
-                    };
-
-                    //Check the Login Provider. We need to Extract the user data based on the LoginProvider
-                    switch (loginInfo.Login.LoginProvider)
-                    {
-                        case "Facebook":
-                            //Get Facebook User Data from the Saved Claim
-                            OAuthReponseUserFacebook userData = loginInfo.ExternalIdentity.GetFacebookUserData();
-                            if (userData != null)
-                            {
-                                //Save the Profile Image
-                                if (userData.Picture.Data != null)
-                                {
-                                    string fileName = DateTime.UtcNow.ToString("yyyyddmmhhmmss_profile_original");
-                                    string filePath = Server.MapPath(_FileSavingPaths.ProfileImage + "/" + fileName);
-                                    if (UtilityExtension.DownloadImage(userData.Picture.Data.URL, filePath))
-                                    {
-                                        user.ProfileImageOriginal = fileName;
-                                        user.ProfileImageSelected = fileName;
-                                    }
-                                }
-
-                                //Get the other Data
-                                user.FullName = user.FullName;
-                            }
-                            break;
-                    }
-
-                    //Set the User Profile Create and Update Date
-                    user.CreatedOn = DateTime.UtcNow;
-                    user.UpdatedOn = DateTime.UtcNow;
-
-                    //Create a User
-                    var createUserResult = await UserManager.CreateAsync(user);
-                    if (createUserResult.Succeeded)
-                    {
-                        //Add Login Infor based on the Login Provider
-                        createUserResult = await UserManager.AddLoginAsync(user.Id, loginInfo.Login);
-                        if (createUserResult.Succeeded)
-                        {
-                            //Login the current User
-                            await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                            //Redirec to Profile Wizard Step 1
-                            return RedirectToLocal("profile_wizard_step_1");
-                        }
-                    }
-
-                    TempData["SignUpError"] = result;
-                    return RedirectToAction("");
             }
         }
 
+        private async Task<ActionResult> CreateExternalProviderUserAsync(ExternalLoginInfo loginInfo)
+        {
+            //Create a New User and SignIn
+            var user = new ApplicationUser
+            {
+                UserName = loginInfo.Email,
+                Email = loginInfo.Email,
+            };
+
+            string profilePictureUrl = null;
+            //Check the Login Provider. We need to Extract the user data based on the LoginProvider
+            switch (loginInfo.Login.LoginProvider)
+            {
+                case "Facebook":
+                    //Get Facebook User Data from the Saved Claim
+                    OAuthReponseUserFacebook facbookUserData = loginInfo.ExternalIdentity.GetOAuthUserData<OAuthReponseUserFacebook>();
+                    if (facbookUserData != null)
+                    {
+                        //Save the Profile Image
+                        if (facbookUserData.Picture.Data != null)
+                        {
+                            profilePictureUrl = facbookUserData.Picture.Data.URL;
+                        }
+
+                        //Get the other Data
+                        user.FullName = facbookUserData.Name;
+                    }
+                    break;
+
+                case "Google":
+                    //Get Google User Data from the Saved Claim
+                    OAuthReponseUserGoogle googleUserData = loginInfo.ExternalIdentity.GetOAuthUserData<OAuthReponseUserGoogle>();
+                    if (googleUserData != null)
+                    {
+                        //Save the Profile Image
+                        if (googleUserData.Image != null)
+                        {
+                            profilePictureUrl = googleUserData.Image.URL;
+                        }
+
+                        //Get the other Data
+                        user.FullName = googleUserData.DisplayName;
+                    }
+                    break;
+
+                case "Instagram":
+                    //Get Google User Data from the Saved Claim
+                    OAuthReponseUserInstagram instagramUserData = loginInfo.ExternalIdentity.GetOAuthUserData<OAuthReponseUserInstagram>();
+                    if (instagramUserData != null)
+                    {
+                        //Save the Profile Image
+                        profilePictureUrl = instagramUserData.ProfilePicture;
+
+                        //Get the other Data
+                        user.FullName = instagramUserData.FullName;
+                    }
+                    break;
+
+                case "Twitter":
+                    //Get Google User Data from the Saved Claim
+                    OAuthReponseUserTwitter twitterUserData = loginInfo.ExternalIdentity.GetOAuthUserData<OAuthReponseUserTwitter>();
+                    if (twitterUserData != null)
+                    {
+                        //Save the Profile Image
+                        profilePictureUrl = twitterUserData.ProfileImageUrl;
+
+                        //Get the other Data
+                        user.FullName = twitterUserData.Name;
+                    }
+                    break;
+            }
+
+            //Set the User Profile Create and Update Date
+            user.CreatedOn = DateTime.UtcNow;
+            user.UpdatedOn = DateTime.UtcNow;
+
+            //Create a User
+            var createUserResult = await UserManager.CreateAsync(user);
+            if (createUserResult.Succeeded)
+            {
+                //Add User Roles
+                UserManager.AddToRole(user.Id, _UserRolesType.User);
+
+                //Add Login Infor based on the Login Provider
+                createUserResult = await UserManager.AddLoginAsync(user.Id, loginInfo.Login);
+                if (createUserResult.Succeeded)
+                {
+                    //Download User Profile Image and Update User
+                    string profileImageName = DateTime.UtcNow.ToString("yyyyddmmhhmmss") + "_profile_original.jpg";
+                    string profileImagePath = Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + profileImageName);
+                    if (UtilityExtension.DownloadImage(profilePictureUrl, profileImagePath))
+                    {
+                        user.ProfileImageOriginal = profileImageName;
+                        user.ProfileImageSelected = profileImageName;
+                    }
+                    await UserManager.UpdateAsync(user);
+
+                    //Add Provider Claim
+                    UserManager.AddClaim(user.Id, new Claim("ExternalProviderType", loginInfo.Login.LoginProvider));
+                    UserManager.AddClaim(user.Id, new Claim("ExternalProviderUsername", loginInfo.DefaultUserName));
+                    UserManager.AddClaim(user.Id, new Claim("UrlUserName", loginInfo.DefaultUserName));
+
+
+                    //Login the current User
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    //TempData External Identity, After login, we will need some of these Claims
+                    TempData["ExternalLoginInfo"] = loginInfo.ExternalIdentity;
+
+                    //Create Cookie If the User Has Completed His Wizard Or Not- bit 0(false): 1(1)
+                    if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted] == null)
+                    {
+                        HttpCookie wizardCompletedCookie = new HttpCookie(_CookieNameStrings.IsProfileWizardCompleted);
+                        wizardCompletedCookie.Value = "0";
+                        wizardCompletedCookie.Expires = DateTime.Now.AddDays(7);
+                        Response.Cookies.Add(wizardCompletedCookie);
+                    }
+                    else
+                    {
+                        Response.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Value = "0";
+                        Response.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Expires = DateTime.Now.AddDays(7);
+                    }
+
+                    //Add claims and Redirect to Profile Wizard Step 1
+                    return RedirectToAction("AddingClaims");
+                }
+            }
+
+            AddErrors(createUserResult);
+            TempData["SignUpError"] = createUserResult;
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<ActionResult> AddingClaims(string returnUrl)
+        {
+            if (TempData["ExternalLoginInfo"] != null)
+            {
+                var externalIdentity = (ClaimsIdentity)TempData["ExternalLoginInfo"];
+                if (externalIdentity != null)
+                {
+                    //Remove Old Data, and Add new Data
+                    Claim claimUserData = User.Identity.GetClaim(ClaimTypes.UserData);
+                    if (claimUserData != null) { UserManager.RemoveClaim(User.Identity.GetUserId(), claimUserData); }
+
+                    Claim claimUserDataExt = externalIdentity.GetClaim(ClaimTypes.UserData);
+                    if (claimUserDataExt != null) { UserManager.AddClaim(User.Identity.GetUserId(), claimUserDataExt); }
+
+                    User.Identity.CopyExternalOAuthClaims(externalIdentity, AuthenticationManager);
+                }
+            }
+
+            //If the Profile Wizard is not completed, take user to Profile Wizard Step 1 
+            if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted] != null)
+            {
+                if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Value == "0")
+                {
+                    returnUrl = Url.Action("Step1", "Profile");
+                }
+            }
+
+            return RedirectToLocal(returnUrl);
+        }
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
@@ -469,12 +581,45 @@ namespace Find2MeWeb.Controllers
             return RedirectToAction("Index", "Home");
         }
 
+        public ActionResult LogOut()
+        {
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index", "Home");
+        }
+
         //
         // GET: /Account/ExternalLoginFailure
         [AllowAnonymous]
         public ActionResult ExternalLoginFailure()
         {
             return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult UserExists([Bind(Prefix = "id")]string username)
+        {
+            _dbContext = new ApplicationDbContext();
+            UserAccountService userAccountService = new UserAccountService(_dbContext);
+
+            //If User exists, create use suggestions
+            if (userAccountService.UserExists(User.Identity.GetUserId(), username))
+            {
+                //Get User Suggestions and return
+                return Json(new UserValidationSuggestions
+                {
+                    UserExists = true,
+                    UserSuggestion = userAccountService.GetUserSuggestion(username)
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                //Otherwise there is no need for suggestions
+                return Json(new UserValidationSuggestions
+                {
+                    UserExists = false
+                }, JsonRequestBehavior.AllowGet);
+            }
         }
 
         protected override void Dispose(bool disposing)

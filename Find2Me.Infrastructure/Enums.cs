@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -66,6 +67,19 @@ namespace Find2Me.Infrastructure
 
     public class _FileSavingPaths
     {
-        public static string ProfileImage = "~/images/user/profile";
+        public static string ProfileImage = "/images/user/profile";
+    }
+
+    public class _CookieNameStrings
+    {
+        public static string IsProfileWizardCompleted = "IsProfileWizardCompleted";
+    }
+
+    public class _ClaimTypes
+    {
+        public static string UrlUserName = "UrlUserName";
+        public static string ExternalProviderUsername = "ExternalProviderUsername";
+        public static string ExternalProviderType = "ExternalProviderType";
+        public static string ExternalProviderAccessToken = "ExternalProviderAccessToken";
     }
 }

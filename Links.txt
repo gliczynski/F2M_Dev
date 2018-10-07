@@ -1,0 +1,5 @@
+>>	Currency Full List SQL Insert Query:
+	https://gist.github.com/voskobovich/43f851859c23a8261514
+
+
+>>	

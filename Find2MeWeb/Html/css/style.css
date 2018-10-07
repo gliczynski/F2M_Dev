@@ -459,12 +459,13 @@ button.btn.reward {
 #loginModal a.btn {
     color: white;
 }
+
 #msg .tread-item {
 }
 
     #msg .tread-item .tread-border {
         border-left: 2px solid #34495E;
-    }   
+    }
 
 /* Footter*/
 footer {
@@ -523,4 +524,12 @@ footer {
     .qq:before {
         content: "xl (min-width: 1200px)"
     }
+}
+
+/***************Form Validation ***************/
+.field-validation-error {
+    width: 100%;
+    margin-top: .25rem;
+    font-size: 80%;
+    color: #dc3545;
 }

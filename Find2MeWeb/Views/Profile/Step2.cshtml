@@ -1,0 +1,232 @@
+﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM
+@using Find2Me.Infrastructure;
+@{
+    ViewBag.Title = "Step2";
+    string ExternalProviderType = User.Identity.GetExternalProviderType();
+}
+
+@section Styles{
+    <link href="~/Content/plugins/cropperjs-master/dist/cropper.min.css" rel="stylesheet" />
+    <style>
+        .img-container,
+        .preview {
+            overflow: hidden;
+        }
+    </style>
+}
+
+<section class="regwizard-section">
+    <div class="container mt-3">
+        <div class="row">
+
+            <!-- Headline of the page -->
+
+            <div class="col-12 d-flex justify-content-md-between align-items-center">
+                <div>
+                    <h1 class="d-inline-flex pr-3">Profile setup wizard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr class="pt-0 mt-0 mb-0" />
+            </div>
+        </div>
+
+
+        <div class="row mt-5">
+            <div class="col">
+
+                <!-- TABS FOR WIZARD -->
+                <div class="row">
+                    <div class="col-11 mr-0 col-xl-6 offset-xl-3">
+                        <div class="stepwizard-row"> </div>
+                    </div>
+                </div>
+                <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
+
+                    <div class="col-4 col-xl-2 stepwizard-step">
+                        <a href="#step-1" type="button" class="btn btn-default btn-circle" disabled="disabled">1</a>
+                        <p>Profile image</p>
+                    </div>
+                    <div class="col-4 col-xl-2 stepwizard-step">
+                        <a href="#step-2" type="button" class="btn btn-dark btn-circle">2</a>
+                        <p>Profile data</p>
+                    </div>
+                    <div class="col-4 col-xl-2 stepwizard-step ">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                        <p>Done</p>
+                    </div>
+                </div>
+
+                <!-- Text section -->
+                <div class="row mt-1">
+                    <div class="col text-center">
+                        <p>
+                            <strong>Profile information</strong><br />Please add your profile data. You will allways be able to change it later.<br />
+                        </p>
+
+                    </div>
+                </div>
+
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <!-- Form for collecting user information -->
+                @using (Html.BeginForm("Step2", "Profile", FormMethod.Post, new { id = "profile_info_form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                    @*<form class="needs-validation" novalidate id="form">*@
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "ol-sm-4 col-xl-2 col-form-label" })
+                        <div class="col-sm-8 col-xl-6">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            <small id="headlineHelpBlock" class="form-text text-muted">
+                                Your account is registered with this email address, through @ExternalProviderType
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "ol-sm-4 col-xl-2 col-form-label" })
+                        <div class="col-sm-8 col-xl-6">
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your full name" } })
+                            <small id="fullnameHelpBlock" class="form-text text-muted">
+
+                            </small>
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        <label for="UrlUsername" class="col-sm-4 col-xl-2 col-form-label">
+                            Username
+                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="valid_username_icon" style="display: none;"></i>
+                            <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="invalid_username_icon" style="display: none;"></i>
+                        </label>
+                        <div class="col-sm-8 col-xl-6">
+                            @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter a username" } })
+                            <small id="fullnameHelpBlock" class="form-text text-muted">
+
+                            </small>
+                            <div class="" id="usernames_suggestion_wrapper">
+
+                            </div>
+                            @Html.ValidationMessageFor(model => model.UrlUsername, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        <label for="YearOfBirth" class="col-sm-4 col-xl-2 col-form-label">Year of birth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
+                        <div class="col-sm-8 col-xl-6">
+                            @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), "Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "ol-sm-4 col-xl-2 col-form-label" })
+                        <div class="col-sm-8 col-xl-6">
+                            <div class="form-check">
+                                @Html.RadioButtonFor(model => model.Sex, _EnSex.Female, new { @class = "form-check-input", id="radio_sex_female" })
+                                @Html.Label("radio_sex_female", "Female", new { @class = "form-check-label" })
+                            </div>
+                            <div class="form-check">
+                                @Html.RadioButtonFor(model => model.Sex, _EnSex.Male, new { @class = "form-check-input", id= "radio_sex_male" })
+                                @Html.Label("radio_sex_male", "Male", new { @class = "form-check-label" })
+                            </div>
+                            @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        @Html.LabelFor(model => model.PreferredCurrency, htmlAttributes: new { @class = "ol-sm-4 col-xl-2 col-form-label" })
+                        <div class="col-sm-8 col-xl-6">
+                            @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), "Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PreferredCurrency, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group row d-flex justify-content-center mt-3">
+                        @Html.LabelFor(model => model.PreferredLanguage, htmlAttributes: new { @class = "ol-sm-4 col-xl-2 col-form-label" })
+                        <div class="col-sm-8 col-xl-6">
+                            @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), "Select", new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.PreferredLanguage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+                    <hr class="mt-5" />
+                    @*</form>*@
+                    <!-- Navigation of the wizard -->
+                    <div class="form-group row d-flex justify-content-center">
+                        @*<a href="profile_start_wizard_page_1.html" class="btn btn-dark mr-3" role="button">Back</a>*@
+                        @*<a href="profile_start_wizard_page_3.html" class="btn btn-dark" role="button">Next</a>*@
+                        <input type="submit" name="SubmitAction" class="btn btn-dark mr-3" formnovalidate="formnovalidate" role="button" value="Back" />
+                        <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="Next" />
+                    </div>
+                }
+
+
+
+
+            </div>
+
+        </div>
+
+    </div> <!-- container -->
+</section><!-- registration-section -->
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        $(function () {
+
+            //Check If a Username exists
+            $('input#UrlUsername').on('change', function () {
+                var form = $('#profile_info_form');
+                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                var username = $(this).val();
+
+                $.ajax({
+                    url: "@Url.Action("UserExists", "Account")",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        __RequestVerificationToken: token,
+                        id: username
+                    },
+                    success: function (data) {
+                        if (data) {
+                            if (data.UserExists) {
+                                var suggestionsHtml = "<strong>Suggestions: </strong>";
+                                $.each(data.UserSuggestion, function (index, item) {
+                                    suggestionsHtml += '<span><a href="javascript:void(0)" data-value="' + item + '">' + item + '</a>&nbsp;&nbsp;&nbsp;</span>';
+                                });
+
+                                $('#usernames_suggestion_wrapper').empty().html(suggestionsHtml);
+                                $('#valid_username_icon').hide();
+                                $('#invalid_username_icon').show();
+                            }
+                            else {
+                                $('#valid_username_icon').show();
+                                $('#invalid_username_icon').hide();
+                            }
+                        }
+                    }
+                })
+            });
+
+            //Username Suggestion Click
+            $('#usernames_suggestion_wrapper').on('click', 'a', function () {
+                $('input#UrlUsername').val($(this).data("value"));
+                $('#valid_username_icon').show();
+                $('#invalid_username_icon').hide();
+            });
+
+        });
+    </script>
+
+}

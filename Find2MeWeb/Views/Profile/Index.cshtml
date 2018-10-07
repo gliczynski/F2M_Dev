@@ -1,0 +1,322 @@
+﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM;
+@{
+    ViewBag.Title = "Index";
+}
+
+<!-- Profile section -->
+<section class="profile-section">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-md-between align-items-center">
+                <div>
+                    <h1 class="d-inline-flex pr-3 mb-0">@Model.FullName</h1>
+                    <small class="text-muted d-inline-flex">has been here since @Model.CreatedOn.ToString("MMMM yyyy") </small>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr class="pt-0 mt-0 mb-0" />
+            </div>
+        </div>
+
+        <div class="row no-gutters nowrap mt-3">
+            <!-- Profile image-->
+            <div class="col-sm-auto col-md-4 d-inline-flex justify-content-center mt-4">
+                <a class="avatar"><img src="img/avatar1.jpg" /></a>
+            </div>
+            <!-- Profile data -->
+            <div class="col pl-2 pr-2 text-truncate align-self-center">
+
+                <div class="container mt-4">
+                    <dl class="row">
+                        <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">13</dt>
+                        <dd class="col-9 col-sm-11 mb-3">ads online <a href="" class="ml-3">see them here</a></dd>
+                        <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">8,459</dt>
+                        <dd class="col-9 col-sm-11 mb-3 ">followers</dd>
+                        <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">15</dt>
+                        <dd class="col-9 col-sm-11 mb-3 ">findings completed</dd>
+                    </dl>
+                </div>
+
+            </div>
+        </div>
+        <!-- Follow me button -->
+        <div class="row">
+            <div class="col-4 offset-4 offset-md-4">
+                <button class="btn btn-dark">Follow me</button>
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- Profile-section end s
+    -->
+<!-- Tab navigation for the ads and private messages -->
+<div class="container">
+    <div class="row">
+
+        <nav id="tabs" class="mt-5">
+            <div class="nav navi" role="tablist">
+                <a class="flex-sm-fill text-sm-center items lead active ml-3 ml-sm-3" id="nav-ad-tab" data-toggle="tab" href="#nav-ads" role="tab" aria-controls="nav-ads" aria-selected="true">JOHN DOES ADS</a>
+                <a class="flex-sm-fill text-sm-center items lead ml-0 text-muted" id="nav-pmsg-tab" data-toggle="tab" href="#nav-pmsg" role="tab" aria-controls="nav-pmsg" aria-selected="false">PRIVATE MESSAGE</a>
+            </div>
+        </nav>
+
+    </div>
+</div>
+<!-- Tab content for the 2 nagivation tabs above -->
+<div class="tab-content" id="nav-tabContent">
+    <!-- Tab Content for ads on profile -->
+    <div class="tab-pane fade show active" id="nav-ads" role="tabpanel" aria-labelledby="nav-ad-tab">
+        <div class="ad-section">
+            <div class="container ">
+                <div class="row">
+
+                    <!-- Ad 1 -->
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4" onclick="location.href='ad.html'" style="cursor:pointer;">
+                        <div class="card ad-header p-0 m-0">
+                            <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                                <div class="row no-gutters nowrap">
+                                    <div class="col-xs-auto">
+                                        <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                                    </div>
+                                    <div class="col pl-2 pr-2 text-truncate align-self-center">
+                                        <p class="m-0 text-truncate ">
+                                            John Doe
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card ad">
+
+                            <img src="img/Thumbnail1@2x.png" class="card-img-top img-fluid" />
+                            <div class="card-img-overlay p-3">
+                                <div class="d-flex">
+                                    <div class="p-0 mr-auto">
+                                        <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br />
+                                        <!-- <small class="text-muted">expires in</small> -->
+                                    </div>
+                                    <div class="p-0">
+                                        <button class="btn btn-secondary reward ">100,00 kr.</button><br />
+                                        <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer pl-3 pr-3">
+
+                                <div class="row no-gutters nowrap">
+                                    <div class="col pl-0 pr-0 text-truncate ">
+                                        <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                                            Beer bottles with closure tab and more too come
+                                        </p>
+                                        <small class="text-muted font-weight-light">Home & garden</small>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-1 ml-auto mr-3">
+                                        <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ad 1 End -->
+                    <!-- Ad 2 -->
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+                        <div class="card ad-header p-0 m-0">
+                            <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                                <div class="row no-gutters nowrap">
+                                    <div class="col-xs-auto">
+                                        <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                                    </div>
+                                    <div class="col pl-2 pr-2 text-truncate align-self-center">
+                                        <p class="m-0 text-truncate ">
+                                            John Doe
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card ad">
+
+                            <img src="img/Thumbnail2@2x.png" class="card-img-top img-fluid" />
+                            <div class="card-img-overlay p-3">
+                                <div class="d-flex">
+                                    <div class="p-0 mr-auto">
+                                        <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br />
+                                        <!-- <small class="text-muted">expires in</small> -->
+                                    </div>
+                                    <div class="p-0">
+                                        <button class="btn btn-secondary reward ">100,00 kr.</button><br />
+                                        <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer pl-3 pr-3">
+
+                                <div class="row no-gutters nowrap">
+                                    <div class="col pl-0 pr-0 text-truncate ">
+                                        <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                                            Beer bottles with closure tab and more too come
+                                        </p>
+                                        <small class="text-muted font-weight-light">Home & garden</small>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-1 ml-auto mr-3">
+                                        <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ad 2 End -->
+                    <!-- Ad 3 -->
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mt-4 mb-4">
+                        <div class="card ad-header p-0 m-0">
+                            <div class="card-body pl-3 pr-3 pt-2 pb-2">
+                                <div class="row no-gutters nowrap">
+                                    <div class="col-xs-auto">
+                                        <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                                    </div>
+                                    <div class="col pl-2 pr-2 text-truncate align-self-center">
+                                        <p class="m-0 text-truncate ">
+                                            John Doe
+                                        </p>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card ad">
+
+                            <img src="img/Thumbnail3@2x.png" class="card-img-top img-fluid" />
+                            <div class="card-img-overlay p-3">
+                                <div class="d-flex">
+                                    <div class="p-0 mr-auto">
+                                        <button class="btn btn-secondary expire"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</button><br />
+                                        <!-- <small class="text-muted">expires in</small> -->
+                                    </div>
+                                    <div class="p-0">
+                                        <button class="btn btn-secondary reward ">100,00 kr.</button><br />
+                                        <!-- <small class="text-muted text-right pull-right">reward</small>  -->
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card-footer pl-3 pr-3">
+
+                                <div class="row no-gutters nowrap">
+                                    <div class="col pl-0 pr-0 text-truncate ">
+                                        <p class="mb-0 pb-0 text-truncate" style="line-height: 1.0">
+                                            Beer bottles with closure tab and more too come
+                                        </p>
+                                        <small class="text-muted font-weight-light">Home & garden</small>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-1">
+                                        <i class="fa fa-heart-o fa-1x text-muted  " aria-hidden="true"></i>
+                                    </div>
+
+                                    <div class="col-1">
+                                        <i class="fa fa-plus fa-1x text-muted  " aria-hidden="true"></i>
+                                    </div>
+                                    <div class="col-1 ml-auto mr-3">
+                                        <i class="fa fa-ellipsis-h fa-1x text-muted" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Ad 3 End -->
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </div>
+    <!-- Tab content for ads on profile ends-->
+    <!-- Tab content for private message -->
+    <div class="tab-pane fade" id="nav-pmsg" role="tabpanel" aria-labelledby="nav-pmsg-tab">
+        <div class="container">
+            <div class="row mt-5" id="msg">
+                <div class="col tread-item">
+                    <div class="row mt-2 ml-1 align-items-center tread-border mb-5">
+                        <div class="col-auto p-0 pl-3 col-sm-auto col-md-auto col-lg-auto pr-lg-0 col-xl-auto">
+                            <a class="avatar"><img src="img/avatar2.jpg" /></a>
+                        </div>
+                        <div class="col-9 col-sm-8 col-md-7 col-lg-7 col-xl-8 mr-lg-2 pr-xl-0 mr-xl-0">
+                            <h4>James Jackson</h4>
+                            <small class="text-muted align-top">12/03/2017 2:40pm</small><br />
+                        </div>
+                        <div class="col-12">
+                            <p class="mb-0">
+                                Grumpy wizards make toxic brew for the evil Queen and Jack. One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mt-2 ml-1 align-items-center tread-border mb-5">
+                        <div class=" col-auto p-0 pl-3 col-sm-auto col-md-auto col-lg-auto pr-lg-0 col-xl-auto">
+                            <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                        </div>
+                        <div class="col-9 col-sm-8 col-md-7 col-lg-7 col-xl-8 mr-lg-2 pr-xl-0 mr-xl-0">
+                            <h4>John Doe</h4>
+                            <small class="text-muted align-top">12/03/2017 2:40pm</small><br />
+                        </div>
+                        <div class="col-12">
+                            <p class="mb-0">
+                                Grumpy wizards make toxic brew for the evil Queen and Jack. One morning, when Gregor Samsa woke from troubled dreams, he found himself transformed in his bed into a horrible vermin.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-12">
+                            <form class="form">
+                                <div class="row d-flex">
+                                    <div class="col-12 col-sm-10 col-md-11">
+                                        <textarea class="form-control" id="" rows="3" placeholder="Type your message here"></textarea>
+
+                                    </div>
+                                    <div class="col-12 col-sm-2 col-md-1 d-flex align-self-end mt-3 justify-content-end">
+                                        <button type="submit" class="btn btn-dark">Send</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <!-- Tab content for private message ends -->
+</div>
+
+<!-- Tab content end here -->

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
 using System.Security.Claims;
@@ -42,6 +43,30 @@ namespace Find2Me.Infrastructure.DbModels
         public DateTime CreatedOn { get; set; }
 
         public DateTime UpdatedOn { get; set; }
+
+        public UserProfileImageData ProfileImageData { get; set; }
+    }
+
+    public class UserProfileImageData
+    {
+        [Key]
+        [ForeignKey("User")]
+        public string UserId { get; set; }
+        public ApplicationUser User { get; set; }
+
+        public float CropBoxData_Left { get; set; }
+        public float CropBoxData_Top { get; set; }
+        public float CropBoxData_Width { get; set; }
+        public float CropBoxData_Height { get; set; }
+
+        public float CanvasData_Left { get; set; }
+        public float CanvasData_Top { get; set; }
+        public float CanvasData_Width { get; set; }
+        public float CanvasData_Height { get; set; }
+        public float CanvasData_NaturalWidth { get; set; }
+        public float CanvasData_NaturalHeight { get; set; }
+
+        public DateTime LastUpdated { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -50,6 +75,8 @@ namespace Find2Me.Infrastructure.DbModels
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+
+        public DbSet<Currency> Currencies { get; set; }
 
         public static ApplicationDbContext Create()
         {

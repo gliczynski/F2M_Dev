@@ -1,6 +1,7 @@
 ﻿using Find2MeWeb.ActionFilters;
 using Find2MeWeb.Resources;
 using Find2MeWeb.ViewModels;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -16,12 +17,29 @@ namespace Find2MeWeb.Controllers
         [Internationalization]
         public ActionResult Index()
         {
+            if (TempData["SignUpError"] != null)
+            {
+                IdentityResult identityResult = (IdentityResult)TempData["SignUpError"];
+                if (identityResult != null)
+                {
+                    foreach (var error in identityResult.Errors)
+                    {
+                        string errorMessage = error;
+                        if (error.ToLower().StartsWith("email") && error.EndsWith("is already taken."))
+                        {
+                            ViewData["PopupError"] = true;
+                            ViewData["PopupErrorMessage"] = "EmailTaken";
+                        }
+                    }
+                }
+            }
             // Get string from strongly typed localzation resources
             var vm = new FullViewModel { LocalisedString = Strings.SomeLocalisedString };
             return View(vm);
 
-           // return View();
+            // return View();
         }
+
         // Localize string without any external impact with caching
         [OutputCache(Duration = 3600)]
         public ActionResult CachedIndex()

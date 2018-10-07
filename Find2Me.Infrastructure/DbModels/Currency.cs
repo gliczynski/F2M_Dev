@@ -16,6 +16,8 @@ namespace Find2Me.Infrastructure.DbModels
 
         public string Symbol { get; set; }
 
+        public string Country { get; set; }
+
         public decimal ExchangeRate { get; set; }
 
         public DateTime LastUpdated { get; set; }

@@ -1,0 +1,370 @@
+﻿@model Find2Me.Infrastructure.ViewModels.UserProfilePictureVM
+@using Find2Me.Infrastructure;
+@{
+    ViewBag.Title = "Step1";
+
+
+}
+
+@section Styles{
+    <link href="~/Content/plugins/cropperjs-master/dist/cropper.min.css" rel="stylesheet" />
+    <style>
+        .img-container,
+        .preview {
+            overflow: hidden;
+        }
+    </style>
+}
+
+
+<section class="adwizard-section">
+    <div class="container mt-3">
+        <div class="row">
+
+            <!-- Headline of the page -->
+            <div class="col-12 d-flex justify-content-md-between align-items-center">
+                <div>
+                    <h1 class="d-inline-flex pr-3">Profile setup wizard</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr class="pt-0 mt-0 mb-0" />
+            </div>
+        </div>
+
+
+        <div class="row mt-5">
+            <div class="col">
+
+                <!-- TABS FOR WIZARD -->
+
+                <div class="row">
+                    <div class="col-11 mr-0 col-xl-6 offset-xl-3">
+                        <div class="stepwizard-row"> </div>
+                    </div>
+                </div>
+                <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
+
+                    <div class="col-4 col-xl-2 stepwizard-step">
+                        <a href="#step-1" type="button" class="btn btn-dark btn-circle">1</a>
+                        <p>Profile image</p>
+                    </div>
+                    <div class="col-4 col-xl-2 stepwizard-step">
+                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        <p>Profile info</p>
+                    </div>
+                    <div class="col-4 col-xl-2 stepwizard-step ">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                        <p>Done</p>
+                    </div>
+                </div>
+
+                <!-- Upload profile image section -->
+                <div class="row mt-1">
+                    <div class="col text-center">
+                        <p>
+                            <strong>Your profile is almost ready.</strong><br />Please add your profile image to your profile. You will allways be able to change it later.<br />
+                            The profile image is shown together with your add, comments and other things.
+                        </p>
+                        <p class="profile-section d-flex justify-content-center mt-5">
+                            <a class="avatar" title="@Model.FullName">
+                                @if (!string.IsNullOrEmpty(Model.ProfileImageSelected))
+                                {
+                                    <img id="profile_avatar" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageSelected" title="@Model.FullName" alt="@Model.FullName" />
+                                }
+                                else
+                                {
+                                    <img id="profile_avatar" src="~/Html/img/default-profile.png" title="@Model.FullName" alt="@Model.FullName" />
+                                }
+                            </a>
+                        </p>
+                        <p class="mt-2">
+                            @using (Html.BeginForm("UploadProfileImage", "Profile", new { returnUrl = Url.Action() }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload_profile_image_form", style = "display: inline-block;" }))
+                            {
+                                if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
+                                {
+                                    <button type="button" class="btn btn-dark" id="edit_image_btn">Edit image</button>
+                                }
+                                else
+                                {
+                                    <button type="button" class="btn btn-dark disabled" disabled="disabled">Edit image</button>
+                                }
+
+                                @Html.AntiForgeryToken()
+                                <button type="button" class="btn btn-dark" id="upload_image_btn">Upload profile image</button>
+                                <input type="file" id="profile_picture_input" name="profileimage" accept="image/*" style="display: none;">
+                            }
+                        </p>
+                    </div>
+                </div>
+
+                <div class="alert" role="alert"></div>
+
+                <!-- Navigation of the wizard -->
+                <hr class="mt-5" />
+
+                <div class="form-group row d-flex justify-content-center">
+                    <a href="@Url.Action("Step2", "Profile")" class="btn btn-dark" role="button">Next</a>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div> <!-- container -->
+</section>
+<!-- adwizard-section -->
+<!-- Image Cropper for Edit/Cropping Of Image -->
+<div class="modal fade" id="edit_crop_image_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="modalLabel">Edit Profile Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+                @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
+                {
+                    <div class="img-container">
+                        <div class="row">
+                            <div class="col col-8">
+                                <p>
+                                    <strong>Original Image</strong>
+                                </p>
+                                <div class="cropper-container" style="height: 400px;">
+                                    <img id="cropper_image" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageOriginal" title="@Model.FullName" alt="@Model.FullName" />
+                                </div>
+                            </div>
+                            <div class="col col-4">
+                                <p>
+                                    <strong>Crop View</strong>
+                                </p>
+                                <div class="preview">
+                                </div>
+
+                                <br />
+                                <div class="progress" style="display: none;">
+                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="alert alert-danger" role="alert">
+                        <i class="fa fa-info-circle fa-fw"></i> You haven't uploaded any profile picture yet. Please upload a picture first!
+                    </div>
+                }
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
+                {
+                    <button type="button" class="btn btn-primary" id="crop">Update</button>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
+
+    <script>
+        var cropData = "";
+        @if(Model.ProfileImageData != null)
+        {
+            <text>
+        cropData = @Html.Raw(Model.ProfileImageData.GetCroppingDataString());
+            </text>
+        }
+
+        $('#upload_image_btn').click(function () {
+            $('#profile_picture_input').click();
+        });
+
+        $('#profile_picture_input').on('change', function () {
+            $('#upload_profile_image_form').submit();
+        });
+
+
+        function each(arr, callback) {
+            var length = arr.length;
+            var i;
+
+            for (i = 0; i < length; i++) {
+                callback.call(arr, arr[i], i, arr);
+            }
+
+            return arr;
+        }
+
+        window.addEventListener('DOMContentLoaded', function () {
+            var image = document.querySelector('#cropper_image');
+            var previews = document.querySelectorAll('.preview');
+            var avatar = document.getElementById('profile_avatar');
+            var $progress = $('.progress');
+            var $progressBar = $('.progress-bar');
+            var $alert = $('.alert');
+
+            var cropper;
+
+            $modal = $('#edit_crop_image_modal');
+            $('#edit_image_btn').click(function () {
+                $modal.modal('show');
+            });
+
+            $modal.on('shown.bs.modal', function () {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1 / 1,
+                    viewMode: 1,
+                    responsive: true,
+
+                    ready: function () {
+                        var clone = this.cloneNode();
+
+                        clone.className = '';
+                        clone.style.cssText = (
+                            'display: block;' +
+                            'width: 100%;' +
+                            'min-width: 0;' +
+                            'min-height: 0;' +
+                            'max-width: none;' +
+                            'max-height: none;'
+                        );
+
+                        each(previews, function (elem) {
+                            elem.appendChild(clone.cloneNode());
+                        });
+
+                        if (cropData) {
+                            setTimeout(function () {
+                                cropper.setCanvasData(cropData.ImageCanvasData);
+                                cropper.setCropBoxData(cropData.ImageCropBoxData);
+                                cropper.crop();
+                            }, 1000);
+                        }
+                    },
+
+                    crop: function (event) {
+                        var data = event.detail;
+                        var cropper = this.cropper;
+                        var imageData = cropper.getImageData();
+                        var previewAspectRatio = data.width / data.height;
+
+                        each(previews, function (elem) {
+                            var previewImage = elem.getElementsByTagName('img').item(0);
+                            var previewWidth = elem.offsetWidth;
+                            var previewHeight = previewWidth / previewAspectRatio;
+                            var imageScaledRatio = data.width / previewWidth;
+
+                            elem.style.height = previewHeight + 'px';
+                            if (previewImage) {
+                                previewImage.style.width = imageData.naturalWidth / imageScaledRatio + 'px';
+                                previewImage.style.height = imageData.naturalHeight / imageScaledRatio + 'px';
+                                previewImage.style.marginLeft = -data.x / imageScaledRatio + 'px';
+                                previewImage.style.marginTop = -data.y / imageScaledRatio + 'px';
+                            }
+                        });
+                    },
+                });
+            }).on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            $('.cropper-container').on('load', '.cropper-canvas img', function () {
+                alert('a')
+            });
+
+            document.getElementById('crop').addEventListener('click', function () {
+                var initialAvatarURL;
+                var canvas;
+
+                if (cropper) {
+                    $('#crop').attr("disabled", "disabled");
+
+                    canvas = cropper.getCroppedCanvas();
+                    initialAvatarURL = avatar.src;
+
+                    $progress.show();
+                    $alert.removeClass('alert-success alert-warning');
+
+                    canvas.toBlob(function (blob) {
+                        var formData = new FormData();
+
+                        var data = {
+                            ImageCanvasData: cropper.getCanvasData(),
+                            ImageCropBoxData: cropper.getCropBoxData()
+                        }
+
+                        formData.append('ImageCropped', blob, 'avatar.jpg');
+                        formData.append('CropData', JSON.stringify(data));
+
+
+                        debugger;
+                        $.ajax('@Url.Action("CropProfileImage", "Profile")', {
+                            method: 'POST',
+                            data: formData,
+                            processData: false,
+                            //dataType: "json",
+                            //contentType: "application/json",
+                            contentType: false,
+                            xhr: function () {
+                                var xhr = new XMLHttpRequest();
+
+                                xhr.upload.onprogress = function (e) {
+                                    var percent = '0';
+                                    var percentage = '0%';
+
+                                    if (e.lengthComputable) {
+                                        percent = Math.round((e.loaded / e.total) * 100);
+                                        percentage = percent + '%';
+                                        $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                                    }
+                                };
+
+                                return xhr;
+                            },
+                            success: function (data) {
+                                $modal.modal('hide');
+                                if (data) {
+                                    if (data.Success) {
+                                        avatar.src = canvas.toDataURL();
+                                        cropData.ImageCanvasData = cropper.getCanvasData();
+                                        cropData.ImageCropBoxData = cropper.getCropBoxData();
+
+                                        $alert.show().addClass('alert-success').empty().html('<i class="fa fa-check-circle fa-fw"></i> Done! Profile Image is updated successfully!');
+                                    }
+                                    else {
+                                        $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i> Oops! There was an error whilte updating Profile Image. '+ data.Message);
+                                    }
+                                }
+                            },
+
+                            error: function () {
+                                avatar.src = initialAvatarURL;
+                                $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i> Oops! There was an error whilte updating Profile Image!');
+                            },
+
+                            complete: function () {
+                                $('#crop').removeAttr("disabled");
+                                $progress.hide();
+                            },
+                        });
+                    });
+                }
+            });
+
+
+        });
+    </script>
+}

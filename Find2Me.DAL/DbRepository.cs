@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Find2Me.DAL
 {
-    public class DbRepository<T> where T : class, IDisposable
+    public class DbRepository<T> where T : class
     {
         protected ApplicationDbContext dbContext;
         public DbRepository(ApplicationDbContext context)
@@ -69,25 +69,6 @@ namespace Find2Me.DAL
         public int SaveChanges()
         {
             return dbContext.SaveChanges();
-        }
-
-        private bool disposed = false;
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!this.disposed)
-            {
-                if (disposing)
-                {
-                    dbContext.Dispose();
-                }
-            }
-            this.disposed = true;
-        }
-
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
         }
     }
 }

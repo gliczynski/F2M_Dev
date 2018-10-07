@@ -18,6 +18,14 @@ using Find2Me.Infrastructure;
 using System.Security.Claims;
 using System.Collections.Generic;
 using System.Configuration;
+using Owin.Security.Providers.Instagram.Provider;
+using Owin.Security.Providers.Instagram;
+using Microsoft.Owin.Security;
+using TweetSharp;
+using System.Text;
+using System.Security.Cryptography;
+using System.Net;
+using System.IO;
 
 namespace Find2MeWeb
 {
@@ -164,7 +172,10 @@ namespace Find2MeWeb
                 //AppSecret = "1abfaaf382ca042b8a91ffd74e5ff18a",
                 AppId = ConfigurationManager.AppSettings["FACEBOOK_APP_ID"],
                 AppSecret = ConfigurationManager.AppSettings["FACEBOOK_APP_SECRET"],
+                CallbackPath = new PathString("/en/signin-facebook"),
+                //CallbackPath = new PathString("/en/Account/ExternalLoginCallback"),
             };
+
             options.Scope.Add("email");
             options.Scope.Add("public_profile");
             options.Fields.Add("email");
@@ -173,27 +184,28 @@ namespace Find2MeWeb
             options.Fields.Add("first_name");
             options.Fields.Add("middle_name");
             options.Fields.Add("last_name");
-            options.CallbackPath = new PathString("/account/ExternalLoginCallback");
             //options.UserInformationEndpoint = "https://graph.facebook.com/v2.4/me?fields=id,name,email,first_name,last_name";
             options.Provider = new FacebookAuthenticationProvider
             {
                 OnAuthenticated = context =>
                 {
                     // Retrieve the OAuth access token to store for subsequent API calls
-                    string accessToken = context.AccessToken;
+                    //string accessToken = context.AccessToken;
 
                     // Retrieve the username
-                    string facebookUserName = context.UserName;
+                    //string facebookUserName = context.UserName;
 
                     // You can even retrieve the full JSON-serialized user
-                    OAuthReponseUserFacebook User = context.User.ToObject<OAuthReponseUserFacebook>();
+                    //OAuthReponseUserFacebook User = context.User.ToObject<OAuthReponseUserFacebook>();
 
                     //Adding User Data Claims
+                    context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
                     context.Identity.AddClaim(new Claim(ClaimTypes.UserData, context.User.ToString()));
 
                     return Task.FromResult(true);
                 },
             };
+
             app.UseFacebookAuthentication(options);
         }
 
@@ -248,24 +260,28 @@ namespace Find2MeWeb
                 //ClientSecret = " pJ-st1q3yQRoIHmaDLTR4lcu",
                 ClientId = ConfigurationManager.AppSettings["GOOGLE_CLIENT_ID"],
                 ClientSecret = ConfigurationManager.AppSettings["GOOGLE_CLIENT_SECRET"],
+                CallbackPath = new PathString("/en/signin-google"),
+                //CallbackPath = new PathString("/en/Account/ExternalLoginCallback")
             };
 
-            options.CallbackPath = new PathString("/Account/ExternalLoginCallback");
             options.Provider = new GoogleOAuth2AuthenticationProvider
             {
                 OnAuthenticated = context =>
                 {
                     // Retrieve the OAuth access token to store for subsequent API calls
-                    string accessToken = context.AccessToken;
+                    //string accessToken = context.AccessToken;
 
                     // Retrieve the name of the user in Google
-                    string googleName = context.Name;
+                    //string googleName = context.Name;
 
                     // Retrieve the user's email address
-                    string googleEmailAddress = context.Email;
+                    //string googleEmailAddress = context.Email;
 
                     // You can even retrieve the full JSON-serialized user
-                    var serializedUser = context.User;
+                    //var serializedUser = context.User;
+                    context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
+                    context.Identity.AddClaim(new Claim(ClaimTypes.UserData, context.User.ToString()));
+
                     return Task.FromResult(true);
                 }
             };
@@ -310,29 +326,35 @@ namespace Find2MeWeb
              * Retrieve the access token and other user information
              * ------------------------------------------------------------------------------- */
 
-            //var options = new InstagramAuthenticationOptions()
-            //{
-            //    ClientId = "Your client id",
-            //    ClientSecret = "Your client secret",
-            //    Provider = new InstagramAuthenticationProvider
-            //    {
-            //        OnAuthenticated = async context =>
-            //        {
-            //            // Retrieve the OAuth access token to store for subsequent API calls
-            //            string accessToken = context.AccessToken;
+            var options = new InstagramAuthenticationOptions()
+            {
+                ClientId = ConfigurationManager.AppSettings["INSTAGRAM_CLIENT_ID"],
+                ClientSecret = ConfigurationManager.AppSettings["INSTAGRAM_CLIENT_SECRET"],
+                CallbackPath = new PathString("/en/signin-instagram"),
+                //CallbackPath = new PathString("/en/Account/ExternalLoginCallback"),
+            };
 
-            //            // Retrieve the username
-            //            string userName = context.UserName;
+            options.Provider = new InstagramAuthenticationProvider
+            {
+                OnAuthenticated = context =>
+                {
+                    // Retrieve the OAuth access token to store for subsequent API calls
+                    //string accessToken = context.AccessToken;
 
-            //            // Retrieve the user's full name
-            //            string fullName = context.Name;
+                    // Retrieve the username
+                    //string userName = context.UserName;
 
-            //            // You can even retrieve the full JSON-serialized user
-            //            var serializedUser = context.User;
-            //        }
-            //    }
-            //};
-            //app.UseInstagramInAuthentication(options);
+                    // Retrieve the user's full name
+                    //string fullName = context.Name;
+
+                    // You can even retrieve the full JSON-serialized user
+                    //var serializedUser = context.User;
+                    context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
+                    context.Identity.AddClaim(new Claim(ClaimTypes.UserData, context.User.ToString()));
+                    return Task.FromResult(true);
+                }
+            };
+            app.UseInstagramInAuthentication(options);
 
         }
 
@@ -362,8 +384,20 @@ namespace Find2MeWeb
 
             var options = new TwitterAuthenticationOptions
             {
-                ConsumerKey = "Your Consumer Key",
-                ConsumerSecret = "Your Consumer Secret",
+                //ConsumerKey = ConfigurationManager.AppSettings["TWITTER_API_KEY"],
+                //ConsumerSecret = ConfigurationManager.AppSettings["TWITTER_API_SECRET"],
+                ConsumerKey = "hXgYJWyXoHshpd7TALXCOIi6Y",
+                ConsumerSecret = "7g6PQysaGrISt9r1VRuV9wjbQmZlbpFCjxAMQalrWF6oKBgpIl",
+                //BackchannelCertificateValidator = new CertificateSubjectKeyIdentifierValidator(new[] {
+                //    "A5EF0B11CEC04103A34A659048B21CE0572D7D47", // VeriSign Class 3 Secure Server CA – G2
+                //    "0D445C165344C1827E1D20AB25F40163D8BE79A5", // VeriSign Class 3 Secure Server CA – G3
+                //    "7FD365A7C2DDECBBF03009F34339FA02AF333133", // VeriSign Class 3 Public Primary Certification Authority – G5
+                //    "39A55D933676616E73A761DFA16A7E59CDE66FAD", // Symantec Class 3 Secure Server CA – G4
+                //    "5168FF90AF0207753CCCD9656462A212B859723B", //DigiCert SHA2 High Assurance Server C‎A
+                //    "B13EC36903F8BF4701D498261A0802EF63642BC3" //DigiCert High Assurance EV Root CA
+                //}),
+                //CallbackPath = new PathString("/en/Account/LoginCallback"),
+                CallbackPath = new PathString("/en/signin-twitter"),
             };
 
             options.Provider = new TwitterAuthenticationProvider
@@ -374,10 +408,21 @@ namespace Find2MeWeb
                     string accessToken = context.AccessToken;
 
                     // Retrieve the screen name (e.g. @jerriepelser)
-                    string twitterScreenName = context.ScreenName;
+                    //string twitterScreenName = context.ScreenName;
 
                     // Retrieve the user ID
-                    var twitterUserId = context.UserId;
+                    //var twitterUserId = context.UserId;
+                    var userData = new OAuthReponseUserTwitter
+                    {
+                        //ProfilePicture = string.Format("https://twitter.com/{0}/profile_image?size=original", twitterScreenName)
+                    };
+                    OAuthReponseUserTwitter response = TwitterLogin(context.AccessToken, context.AccessTokenSecret, options.ConsumerKey, options.ConsumerSecret);
+                    if (response != null)
+                    {
+                        context.Identity.AddClaim(new Claim(ClaimTypes.Email, response.Email));
+                    }
+                    context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
+                    context.Identity.AddClaim(new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(response)));
                     return Task.FromResult(true);
                 }
             };
@@ -386,5 +431,70 @@ namespace Find2MeWeb
 
         }
 
+        public OAuthReponseUserTwitter TwitterLogin(string oauth_token, string oauth_token_secret, string oauth_consumer_key, string oauth_consumer_secret)
+        {
+            // oauth implementation details
+            var oauth_version = "1.0";
+            var oauth_signature_method = "HMAC-SHA1";
+
+            // unique request details
+            var oauth_nonce = Convert.ToBase64String(
+                new ASCIIEncoding().GetBytes(DateTime.Now.Ticks.ToString()));
+            var timeSpan = DateTime.UtcNow
+                - new DateTime(1970, 1, 1, 0, 0, 0, 0, DateTimeKind.Utc);
+            var oauth_timestamp = Convert.ToInt64(timeSpan.TotalSeconds).ToString();
+
+            var resource_url = "https://api.twitter.com/1.1/account/verify_credentials.json";
+            var request_query = "include_email=true";
+            // create oauth signature
+            var baseFormat = "oauth_consumer_key={0}&oauth_nonce={1}&oauth_signature_method={2}" +
+                            "&oauth_timestamp={3}&oauth_token={4}&oauth_version={5}";
+
+            var baseString = string.Format(baseFormat,
+                                        oauth_consumer_key,
+                                        oauth_nonce,
+                                        oauth_signature_method,
+                                        oauth_timestamp,
+                                        oauth_token,
+                                        oauth_version
+                                        );
+
+            baseString = string.Concat("GET&", Uri.EscapeDataString(resource_url) + "&" + Uri.EscapeDataString(request_query), "%26", Uri.EscapeDataString(baseString));
+
+            var compositeKey = string.Concat(Uri.EscapeDataString(oauth_consumer_secret),
+                                    "&", Uri.EscapeDataString(oauth_token_secret));
+
+            string oauth_signature;
+            using (HMACSHA1 hasher = new HMACSHA1(ASCIIEncoding.ASCII.GetBytes(compositeKey)))
+            {
+                oauth_signature = Convert.ToBase64String(
+                    hasher.ComputeHash(ASCIIEncoding.ASCII.GetBytes(baseString)));
+            }
+
+            // create the request header
+            var headerFormat = "OAuth oauth_consumer_key=\"{0}\", oauth_nonce=\"{1}\", oauth_signature=\"{2}\", oauth_signature_method=\"{3}\", oauth_timestamp=\"{4}\", oauth_token=\"{5}\", oauth_version=\"{6}\"";
+
+            var authHeader = string.Format(headerFormat,
+                                    Uri.EscapeDataString(oauth_consumer_key),
+                                    Uri.EscapeDataString(oauth_nonce),
+                                    Uri.EscapeDataString(oauth_signature),
+                                    Uri.EscapeDataString(oauth_signature_method),
+                                    Uri.EscapeDataString(oauth_timestamp),
+                                    Uri.EscapeDataString(oauth_token),
+                                    Uri.EscapeDataString(oauth_version)
+                            );
+
+
+            // make the request
+
+            ServicePointManager.Expect100Continue = false;
+            resource_url += "?include_email=true";
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(resource_url);
+            request.Headers.Add("Authorization", authHeader);
+            request.Method = "GET";
+
+            WebResponse response = request.GetResponse();
+            return JsonConvert.DeserializeObject<OAuthReponseUserTwitter>(new StreamReader(response.GetResponseStream()).ReadToEnd());
+        }
     }
 }

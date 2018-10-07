@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNet.Identity
+@using Find2Me.Infrastructure;
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,36 +14,58 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,500|Lato:300,400,700">
     <link rel="stylesheet" href="~/Html/css/iconic/css/open-iconic-bootstrap.css">
     <link rel="stylesheet" href="~/Html/css/font-awesome4/css/font-awesome.min.css">
+
+    @RenderSection("Styles", false)
+
     <link rel="stylesheet" href="~/Html/css/style.css">
     <link rel="stylesheet" href="~/Html/css/bootstrap-social.css">
 </head>
 
 @helper english()
-    {
+{
+    var targetPath = string.Format("/{0}/{1}{2}",
+                               ViewContext.RouteData.Values["controller"].ToString(),
+                               ViewContext.RouteData.Values["action"].ToString(),
+                               Request.Url.Query);
+    var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+    var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
 
-        var targetPath = string.Format("/{0}/{1}{2}",
-                                   ViewContext.RouteData.Values["controller"].ToString(),
-                                   ViewContext.RouteData.Values["action"].ToString(),
-                                   Request.Url.Query);
-        var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
-        var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
-        <a class="nav-link" href="@(string.Format(targetUrlMask, "en"))">EN</a>
+    <a class="nav-link" href="@(string.Format(targetUrlMask, "en"))">EN</a>
 }
+
 @helper langSelector()
-    {
+{
+    var targetPath = string.Format("/{0}/{1}{2}",
+        ViewContext.RouteData.Values["controller"].ToString(),
+        ViewContext.RouteData.Values["action"].ToString(),
+        Request.Url.Query);
+    var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
+    var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
 
-
-        var targetPath = string.Format("/{0}/{1}{2}",
-            ViewContext.RouteData.Values["controller"].ToString(),
-            ViewContext.RouteData.Values["action"].ToString(),
-            Request.Url.Query);
-        var hostRoot = string.Format("{0}://{1}", Request.Url.Scheme, Request.Url.Authority);
-        var targetUrlMask = string.Format("{0}/{{0}}/{1}", hostRoot, targetPath);
-
-
-        <a class="nav-link" href="@(string.Format(targetUrlMask, "da"))">DK</a>
-
+    <a class="nav-link" href="@(string.Format(targetUrlMask, "da"))">DK</a>
 }
+
+@{
+    var hasError = false;
+    var ErrorMessage = "";
+    if (ViewData["PopupError"] != null) { hasError = Convert.ToBoolean(ViewData["PopupError"]); };
+    if (ViewData["PopupErrorMessage"] != null) { ErrorMessage = Convert.ToString(ViewData["PopupErrorMessage"]); };
+}
+
+@helper OpenErrorModal(bool hasError)
+{
+    if (hasError)
+    {
+        <text>
+            <script>
+                $(function () {
+                    $('#error_login_modal').modal('show');
+                });
+            </script>
+        </text>
+    }
+}
+
 <body>
 
 
@@ -84,11 +108,34 @@
                               <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
                             </li> -->
 
-                            <li class="nav-item justify-content-end mr-3">
-                                <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal" role="button">
-                                    Login
-                                </button>
-                            </li>
+
+                            @if (Request.IsAuthenticated)
+                            {
+                                <li class="nav-item dropdown justify-content-end mr-3">
+                                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown_LoggedIn" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                                        @User.Identity.GetUrlUserName()
+                                    </a>
+                                    <div class="dropdown-menu" aria-labelledby="navbarDropdown_LoggedIn">
+                                        <a class="dropdown-item" href="@Url.Action("Index", "Profile")" data-i18n="MENUITEM_SUB_ITEM1">My profile</a>
+                                        <a class="dropdown-item" href="#" data-i18n="MENUITEM_SUB_ITEM2">My ads</a>
+                                        <div class="dropdown-divider"></div>
+                                        @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+                                        {
+                                            @Html.AntiForgeryToken()
+                                            <a class="dropdown-item" href="javascript:sessionStorage.removeItem('accessToken');$('#logoutForm').submit();" data-i18n="MENUITEM_SUB_LOGOFF">Log out</a>
+                                        }
+                                    </div>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item justify-content-end mr-3">
+                                    <button type="button" class="btn btn-dark" data-toggle="modal" data-target="#loginModal" role="button">
+                                        Login
+                                    </button>
+                                </li>
+                            }
+
                             <li class="nav-item dropdown  justify-content-end">
                                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     Menu
@@ -100,6 +147,7 @@
                                     <a class="dropdown-item" href="#">Something else here</a>
                                 </div>
                             </li>
+
                         </ul>
                     </div>
                 </nav>
@@ -110,8 +158,8 @@
     @*Header End Here*@
 
     @*Body Start Here*@
-
     @RenderBody()
+
     @RenderSection("SPAViews", required: false)
 
     <!-- Body END ->
@@ -272,19 +320,22 @@
     </div>
 
     <!-- Error Alert Model -->
-    <div class="modal" tabindex="-1" role="dialog">
+    <div class="modal" tabindex="-1" role="dialog" id="error_login_modal">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Login attempt failed.</h5>
+                    <h4 class="modal-title">Login attempt failed.</h4>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        The email is already registered on another account. Please try another login provider.
-                    </p>
+                    @if (ErrorMessage.Equals("EmailTaken"))
+                    {
+                        <p>
+                            The email is already registered on another account. Please try another login provider.
+                        </p>
+                    }
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -293,12 +344,19 @@
         </div>
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    @Scripts.Render("~/bundles/jquery")
+    @*<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>*@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @OpenErrorModal(hasError)
+
+    <script>
+        $(function () {
+            $('[data-toggle="tooltip"]').tooltip();
+        })
+    </script>
     @RenderSection("Scripts", required: false)
 
 </body>

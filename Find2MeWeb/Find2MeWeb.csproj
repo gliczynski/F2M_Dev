@@ -54,11 +54,17 @@
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="Common.Logging, Version=2.0.0.0, Culture=neutral, PublicKeyToken=af08829b84f0328e, processorArchitecture=MSIL">
+      <HintPath>..\packages\Common.Logging.2.0.0\lib\2.0\Common.Logging.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Hammock.ClientProfile, Version=1.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\Hammock.ClientProfile.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=2.4.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.2.4.0\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -88,7 +94,7 @@
       <HintPath>..\packages\Microsoft.AspNet.Identity.EntityFramework.2.2.2\lib\net45\Microsoft.AspNet.Identity.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Owin, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.0\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
+      <HintPath>..\packages\Microsoft.AspNet.Identity.Owin.2.2.2\lib\net45\Microsoft.AspNet.Identity.Owin.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.TelemetryCorrelation, Version=1.0.4.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.TelemetryCorrelation.1.0.4\lib\net45\Microsoft.AspNet.TelemetryCorrelation.dll</HintPath>
@@ -97,32 +103,32 @@
       <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.2.0.1\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="Microsoft.Owin, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.3.1.0\lib\net45\Microsoft.Owin.dll</HintPath>
+    <Reference Include="Microsoft.Owin, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.4.0.0\lib\net451\Microsoft.Owin.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.3.1.0\lib\net45\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Cors, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Cors.4.0.0\lib\net451\Microsoft.Owin.Cors.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.3.1.0\lib\net45\Microsoft.Owin.Security.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Host.SystemWeb, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Host.SystemWeb.4.0.0\lib\net451\Microsoft.Owin.Host.SystemWeb.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.3.1.0\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.4.0.0\lib\net451\Microsoft.Owin.Security.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Facebook, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.3.1.0\lib\net45\Microsoft.Owin.Security.Facebook.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Cookies, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Cookies.4.0.0\lib\net451\Microsoft.Owin.Security.Cookies.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Google, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Google.3.1.0\lib\net45\Microsoft.Owin.Security.Google.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Facebook, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Facebook.4.0.0\lib\net451\Microsoft.Owin.Security.Facebook.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.MicrosoftAccount, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.MicrosoftAccount.3.1.0\lib\net45\Microsoft.Owin.Security.MicrosoftAccount.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Google, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Google.4.0.0\lib\net451\Microsoft.Owin.Security.Google.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.3.1.0\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.OAuth, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.OAuth.4.0.0\lib\net451\Microsoft.Owin.Security.OAuth.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Owin.Security.Twitter, Version=3.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.3.1.0\lib\net45\Microsoft.Owin.Security.Twitter.dll</HintPath>
+    <Reference Include="Microsoft.Owin.Security.Twitter, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Owin.Security.Twitter.4.0.0\lib\net451\Microsoft.Owin.Security.Twitter.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Web.Infrastructure">
       <Private>True</Private>
@@ -157,6 +163,9 @@
     <Reference Include="System.Transactions" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Cors, Version=5.2.6.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.Cors.5.2.6\lib\net45\System.Web.Cors.dll</HintPath>
     </Reference>
     <Reference Include="System.Web.Helpers, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.WebPages.3.2.6\lib\net45\System.Web.Helpers.dll</HintPath>
@@ -199,6 +208,9 @@
     </Reference>
     <Reference Include="System.Web.Routing" />
     <Reference Include="System.Web.Services" />
+    <Reference Include="TweetSharp, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c148cfba29ed1a4d, processorArchitecture=MSIL">
+      <HintPath>..\packages\TweetSharp.2.3.1\lib\4.0\TweetSharp.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease, Version=1.6.5135.21930, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\WebGrease.1.6.0\lib\WebGrease.dll</HintPath>
     </Reference>
@@ -244,6 +256,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MeController.cs" />
+    <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -271,6 +284,127 @@
     <Content Include="Content\bootstrap-reboot.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\plugins\cropperjs-master\dist\cropper.common.js" />
+    <Content Include="Content\plugins\cropperjs-master\dist\cropper.css" />
+    <Content Include="Content\plugins\cropperjs-master\dist\cropper.esm.js" />
+    <Content Include="Content\plugins\cropperjs-master\dist\cropper.js" />
+    <Content Include="Content\plugins\cropperjs-master\dist\cropper.min.css" />
+    <Content Include="Content\plugins\cropperjs-master\dist\cropper.min.js" />
+    <Content Include="Content\plugins\cropperjs-master\docs\css\cropper.css" />
+    <Content Include="Content\plugins\cropperjs-master\docs\css\main.css" />
+    <Content Include="Content\plugins\cropperjs-master\docs\images\data.jpg" />
+    <Content Include="Content\plugins\cropperjs-master\docs\images\layers.jpg" />
+    <Content Include="Content\plugins\cropperjs-master\docs\images\picture-2.jpg" />
+    <Content Include="Content\plugins\cropperjs-master\docs\images\picture-3.jpg" />
+    <Content Include="Content\plugins\cropperjs-master\docs\images\picture.jpg" />
+    <Content Include="Content\plugins\cropperjs-master\docs\index.html" />
+    <Content Include="Content\plugins\cropperjs-master\docs\js\cropper.js" />
+    <Content Include="Content\plugins\cropperjs-master\docs\js\main.js" />
+    <Content Include="Content\plugins\cropperjs-master\examples\a-range-of-aspect-ratio.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\crop-a-round-image.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\crop-cross-origin-image.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\crop-on-canvas.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\cropper-in-modal.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\customize-preview.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\fixed-crop-box.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\full-crop-box.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\mask-an-image.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\minimum-and-maximum-cropped-dimensions.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\multiple-croppers.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\one-to-one-crop-box.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\responsive-container.html" />
+    <Content Include="Content\plugins\cropperjs-master\examples\upload-cropped-image-to-server.html" />
+    <Content Include="Content\plugins\cropperjs-master\postcss.config.js" />
+    <Content Include="Content\plugins\cropperjs-master\rollup.config.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\css\cropper.css" />
+    <Content Include="Content\plugins\cropperjs-master\src\images\bg.png" />
+    <Content Include="Content\plugins\cropperjs-master\src\index.css" />
+    <Content Include="Content\plugins\cropperjs-master\src\index.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\change.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\constants.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\cropper.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\defaults.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\events.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\handlers.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\methods.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\preview.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\render.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\template.js" />
+    <Content Include="Content\plugins\cropperjs-master\src\js\utilities.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\helpers.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\karma.conf.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\events\crop.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\events\cropend.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\events\cropmove.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\events\cropstart.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\events\ready.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\events\zoom.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\clear.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\crop.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\destroy.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\disable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\enable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\getCanvasData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\getContainerData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\getCropBoxData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\getCroppedCanvas.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\getData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\getImageData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\move.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\moveTo.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\replace.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\reset.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\rotate.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\rotateTo.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\scale.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\scaleX.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\scaleY.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\setAspectRatio.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\setCanvasData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\setCropBoxData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\setData.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\setDragMode.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\zoom.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\methods\zoomTo.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\aspectRatio.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\autoCrop.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\autoCropArea.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\background.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\center.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\checkCrossOrigin.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\checkOrientation.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\crop.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\cropBoxMovable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\cropBoxResizable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\cropend.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\cropmove.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\cropstart.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\data.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\dragMode.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\guides.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\highlight.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\initialAspectRatio.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\minCanvasHeight.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\minCanvasWidth.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\minContainerHeight.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\minContainerWidth.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\minCropBoxHeight.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\minCropBoxWidth.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\modal.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\movable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\preview.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\ready.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\responsive.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\restore.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\rotatable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\scalable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\toggleDragModeOnDblclick.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\viewMode.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\wheelZoomRatio.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\zoom.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\zoomable.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\zoomOnTouch.spec.js" />
+    <Content Include="Content\plugins\cropperjs-master\test\specs\options\zoomOnWheel.spec.js" />
     <Content Include="Content\Site.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -425,12 +559,36 @@
     <Content Include="Scripts\esm\popper.js.map" />
     <Content Include="Scripts\esm\popper-utils.min.js.map" />
     <Content Include="Scripts\esm\popper-utils.js.map" />
+    <Content Include="Content\plugins\cropperjs-master\.babelrc" />
+    <Content Include="Content\plugins\cropperjs-master\.browserslistrc" />
+    <Content Include="Content\plugins\cropperjs-master\.commitlintrc" />
+    <Content Include="Content\plugins\cropperjs-master\.editorconfig" />
+    <Content Include="Content\plugins\cropperjs-master\.eslintrc" />
+    <Content Include="Content\plugins\cropperjs-master\.gitattributes" />
+    <Content Include="Content\plugins\cropperjs-master\.github\CODE_OF_CONDUCT.md" />
+    <Content Include="Content\plugins\cropperjs-master\.github\CONTRIBUTING.md" />
+    <Content Include="Content\plugins\cropperjs-master\.github\ISSUE_TEMPLATE.md" />
+    <Content Include="Content\plugins\cropperjs-master\.github\PULL_REQUEST_TEMPLATE.md" />
+    <Content Include="Content\plugins\cropperjs-master\.gitignore" />
+    <Content Include="Content\plugins\cropperjs-master\.travis.yml" />
+    <Content Include="Content\plugins\cropperjs-master\CHANGELOG.md" />
+    <Content Include="Content\plugins\cropperjs-master\LICENSE" />
+    <Content Include="Content\plugins\cropperjs-master\package-lock.json" />
+    <Content Include="Content\plugins\cropperjs-master\package.json" />
+    <Content Include="Content\plugins\cropperjs-master\README.md" />
+    <Content Include="Content\plugins\cropperjs-master\src\css\cropper.scss" />
+    <Content Include="Content\plugins\cropperjs-master\src\index.scss" />
+    <Content Include="Content\plugins\cropperjs-master\test\.eslintrc" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.js" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-3.4.2.debug.js" />
     <Content Include="Scripts\knockout-3.4.2.js" />
     <Content Include="Scripts\knockout.validation.js" />
@@ -505,6 +663,11 @@
     <Content Include="Scripts\popper.js.map" />
     <Content Include="Scripts\popper-utils.min.js.map" />
     <Content Include="Scripts\popper-utils.js.map" />
+    <Content Include="Views\Profile\Step1.cshtml" />
+    <Content Include="Views\Profile\Step2.cshtml" />
+    <Content Include="Views\Profile\Step2T.cshtml" />
+    <Content Include="Views\Profile\Step3.cshtml" />
+    <Content Include="Views\Profile\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -526,11 +689,16 @@
       <Project>{02EF9264-7733-407D-B9DE-E5B620A9471C}</Project>
       <Name>Find2Me.Infrastructure</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Find2Me.Services\Find2Me.Services.csproj">
+      <Project>{8C7A09DD-453C-497F-8124-9FC84E2FEC27}</Project>
+      <Name>Find2Me.Services</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{4A0DDDB5-7A95-4FBF-97CC-616D07737A77}" />
   </ItemGroup>
   <ItemGroup>
+    <TypeScriptCompile Include="Content\plugins\cropperjs-master\types\index.d.ts" />
     <TypeScriptCompile Include="Scripts\index.d.ts" />
   </ItemGroup>
   <PropertyGroup>
@@ -552,7 +720,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>52096</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>https://localhost:44300/</IISUrl>
+          <IISUrl>https://localhost:44301/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>
