@@ -168,7 +168,7 @@
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
                 {
-                    <button type="button" class="btn btn-primary" id="crop">Update</button>
+                    <button type="button" class="btn btn-dark" id="crop">Update</button>
                 }
             </div>
         </div>
@@ -216,17 +216,21 @@
             var $alert = $('.alert');
 
             var cropper;
-
-            $modal = $('#edit_crop_image_modal');
-            $('#edit_image_btn').click(function () {
-                $modal.modal('show');
-            });
-
-            $modal.on('shown.bs.modal', function () {
+            function ConstructCropper() {
                 cropper = new Cropper(image, {
                     aspectRatio: 1 / 1,
                     viewMode: 1,
+                    zoomable: false,
                     responsive: true,
+
+                    built: function () {
+                        setTimeout(function () {
+                            if (cropData) {
+                                cropper.setCanvasData(cropData.ImageCanvasData);
+                                cropper.setCropBoxData(cropData.ImageCropBoxData);
+                            }
+                        }, 1000);
+                    },
 
                     ready: function () {
                         var clone = this.cloneNode();
@@ -245,16 +249,19 @@
                             elem.appendChild(clone.cloneNode());
                         });
 
-                        if (cropData) {
-                            setTimeout(function () {
+                        setTimeout(function () {
+                            if (cropData) {
                                 cropper.setCanvasData(cropData.ImageCanvasData);
                                 cropper.setCropBoxData(cropData.ImageCropBoxData);
-                                cropper.crop();
-                            }, 1000);
-                        }
+                            }
+                            // And then
+                            this.cropper.move(0);
+
+                        }, 1000);
                     },
 
                     crop: function (event) {
+
                         var data = event.detail;
                         var cropper = this.cropper;
                         var imageData = cropper.getImageData();
@@ -276,6 +283,15 @@
                         });
                     },
                 });
+            }
+
+            $modal = $('#edit_crop_image_modal');
+            $('#edit_image_btn').click(function () {
+                $modal.modal('show');
+            });
+
+            $modal.on('shown.bs.modal', function () {
+                ConstructCropper();
             }).on('hidden.bs.modal', function () {
                 cropper.destroy();
                 cropper = null;
@@ -345,14 +361,14 @@
                                         $alert.show().addClass('alert-success').empty().html('<i class="fa fa-check-circle fa-fw"></i> Done! Profile Image is updated successfully!');
                                     }
                                     else {
-                                        $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i> Oops! There was an error whilte updating Profile Image. '+ data.Message);
+                                        $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i> Oops! There was an error while updating Profile Image. '+ data.Message);
                                     }
                                 }
                             },
 
                             error: function () {
                                 avatar.src = initialAvatarURL;
-                                $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i> Oops! There was an error whilte updating Profile Image!');
+                                $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i> Oops! There was an error while updating Profile Image!');
                             },
 
                             complete: function () {

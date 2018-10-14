@@ -81,5 +81,6 @@ namespace Find2Me.Infrastructure
         public static string ExternalProviderUsername = "ExternalProviderUsername";
         public static string ExternalProviderType = "ExternalProviderType";
         public static string ExternalProviderAccessToken = "ExternalProviderAccessToken";
+        public static string HasCompletedProfileWizard = "HasCompletedProfileWizard";
     }
 }

@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using System.Collections.Generic;
 using Find2MeWeb.Utils;
+using System.Security.Claims;
+using Find2Me.Infrastructure;
 
 namespace Find2MeWeb.HttpModules
 {
@@ -64,7 +66,7 @@ namespace Find2MeWeb.HttpModules
                 // cause we assume that all requests with other verbs will be called from site directly
                 // where all the urls created with URLHelper, so it complies with routing rules and will contain "lang" parameter
                 if (string.Equals(ctx.Request.HttpMethod, "GET", StringComparison.OrdinalIgnoreCase))
-                {                    
+                {
                     var localisedUri = LocalizationHelper.GetLocalisedUrl(ctx.Request.Url, _controllersNamesList, ctx.Request.UserLanguages);
                     if (!string.IsNullOrEmpty(localisedUri))
                         // Perform redirect action to changed url if it exists

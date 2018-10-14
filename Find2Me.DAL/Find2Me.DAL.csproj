@@ -53,6 +53,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="UserProfileImageDataRepository.cs" />
     <Compile Include="ApplicationUserRepository.cs" />
     <Compile Include="CurrencyRepository.cs" />
     <Compile Include="DbRepository.cs" />

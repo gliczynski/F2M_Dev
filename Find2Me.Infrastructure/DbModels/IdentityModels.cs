@@ -76,6 +76,7 @@ namespace Find2Me.Infrastructure.DbModels
         {
         }
 
+        public DbSet<UserProfileImageData> UserProfileImageDatas { get; set; }
         public DbSet<Currency> Currencies { get; set; }
 
         public static ApplicationDbContext Create()

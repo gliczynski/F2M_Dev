@@ -12,6 +12,7 @@ using System.Web.Mvc;
 namespace Find2MeWeb.Controllers
 {
     //[Authorize]
+    [ProfileWizardCompletionCheck]
     public class HomeController : Controller
     {
         [Internationalization]
@@ -25,7 +26,7 @@ namespace Find2MeWeb.Controllers
                     foreach (var error in identityResult.Errors)
                     {
                         string errorMessage = error;
-                        if (error.ToLower().StartsWith("email") && error.EndsWith("is already taken."))
+                        if (error.ToLower().StartsWith("email") && error.EndsWith("is already taken"))
                         {
                             ViewData["PopupError"] = true;
                             ViewData["PopupErrorMessage"] = "EmailTaken";

@@ -27,7 +27,6 @@ namespace Find2MeWeb.Controllers
         public ActionResult Index([Bind(Prefix = "id")] string username)
         {
 
-
             _dbContext = new ApplicationDbContext();
             //Update the User Profile Details
             UserAccountService userAccountService = new UserAccountService(_dbContext);
@@ -43,14 +42,122 @@ namespace Find2MeWeb.Controllers
                 userProfileVM = userAccountService.GetUserProfileById(User.Identity.GetUserId());
             }
 
-            if (userProfileVM == null)
-            {
-                return HttpNotFound();
-            }
+            if (userProfileVM == null) { return HttpNotFound(); }
 
-            return View(userProfileVM);
+            //Check whether the User is seeing his/her own Profile
+            //If it is his/her ownn profile, return Edit Profile Page.
+            //else return the Public Profile View
+            if (User.Identity.GetUserId().Equals(userProfileVM.Id))
+            {
+                ViewBag.YearsOfBirth = UtilityExtension.GetYearsList();
+                ViewBag.LanguagesList = UtilityExtension.GetLanguagesList();
+
+                CurrencyService currencyService = new CurrencyService(_dbContext);
+                ViewBag.CurrencyList = currencyService.GetAllCurrencies();
+
+                userProfileVM.ProfileImageData = userAccountService.GetUserProfileImageData(userProfileVM.Id);
+
+                return View("UpdateProfile", userProfileVM);
+            }
+            else
+            {
+                return View("PublicProfile", userProfileVM);
+            }
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult UpdateProfile(UserProfileVM userProfileVM)
+        {
+            //If User does no exists, just update the UserData
+            try
+            {
+                _dbContext = new ApplicationDbContext();
+                if (!ModelState.IsValid)
+                {
+                    goto FormValidationFailed_GetData;
+                }
+
+                //Update the User Profile Details
+                UserAccountService userAccountService = new UserAccountService(_dbContext);
+
+                //Update the User
+                userProfileVM.Id = User.Identity.GetUserId();
+                var userUpdateResponse = userAccountService.UpdateUserProfile(userProfileVM, false);
+                if (userUpdateResponse.Success == false)
+                {
+                    if (userUpdateResponse.MessageCode == ResponseResultMessageCode.EmailExists)
+                    {
+                        ModelState.AddModelError("Email", "A user already exists with the same email address. Please choose a different one.");
+                        ViewBag.DisableEmailTextbox = false;
+                    }
+                    else if (userUpdateResponse.MessageCode == ResponseResultMessageCode.UserNameExists)
+                    {
+                        ModelState.AddModelError("UrlUsername", "A user already exists with the same username. Please choose a different one.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", ResponseResultMessageCode.GetMessageFromCode(userUpdateResponse.MessageCode));
+                    }
+                    goto FormValidationFailed_GetData;
+                }
+
+                //If User is Updated Successfully, Change UrlUserName Claim Also
+                if (userUpdateResponse.SuccessCode == ResponseResultMessageCode.UserNameUpdated)
+                {
+                    var owinContext = HttpContext.GetOwinContext();
+                    var UserManager = owinContext.GetUserManager<ApplicationUserManager>();
+
+                    //New Claims List, for current Identity
+                    List<Claim> newClaimsList = new List<Claim>();
+
+                    Claim UserNameClaim = User.Identity.GetClaim(_ClaimTypes.UrlUserName);
+                    if (UserNameClaim != null)
+                    {
+                        //If the Username is changed, only then update the Claim
+                        if (!UserNameClaim.Value.ToLower().Equals(userProfileVM.UrlUsername.ToLower()))
+                        {
+                            UserManager.RemoveClaim(userProfileVM.Id, UserNameClaim);
+                            UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
+
+                            newClaimsList.Add(new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
+                        }
+                    }
+                    else
+                    {
+                        UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
+
+                        newClaimsList.Add(new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
+                    }
+
+                    //Update Current Identity Claim and Login User Again
+                    if (newClaimsList.Count > 0)
+                    {
+                        User.Identity.AddOrUpdateClaims(newClaimsList, owinContext.Authentication);
+                    }
+                }
+
+                //User update was successfull
+                //Now Check If Next button is clicked, goto Step 3
+                //If Back button is clicked, goto Step 1
+                return RedirectToAction("Index", new { id = User.Identity.GetUrlUserName() });
+            }
+            catch (Exception err)
+            {
+                ModelState.AddModelError("", err);
+                goto FormValidationFailed_GetData;
+            }
+
+            //Goto Statement If form validation is failed, goto View but first get the required data for View
+            FormValidationFailed_GetData:
+            ViewBag.YearsOfBirth = UtilityExtension.GetYearsList();
+            ViewBag.LanguagesList = UtilityExtension.GetLanguagesList();
+
+            CurrencyService currencyService = new CurrencyService(_dbContext);
+            ViewBag.CurrencyList = currencyService.GetAllCurrencies();
+            return View(userProfileVM);
+        }
 
         [HttpGet]
         [Authorize]
@@ -77,8 +184,9 @@ namespace Find2MeWeb.Controllers
 
         [HttpGet]
         [Authorize]
-        public async Task<ActionResult> Step2()
+        public ActionResult Step2()
         {
+            ViewBag.DisableEmailTextbox = true;
             _dbContext = new ApplicationDbContext();
 
             //Get Current User's Profile
@@ -90,6 +198,7 @@ namespace Find2MeWeb.Controllers
             if (string.IsNullOrEmpty(userProfileVM.UrlUsername))
             {
                 userProfileVM.UrlUsername = User.Identity.GetExternalProviderUsername();
+                ViewBag.DisableEmailTextbox = false;
             }
 
             ViewBag.YearsOfBirth = UtilityExtension.GetYearsList();
@@ -109,7 +218,9 @@ namespace Find2MeWeb.Controllers
             //If User does no exists, just update the UserData
             try
             {
+                ViewBag.DisableEmailTextbox = true;
                 _dbContext = new ApplicationDbContext();
+                bool skipValidation = false;
 
                 //If Next Button is clicked, perform the Form Validation, otherwise do not perform Validations
                 if (!SubmitAction.ToLower().Equals("back"))
@@ -119,56 +230,76 @@ namespace Find2MeWeb.Controllers
                         goto FormValidationFailed_GetData;
                     }
                 }
+                else
+                {
+                    skipValidation = true;
+                }
 
                 //Update the User Profile Details
                 UserAccountService userAccountService = new UserAccountService(_dbContext);
 
                 //Check If the Username is unique
                 userProfileVM.Id = User.Identity.GetUserId();
-                if (!SubmitAction.ToLower().Equals("back"))
-                {
-                    if (userAccountService.UserExists(userProfileVM.Id, userProfileVM.UrlUsername))
-                    {
-                        ModelState.AddModelError("UrlUsername", "A user exists with the same username. Please choose a different one.");
-                        goto FormValidationFailed_GetData;
-                    }
-                }
-
                 //Update the User
-                if (userAccountService.UpdateUserProfile(userProfileVM) == null)
+                var userUpdateResponse = userAccountService.UpdateUserProfile(userProfileVM, skipValidation);
+                if (userUpdateResponse.Success == false)
                 {
-                    ModelState.AddModelError("", "No such user found!");
+                    if (userUpdateResponse.MessageCode == ResponseResultMessageCode.EmailExists)
+                    {
+                        ModelState.AddModelError("Email", "A user already exists with the same email address. Please choose a different one.");
+                        ViewBag.DisableEmailTextbox = false;
+                    }
+                    else if (userUpdateResponse.MessageCode == ResponseResultMessageCode.UserNameExists)
+                    {
+                        ModelState.AddModelError("UrlUsername", "A user already exists with the same username. Please choose a different one.");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", ResponseResultMessageCode.GetMessageFromCode(userUpdateResponse.MessageCode));
+                    }
                     goto FormValidationFailed_GetData;
                 }
 
                 //If User is Updated Successfully, Change UrlUserName Claim Also
-                Claim UserNameClaim = User.Identity.GetClaim("UrlUserName");
+                var owinContext = HttpContext.GetOwinContext();
+                var UserManager = owinContext.GetUserManager<ApplicationUserManager>();
+
+                //New Claims List, for current Identity
+                List<Claim> newClaimsList = new List<Claim>();
+
+                Claim UserNameClaim = User.Identity.GetClaim(_ClaimTypes.UrlUserName);
                 if (UserNameClaim != null)
                 {
                     //If the Username is changed, only then update the Claim
-                    if (UserNameClaim.Value.ToLower().Equals(userProfileVM.UrlUsername.ToLower()))
+                    if (!UserNameClaim.Value.ToLower().Equals(userProfileVM.UrlUsername.ToLower()))
                     {
-                        var owinContext = HttpContext.GetOwinContext();
-                        var UserManager = owinContext.GetUserManager<ApplicationUserManager>();
-
                         UserManager.RemoveClaim(userProfileVM.Id, UserNameClaim);
                         UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
-                        User.Identity.AddOrUpdateClaims(new List<Claim>
-                        {
-                            new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername),
-                        }, owinContext.Authentication);
+
+                        newClaimsList.Add(new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
                     }
                 }
                 else
                 {
-                    var owinContext = HttpContext.GetOwinContext();
-                    var UserManager = owinContext.GetUserManager<ApplicationUserManager>();
-
                     UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
-                    User.Identity.AddOrUpdateClaims(new List<Claim>
-                    {
-                        new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername),
-                    }, owinContext.Authentication);
+
+                    newClaimsList.Add(new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
+                }
+
+                //If User is Updated then the Wizard is Completed, Change HasCompletedProfileWizard Claim Also
+                Claim HasCompletedProfileWizardClaim = User.Identity.GetClaim(_ClaimTypes.HasCompletedProfileWizard);
+                if (HasCompletedProfileWizardClaim != null)
+                {
+                    UserManager.RemoveClaim(userProfileVM.Id, HasCompletedProfileWizardClaim);
+                }
+
+                UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.HasCompletedProfileWizard, true.ToString()));
+                newClaimsList.Add(new Claim(_ClaimTypes.HasCompletedProfileWizard, true.ToString()));
+
+                //Update Current Identity Claim and Login User Again
+                if (newClaimsList.Count > 0)
+                {
+                    User.Identity.AddOrUpdateClaims(newClaimsList, owinContext.Authentication);
                 }
 
                 //User update was successfull
@@ -196,24 +327,19 @@ namespace Find2MeWeb.Controllers
 
             CurrencyService currencyService = new CurrencyService(_dbContext);
             ViewBag.CurrencyList = currencyService.GetAllCurrencies();
-            return View();
+            return View(userProfileVM);
         }
 
         [HttpGet]
         [Authorize]
         public ActionResult Step3()
         {
-            //Remove the Cookie If the Profile Wizard is completed
-            if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted] != null)
-            {
-                Response.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Value = "1";
-                Response.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Expires = DateTime.Now.AddDays(-1);
-            }
             return View();
         }
 
         public ActionResult UploadProfileImage(HttpPostedFileBase profileimage, string returnUrl)
         {
+            string newProfileImageFilename = "";
             if (Request.Files.Count > 0)
             {
                 HttpPostedFileBase ProfileImage = profileimage;//Request.Files[0];
@@ -256,21 +382,32 @@ namespace Find2MeWeb.Controllers
 
                         userProfile.ProfileImageOriginal = profileImageName;
                         userProfile.ProfileImageSelected = profileImageName;
+                        newProfileImageFilename = profileImageName;
                         userAccountService.UpdateUserProfileImage(userProfile, false);
                     }
                 }
             }
 
 
-            if (!string.IsNullOrEmpty(returnUrl))
+            if (Request.IsAjaxRequest())
             {
-                return Redirect(returnUrl);
+                return Json(new ResponseResult<string>
+                {
+                    Success = true,
+                    Data = newProfileImageFilename
+                }, JsonRequestBehavior.AllowGet);
             }
             else
             {
-                return RedirectToAction("Index");
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
-
         }
 
         [HttpPost]

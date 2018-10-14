@@ -1,4 +1,5 @@
-﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM;
+﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM
+@using Find2Me.Infrastructure;
 @{
     ViewBag.Title = "Index";
 }
@@ -23,7 +24,16 @@
         <div class="row no-gutters nowrap mt-3">
             <!-- Profile image-->
             <div class="col-sm-auto col-md-4 d-inline-flex justify-content-center mt-4">
-                <a class="avatar"><img src="img/avatar1.jpg" /></a>
+                <a class="avatar">
+                    @if (!string.IsNullOrEmpty(Model.ProfileImageSelected))
+                    {
+                        <img src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageSelected" onerror='this.src = "/Html/img/default-profile.png";' alt="@Model.FullName" />
+                    }
+                    else
+                    {
+                        <img src="~/Html/img/default-profile.png" alt="@Model.FullName" />
+                    }
+                </a>
             </div>
             <!-- Profile data -->
             <div class="col pl-2 pr-2 text-truncate align-self-center">
@@ -44,7 +54,14 @@
         <!-- Follow me button -->
         <div class="row">
             <div class="col-4 offset-4 offset-md-4">
-                <button class="btn btn-dark">Follow me</button>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <button type="button" class="btn btn-dark" disabled="disabled">Follow me</button>
+                }
+                else
+                {
+                    <button class="btn btn-dark">Follow me</button>
+                }
             </div>
 
         </div>

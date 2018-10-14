@@ -12,6 +12,7 @@ using Find2MeWeb.Models;
 using Find2Me.Infrastructure.DbModels;
 using Find2Me.Infrastructure;
 using Find2Me.Services;
+using System.Collections.Generic;
 
 namespace Find2MeWeb.Controllers
 {
@@ -373,11 +374,23 @@ namespace Find2MeWeb.Controllers
         private async Task<ActionResult> CreateExternalProviderUserAsync(ExternalLoginInfo loginInfo)
         {
             //Create a New User and SignIn
-            var user = new ApplicationUser
+            var user = new ApplicationUser();
+
+            //If External Provider has email, set the email here. Otherwise we will take it on Profile Wizard
+            user.Email = loginInfo.Email;
+            //If email is set, check whether a User with same email exists or not
+            if (!string.IsNullOrEmpty(user.Email))
             {
-                UserName = loginInfo.Email,
-                Email = loginInfo.Email,
-            };
+                if (UserManager.FindByEmail(user.Email) != null)
+                {
+                    TempData["SignUpError"] = new IdentityResult(new List<string>
+                    {
+                        "Email is already taken",
+                    });
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+
 
             string profilePictureUrl = null;
             //Check the Login Provider. We need to Extract the user data based on the LoginProvider
@@ -396,6 +409,7 @@ namespace Find2MeWeb.Controllers
 
                         //Get the other Data
                         user.FullName = facbookUserData.Name;
+                        user.UserName = "user_" + facbookUserData.ID;
                     }
                     break;
 
@@ -412,6 +426,7 @@ namespace Find2MeWeb.Controllers
 
                         //Get the other Data
                         user.FullName = googleUserData.DisplayName;
+                        user.UserName = "user_" + googleUserData.ID;
                     }
                     break;
 
@@ -425,6 +440,7 @@ namespace Find2MeWeb.Controllers
 
                         //Get the other Data
                         user.FullName = instagramUserData.FullName;
+                        user.UserName = "user_" + instagramUserData.ID;
                     }
                     break;
 
@@ -438,6 +454,7 @@ namespace Find2MeWeb.Controllers
 
                         //Get the other Data
                         user.FullName = twitterUserData.Name;
+                        user.UserName = "user_" + twitterUserData.ID;
                     }
                     break;
             }
@@ -468,30 +485,16 @@ namespace Find2MeWeb.Controllers
                     await UserManager.UpdateAsync(user);
 
                     //Add Provider Claim
-                    UserManager.AddClaim(user.Id, new Claim("ExternalProviderType", loginInfo.Login.LoginProvider));
-                    UserManager.AddClaim(user.Id, new Claim("ExternalProviderUsername", loginInfo.DefaultUserName));
-                    UserManager.AddClaim(user.Id, new Claim("UrlUserName", loginInfo.DefaultUserName));
-
+                    UserManager.AddClaim(user.Id, new Claim(_ClaimTypes.ExternalProviderType, loginInfo.Login.LoginProvider));
+                    UserManager.AddClaim(user.Id, new Claim(_ClaimTypes.ExternalProviderUsername, loginInfo.DefaultUserName));
+                    UserManager.AddClaim(user.Id, new Claim(_ClaimTypes.UrlUserName, loginInfo.DefaultUserName));
+                    UserManager.AddClaim(user.Id, new Claim(_ClaimTypes.HasCompletedProfileWizard, false.ToString()));
 
                     //Login the current User
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     //TempData External Identity, After login, we will need some of these Claims
                     TempData["ExternalLoginInfo"] = loginInfo.ExternalIdentity;
-
-                    //Create Cookie If the User Has Completed His Wizard Or Not- bit 0(false): 1(1)
-                    if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted] == null)
-                    {
-                        HttpCookie wizardCompletedCookie = new HttpCookie(_CookieNameStrings.IsProfileWizardCompleted);
-                        wizardCompletedCookie.Value = "0";
-                        wizardCompletedCookie.Expires = DateTime.Now.AddDays(7);
-                        Response.Cookies.Add(wizardCompletedCookie);
-                    }
-                    else
-                    {
-                        Response.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Value = "0";
-                        Response.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Expires = DateTime.Now.AddDays(7);
-                    }
 
                     //Add claims and Redirect to Profile Wizard Step 1
                     return RedirectToAction("AddingClaims");
@@ -518,15 +521,6 @@ namespace Find2MeWeb.Controllers
                     if (claimUserDataExt != null) { UserManager.AddClaim(User.Identity.GetUserId(), claimUserDataExt); }
 
                     User.Identity.CopyExternalOAuthClaims(externalIdentity, AuthenticationManager);
-                }
-            }
-
-            //If the Profile Wizard is not completed, take user to Profile Wizard Step 1 
-            if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted] != null)
-            {
-                if (Request.Cookies[_CookieNameStrings.IsProfileWizardCompleted].Value == "0")
-                {
-                    returnUrl = Url.Action("Step1", "Profile");
                 }
             }
 

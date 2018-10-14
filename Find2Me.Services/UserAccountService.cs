@@ -15,10 +15,12 @@ namespace Find2Me.Services
     public interface IUserAccountService
     {
         bool UserExists(string currentUserIdToExclude, string username);
+        ResponseResult<ApplicationUser> UserExists(string currentUserIdToExclude, string username, string email);
         UserProfileVM GetUserProfile(string username);
         UserProfileVM GetUserProfileById(string id);
         UserProfilePictureVM GetUserProfilePicture(string id);
-        UserProfileVM UpdateUserProfile(UserProfileVM userProfileVM);
+        UserProfileImageDataVM GetUserProfileImageData(string id);
+        ResponseResult<UserProfileVM> UpdateUserProfile(UserProfileVM userProfileVM, bool skipValidation);
         List<string> GetUserSuggestion(string username, int suggestionToTake = 3);
     }
 
@@ -28,6 +30,24 @@ namespace Find2Me.Services
         public UserAccountService(ApplicationDbContext dbContext)
         {
             applicationUserRepository = new ApplicationUserRepository(dbContext);
+        }
+
+        public ResponseResult<ApplicationUser> UserExists(string currentUserIdToExclude, string username, string email)
+        {
+            ApplicationUser applicationUser = applicationUserRepository.UserExists(currentUserIdToExclude, username, email);
+            if (applicationUser != null)
+            {
+                if (applicationUser.Email.ToLower().Trim().Equals(email.ToLower().Trim()))
+                {
+                    return new ResponseResult<ApplicationUser> { Success = true, Data = applicationUser, MessageCode = ResponseResultMessageCode.EmailExists };
+                }
+                else
+                {
+                    return new ResponseResult<ApplicationUser> { Success = true, Data = applicationUser, MessageCode = ResponseResultMessageCode.UserNameExists };
+                }
+            }
+
+            return new ResponseResult<ApplicationUser> { Success = false };
         }
 
         public bool UserExists(string currentUserIdToExclude, string username)
@@ -76,27 +96,95 @@ namespace Find2Me.Services
             return null;
         }
 
-        public UserProfileVM UpdateUserProfile(UserProfileVM userProfileVM)
+        public UserProfileImageDataVM GetUserProfileImageData(string id)
         {
+            UserProfileImageData applicationUser = applicationUserRepository.GetProfileImageDataForUser(id);
+            if (applicationUser != null)
+            {
+                UserProfileImageDataVM userProfilePictureVM = new UserProfileImageDataVM();
+                Mapper.Map(applicationUser, userProfilePictureVM);
+                return userProfilePictureVM;
+            }
+            return null;
+        }
+
+        /// <summary>
+        /// Update User Profile Information
+        /// </summary>
+        /// <param name="userProfileVM">User Profile Data</param>
+        /// <param name="skipValidation">Skip Email and Username Validation</param>
+        /// <returns></returns>
+        public ResponseResult<UserProfileVM> UpdateUserProfile(UserProfileVM userProfileVM, bool skipValidation)
+        {
+            ResponseResult<UserProfileVM> responseResult = new ResponseResult<UserProfileVM>
+            {
+                Success = true
+            };
+
+            ApplicationUser someExistedUser = applicationUserRepository.UserExists(userProfileVM.Id, userProfileVM.UrlUsername, userProfileVM.Email);
+            if (someExistedUser != null)
+            {
+                if (skipValidation == false)
+                {
+                    if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
+                    {
+                        responseResult.MessageCode = ResponseResultMessageCode.EmailExists;
+                    }
+                    if (someExistedUser.UrlUsername.ToLower().Trim().Equals(userProfileVM.UrlUsername.ToLower().Trim()))
+                    {
+                        responseResult.MessageCode = ResponseResultMessageCode.UserNameExists;
+                    }
+                    responseResult.Data = userProfileVM;
+                    responseResult.Success = false;
+                    return responseResult;
+                }
+                else
+                {
+                    if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
+                    {
+                        userProfileVM.Email= null;
+                    }
+                    if (someExistedUser.UrlUsername.ToLower().Trim().Equals(userProfileVM.UrlUsername.ToLower().Trim()))
+                    {
+                        userProfileVM.UrlUsername= null;
+                    }
+                }
+            }
+
             ApplicationUser applicationUser = applicationUserRepository.GetSingle(userProfileVM.Id);
             if (applicationUser != null)
             {
                 applicationUser.PreferredCurrency = userProfileVM.PreferredCurrency;
                 applicationUser.PreferredLanguage = userProfileVM.PreferredLanguage;
                 applicationUser.Sex = userProfileVM.Sex;
-                applicationUser.UpdatedOn = DateTime.UtcNow;
                 applicationUser.UrlUsername = userProfileVM.UrlUsername;
                 applicationUser.YearOfBirth = userProfileVM.YearOfBirth;
                 applicationUser.PreferredCurrency = userProfileVM.PreferredCurrency;
                 applicationUser.PreferredLanguage = userProfileVM.PreferredLanguage;
+                applicationUser.UpdatedOn = DateTime.UtcNow;
+                if (!string.IsNullOrEmpty(userProfileVM.Email))
+                {
+                    applicationUser.Email = userProfileVM.Email;
+                    responseResult.SuccessCode = ResponseResultMessageCode.EmailUpdated;
+                }
+                if (!string.IsNullOrEmpty(userProfileVM.UrlUsername))
+                {
+                    applicationUser.UrlUsername = userProfileVM.UrlUsername;
+                    responseResult.SuccessCode = ResponseResultMessageCode.UserNameUpdated;
+                }
                 applicationUserRepository.Update(applicationUser);
                 applicationUserRepository.SaveChanges();
-
                 userProfileVM.Id = applicationUser.Id;
-                return userProfileVM;
+            }
+            else
+            {
+                responseResult.Success = false;
+                responseResult.MessageCode = ResponseResultMessageCode.UserNotFound;
+                responseResult.MessageCode = ResponseResultMessageCode.UserNotFound;
             }
 
-            return null;
+            responseResult.Data = userProfileVM;
+            return responseResult;
         }
 
         public List<string> GetUserSuggestion(string username, int suggestionToTake = 3)
@@ -133,7 +221,7 @@ namespace Find2Me.Services
             {
                 applicationUser.ProfileImageOriginal = userProfilePictureVM.ProfileImageOriginal;
                 applicationUser.ProfileImageSelected = userProfilePictureVM.ProfileImageSelected;
-                
+
                 //If there is profile Data, then updateit. 
                 if (userProfilePictureVM.ProfileImageData != null && updateCropData)
                 {
