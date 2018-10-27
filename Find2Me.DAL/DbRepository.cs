@@ -2,7 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -39,6 +41,16 @@ namespace Find2Me.DAL
         public void Insert(List<T> Entities)
         {
             dbContext.Set<T>().AddRange(Entities);
+        }
+
+        public void InsertOrUpdate(Expression<Func<T, object>> identifierExpression, T Entity)
+        {
+            dbContext.Set<T>().AddOrUpdate(identifierExpression, Entity);
+        }
+
+        public void InsertOrUpdate(Expression<Func<T, object>> identifierExpression, List<T> Entities)
+        {
+            dbContext.Set<T>().AddOrUpdate(identifierExpression, Entities.ToArray());
         }
 
         public void Update(T Entity)

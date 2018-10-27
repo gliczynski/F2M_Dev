@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Find2Me.Infrastructure.DbModels;
+using Find2Me.Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -13,6 +15,13 @@ namespace Find2MeWeb
         {
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
+
+            //routes.MapRoute(
+            //    name: "ProfilePageRoute",
+            //    url: "{id}",
+            //    defaults: new { controller= "Profile", action="Index" },
+            //    constraints: new hasProfilePage()
+            //    );
 
             // Localization route - it will be used as a route of the first priority 
             routes.MapRoute(
@@ -33,6 +42,28 @@ namespace Find2MeWeb
                 url: "{controller}/{action}/{id}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
+        }
+
+
+        public class hasProfilePage : IRouteConstraint
+        {
+            public bool Match(HttpContextBase httpContext, Route route, string parameterName, RouteValueDictionary values, RouteDirection routeDirection)
+            {
+                // If parameter matches any known page, 
+                // then we have found a match.
+                string url = values[parameterName] as string;
+
+                if (string.IsNullOrEmpty(url))
+                {
+                    // check our database
+                    using(ApplicationDbContext dbContext = new ApplicationDbContext())
+                    {
+                        return new UserAccountService(dbContext).UserExists(url);
+                    }
+                }
+
+                return false;
+            }
         }
     }
 }

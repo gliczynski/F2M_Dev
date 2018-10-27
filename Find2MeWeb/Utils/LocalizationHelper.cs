@@ -43,7 +43,8 @@ namespace Find2MeWeb.Utils
                 // This condition is for default (initial) route
                 (cleanedSegments.Count == 1) ||
                 // initial route with lang parameter that is not supported -> need to change it
-                (cleanedSegments.Count == 2 && !supportedLocales.Contains(cleanedSegments[1]));     
+                (cleanedSegments.Count == 2 && !supportedLocales.Contains(cleanedSegments[1])
+                );     
 
             if (!isLocaleDefined && isRequestPathToHandle)
             {

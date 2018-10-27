@@ -37,9 +37,15 @@ namespace Find2MeWeb.Controllers
                 userProfileVM = userAccountService.GetUserProfile(username);
             }
 
+            string currentUserId = "";
             if (User.Identity.IsAuthenticated)
             {
-                userProfileVM = userAccountService.GetUserProfileById(User.Identity.GetUserId());
+                currentUserId = User.Identity.GetUserId();
+            }
+
+            if (userProfileVM == null && User.Identity.IsAuthenticated)
+            {
+                userProfileVM = userAccountService.GetUserProfileById(currentUserId);
             }
 
             if (userProfileVM == null) { return HttpNotFound(); }
@@ -47,7 +53,8 @@ namespace Find2MeWeb.Controllers
             //Check whether the User is seeing his/her own Profile
             //If it is his/her ownn profile, return Edit Profile Page.
             //else return the Public Profile View
-            if (User.Identity.GetUserId().Equals(userProfileVM.Id))
+            ViewBag.HasUserFollowed = false;
+            if (currentUserId.Equals(userProfileVM.Id))
             {
                 ViewBag.YearsOfBirth = UtilityExtension.GetYearsList();
                 ViewBag.LanguagesList = UtilityExtension.GetLanguagesList();
@@ -61,6 +68,10 @@ namespace Find2MeWeb.Controllers
             }
             else
             {
+                if (User.Identity.IsAuthenticated)
+                {
+                    ViewBag.HasUserFollowed = userAccountService.GetUserFollower(currentUserId, userProfileVM.Id) != null;
+                }
                 return View("PublicProfile", userProfileVM);
             }
         }
@@ -198,6 +209,9 @@ namespace Find2MeWeb.Controllers
             if (string.IsNullOrEmpty(userProfileVM.UrlUsername))
             {
                 userProfileVM.UrlUsername = User.Identity.GetExternalProviderUsername();
+            }
+            if (string.IsNullOrEmpty(userProfileVM.Email))
+            {
                 ViewBag.DisableEmailTextbox = false;
             }
 
@@ -504,10 +518,85 @@ namespace Find2MeWeb.Controllers
             return Json(responseResult, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Follow(string UserId, bool DoFollow= true)
+        {
+            ResponseResult<object> responseResult = new ResponseResult<object>
+            {
+                Success = true
+            };
 
+            try
+            {
+                if (!String.IsNullOrEmpty(UserId))
+                {
+                    var currentUserId = User.Identity.GetUserId();
+
+                    _dbContext = new ApplicationDbContext();
+                    //Update the User Profile Details
+                    UserAccountService userAccountService = new UserAccountService(_dbContext);
+                    ResponseResult<UserFollowerVM> responseResultUserFollow = userAccountService.FollowUser(new UserFollowerVM
+                    {
+                        FollowByUserId = currentUserId,
+                        FollowedUserId = UserId,
+                        FollowedOn = DateTime.UtcNow
+                    }, DoFollow);
+
+                    return Json(responseResultUserFollow, JsonRequestBehavior.AllowGet);
+                }
+
+                responseResult.Success = false;
+                responseResult.Message = "User is missing.";
+            }
+            catch (Exception err)
+            {
+                responseResult.Success = false;
+                responseResult.Message = "An error occured while following this user. Please try again.";
+            }
+
+            return Json(responseResult, JsonRequestBehavior.AllowGet);
+        }
+
+        [Authorize]
+        public ActionResult GetFollowers(string UserId)
+        {
+            ResponseResult<SP_FollowersCount> responseResult = new ResponseResult<SP_FollowersCount>
+            {
+                Success = true
+            };
+
+            try
+            {
+                if (!String.IsNullOrEmpty(UserId))
+                {
+                    var currentUserId = User.Identity.GetUserId();
+
+                    _dbContext = new ApplicationDbContext();
+                    //Update the User Profile Details
+                    UserAccountService userAccountService = new UserAccountService(_dbContext);
+                    responseResult.Data = userAccountService.GetFollowersCount(UserId);
+
+                    return Json(responseResult, JsonRequestBehavior.AllowGet);
+                }
+
+                responseResult.Success = false;
+                responseResult.Message = "User is missing.";
+            }
+            catch (Exception err)
+            {
+                responseResult.Success = false;
+                responseResult.Message = "An error occured. Please try again.";
+            }
+
+            return Json(responseResult, JsonRequestBehavior.AllowGet);
+        }
+
+        /***********************************/
+        /* Dispose */
+        /***********************************/
         private bool disposed = false;
-
-        public object ProfileImage { get; private set; }
 
         protected override void Dispose(bool disposing)
         {

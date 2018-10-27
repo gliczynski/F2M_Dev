@@ -34,35 +34,61 @@ namespace Find2Me.Infrastructure
         }
     }
 
-    public class _LogActionType
+    public static class _LogActionType
     {
         //Accounts
-        public static string AccountCreated = "AccountCreated";
-        public static string AccountDeleted = "AccountDeleted";
-        public static string AccountLocked = "AccountLocked";
-        public static string AccountUnlocked = "AccountUnlocked";
-        public static string AccountSuspended = "AccountSuspended";
-
-        //Profile 
-        public static string ProfileUpdate = "ProfileUpdated";
-        public static string ProfileImageUpdated = "ProfileImageUpdated";
-        public static string ProfileLiked = "ProfileLiked";
-
-        //Follow / Unfollow
-        public static string FollowStart = "FollowStart";
-        public static string FollowStop = "FollowStop";
+        public const string AccountCreated = "AccountCreated";
+        public const string AccountDeleted = "AccountDeleted";
+        public const string AccountLocked = "AccountLocked";
+        public const string AccountUnlocked = "AccountUnlocked";
+        public const string AccountSuspended = "AccountSuspended";
 
         //Login Logout
-        public static string UserLogin = "UserLogin";
-        public static string UserLogout = "UserLogout";
+        public const string UserLogin = "UserLogin";
+        public const string UserLogout = "UserLogout";
+
+        //Profile 
+        public const string ProfileUpdate = "ProfileUpdated";
+        public const string ProfileImageUpdated = "ProfileImageUpdated";
+        public const string ProfileNewImage = "ProfileNewImage";
+
+        //Follow / Unfollow
+        public const string Follow = "Follow";
+        public const string UnFollow = "UnFollow";
+
+        
 
         //Ads
-        public static string AdDrafted = "AdDrafted";
-        public static string AdUpdated = "AdUpdated";
-        public static string AdPublished = "AdPublished";
-        public static string AdRemoved = "AdRemoved";
-        public static string AdReported = "AdReported";
+        public const string AdDrafted = "AdDrafted";
+        public const string AdUpdated = "AdUpdated";
+        public const string AdPublished = "AdPublished";
+        public const string AdRemoved = "AdRemoved";
+        public const string AdReported = "AdReported";
 
+        public static string GetActionMessage(string actionType)
+        {
+            switch (actionType)
+            {
+                case AccountCreated:
+                    return "create an account through";
+                case UserLogin:
+                    return "logged in";
+                case UserLogout:
+                    return "logged out";
+                case ProfileUpdate:
+                    return "updated his/her profile data";
+                case ProfileImageUpdated:
+                    return "updated the profile image";
+                case ProfileNewImage:
+                    return "uploaded a new profile image";
+                case Follow:
+                    return "is now following";
+                case UnFollow:
+                    return "has stop following";
+                default:
+                    return null;
+            }
+        }
     }
 
     public class _FileSavingPaths

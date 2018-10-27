@@ -10,15 +10,29 @@
   <Class Name="Find2Me.Infrastructure.DbModels.ApplicationUser">
     <Position X="1" Y="1" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAQAAACAAADICAIAAAAAAACAACAAAAIAAAAAQAAAA=</HashCode>
+      <HashCode>AAAAQAAASAAADICAIAAACAAACAACAAAAoAAAAAQAAAA=</HashCode>
       <FileName>DbModels\IdentityModels.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Find2Me.Infrastructure.DbModels.Currency">
-    <Position X="4.75" Y="1" Width="1.5" />
+    <Position X="4" Y="1.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAIAAAAgAAUAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAIAAAAgAAUAAAIAAAAAAAAAAAAACAA=</HashCode>
       <FileName>DbModels\Currency.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Find2Me.Infrastructure.DbModels.UserFollower">
+    <Position X="4" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>IAACAAAACAAAAQEAAAAAAAAAAAAAAAAAAAAAAAAAgAA=</HashCode>
+      <FileName>DbModels\UserFollower.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Find2Me.Infrastructure.DbModels.UserProfileImageData" Collapsed="true">
+    <Position X="4" Y="1" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgCBAQBAAAQAAAAAAAAAAAkAAAAAAAAAAAAAAACAYwA=</HashCode>
+      <FileName>DbModels\IdentityModels.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

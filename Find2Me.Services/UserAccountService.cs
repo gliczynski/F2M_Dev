@@ -22,13 +22,16 @@ namespace Find2Me.Services
         UserProfileImageDataVM GetUserProfileImageData(string id);
         ResponseResult<UserProfileVM> UpdateUserProfile(UserProfileVM userProfileVM, bool skipValidation);
         List<string> GetUserSuggestion(string username, int suggestionToTake = 3);
+        SP_FollowersCount GetFollowersCount(string userId);
     }
 
     public class UserAccountService : IUserAccountService
     {
         private ApplicationUserRepository applicationUserRepository;
+        private ApplicationDbContext dbContext;
         public UserAccountService(ApplicationDbContext dbContext)
         {
+            this.dbContext = dbContext;
             applicationUserRepository = new ApplicationUserRepository(dbContext);
         }
 
@@ -48,6 +51,11 @@ namespace Find2Me.Services
             }
 
             return new ResponseResult<ApplicationUser> { Success = false };
+        }
+
+        public bool UserExists(string urlUsername)
+        {
+            return applicationUserRepository.UserExists(urlUsername);
         }
 
         public bool UserExists(string currentUserIdToExclude, string username)
@@ -142,11 +150,11 @@ namespace Find2Me.Services
                 {
                     if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
                     {
-                        userProfileVM.Email= null;
+                        userProfileVM.Email = null;
                     }
                     if (someExistedUser.UrlUsername.ToLower().Trim().Equals(userProfileVM.UrlUsername.ToLower().Trim()))
                     {
-                        userProfileVM.UrlUsername= null;
+                        userProfileVM.UrlUsername = null;
                     }
                 }
             }
@@ -175,6 +183,9 @@ namespace Find2Me.Services
                 applicationUserRepository.Update(applicationUser);
                 applicationUserRepository.SaveChanges();
                 userProfileVM.Id = applicationUser.Id;
+
+                //Add User Action Log
+                new LogsSerivce().RunAddLogTask(_LogActionType.ProfileUpdate, applicationUser.Id);
             }
             else
             {
@@ -219,6 +230,9 @@ namespace Find2Me.Services
             ApplicationUser applicationUser = applicationUserRepository.GetProfilePicture(userProfilePictureVM.Id);
             if (applicationUser != null)
             {
+                //Check whether the Profile Image is new, we will need this for Logs
+                bool newProfileImage = applicationUser.ProfileImageOriginal.Equals(userProfilePictureVM.ProfileImageOriginal) ? false : true;
+
                 applicationUser.ProfileImageOriginal = userProfilePictureVM.ProfileImageOriginal;
                 applicationUser.ProfileImageSelected = userProfilePictureVM.ProfileImageSelected;
 
@@ -250,10 +264,84 @@ namespace Find2Me.Services
 
                 applicationUserRepository.Update(applicationUser);
                 applicationUserRepository.SaveChanges();
+
+                //Add User Action Log
+                if (newProfileImage)
+                {
+                    new LogsSerivce().RunAddLogTask(_LogActionType.ProfileNewImage, applicationUser.Id);
+                }
+                else
+                {
+                    new LogsSerivce().RunAddLogTask(_LogActionType.ProfileImageUpdated, applicationUser.Id);
+                }
                 return userProfilePictureVM;
             }
             return null;
         }
 
+        public ResponseResult<UserFollowerVM> FollowUser(UserFollowerVM userFollowerVM, bool follow)
+        {
+            ResponseResult<UserFollowerVM> responseResult = new ResponseResult<UserFollowerVM>
+            {
+                Success = true,
+                Data = userFollowerVM
+            };
+
+            try
+            {
+                UserFollowerRepository userFollowerRepository = new UserFollowerRepository(dbContext);
+                UserFollower userFollower = userFollowerRepository.GetFollower(userFollowerVM.FollowByUserId, userFollowerVM.FollowedUserId);
+                if (follow)
+                {
+                    if (userFollower == null)
+                    {
+                        userFollower = new UserFollower();
+                        Mapper.Map(userFollowerVM, userFollower);
+                        userFollowerRepository.Insert(userFollower);
+                        userFollowerRepository.SaveChanges();
+
+                        //Add User Action Log
+                        new LogsSerivce().RunAddLogTask(_LogActionType.Follow, userFollowerVM.FollowByUserId, userFollowerVM.FollowedUserId);
+                    }
+                }
+                else
+                {
+                    if (userFollower != null)
+                    {
+                        userFollowerRepository.Delete(userFollower);
+                        userFollowerRepository.SaveChanges();
+
+                        //Add User Action Log
+                        new LogsSerivce().RunAddLogTask(_LogActionType.UnFollow, userFollowerVM.FollowByUserId, userFollowerVM.FollowedUserId);
+                    }
+                }
+
+                userFollowerVM.Id = userFollower.Id;
+            }
+            catch
+            {
+                responseResult.Success = false;
+                responseResult.Message = "Oops! You are unable to follow this user.";
+            }
+
+            return responseResult;
+        }
+
+        public UserFollowerVM GetUserFollower(string followByUserId, string followedUserId)
+        {
+            UserFollower userFollower = new UserFollowerRepository(dbContext).GetFollower(followByUserId, followedUserId);
+            if (userFollower != null)
+            {
+                UserFollowerVM userFollowerVM = new UserFollowerVM();
+                Mapper.Map(userFollower, userFollowerVM);
+                return userFollowerVM;
+            }
+            return null;
+        }
+
+        public SP_FollowersCount GetFollowersCount(string userId)
+        {
+            return new UserFollowerRepository(dbContext).GetFollowersCount(userId);
+        }
     }
 }

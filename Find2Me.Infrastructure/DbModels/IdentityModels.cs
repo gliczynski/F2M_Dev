@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -45,6 +46,9 @@ namespace Find2Me.Infrastructure.DbModels
         public DateTime UpdatedOn { get; set; }
 
         public UserProfileImageData ProfileImageData { get; set; }
+
+        //public ICollection<UserFollower> UserFollowed { get; set; }
+        //public ICollection<UserFollower> UserFollowedBy { get; set; }
     }
 
     public class UserProfileImageData
@@ -78,10 +82,19 @@ namespace Find2Me.Infrastructure.DbModels
 
         public DbSet<UserProfileImageData> UserProfileImageDatas { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<UserFollower> UserFollowers { get; set; }
+
+        public DbSet<Logs> Logs { get; set; }
 
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
+        }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
         }
     }
 }

@@ -108,7 +108,7 @@
                     <div class="form-group row d-flex justify-content-center mt-3">
                         <label for="UrlUsername" class="col-sm-4 col-xl-2 col-form-label">
                             Username
-                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="valid_username_icon" style="display: none;"></i>
+                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="Username is valid." id="valid_username_icon" style="display: none;"></i>
                             <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="invalid_username_icon" style="display: none;"></i>
                         </label>
                         <div class="col-sm-8 col-xl-6">
@@ -196,6 +196,15 @@
                 var token = $('input[name="__RequestVerificationToken"]', form).val();
                 var username = $(this).val();
 
+                //disable form Submit Buttons
+                debugger;
+                if ($(this).val().length < 5) {
+                    $('input[name="SubmitAction"][value="Next"]').attr("disabled", "disabled");
+                    return
+                }
+                $('input[name="SubmitAction"]').attr("disabled", "disabled");
+
+
                 $.ajax({
                     url: "@Url.Action("UserExists", "Account")",
                     type: "POST",
@@ -205,6 +214,9 @@
                         id: username
                     },
                     success: function (data) {
+                        //enable form Submit Buttons
+                        $('input[name="SubmitAction"]').removeAttr("disabled");
+
                         if (data) {
                             if (data.UserExists) {
                                 var suggestionsHtml = "<strong>Suggestions: </strong>";
@@ -215,12 +227,17 @@
                                 $('#usernames_suggestion_wrapper').empty().html(suggestionsHtml);
                                 $('#valid_username_icon').hide();
                                 $('#invalid_username_icon').show();
+                                $('input[name="SubmitAction"][value="Next"]').attr("disabled", "disabled");
                             }
                             else {
                                 $('#valid_username_icon').show();
                                 $('#invalid_username_icon').hide();
                             }
                         }
+                    },
+                    failure: function (data) {
+                        //enable form Submit Buttons
+                        $('input[name="SubmitAction"]').removeAttr("disabled");
                     }
                 })
             });
@@ -230,6 +247,8 @@
                 $('input#UrlUsername').val($(this).data("value"));
                 $('#valid_username_icon').show();
                 $('#invalid_username_icon').hide();
+                //enable form Submit Buttons
+                $('input[name="SubmitAction"]').removeAttr("disabled");
             });
 
         });

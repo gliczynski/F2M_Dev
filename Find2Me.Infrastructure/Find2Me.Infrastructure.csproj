@@ -65,6 +65,8 @@
   <ItemGroup>
     <Compile Include="DbModels\Currency.cs" />
     <Compile Include="DbModels\Logs.cs" />
+    <Compile Include="DbModels\StoredProcedureResponses.cs" />
+    <Compile Include="DbModels\UserFollower.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="DbModels\IdentityModels.cs" />
     <Compile Include="Extensions.cs" />
@@ -88,18 +90,41 @@
     <Compile Include="Migrations\201810061404163_user_profile_image_data_tbl.Designer.cs">
       <DependentUpon>201810061404163_user_profile_image_data_tbl.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201810210535544_userfollowers_tbl.cs" />
+    <Compile Include="Migrations\201810210535544_userfollowers_tbl.Designer.cs">
+      <DependentUpon>201810210535544_userfollowers_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810231808479_userfollowers_tbl_remove.cs" />
+    <Compile Include="Migrations\201810231808479_userfollowers_tbl_remove.Designer.cs">
+      <DependentUpon>201810231808479_userfollowers_tbl_remove.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810231810040_userfollowers_tbl_add.cs" />
+    <Compile Include="Migrations\201810231810040_userfollowers_tbl_add.Designer.cs">
+      <DependentUpon>201810231810040_userfollowers_tbl_add.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201810241631175_sp_getfollowerscount.cs" />
+    <Compile Include="Migrations\201810241631175_sp_getfollowerscount.Designer.cs">
+      <DependentUpon>201810241631175_sp_getfollowerscount.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OAuthReponses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Responses.cs" />
+    <Compile Include="SqlScripts\SqlScripts.Designer.cs">
+      <DependentUpon>SqlScripts.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="UtilityExtension.cs" />
     <Compile Include="ViewModels\CurrencyVM.cs" />
+    <Compile Include="ViewModels\UserFollowerVM.cs" />
     <Compile Include="ViewModels\UserProfileVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="DbModels\ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <Content Include="SqlScripts\2018-10-18_GetFollowerCount.sql" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
@@ -117,6 +142,22 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810061404163_user_profile_image_data_tbl.resx">
       <DependentUpon>201810061404163_user_profile_image_data_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810210535544_userfollowers_tbl.resx">
+      <DependentUpon>201810210535544_userfollowers_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810231808479_userfollowers_tbl_remove.resx">
+      <DependentUpon>201810231808479_userfollowers_tbl_remove.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810231810040_userfollowers_tbl_add.resx">
+      <DependentUpon>201810231810040_userfollowers_tbl_add.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201810241631175_sp_getfollowerscount.resx">
+      <DependentUpon>201810241631175_sp_getfollowerscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="SqlScripts\SqlScripts.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>SqlScripts.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

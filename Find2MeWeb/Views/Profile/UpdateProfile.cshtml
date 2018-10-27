@@ -34,6 +34,7 @@
         </div>
 
         <div class="row no-gutters nowrap mt-3">
+            <!-- Page Alert for Success and Error Messages -->
             <div class="col-sm-12 col-md-12 mt-12">
                 <div class="alert" id="page_message_alert" role="alert" style="display: none;"></div>
             </div>
@@ -64,8 +65,8 @@
 
                     <div class="col-12 d-inline-flex justify-content-center mt-5">
                         <div class="row">
-                            <div class="col text-center"><h3><strong>1,389</strong></h3>Followers</div>
-                            <div class="col text-center"><h3><strong>345</strong></h3>Follow</div>
+                            <div class="col text-center"><h3><strong data-control="follower-count"></strong></h3>Followers</div>
+                            <div class="col text-center"><h3><strong data-control="followed-count"></strong></h3>Follow</div>
 
                         </div>
                     </div>
@@ -566,10 +567,20 @@
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
-
+    <script src="~/Scripts/site/Utilities.js"></script>
+    <script src="~/Scripts/site/UserProfile.js"></script>
     <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
 
     <script>
+        var PageAlert = $('#page_message_alert');
+        var ProfileTitle = $('[data-profile="title"]');
+        var _F2M_Utilities = new F2M_Utilities();
+        var _UserProfile = new UserProfile(_F2M_Utilities);
+        //Get The Followers Count
+        _UserProfile.GetUserFollowersCount("@Model.Id");
+
+
+
         var _Find2MeScripts = new Find2MeScripts();
 
         $(function () {

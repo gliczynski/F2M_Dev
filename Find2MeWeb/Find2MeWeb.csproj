@@ -580,6 +580,7 @@
     <Content Include="Content\plugins\cropperjs-master\src\css\cropper.scss" />
     <Content Include="Content\plugins\cropperjs-master\src\index.scss" />
     <Content Include="Content\plugins\cropperjs-master\test\.eslintrc" />
+    <None Include="Properties\PublishProfiles\F2MWebPubProfile.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
@@ -609,6 +610,8 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\sammy-0.7.5.js" />
     <Content Include="Scripts\sammy-0.7.5.min.js" />
+    <Content Include="Scripts\site\UserProfile.js" />
+    <Content Include="Scripts\site\Utilities.js" />
     <Content Include="Scripts\umd\popper-utils.js" />
     <Content Include="Scripts\umd\popper-utils.min.js" />
     <Content Include="Scripts\umd\popper.js" />

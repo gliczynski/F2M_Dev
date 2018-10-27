@@ -1,4 +1,5 @@
 ﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM
+@using Microsoft.AspNet.Identity;
 @using Find2Me.Infrastructure;
 @{
     ViewBag.Title = "Index";
@@ -10,6 +11,7 @@
         <div class="row">
             <div class="col-12 d-flex justify-content-md-between align-items-center">
                 <div>
+                    <input type="hidden" value="@Model.FullName" data-profile="title" />
                     <h1 class="d-inline-flex pr-3 mb-0">@Model.FullName</h1>
                     <small class="text-muted d-inline-flex">has been here since @Model.CreatedOn.ToString("MMMM yyyy") </small>
                 </div>
@@ -22,6 +24,11 @@
         </div>
 
         <div class="row no-gutters nowrap mt-3">
+            <!-- Page Alert for Success and Error Messages -->
+            <div class="col-sm-12 col-md-12 mt-12">
+                <div class="alert" id="page_message_alert" role="alert" style="display: none;"></div>
+            </div>
+
             <!-- Profile image-->
             <div class="col-sm-auto col-md-4 d-inline-flex justify-content-center mt-4">
                 <a class="avatar">
@@ -42,11 +49,13 @@
                     <dl class="row">
                         <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">13</dt>
                         <dd class="col-9 col-sm-11 mb-3">ads online <a href="" class="ml-3">see them here</a></dd>
-                        <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">8,459</dt>
+                        <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0" data-control="follower-count"></dt>
                         <dd class="col-9 col-sm-11 mb-3 ">followers</dd>
                         <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">15</dt>
                         <dd class="col-9 col-sm-11 mb-3 ">findings completed</dd>
                     </dl>
+                    <script>
+                    </script>
                 </div>
 
             </div>
@@ -56,11 +65,35 @@
             <div class="col-4 offset-4 offset-md-4">
                 @if (User.Identity.IsAuthenticated)
                 {
-                    <button type="button" class="btn btn-dark" disabled="disabled">Follow me</button>
+
+                    using (Ajax.BeginForm("Follow", "Profile", new AjaxOptions
+                    {
+                        HttpMethod = "POST",
+                        OnBegin = "FollowBeginFunction",
+                        OnSuccess = "FollowSuccessFunction",
+                        OnFailure = "FollowFaliureFunction",
+                        OnComplete = "FollowCompletedFunction"
+                    }, new { }))
+                    {
+                        @Html.ValidationSummary()
+                        @Html.AntiForgeryToken()
+
+                        @Html.Hidden("UserId", Model.Id)
+                        if (ViewBag.HasUserFollowed)
+                        {
+                            @Html.Hidden("DoFollow", false)
+                            <button type="submit" class="btn btn-dark" data-button="follow-btn">Un Follow</button>
+                        }
+                        else
+                        {
+                            @Html.Hidden("DoFollow", true)
+                            <button type="submit" class="btn btn-dark" data-button="follow-btn">Follow me</button>
+                        }
+                    }
                 }
                 else
                 {
-                    <button class="btn btn-dark">Follow me</button>
+                    <button class="btn btn-dark" disabled="disabled">Follow me</button>
                 }
             </div>
 
@@ -337,3 +370,55 @@
 </div>
 
 <!-- Tab content end here -->
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/site/Utilities.js"></script>
+    <script src="~/Scripts/site/UserProfile.js"></script>
+
+
+    <script>
+
+        var PageAlert = $('#page_message_alert');
+        var ProfileTitle = $('[data-profile="title"]');
+        var _F2M_Utilities = new F2M_Utilities();
+        var _UserProfile = new UserProfile(_F2M_Utilities);
+        //Get The Followers Count
+        _UserProfile.GetUserFollowersCount("@Model.Id");
+
+        var dofollow = $('input[name=DoFollow]');
+        var followButton = $('[data-button="follow-btn"]');
+        var FollowBeginFunction = function () {
+            _F2M_Utilities.Disable(followButton);
+        }
+        var FollowCompletedFunction = function (data) {
+            _F2M_Utilities.Enable(followButton);
+        }
+
+        var FollowSuccessFunction = function (data) {
+            if (dofollow.val() == 'True') {
+                dofollow.val('False');
+                followButton.text("UnFollow");
+                _F2M_Utilities.ShowPageAlert(PageAlert, true, "Done! You have successfully followed <strong>" + ProfileTitle.val() + "</strong>.");
+            }
+            else {
+                dofollow.val('True');
+                followButton.text("Follow me");
+                _F2M_Utilities.ShowPageAlert(PageAlert, true, "Done! You have unfollowed <strong>" + ProfileTitle.val() + "</strong>.");
+            }
+            //Get The Followers Count
+            _UserProfile.GetUserFollowersCount("@Model.Id");
+
+        }
+
+        var FollowFailureFunction = function (data) {
+            _F2M_Utilities.ShowPageAlert();
+            _F2M_Utilities.ShowPageAlert(PageAlert, false, "Oops! You were not able to follow " + ProfileTitle.val() + ". An error occured.");
+        }
+
+        
+
+
+
+    </script>
+}

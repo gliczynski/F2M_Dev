@@ -22,6 +22,11 @@ namespace Find2Me.DAL
                                                  );
         }
 
+        public bool UserExists(string username)
+        {
+            return dbContext.Users.Any(x=> x.UrlUsername.ToLower().Trim().Equals(username.ToLower().Trim()));
+        }
+
         public ApplicationUser UserExists(string userIdToExclude, string username, string email)
         {
             return dbContext.Users.FirstOrDefault(x => x.Id.Equals(userIdToExclude) == false

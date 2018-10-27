@@ -17,7 +17,6 @@ using System.Collections.Generic;
 namespace Find2MeWeb.Controllers
 {
     [Authorize]
-    [RequireHttps]
     public class AccountController : Controller
     {
         private ApplicationSignInManager _signInManager;
@@ -154,11 +153,12 @@ namespace Find2MeWeb.Controllers
 
         //
         // GET: /Account/Register
-        [AllowAnonymous]
+        /*[AllowAnonymous]
         public ActionResult Register()
         {
             return View();
         }
+        */
 
         //
         // POST: /Account/Register
@@ -404,7 +404,10 @@ namespace Find2MeWeb.Controllers
                         //Save the Profile Image
                         if (facbookUserData.Picture.Data != null)
                         {
-                            profilePictureUrl = facbookUserData.Picture.Data.URL;
+                            if (!facbookUserData.Picture.Data.is_silhouette)
+                            {
+                                profilePictureUrl = facbookUserData.Picture.Data.URL;
+                            }
                         }
 
                         //Get the other Data
@@ -421,7 +424,10 @@ namespace Find2MeWeb.Controllers
                         //Save the Profile Image
                         if (googleUserData.Image != null)
                         {
-                            profilePictureUrl = googleUserData.Image.URL;
+                            if (!googleUserData.Image.IsDefault)
+                            {
+                                profilePictureUrl = googleUserData.Image.URL;
+                            }
                         }
 
                         //Get the other Data
@@ -450,7 +456,10 @@ namespace Find2MeWeb.Controllers
                     if (twitterUserData != null)
                     {
                         //Save the Profile Image
-                        profilePictureUrl = twitterUserData.ProfileImageUrl;
+                        if (!twitterUserData.DefaultProfileImage)
+                        {
+                            profilePictureUrl = twitterUserData.ProfileImageUrl;
+                        }
 
                         //Get the other Data
                         user.FullName = twitterUserData.Name;
@@ -493,6 +502,9 @@ namespace Find2MeWeb.Controllers
                     //Login the current User
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    //Add User Action Log
+                    new LogsSerivce().RunAddLogTask(_LogActionType.AccountCreated, user.Id, extraMessage: loginInfo.Login.LoginProvider);
+
                     //TempData External Identity, After login, we will need some of these Claims
                     TempData["ExternalLoginInfo"] = loginInfo.ExternalIdentity;
 
@@ -523,6 +535,9 @@ namespace Find2MeWeb.Controllers
                     User.Identity.CopyExternalOAuthClaims(externalIdentity, AuthenticationManager);
                 }
             }
+
+            //Add User Action Log
+            new LogsSerivce().RunAddLogTask(_LogActionType.UserLogin, User.Identity.GetUserId());
 
             return RedirectToLocal(returnUrl);
         }
@@ -571,13 +586,12 @@ namespace Find2MeWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult LogOff()
         {
+            string currentUserId = User.Identity.GetUserId();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
-            return RedirectToAction("Index", "Home");
-        }
 
-        public ActionResult LogOut()
-        {
-            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            //Add User Action Log
+            new LogsSerivce().RunAddLogTask(_LogActionType.UserLogout, currentUserId);
+
             return RedirectToAction("Index", "Home");
         }
 
