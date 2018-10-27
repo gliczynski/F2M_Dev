@@ -24,6 +24,7 @@ namespace Find2MeWeb.Controllers
         private ApplicationDbContext _dbContext;
 
         // GET: Profile
+        [ProfileWizardCompletionCheck]
         public ActionResult Index([Bind(Prefix = "id")] string username)
         {
 
@@ -521,7 +522,7 @@ namespace Find2MeWeb.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Follow(string UserId, bool DoFollow= true)
+        public ActionResult Follow(string UserId, bool DoFollow = true)
         {
             ResponseResult<object> responseResult = new ResponseResult<object>
             {
@@ -559,7 +560,8 @@ namespace Find2MeWeb.Controllers
             return Json(responseResult, JsonRequestBehavior.AllowGet);
         }
 
-        [Authorize]
+        [HttpGet]
+        [AllowAnonymous]
         public ActionResult GetFollowers(string UserId)
         {
             ResponseResult<SP_FollowersCount> responseResult = new ResponseResult<SP_FollowersCount>

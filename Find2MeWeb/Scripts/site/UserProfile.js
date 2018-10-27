@@ -3,7 +3,7 @@
     self._F2M_Utilities = F2M_Utilities;
 
     self.GetUserFollowersCount = function (userId) {
-        return _F2M_Utilities.Ajax("/en/profile/getfollowers?UserId=" + userId, "POST", null)
+        return _F2M_Utilities.Ajax("/en/profile/getfollowers?UserId=" + userId, "GET", null)
             .done(function (response) {
                 if (response) {
                     if (response.Success) {
