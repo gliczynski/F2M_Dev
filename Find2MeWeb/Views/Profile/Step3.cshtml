@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNet.Identity
+@using Find2Me.Infrastructure;
+
 @{
     ViewBag.Title = "Step3";
 }
@@ -164,7 +166,7 @@
                             <p>
                                 <br /><br />
                                 <a href="" class="mr-5">Go to frontpage</a>
-                                <a href="">Go to your profile page</a>
+                                <a href="@Url.Action("Index", "Profile", new { id= User.Identity.GetUrlUserName() })">Go to your profile page</a>
                             </p>
                         </div>
                     </div>

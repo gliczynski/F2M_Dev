@@ -28,5 +28,7 @@ namespace Find2Me.DAL
             SP_FollowersCount result = dbContext.Database.SqlQuery<SP_FollowersCount>("SP_GetFollowersCount @UserId", parameters).FirstOrDefault();
             return result;
         }
+
+       
     }
 }

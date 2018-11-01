@@ -106,6 +106,10 @@
     <Compile Include="Migrations\201810241631175_sp_getfollowerscount.Designer.cs">
       <DependentUpon>201810241631175_sp_getfollowerscount.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201811011553187_sp_delete_userprofile_data.cs" />
+    <Compile Include="Migrations\201811011553187_sp_delete_userprofile_data.Designer.cs">
+      <DependentUpon>201811011553187_sp_delete_userprofile_data.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OAuthReponses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -124,6 +128,7 @@
     <None Include="App.config" />
     <None Include="DbModels\ClassDiagram1.cd" />
     <None Include="packages.config" />
+    <Content Include="SqlScripts\2018-11-01_DeleteUserProfileData.sql" />
     <Content Include="SqlScripts\2018-10-18_GetFollowerCount.sql" />
   </ItemGroup>
   <ItemGroup />
@@ -154,6 +159,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201810241631175_sp_getfollowerscount.resx">
       <DependentUpon>201810241631175_sp_getfollowerscount.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201811011553187_sp_delete_userprofile_data.resx">
+      <DependentUpon>201811011553187_sp_delete_userprofile_data.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlScripts\SqlScripts.resx">
       <Generator>ResXFileCodeGenerator</Generator>

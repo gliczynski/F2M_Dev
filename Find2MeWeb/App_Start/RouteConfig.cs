@@ -16,12 +16,16 @@ namespace Find2MeWeb
             routes.IgnoreRoute("{resource}.axd/{*pathInfo}");
 
 
-            //routes.MapRoute(
-            //    name: "ProfilePageRoute",
-            //    url: "{id}",
-            //    defaults: new { controller= "Profile", action="Index" },
-            //    constraints: new hasProfilePage()
-            //    );
+            routes.MapRoute(
+                name: "ProfilePageRoute",
+                url: "{lang}/{id}",
+                defaults: new {
+                    controller = "Profile",
+                    action = "Index",
+                    lang = "da"
+                },
+                constraints: new hasProfilePage()
+                );
 
             // Localization route - it will be used as a route of the first priority 
             routes.MapRoute(

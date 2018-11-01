@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace Find2Me.Services
 {
@@ -23,6 +24,7 @@ namespace Find2Me.Services
         ResponseResult<UserProfileVM> UpdateUserProfile(UserProfileVM userProfileVM, bool skipValidation);
         List<string> GetUserSuggestion(string username, int suggestionToTake = 3);
         SP_FollowersCount GetFollowersCount(string userId);
+        ResponseResult<UserFollowerVM> AnonymizeProfile(string currentUserId);
     }
 
     public class UserAccountService : IUserAccountService
@@ -94,7 +96,7 @@ namespace Find2Me.Services
 
         public UserProfilePictureVM GetUserProfilePicture(string id)
         {
-            ApplicationUser applicationUser = applicationUserRepository.GetProfilePicture(id);
+            ApplicationUser applicationUser = applicationUserRepository.GetUserWithProfilePicture(id);
             if (applicationUser != null)
             {
                 UserProfilePictureVM userProfilePictureVM = new UserProfilePictureVM();
@@ -227,7 +229,7 @@ namespace Find2Me.Services
 
         public UserProfilePictureVM UpdateUserProfileImage(UserProfilePictureVM userProfilePictureVM, bool updateCropData = true)
         {
-            ApplicationUser applicationUser = applicationUserRepository.GetProfilePicture(userProfilePictureVM.Id);
+            ApplicationUser applicationUser = applicationUserRepository.GetUserWithProfilePicture(userProfilePictureVM.Id);
             if (applicationUser != null)
             {
                 //Check whether the Profile Image is new, we will need this for Logs
@@ -342,6 +344,75 @@ namespace Find2Me.Services
         public SP_FollowersCount GetFollowersCount(string userId)
         {
             return new UserFollowerRepository(dbContext).GetFollowersCount(userId);
+        }
+
+        public ResponseResult<UserFollowerVM> AnonymizeProfile(string currentUserId)
+        {
+            ResponseResult<UserFollowerVM> responseResult = new ResponseResult<UserFollowerVM>
+            {
+                Success = true,
+            };
+
+            try
+            {
+                ApplicationUser applicationUser = applicationUserRepository.GetUserWithProfilePicture(currentUserId);
+                UserFollowerRepository userFollowerRepository = new UserFollowerRepository(dbContext);
+                if (applicationUser != null)
+                {
+                    string ProfileImageOriginal = applicationUser.ProfileImageOriginal;
+                    string ProfileImageSelected = applicationUser.ProfileImageSelected;
+
+                    //Anonymize User
+                    applicationUser.UrlUsername = "N/A";
+                    applicationUser.Email = "N/A";
+                    applicationUser.FullName = "N/A";
+                    applicationUser.LockoutEnabled = true;
+                    applicationUser.LockoutEndDateUtc = DateTime.UtcNow;
+                    applicationUser.ProfileImageOriginal = null;
+                    applicationUser.ProfileImageSelected = null;
+                    applicationUser.ProfileImageData = null;
+                    applicationUser.UpdatedOn = DateTime.UtcNow;
+
+                    if (userFollowerRepository.SaveChanges() > 0)
+                    {
+                        //Remove the ProfilePictures
+                        try
+                        {
+                            if (!string.IsNullOrEmpty(ProfileImageOriginal))
+                            {
+                                System.IO.File.Delete(HttpContext.Current.Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + ProfileImageOriginal));
+                            }
+                        }catch { }
+
+                        try
+                        {
+                            if (!string.IsNullOrEmpty(ProfileImageSelected))
+                            {
+                                System.IO.File.Delete(HttpContext.Current.Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + ProfileImageSelected));
+                            }
+                        }
+                        catch { }
+
+                        //Remove all Profile Data
+                        applicationUserRepository.SP_DeleteUserProfileData(currentUserId);
+                    }
+
+                    //Add User Action Log
+                    new LogsSerivce().RunAddLogTask(_LogActionType.AccountDeleted, currentUserId);
+                }
+                else
+                {
+                    responseResult.Success = false;
+                    responseResult.Message = "Oops! Account profile does not exist.";
+                }
+
+            }
+            catch
+            {
+                responseResult.Success = false;
+                responseResult.Message = "Oops! An error occured while removing your profile.";
+            }
+            return responseResult;
         }
     }
 }

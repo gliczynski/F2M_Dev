@@ -24,10 +24,9 @@
         </div>
 
         <div class="row no-gutters nowrap mt-3">
-            <!-- Page Alert for Success and Error Messages -->
-            <div class="col-sm-12 col-md-12 mt-12">
-                <div class="alert" id="page_message_alert" role="alert" style="display: none;"></div>
-            </div>
+            
+            @*Page Alerts Partial*@
+            @Html.Partial("_PageAlertsPartial")
 
             <!-- Profile image-->
             <div class="col-sm-auto col-md-4 d-inline-flex justify-content-center mt-4">

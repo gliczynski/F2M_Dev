@@ -21,6 +21,12 @@ namespace Find2Me.Services
             Task.Run(() => AddLog(actionType, fromUserId, toUserId, extraMessage, ipAdress));
         }
 
+        public void RunAddLogTask(string[] actionTypes, string fromUserId, string toUserId = null, string extraMessage = null)
+        {
+            string ipAdress = HttpContext.Current.Request.UserHostAddress;
+            Task.Run(() => AddLog(actionTypes, fromUserId, toUserId, extraMessage, ipAdress));
+        }
+
         private ResponseResult<object> AddLog(string actionType, string fromUserId, string toUserId = null, string extraMessage = null, string ipAddress = null)
         {
             var response = new ResponseResult<object>
@@ -43,6 +49,45 @@ namespace Find2Me.Services
                         IpAddress = ipAddress,
                         CreateTime = DateTime.UtcNow,
                     });
+                    logsRepository.SaveChanges();
+                }
+            }
+            catch (Exception err)
+            {
+                response.Message = err.Message;
+                response.Success = false;
+            }
+
+            return response;
+        }
+
+        private ResponseResult<object> AddLog(string[] actionTypes, string fromUserId, string toUserId = null, string extraMessage = null, string ipAddress = null)
+        {
+            var response = new ResponseResult<object>
+            {
+                Success = true,
+            };
+            try
+            {
+
+                using (ApplicationDbContext dbContext = new ApplicationDbContext())
+                {
+                    LogsRepository logsRepository = new LogsRepository(dbContext);
+                    List<Logs> logs = new List<Logs>();
+                    foreach (var actionType in actionTypes)
+                    {
+                        string actionMessage = _LogActionType.GetActionMessage(actionType) + " " + extraMessage;
+                        Logs log = new Logs
+                        {
+                            ActionType = actionType,
+                            ActionMessage = actionMessage,
+                            ActionFromUserId = fromUserId,
+                            ActionToUserId = toUserId,
+                            IpAddress = ipAddress,
+                            CreateTime = DateTime.UtcNow,
+                        };
+                    }
+                    logsRepository.Insert(logs);
                     logsRepository.SaveChanges();
                 }
             }

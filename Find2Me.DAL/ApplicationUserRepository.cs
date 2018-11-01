@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,7 +25,7 @@ namespace Find2Me.DAL
 
         public bool UserExists(string username)
         {
-            return dbContext.Users.Any(x=> x.UrlUsername.ToLower().Trim().Equals(username.ToLower().Trim()));
+            return dbContext.Users.Any(x => x.UrlUsername.ToLower().Trim().Equals(username.ToLower().Trim()));
         }
 
         public ApplicationUser UserExists(string userIdToExclude, string username, string email)
@@ -61,7 +62,7 @@ namespace Find2Me.DAL
             return result;
         }
 
-        public ApplicationUser GetProfilePicture(string id)
+        public ApplicationUser GetUserWithProfilePicture(string id)
         {
             return dbContext.Users.Include(x => x.ProfileImageData).SingleOrDefault(x => x.Id.Equals(id));
         }
@@ -69,6 +70,22 @@ namespace Find2Me.DAL
         public UserProfileImageData GetProfileImageDataForUser(string userId)
         {
             return dbContext.UserProfileImageDatas.FirstOrDefault(x => x.UserId.Equals(userId));
+        }
+
+        /// <summary>
+        /// Sored Procedure: Delete UserExternalLogins, Claims and UserFollower Data
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <returns></returns>
+        public int SP_DeleteUserProfileData(string userId)
+        {
+            SqlParameter[] parameters =
+            {
+                new SqlParameter("@UserId", userId),
+            };
+            string sqlQuery = "SP_DeleteUserProfileData @UserId";
+            int result = dbContext.Database.ExecuteSqlCommand(sqlQuery, parameters);
+            return result;
         }
     }
 }

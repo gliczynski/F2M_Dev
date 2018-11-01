@@ -560,6 +560,53 @@ namespace Find2MeWeb.Controllers
             return Json(responseResult, JsonRequestBehavior.AllowGet);
         }
 
+        [HttpPost]
+        [Authorize]
+        [ValidateAntiForgeryToken]
+        public ActionResult Delete(bool ConfirmDelete, string returnUrl)
+        {
+            ResponseResult<object> responseResult = new ResponseResult<object>
+            {
+                Success = true
+            };
+
+            try
+            {
+                if (ConfirmDelete)
+                {
+
+                    string currentUserId = User.Identity.GetUserId();
+                    _dbContext = new ApplicationDbContext();
+                    //Anonymize the User Profile
+                    UserAccountService userAccountService = new UserAccountService(_dbContext);
+                    ResponseResult<UserFollowerVM> responseResultAnonymize = userAccountService.AnonymizeProfile(currentUserId);
+
+                    //if profile is anonymized, redirect the user to homepage and return the success message
+                    if (responseResultAnonymize.Success)
+                    {
+                        HttpContext.GetOwinContext().Authentication.SignOut();
+                        responseResultAnonymize.Message = "Done! Your profile is removed successfully.";
+                        TempData["ResponseResult"] = responseResultAnonymize;
+                        return RedirectToAction("Index", "Home");
+                    }
+                    responseResult.Success = false;
+                    responseResult.Message = responseResultAnonymize.Message;
+                }
+
+                responseResult.Success = false;
+                responseResult.Message = "Please confirm that you want to delete your profile.";
+            }
+            catch (Exception err)
+            {
+                responseResult.Success = false;
+                responseResult.Message = "An error occured while following this user. Please try again.";
+            }
+
+            TempData["ResponseResult"] = responseResult;
+
+            return Redirect(returnUrl);
+        }
+
         [HttpGet]
         [AllowAnonymous]
         public ActionResult GetFollowers(string UserId)

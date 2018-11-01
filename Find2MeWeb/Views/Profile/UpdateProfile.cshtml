@@ -34,10 +34,9 @@
         </div>
 
         <div class="row no-gutters nowrap mt-3">
-            <!-- Page Alert for Success and Error Messages -->
-            <div class="col-sm-12 col-md-12 mt-12">
-                <div class="alert" id="page_message_alert" role="alert" style="display: none;"></div>
-            </div>
+
+            @*Page Alerts Partial*@
+            @Html.Partial("_PageAlertsPartial")
 
             <!-- Left column -->
             <div class="col-sm-auto col-md-4 mt-4">
@@ -544,23 +543,26 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>
-                    This will delete your profile and can't be reestablished.
-                </p>
-                <form>
+            @using (Html.BeginForm("Delete", "Profile", new { returnUrl = Url.Action() }, FormMethod.Post, new { id = "delete_profile_form" }))
+            {
+                @Html.AntiForgeryToken()
 
+                <div class="modal-body">
+                    <p>
+                        This will delete your profile and can't be reestablished.
+                    </p>
                     <div class="form-check">
-                        <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                        <label class="form-check-label" for="exampleCheck1">Yes, i'm sure that i want to delete my profile.</label>
+                        @Html.CheckBox("ConfirmDelete", false, new { @class = "form-check-input", reuquired = "required" })
+                        @Html.Label("ConfirmDelete", "Yes, i'm sure that i want to delete my profile.", new { @class = "form-check-label" })
+                        @*<input type="checkbox" class="form-check-input" id="exampleCheck1">*@
+                        @*<label class="form-check-label" for="exampleCheck1">Yes, i'm sure that i want to delete my profile.</label>*@
                     </div>
-
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger">DELETE MY PROFILE</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-danger">DELETE MY PROFILE</button>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -856,5 +858,14 @@
 
 
         //});
+
+            $('form#delete_profile_form').submit(function (ev) {
+                if ($("input[type=checkbox]#ConfirmDelete").is(":checked") == false) {
+                    ev.preventDefault();
+                    alert("Please confirm that you want to delete your profile!");
+                }
+            });
     </script>
+
+
 }

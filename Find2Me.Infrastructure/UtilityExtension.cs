@@ -23,11 +23,6 @@ namespace Find2Me.Infrastructure
             return false;
         }
 
-        public static bool DownloadImage(object uRL, string filePath)
-        {
-            throw new NotImplementedException();
-        }
-
         /// <summary>
         /// Key Value Pair for Years of Birth Dropdown List.
         /// Min Age 18 years and go back to 72 years.
