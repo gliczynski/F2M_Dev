@@ -66,7 +66,7 @@ namespace Find2Me.Infrastructure
                 Claim providerClaim = claimsIdentity.FindFirst(_ClaimTypes.ExternalProviderUsername);
                 if (providerClaim != null)
                 {
-                    return providerClaim.Value;
+                    return providerClaim.Value.Trim().ToLower();
                 }
             }
             return null;
@@ -80,7 +80,7 @@ namespace Find2Me.Infrastructure
                 Claim providerClaim = claimsIdentity.FindFirst(_ClaimTypes.UrlUserName);
                 if (providerClaim != null)
                 {
-                    return providerClaim.Value.ToLower();
+                    return providerClaim.Value.Trim().ToLower();
                 }
             }
             return null;

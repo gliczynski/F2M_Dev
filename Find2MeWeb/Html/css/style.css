@@ -91,7 +91,7 @@ h6 {
 
 }
 
-// Extra large devices (large desktops, 75em and up)
+//Extra large devices (large desktops, 75em and up)
 @media (min-width: 75em) {
     html, body
 
@@ -194,7 +194,7 @@ Ad section
     flex: 0 0 auto;
     overflow: hidden;
     position: relative;
-    width: 30;
+    width: 30px;
     height: 30px;
 }
 
@@ -349,6 +349,10 @@ button.btn.reward {
     border-color: #ccc;
 }
 
+.stepwizard-step .btn-circle {
+    border-radius: 0px !important;
+}
+
 .stepwizard-row:before {
     top: 14px;
     bottom: 0;
@@ -377,7 +381,8 @@ button.btn.reward {
 }
 
 /* registration wizard */
-.regwizard-section label .fa.fa-check-circle.green {
+.regwizard-section label .fa.fa-check-circle.green,
+.profile-section label .fa.fa-check-circle.green {
     position: absolute;
     display: inline;
     right: 0px;
@@ -385,7 +390,8 @@ button.btn.reward {
     color: forestgreen;
 }
 
-.regwizard-section label .fa.fa-times-circle.red {
+.regwizard-section label .fa.fa-times-circle.red,
+.profile-section label .fa.fa-times-circle.red {
     position: absolute;
     display: inline;
     right: 0px;
@@ -532,4 +538,8 @@ footer {
     margin-top: .25rem;
     font-size: 80%;
     color: #dc3545;
+}
+
+.input-validation-error {
+    border-color: #dc3545;
 }

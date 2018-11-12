@@ -2,8 +2,6 @@
 @using Find2Me.Infrastructure;
 @{
     ViewBag.Title = "Step1";
-
-
 }
 
 @section Styles{
@@ -63,9 +61,10 @@
 
                 <!-- Upload profile image section -->
                 <div class="row mt-1">
-                    <div class="col col-md-12">
-                        <div class="alert" role="alert"></div>
-                    </div>
+
+                    @*Page Alerts Partial*@
+                    @Html.Partial("_PageAlertsPartial")
+
                     <div class="col text-center">
                         <p>
                             <strong>Your profile is almost ready.</strong><br />Please add your profile image to your profile. You will allways be able to change it later.<br />
@@ -90,10 +89,10 @@
                                 {
                                     <button type="button" class="btn btn-dark" id="edit_image_btn">Edit image</button>
                                 }
-                                else
-                                {
-                                    <button type="button" class="btn btn-dark disabled" disabled="disabled">Edit image</button>
-                                }
+                                @*else
+                                    {
+                                        <button type="button" class="btn btn-dark disabled" disabled="disabled">Edit image</button>
+                                    }*@
 
                                 @Html.AntiForgeryToken()
                                 <button type="button" class="btn btn-dark" id="upload_image_btn">Upload profile image</button>
@@ -107,7 +106,13 @@
                 <hr class="mt-5" />
 
                 <div class="form-group row d-flex justify-content-center">
-                    <a href="@Url.Action("Step2", "Profile")" class="btn btn-dark" role="button">Next</a>
+                    @using (Html.BeginForm("Step1", "Profile", new { }, FormMethod.Post, new {  }))
+                    {
+                        <input type="hidden" id="ProfileImage" name="ProfileImage" value="@Model.ProfileImageOriginal" data-val="true" data-val-required="Please upload a profile picture." />
+                        <span class="text-danger field-validation-valid" data-valmsg-for="ProfileImage" data-valmsg-replace="true"></span>
+
+                        <button type="submit" class="btn btn-dark">Next</button>
+                    }
                 </div>
 
             </div>
@@ -177,16 +182,11 @@
 </div>
 
 @section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
     <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
 
     <script>
         var cropData = "";
-        @if(Model.ProfileImageData != null)
-        {
-            <text>
-        cropData = @Html.Raw(Model.ProfileImageData.GetCroppingDataString());
-            </text>
-        }
 
         $('#upload_image_btn').click(function () {
             $('#profile_picture_input').click();
@@ -215,8 +215,24 @@
             var $progress = $('.progress');
             var $progressBar = $('.progress-bar');
             var $alert = $('.alert');
+            $modal = $('#edit_crop_image_modal');
 
             var cropper;
+
+            @if(Model.ProfileImageData != null)
+            {
+                <text>
+            cropData = @Html.Raw(Model.ProfileImageData.GetCroppingDataString());
+                </text>
+            }
+
+            @if (ViewBag.OpenEditProfileImageModel)
+            {
+                <text>
+                    $modal.modal('show');
+                </text>
+            }
+
             function ConstructCropper() {
                 cropper = new Cropper(image, {
                     aspectRatio: 1 / 1,
@@ -286,7 +302,6 @@
                 });
             }
 
-            $modal = $('#edit_crop_image_modal');
             $('#edit_image_btn').click(function () {
                 $modal.modal('show');
             });

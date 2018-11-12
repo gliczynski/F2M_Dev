@@ -80,6 +80,7 @@ namespace Find2MeWeb.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
+        [ProfileWizardCompletionCheck]
         public ActionResult UpdateProfile(UserProfileVM userProfileVM)
         {
             //If User does no exists, just update the UserData
@@ -183,15 +184,30 @@ namespace Find2MeWeb.Controllers
 
             if (userProfilePictureVM == null) { return HttpNotFound(); }
 
+            ViewBag.OpenEditProfileImageModel = false;
+            if (TempData["ImageUploaded"] != null)
+            {
+                ViewBag.OpenEditProfileImageModel = true;
+            }
+
             return View(userProfilePictureVM);
         }
 
         [HttpPost]
         [Authorize]
-        public ActionResult Step1(UserProfilePictureVM userProfilePictureVM)
+        public ActionResult Step1(string ProfileImage)
         {
+            if (string.IsNullOrEmpty(ProfileImage))
+            {
+                TempData["ResponseResult"] = new ResponseResult<object>
+                {
+                    Success = false,
+                    Message = "Please upload a Profile picture.",
+                };
+                return RedirectToAction("Step1");
+            }
 
-            return View();
+            return RedirectToAction("Step2");
         }
 
         [HttpGet]
@@ -255,6 +271,7 @@ namespace Find2MeWeb.Controllers
 
                 //Check If the Username is unique
                 userProfileVM.Id = User.Identity.GetUserId();
+                
                 //Update the User
                 var userUpdateResponse = userAccountService.UpdateUserProfile(userProfileVM, skipValidation);
                 if (userUpdateResponse.Success == false)
@@ -355,54 +372,58 @@ namespace Find2MeWeb.Controllers
         public ActionResult UploadProfileImage(HttpPostedFileBase profileimage, string returnUrl)
         {
             string newProfileImageFilename = "";
-            if (Request.Files.Count > 0)
+            if (profileimage != null)
             {
-                HttpPostedFileBase ProfileImage = profileimage;//Request.Files[0];
-                if (ProfileImage != null)
+                if (profileimage.ContentLength > 0)
                 {
-                    if (ProfileImage.ContentLength > 0)
+                    _dbContext = new ApplicationDbContext();
+                    var currentUserId = User.Identity.GetUserId();
+
+                    //Get the User First
+                    UserAccountService userAccountService = new UserAccountService(_dbContext);
+                    UserProfilePictureVM userProfile = userAccountService.GetUserProfilePicture(currentUserId);
+                    if (userProfile == null) { return HttpNotFound(); }
+
+                    //Save New Profile Image and Remove Old Image
+                    string profileImageName = DateTime.UtcNow.ToString("yyyyddmmhhmmss") + "_profile_original.jpg";
+                    string profileImagePath = Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + profileImageName);
+
+                    //Save New Image
+                    if (System.IO.File.Exists(profileImagePath) == false)
                     {
-                        _dbContext = new ApplicationDbContext();
-                        var currentUserId = User.Identity.GetUserId();
-
-                        //Get the User First
-                        UserAccountService userAccountService = new UserAccountService(_dbContext);
-                        UserProfilePictureVM userProfile = userAccountService.GetUserProfilePicture(currentUserId);
-                        if (userProfile == null) { return HttpNotFound(); }
-
-                        //Save New Profile Image and Remove Old Image
-                        string profileImageName = DateTime.UtcNow.ToString("yyyyddmmhhmmss") + "_profile_original.jpg";
-                        string profileImagePath = Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + profileImageName);
-
-                        //Save New Image
-                        if (System.IO.File.Exists(profileImagePath) == false)
-                        {
-                            ProfileImage.SaveAs(profileImagePath);
-                        }
-
-                        //Remove Old Image
-                        try
-                        {
-                            //Delete Original and Selected Images 
-                            if (System.IO.File.Exists(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageOriginal)))
-                            {
-                                System.IO.File.Delete(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageOriginal));
-                            }
-                            if (System.IO.File.Exists(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageSelected)))
-                            {
-                                System.IO.File.Delete(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageSelected));
-                            }
-                        }
-                        catch { }
-
-                        userProfile.ProfileImageOriginal = profileImageName;
-                        userProfile.ProfileImageSelected = profileImageName;
-                        newProfileImageFilename = profileImageName;
-                        userAccountService.UpdateUserProfileImage(userProfile, false);
+                        profileimage.SaveAs(profileImagePath);
                     }
+
+                    //Remove Old Image
+                    try
+                    {
+                        //Delete Original and Selected Images 
+                        if (System.IO.File.Exists(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageOriginal)))
+                        {
+                            System.IO.File.Delete(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageOriginal));
+                        }
+                        if (System.IO.File.Exists(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageSelected)))
+                        {
+                            System.IO.File.Delete(Server.MapPath("~" + _FileSavingPaths.ProfileImage + "/" + userProfile.ProfileImageSelected));
+                        }
+                    }
+                    catch { }
+
+                    userProfile.ProfileImageOriginal = profileImageName;
+                    userProfile.ProfileImageSelected = profileImageName;
+                    newProfileImageFilename = profileImageName;
+                    userAccountService.UpdateUserProfileImage(userProfile, false);
+
+                    //Set the Image Uploaded 
+                    TempData["ImageUploaded"] = true;
+                    TempData["ResponseResult"] = new ResponseResult<object>
+                    {
+                        Success = true,
+                        Message = "Profile Image is uploaded successfully.",
+                        MessageCode = ResponseResultMessageCode.ProfileImageUploaded,
+                    };
                 }
             }
-
 
             if (Request.IsAjaxRequest())
             {
@@ -585,21 +606,25 @@ namespace Find2MeWeb.Controllers
                     if (responseResultAnonymize.Success)
                     {
                         HttpContext.GetOwinContext().Authentication.SignOut();
-                        responseResultAnonymize.Message = "Done! Your profile is removed successfully.";
-                        TempData["ResponseResult"] = responseResultAnonymize;
+
+                        responseResult.Success = true;
+                        responseResult.Message = "Done! Your profile is removed successfully.";
+                        TempData["ResponseResult"] = responseResult;
                         return RedirectToAction("Index", "Home");
                     }
                     responseResult.Success = false;
                     responseResult.Message = responseResultAnonymize.Message;
                 }
-
-                responseResult.Success = false;
-                responseResult.Message = "Please confirm that you want to delete your profile.";
+                else
+                {
+                    responseResult.Success = false;
+                    responseResult.Message = "Please confirm that you want to delete your profile.";
+                }
             }
             catch (Exception err)
             {
                 responseResult.Success = false;
-                responseResult.Message = "An error occured while following this user. Please try again.";
+                responseResult.Message = "An error occured while deleting your profile. Please try again.";
             }
 
             TempData["ResponseResult"] = responseResult;

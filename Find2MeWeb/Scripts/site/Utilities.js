@@ -9,12 +9,24 @@ var F2M_Utilities = function () {
         $(control).removeAttr("disabled");
     };
 
-    self.Ajax = function (url, method, data) {
+    self.Ajax = function (url, method, data, contentType = "application/json") {
         return $.ajax(url, {
             method: method,
             data: data,
             dataType: "json",
-            contentType: "application/json",
+            contentType: contentType,
+            //contentType: false,
+            success: function (response) {
+                return response;
+            }
+        });
+    };
+
+    self.AjaxNoContentType = function (url, method, data) {
+        return $.ajax(url, {
+            method: method,
+            data: data,
+            dataType: "json",
             //contentType: false,
             success: function (response) {
                 return response;

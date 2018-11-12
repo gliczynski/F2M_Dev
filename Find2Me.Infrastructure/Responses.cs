@@ -26,26 +26,27 @@ namespace Find2Me.Infrastructure
         public T Data { get; set; }
     }
 
-    public class ResponseResultMessageCode
+    public static class ResponseResultMessageCode
     {
-        public static string UserNameExists = "UserNameExists";
-        public static string EmailExists = "EmailExists";
-        public static string UserNotFound = "UserNotFound";
-        public static string UserNameUpdated = "UserNameUpdated";
-        public static string EmailUpdated = "EmailUpdated";
-        public static string UserNameAndEmailUpdated = "UserNameAndEmailUpdated";
+        public const string UserNameExists = "UserNameExists";
+        public const string EmailExists = "EmailExists";
+        public const string UserNotFound = "UserNotFound";
+        public const string UserNameUpdated = "UserNameUpdated";
+        public const string EmailUpdated = "EmailUpdated";
+        public const string UserNameAndEmailUpdated = "UserNameAndEmailUpdated";
+        public const string ProfileImageUploaded = "ProfileImageUploaded";
 
         public static string GetMessageFromCode(string message)
         {
             switch (message)
             {
-                case "UserNameExists":
+                case UserNameExists:
                     return "A User exists with a similar username";
 
-                case "EmailExists":
+                case EmailExists:
                     return "A User exists with a similar email address.";
 
-                case "UserNotFound":
+                case UserNotFound:
                     return "User does not exists in the system.";
 
                 default:

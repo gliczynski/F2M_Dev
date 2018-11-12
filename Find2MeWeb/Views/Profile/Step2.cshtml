@@ -186,26 +186,36 @@
 
 @section Scripts{
     @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Scripts/site/Utilities.js"></script>
+    <script src="~/Scripts/site/UserProfile.js"></script>
 
     <script>
+        var _F2M_Utilities = new F2M_Utilities();
+        var _UserProfile = new UserProfile(_F2M_Utilities);
+
         $(function () {
 
+            var form = $('#profile_info_form');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
             //Check If a Username exists
             $('input#UrlUsername').on('change', function () {
-                var form = $('#profile_info_form');
-                var token = $('input[name="__RequestVerificationToken"]', form).val();
+                debugger;
                 var username = $(this).val();
 
                 //disable form Submit Buttons
-                debugger;
-                if ($(this).val().length < 5) {
+                if (username.length < 5) {
                     $('input[name="SubmitAction"][value="Next"]').attr("disabled", "disabled");
                     return
                 }
                 $('input[name="SubmitAction"]').attr("disabled", "disabled");
 
+                var data = {
+                    __RequestVerificationToken: token,
+                    id: username
+                };
+                _UserProfile.ValidateUsername(data);
 
-                $.ajax({
+                @*$.ajax({
                     url: "@Url.Action("UserExists", "Account")",
                     type: "POST",
                     dataType: "json",
@@ -239,17 +249,22 @@
                         //enable form Submit Buttons
                         $('input[name="SubmitAction"]').removeAttr("disabled");
                     }
-                })
+                })*@
             });
 
             //Username Suggestion Click
             $('#usernames_suggestion_wrapper').on('click', 'a', function () {
                 $('input#UrlUsername').val($(this).data("value"));
-                $('#valid_username_icon').show();
-                $('#invalid_username_icon').hide();
+                $('input#UrlUsername').trigger("change");
+
+                //$('#valid_username_icon').show();
+                //$('#invalid_username_icon').hide();
                 //enable form Submit Buttons
-                $('input[name="SubmitAction"]').removeAttr("disabled");
+                //$('input[name="SubmitAction"]').removeAttr("disabled");
             });
+
+            //Trigger it on load also
+            $('input#UrlUsername').trigger("change");
 
         });
     </script>

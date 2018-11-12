@@ -150,10 +150,15 @@ namespace Find2Me.Services
                 }
                 else
                 {
-                    if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
-                    {
-                        userProfileVM.Email = null;
-                    }
+                    //if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
+                    //{
+                    //    userProfileVM.Email = null;
+                    //}
+
+                    //Incase of Skip Validation, do not save Email Address
+                    userProfileVM.Email = null;
+
+                    //Incase of Skip Validation, if Username is not valid do not save Username
                     if (someExistedUser.UrlUsername.ToLower().Trim().Equals(userProfileVM.UrlUsername.ToLower().Trim()))
                     {
                         userProfileVM.UrlUsername = null;
@@ -233,8 +238,11 @@ namespace Find2Me.Services
             if (applicationUser != null)
             {
                 //Check whether the Profile Image is new, we will need this for Logs
-                bool newProfileImage = applicationUser.ProfileImageOriginal.Equals(userProfilePictureVM.ProfileImageOriginal) ? false : true;
-
+                bool newProfileImage = false;
+                if (!string.IsNullOrEmpty(applicationUser.ProfileImageOriginal))
+                {
+                    newProfileImage = applicationUser.ProfileImageOriginal.ToLower().Equals(userProfilePictureVM.ProfileImageOriginal.ToLower()) ? false : true;
+                }
                 applicationUser.ProfileImageOriginal = userProfilePictureVM.ProfileImageOriginal;
                 applicationUser.ProfileImageSelected = userProfilePictureVM.ProfileImageSelected;
 
@@ -364,6 +372,7 @@ namespace Find2Me.Services
 
                     //Anonymize User
                     applicationUser.UrlUsername = "N/A";
+                    applicationUser.UserName =   Guid.NewGuid().ToString() +  "_N/A";
                     applicationUser.Email = "N/A";
                     applicationUser.FullName = "N/A";
                     applicationUser.LockoutEnabled = true;
@@ -407,7 +416,7 @@ namespace Find2Me.Services
                 }
 
             }
-            catch
+            catch (Exception err)
             {
                 responseResult.Success = false;
                 responseResult.Message = "Oops! An error occured while removing your profile.";

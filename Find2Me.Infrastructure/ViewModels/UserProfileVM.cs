@@ -14,12 +14,15 @@ namespace Find2Me.Infrastructure.ViewModels
         public string Id { get; set; }
 
         [Display(Name = "Email address")]
+        [EmailAddress(ErrorMessage ="Please provide a valid email address.")]
+        [DataType(DataType.EmailAddress, ErrorMessage = "Please provide a valid email address.")]
         public string Email { get; set; }
 
         public string UserName { get; set; }
 
         [Display(Name = "Fullname")]
         [Required(ErrorMessage = "Please provide a valid full name.")]
+        [MinLength(2, ErrorMessage = "Full name should contain minimum 2 characters.")]
         public string FullName { get; set; }
 
         [Display(Name = "Year of birth")]
