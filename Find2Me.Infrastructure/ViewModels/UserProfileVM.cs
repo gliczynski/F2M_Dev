@@ -14,7 +14,8 @@ namespace Find2Me.Infrastructure.ViewModels
         public string Id { get; set; }
 
         [Display(Name = "Email address")]
-        [EmailAddress(ErrorMessage ="Please provide a valid email address.")]
+        [Required(ErrorMessage ="Please provide a valid email address.")]
+        [EmailAddress(ErrorMessage = "Please provide a valid email address.")]
         [DataType(DataType.EmailAddress, ErrorMessage = "Please provide a valid email address.")]
         public string Email { get; set; }
 

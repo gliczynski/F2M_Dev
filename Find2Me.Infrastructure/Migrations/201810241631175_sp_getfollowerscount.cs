@@ -14,8 +14,8 @@ namespace Find2Me.Infrastructure.Migrations
                     UserId = p.String(maxLength: 128),
                 },
                 body: @"SELECT 
-	                    SUM(CASE FollowedUserId WHEN @UserId THEN 1 ELSE 0 END) AS Followers, 
-	                    SUM(CASE FollowByUserId WHEN @UserId THEN 1 ELSE 0 END) AS Followed
+	                    COALESCE(SUM(CASE FollowedUserId WHEN @UserId THEN 1 ELSE 0 END), 0) AS Followers, 
+	                    COALESCE(SUM(CASE FollowByUserId WHEN @UserId THEN 1 ELSE 0 END), 0) AS Followed
 	                    FROM UserFollowers"
                 );
         }

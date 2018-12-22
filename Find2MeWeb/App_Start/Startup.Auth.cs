@@ -26,6 +26,7 @@ using System.Text;
 using System.Security.Cryptography;
 using System.Net;
 using System.IO;
+using System.Web;
 
 namespace Find2MeWeb
 {
@@ -338,19 +339,26 @@ namespace Find2MeWeb
             {
                 OnAuthenticated = context =>
                 {
-                    // Retrieve the OAuth access token to store for subsequent API calls
-                    //string accessToken = context.AccessToken;
+                    try
+                    {
+                        // Retrieve the OAuth access token to store for subsequent API calls
+                        //string accessToken = context.AccessToken;
 
-                    // Retrieve the username
-                    //string userName = context.UserName;
+                        // Retrieve the username
+                        //string userName = context.UserName;
 
-                    // Retrieve the user's full name
-                    //string fullName = context.Name;
+                        // Retrieve the user's full name
+                        //string fullName = context.Name;
 
-                    // You can even retrieve the full JSON-serialized user
-                    //var serializedUser = context.User;
-                    context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
-                    context.Identity.AddClaim(new Claim(ClaimTypes.UserData, context.User.ToString()));
+                        // You can even retrieve the full JSON-serialized user
+                        //var serializedUser = context.User;
+                        context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
+                        context.Identity.AddClaim(new Claim(ClaimTypes.UserData, context.User.ToString()));
+                    }
+                    catch (Exception e)
+                    {
+                        File.AppendAllText(HttpContext.Current.Server.MapPath("~/Logs.txt"), DateTime.UtcNow.ToShortDateString() + " - " + HttpContext.Current.Request.Browser.Type + "\n\n" + e.Message + "\n\n===============================\n\n");
+                    }
                     return Task.FromResult(true);
                 }
             };
@@ -384,10 +392,8 @@ namespace Find2MeWeb
 
             var options = new TwitterAuthenticationOptions
             {
-                //ConsumerKey = ConfigurationManager.AppSettings["TWITTER_API_KEY"],
-                //ConsumerSecret = ConfigurationManager.AppSettings["TWITTER_API_SECRET"],
-                ConsumerKey = "hXgYJWyXoHshpd7TALXCOIi6Y",
-                ConsumerSecret = "7g6PQysaGrISt9r1VRuV9wjbQmZlbpFCjxAMQalrWF6oKBgpIl",
+                ConsumerKey = ConfigurationManager.AppSettings["TWITTER_API_KEY"],
+                ConsumerSecret = ConfigurationManager.AppSettings["TWITTER_API_SECRET"],
                 //BackchannelCertificateValidator = new CertificateSubjectKeyIdentifierValidator(new[] {
                 //    "A5EF0B11CEC04103A34A659048B21CE0572D7D47", // VeriSign Class 3 Secure Server CA – G2
                 //    "0D445C165344C1827E1D20AB25F40163D8BE79A5", // VeriSign Class 3 Secure Server CA – G3
@@ -404,25 +410,32 @@ namespace Find2MeWeb
             {
                 OnAuthenticated = context =>
                 {
-                    // Retrieve the OAuth access token to store for subsequent API calls
-                    string accessToken = context.AccessToken;
-
-                    // Retrieve the screen name (e.g. @jerriepelser)
-                    //string twitterScreenName = context.ScreenName;
-
-                    // Retrieve the user ID
-                    //var twitterUserId = context.UserId;
-                    var userData = new OAuthReponseUserTwitter
+                    try
                     {
-                        //ProfilePicture = string.Format("https://twitter.com/{0}/profile_image?size=original", twitterScreenName)
-                    };
-                    OAuthReponseUserTwitter response = TwitterLogin(context.AccessToken, context.AccessTokenSecret, options.ConsumerKey, options.ConsumerSecret);
-                    if (response != null)
-                    {
-                        context.Identity.AddClaim(new Claim(ClaimTypes.Email, response.Email));
+                        // Retrieve the OAuth access token to store for subsequent API calls
+                        //string accessToken = context.AccessToken;
+
+                        // Retrieve the screen name (e.g. @jerriepelser)
+                        //string twitterScreenName = context.ScreenName;
+
+                        // Retrieve the user ID
+                        //var twitterUserId = context.UserId;
+                        var userData = new OAuthReponseUserTwitter
+                        {
+                            //ProfilePicture = string.Format("https://twitter.com/{0}/profile_image?size=original", twitterScreenName)
+                        };
+                        OAuthReponseUserTwitter response = TwitterLogin(context.AccessToken, context.AccessTokenSecret, options.ConsumerKey, options.ConsumerSecret);
+                        if (response != null)
+                        {
+                            context.Identity.AddClaim(new Claim(ClaimTypes.Email, response.Email));
+                            context.Identity.AddClaim(new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(response)));
+                        }
+                        context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
                     }
-                    context.Identity.AddClaim(new Claim(_ClaimTypes.ExternalProviderAccessToken, context.AccessToken));
-                    context.Identity.AddClaim(new Claim(ClaimTypes.UserData, JsonConvert.SerializeObject(response)));
+                    catch (Exception e)
+                    {
+                        File.AppendAllText(HttpContext.Current.Server.MapPath("~/Logs.txt"), DateTime.UtcNow.ToShortDateString() + " - " + HttpContext.Current.Request.Browser.Type + "\n\n" + e.Message + "\n\n===============================\n\n");
+                    }
                     return Task.FromResult(true);
                 }
             };

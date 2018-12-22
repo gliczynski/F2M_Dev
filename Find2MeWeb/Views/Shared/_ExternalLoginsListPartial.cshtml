@@ -17,39 +17,41 @@
         using (Html.BeginForm("ExternalLogin", "Account"))
         {
             @Html.AntiForgeryToken()
+            @Html.Hidden("returnUrl", Request.Url.AbsolutePath)
 
-            <div class="row d-flex justify-content-center mt-3">
+        <div class="row d-flex justify-content-center mt-3">
+            <div class="col-md-12 text-center">
                 <p>Connect with one of your favorite social account</p>
-                <br />
-                <br />
-
-                @Html.Hidden("returnUrl", Request.Url.AbsolutePath)
-
-                <div class="w-100"></div>
-                <div class="col-4 col-md-4  ">
-                    <button type="submit" class="btn btn-block btn-social btn-facebook" id="Facebook" name="provider" value="Facebook" title="Sign in using your Facebook account">
-                        <span class="fa fa-facebook"></span> Sign in with Facebook
-                    </button>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-4 col-md-4 mt-3 ">
-                    <button type="submit" class="btn btn-block btn-social btn-google" id="Google" name="provider" value="Google" title="Sign in using your Google account">
-                        <span class="fa fa-google"></span> Sign in with Google
-                    </button>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-4 col-md-4 mt-3">
-                    <button type="submit" class="btn btn-block btn-social btn-instagram" id="Instagram" name="provider" value="Instagram" title="Sign in using your Instagram account">
-                        <span class="fa fa-instagram"></span> Sign in with Instagram
-                    </button>
-                </div>
-                <div class="w-100"></div>
-                <div class="col-4 col-md-4 mt-3 mb-5">
-                    <button type="submit" class="btn btn-block btn-social btn-twitter" id="Twitter" name="provider" value="Twitter" title="Sign in using your Twitter account">
-                        <span class="fa fa-twitter"></span> Sign in with Twitter
-                    </button>
-                </div>
             </div>
+            <br />
+            <br />
+
+
+            <div class="w-100"></div>
+            <div class="col-md-4  ">
+                <button type="submit" class="btn btn-block btn-social btn-facebook" id="Facebook" name="provider" value="Facebook" title="Sign in using your Facebook account">
+                    <span class="fa fa-facebook"></span> Sign in with Facebook
+                </button>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-4 mt-3 ">
+                <button type="submit" class="btn btn-block btn-social btn-google" id="Google" name="provider" value="Google" title="Sign in using your Google account">
+                    <span class="fa fa-google"></span> Sign in with Google
+                </button>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-4 mt-3">
+                <button type="submit" class="btn btn-block btn-social btn-instagram" id="Instagram" name="provider" value="Instagram" title="Sign in using your Instagram account">
+                    <span class="fa fa-instagram"></span> Sign in with Instagram
+                </button>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-md-4 mt-3 mb-5">
+                <button type="submit" class="btn btn-block btn-social btn-twitter" id="Twitter" name="provider" value="Twitter" title="Sign in using your Twitter account">
+                    <span class="fa fa-twitter"></span> Sign in with Twitter
+                </button>
+            </div>
+        </div>
 
 
             @*<div id="socialLoginList">

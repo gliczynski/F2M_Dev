@@ -13,6 +13,7 @@ using Find2Me.Infrastructure.DbModels;
 using Find2Me.Infrastructure;
 using Find2Me.Services;
 using System.Collections.Generic;
+using Find2MeWeb.ActionFilters;
 
 namespace Find2MeWeb.Controllers
 {
@@ -83,6 +84,7 @@ namespace Find2MeWeb.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
+        [ProfileWizardCompletionCheck]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
@@ -296,6 +298,11 @@ namespace Find2MeWeb.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> ExternalLogin(string provider, string returnUrl)
         {
+            Session.RemoveAll();
+            if (Request.Cookies.AllKeys.Contains(".AspNet.ExternalCookie"))
+            {
+                Request.Cookies.Remove(".AspNet.ExternalCookie");
+            }
             // Request a redirect to the external login provider
             string challangeUrl = Url.Action("ExternalLoginCallback", "Account", new { ReturnUrl = returnUrl });
             var result = new ChallengeResult(provider, challangeUrl);
@@ -304,6 +311,7 @@ namespace Find2MeWeb.Controllers
 
         //
         // GET: /Account/SendCode
+
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl, bool rememberMe)
         {
@@ -342,6 +350,12 @@ namespace Find2MeWeb.Controllers
         [AllowAnonymous]
         public async Task<ActionResult> ExternalLoginCallback(string returnUrl)
         {
+            if (Session["OAuthError"] != null)
+            {
+                Exception exception = (Exception)Session["OAuthError"];
+                throw exception;
+            }
+
             var loginInfo = await AuthenticationManager.GetExternalLoginInfoAsync();
             if (loginInfo == null)
             {
@@ -587,7 +601,9 @@ namespace Find2MeWeb.Controllers
         public ActionResult LogOff()
         {
             string currentUserId = User.Identity.GetUserId();
+            AuthenticationManager.SignOut();
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            AuthenticationManager.SignOut(DefaultAuthenticationTypes.ExternalCookie);
 
             //Add User Action Log
             new LogsSerivce().RunAddLogTask(_LogActionType.UserLogout, currentUserId);
@@ -699,6 +715,8 @@ namespace Find2MeWeb.Controllers
 
             public override void ExecuteResult(ControllerContext context)
             {
+                context.RequestContext.HttpContext.Response.SuppressFormsAuthenticationRedirect = true;
+
                 var properties = new AuthenticationProperties { RedirectUri = RedirectUri };
                 if (UserId != null)
                 {

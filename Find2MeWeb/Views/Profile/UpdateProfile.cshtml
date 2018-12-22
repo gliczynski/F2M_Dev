@@ -207,8 +207,8 @@
 <div class="tab-content" id="nav-tabContent">
     <!-- Tab Content for ads on profile -->
     <div class="tab-pane fade show active" id="nav-ads" role="tabpanel" aria-labelledby="nav-ad-tab">
-        <div class="ad-section">
-            <div class="container ">
+            
+        <div class="container ">
                 <div class="row">
 
                     <!-- Ad 1 -->
@@ -230,7 +230,7 @@
                         </div>
                         <div class="card ad">
 
-                            <img src="img/Thumbnail1@2x.png" class="card-img-top img-fluid" />
+                            <img src="/Html/img/Thumbnail1@2x.png" class="card-img-top img-fluid" />
                             <div class="card-img-overlay p-3">
                                 <div class="d-flex">
                                     <div class="p-0 mr-auto">
@@ -290,7 +290,7 @@
                         </div>
                         <div class="card ad">
 
-                            <img src="img/Thumbnail2@2x.png" class="card-img-top img-fluid" />
+                            <img src="/Html/img/Thumbnail2@2x.png" class="card-img-top img-fluid" />
                             <div class="card-img-overlay p-3">
                                 <div class="d-flex">
                                     <div class="p-0 mr-auto">
@@ -350,7 +350,7 @@
                         </div>
                         <div class="card ad">
 
-                            <img src="img/Thumbnail3@2x.png" class="card-img-top img-fluid" />
+                            <img src="/Html/img/Thumbnail3@2x.png" class="card-img-top img-fluid" />
                             <div class="card-img-overlay p-3">
                                 <div class="d-flex">
                                     <div class="p-0 mr-auto">
@@ -395,9 +395,6 @@
                 </div>
 
             </div>
-        </div>
-
-
 
     </div>
     <!-- Tab content for ads on profile ends-->
@@ -518,6 +515,7 @@
                 }, new { enctype = "multipart/form-data", id = "upload_profile_image_form", style = "display: inline-block;" }))
                 {
                     @Html.AntiForgeryToken()
+                    <i class="fa fa-spinner fa-spin fa-lg fa-fw" id="image_upload_loader" style="display:none;"></i>
                     <button type="button" class="btn btn-primary" id="upload_image_btn">Upload</button>
                     <input type="file" id="profile_picture_input" name="profileimage" accept="image/*" style="display: none;">
                 }
@@ -587,13 +585,31 @@
 
         $(function () {
 
+            var form = $('#profile_info_form');
+            var token = $('input[name="__RequestVerificationToken"]', form).val();
             //Check If a Username exists
             $('input#UrlUsername').on('change', function () {
-                var form = $('#profile_info_form');
-                var token = $('input[name="__RequestVerificationToken"]', form).val();
+
                 var username = $(this).val();
 
-                $.ajax({
+                //disable form Submit Buttons
+                if (username.length < 5) {
+                    $('#valid_username_icon').hide();
+                    $('#invalid_username_icon').show();
+                    //disable form Submit Buttons
+                    $('input[name="SubmitAction"][value="Next"]').attr("disabled", "disabled");
+                    return
+                }
+
+                $('input[name="SubmitAction"]').attr("disabled", "disabled");
+
+                var data = {
+                    __RequestVerificationToken: token,
+                    id: username
+                };
+                _UserProfile.ValidateUsername(data);
+
+                @*$.ajax({
                     url: "@Url.Action("UserExists", "Account")",
                     type: "POST",
                     dataType: "json",
@@ -602,6 +618,9 @@
                         id: username
                     },
                     success: function (data) {
+                        //enable form Submit Buttons
+                        $('input[name="SubmitAction"]').removeAttr("disabled");
+
                         if (data) {
                             if (data.UserExists) {
                                 var suggestionsHtml = "<strong>Suggestions: </strong>";
@@ -612,21 +631,30 @@
                                 $('#usernames_suggestion_wrapper').empty().html(suggestionsHtml);
                                 $('#valid_username_icon').hide();
                                 $('#invalid_username_icon').show();
+                                $('input[name="SubmitAction"][value="Next"]').attr("disabled", "disabled");
                             }
                             else {
                                 $('#valid_username_icon').show();
                                 $('#invalid_username_icon').hide();
                             }
                         }
+                    },
+                    failure: function (data) {
+                        //enable form Submit Buttons
+                        $('input[name="SubmitAction"]').removeAttr("disabled");
                     }
-                })
+                })*@
             });
 
             //Username Suggestion Click
             $('#usernames_suggestion_wrapper').on('click', 'a', function () {
                 $('input#UrlUsername').val($(this).data("value"));
-                $('#valid_username_icon').show();
-                $('#invalid_username_icon').hide();
+                $('input#UrlUsername').trigger("change");
+
+                //$('#valid_username_icon').show();
+                //$('#invalid_username_icon').hide();
+                //enable form Submit Buttons
+                //$('input[name="SubmitAction"]').removeAttr("disabled");
             });
 
         });
@@ -734,6 +762,9 @@
 
             $('#profile_picture_input').on('change', function () {
                 $('#upload_profile_image_form').submit();
+                $('#upload_image_btn').attr("disabled", "disabled");
+                $('#crop').attr("disabled", "disabled");
+                $('#image_upload_loader').show();
             });
 
             function ImageUploadSuccess(data) {
@@ -758,7 +789,9 @@
             }
 
             var ImageUploadComplete = function (data) {
-
+                $('#upload_image_btn').removeAttr("disabled");
+                $('#crop').removeAttr("disabled");
+                $('#image_upload_loader').hide();
             }
 
             $modal = $('#edit_crop_image_modal');

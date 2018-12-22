@@ -150,13 +150,10 @@ namespace Find2Me.Services
                 }
                 else
                 {
-                    //if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
-                    //{
-                    //    userProfileVM.Email = null;
-                    //}
-
-                    //Incase of Skip Validation, do not save Email Address
-                    userProfileVM.Email = null;
+                    if (someExistedUser.Email.ToLower().Trim().Equals(userProfileVM.Email.ToLower().Trim()))
+                    {
+                        userProfileVM.Email = null;
+                    }
 
                     //Incase of Skip Validation, if Username is not valid do not save Username
                     if (someExistedUser.UrlUsername.ToLower().Trim().Equals(userProfileVM.UrlUsername.ToLower().Trim()))
@@ -169,6 +166,7 @@ namespace Find2Me.Services
             ApplicationUser applicationUser = applicationUserRepository.GetSingle(userProfileVM.Id);
             if (applicationUser != null)
             {
+                applicationUser.FullName = userProfileVM.FullName;
                 applicationUser.PreferredCurrency = userProfileVM.PreferredCurrency;
                 applicationUser.PreferredLanguage = userProfileVM.PreferredLanguage;
                 applicationUser.Sex = userProfileVM.Sex;
@@ -177,11 +175,12 @@ namespace Find2Me.Services
                 applicationUser.PreferredCurrency = userProfileVM.PreferredCurrency;
                 applicationUser.PreferredLanguage = userProfileVM.PreferredLanguage;
                 applicationUser.UpdatedOn = DateTime.UtcNow;
-                if (!string.IsNullOrEmpty(userProfileVM.Email))
+                if (!string.IsNullOrEmpty(userProfileVM.Email) && skipValidation == false)
                 {
                     applicationUser.Email = userProfileVM.Email;
                     responseResult.SuccessCode = ResponseResultMessageCode.EmailUpdated;
                 }
+
                 if (!string.IsNullOrEmpty(userProfileVM.UrlUsername))
                 {
                     applicationUser.UrlUsername = userProfileVM.UrlUsername;

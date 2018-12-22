@@ -50,7 +50,7 @@ namespace Find2Me.DAL
 
             var result = (from username in userSuggestions
                           join user in dbContext.Users
-                          on username.ToLower() equals user.UrlUsername.ToLower()
+                          on username.ToLower() equals (user.UrlUsername != null ? user.UrlUsername.ToLower(): "")
                           into ug
                           from u in ug.DefaultIfEmpty()
                           select new
