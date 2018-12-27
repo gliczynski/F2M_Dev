@@ -53,6 +53,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
@@ -67,6 +68,7 @@
     <Compile Include="DbModels\Logs.cs" />
     <Compile Include="DbModels\StoredProcedureResponses.cs" />
     <Compile Include="DbModels\UserFollower.cs" />
+    <Compile Include="EmailHelperService.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="DbModels\IdentityModels.cs" />
     <Compile Include="Extensions.cs" />

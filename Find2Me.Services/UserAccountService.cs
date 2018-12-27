@@ -166,6 +166,16 @@ namespace Find2Me.Services
             ApplicationUser applicationUser = applicationUserRepository.GetSingle(userProfileVM.Id);
             if (applicationUser != null)
             {
+                /*
+                //If Email Address is not confirmed, then return an Error
+                if (applicationUser.EmailConfirmed == false)
+                {
+                    responseResult.Success = false;
+                    responseResult.MessageCode = ResponseResultMessageCode.EmailNotConfirmed;
+                    responseResult.Data = userProfileVM;
+                    return responseResult;
+                }*/
+
                 applicationUser.FullName = userProfileVM.FullName;
                 applicationUser.PreferredCurrency = userProfileVM.PreferredCurrency;
                 applicationUser.PreferredLanguage = userProfileVM.PreferredLanguage;
@@ -189,6 +199,7 @@ namespace Find2Me.Services
                 applicationUserRepository.Update(applicationUser);
                 applicationUserRepository.SaveChanges();
                 userProfileVM.Id = applicationUser.Id;
+                userProfileVM.EmailConfirmed = applicationUser.EmailConfirmed;
 
                 //Add User Action Log
                 new LogsSerivce().RunAddLogTask(_LogActionType.ProfileUpdate, applicationUser.Id);
@@ -196,7 +207,6 @@ namespace Find2Me.Services
             else
             {
                 responseResult.Success = false;
-                responseResult.MessageCode = ResponseResultMessageCode.UserNotFound;
                 responseResult.MessageCode = ResponseResultMessageCode.UserNotFound;
             }
 

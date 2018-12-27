@@ -106,7 +106,7 @@
                 <hr class="mt-5" />
 
                 <div class="form-group row d-flex justify-content-center">
-                    @using (Html.BeginForm("Step1", "Profile", new { }, FormMethod.Post, new {  }))
+                    @using (Html.BeginForm("Step1", "Profile", new { }, FormMethod.Post, new { }))
                     {
                         <input type="hidden" id="ProfileImage" name="ProfileImage" value="@Model.ProfileImageOriginal" data-val="true" data-val-required="Please upload a profile picture." />
                         <span class="text-danger field-validation-valid" data-valmsg-for="ProfileImage" data-valmsg-replace="true"></span>

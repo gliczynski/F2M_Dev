@@ -227,7 +227,8 @@ namespace Find2MeWeb.Controllers
             {
                 userProfileVM.UrlUsername = User.Identity.GetExternalProviderUsername();
             }
-            if (string.IsNullOrEmpty(userProfileVM.Email))
+
+            if (string.IsNullOrEmpty(userProfileVM.Email) || userProfileVM.EmailConfirmed == false)
             {
                 ViewBag.DisableEmailTextbox = false;
             }
@@ -244,7 +245,7 @@ namespace Find2MeWeb.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public ActionResult Step2(UserProfileVM userProfileVM, string SubmitAction = "")
+        public async Task<ActionResult> Step2(UserProfileVM userProfileVM, string SubmitAction = "")
         {
             //If User does no exists, just update the UserData
             try
@@ -271,7 +272,7 @@ namespace Find2MeWeb.Controllers
 
                 //Check If the Username is unique
                 userProfileVM.Id = User.Identity.GetUserId();
-                
+
                 //Update the User
                 var userUpdateResponse = userAccountService.UpdateUserProfile(userProfileVM, skipValidation);
                 if (userUpdateResponse.Success == false)
@@ -281,6 +282,11 @@ namespace Find2MeWeb.Controllers
                         ModelState.AddModelError("Email", "A user already exists with the same email address. Please choose a different one.");
                         ViewBag.DisableEmailTextbox = false;
                     }
+                    /*else if (userUpdateResponse.MessageCode == ResponseResultMessageCode.EmailNotConfirmed)
+                    {
+                        ModelState.AddModelError("Email", "You have not confirm your rmail address. Please confirm your email address to continue. Click on the \"Send Confirmation\" to send the confirmation link again.");
+                        ViewBag.DisableEmailTextbox = false;
+                    }*/
                     else if (userUpdateResponse.MessageCode == ResponseResultMessageCode.UserNameExists)
                     {
                         ModelState.AddModelError("UrlUsername", "A user already exists with the same username. Please choose a different one.");
@@ -318,6 +324,7 @@ namespace Find2MeWeb.Controllers
                     newClaimsList.Add(new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
                 }
 
+
                 //If User is Updated then the Wizard is Completed, Change HasCompletedProfileWizard Claim Also
                 Claim HasCompletedProfileWizardClaim = User.Identity.GetClaim(_ClaimTypes.HasCompletedProfileWizard);
                 if (HasCompletedProfileWizardClaim != null)
@@ -327,6 +334,7 @@ namespace Find2MeWeb.Controllers
 
                 UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.HasCompletedProfileWizard, true.ToString()));
                 newClaimsList.Add(new Claim(_ClaimTypes.HasCompletedProfileWizard, true.ToString()));
+
 
                 //Update Current Identity Claim and Login User Again
                 if (newClaimsList.Count > 0)
@@ -343,6 +351,17 @@ namespace Find2MeWeb.Controllers
                 }
                 else
                 {
+                    //Before Redirecting to Step 3, send out an email confirmation link mail.
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(userProfileVM.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userProfileVM.Id, code = code }, protocol: Request.Url.Scheme);
+                    bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(userProfileVM.Email, callbackUrl);
+                    TempData["ResponseResult"] = new ResponseResult<bool>
+                    {
+                        Data = true,
+                        Message = "A email confirmation link is sent to the provided email address via email. Please confirm your email address.",
+                        Success = true
+                    };
+
                     return RedirectToAction("Step3");
                 }
             }

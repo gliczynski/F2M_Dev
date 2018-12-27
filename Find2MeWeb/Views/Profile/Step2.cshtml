@@ -54,7 +54,7 @@
                         <p>Profile data</p>
                     </div>
                     <div class="col-4 col-xl-2 stepwizard-step ">
-                        <a href="#step-3" type="class="btn btn-default btn-circle" disabled="disabled">3</a>
+                        <a href="#step-3" type="class=" btn btn-default btn-circle" disabled="disabled">3</a>
                         <p>Done</p>
                     </div>
                 </div>
@@ -82,15 +82,32 @@
                             @if (ViewBag.DisableEmailTextbox)
                             {
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                <small id="headlineHelpBlock" class="form-text text-muted">
+                                    Your account is registered with this email address, through @ExternalProviderType
+                                </small>
                             }
                             else
                             {
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                <div class="input-group">
+                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                                    @if (!string.IsNullOrEmpty(Model.Email))
+                                    {
+                                        <span class="input-group-btn">
+                                            <button id="send_email_confirm_btn" class="btn btn-dark" type="button" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Resend Confirmation Link</button>
+                                        </span>
+                                    }
+                                </div>
+
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                                <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
+                                    <small class="form-text text-muted">
+                                        A email confirmation link is sent to the provided email address via email. Please confirm your email address.
+                                    </small>
+                                </div>
                             }
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                            <small id="headlineHelpBlock" class="form-text text-muted">
-                                Your account is registered with this email address, through @ExternalProviderType
-                            </small>
+
+
                         </div>
                     </div>
 
@@ -270,6 +287,13 @@
             //Trigger it on load also
             $('input#UrlUsername').trigger("change");
 
+
+            $('#send_email_confirm_btn').click(function () {
+                //If email is valid,
+                if ($('input#Email').valid()) {
+                    _UserProfile.SendEmailConfirmationLink($('input#Email').val());
+                }
+            })
         });
     </script>
 

@@ -1,10 +1,34 @@
-﻿@{
+﻿@using Microsoft.AspNet.Identity
+@using Find2Me.Infrastructure;
+
+@{
     ViewBag.Title = "Confirm Email";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div>
-    <p>
-        Thank you for confirming your email. Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
-    </p>
+<div class="container">
+    <h2>@ViewBag.Title.</h2>
+    <div>
+        <p>
+            @if (ViewBag.Success)
+            {
+                <div class="alert alert-success">
+                    <i class="fa fa-check-circle fa-fw"></i> Thank you for confirming your email address.
+                    @if (!Request.IsAuthenticated)
+                    {
+                        <span>Please @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</span>
+                    }
+                    else
+                    {
+                        <span>Please @Html.ActionLink("Click here to view Profile", "Index", "Profile", routeValues: new { id = User.Identity.GetUrlUserName() }, htmlAttributes: new { id = "" })</span>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    <i class="fa fa-exclamation-circle fa-fw"></i> Unable to confirm your email address. Email confirmation link is either invalid or expired.
+                </div>
+            }
+        </p>
+    </div>
 </div>

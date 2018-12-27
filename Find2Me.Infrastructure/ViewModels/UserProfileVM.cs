@@ -49,6 +49,8 @@ namespace Find2Me.Infrastructure.ViewModels
         [MinLength(5, ErrorMessage = "Username must contains atleast 5 characters.")]
         public string UrlUsername { get; set; }
 
+        public bool EmailConfirmed { get; set; }
+
         public string ProfileImageOriginal { get; set; }
 
         public string ProfileImageSelected { get; set; }

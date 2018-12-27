@@ -31,6 +31,7 @@ namespace Find2Me.Infrastructure
         public const string UserNameExists = "UserNameExists";
         public const string EmailExists = "EmailExists";
         public const string UserNotFound = "UserNotFound";
+        public const string EmailNotConfirmed = "EmailNotConfirmed";
         public const string UserNameUpdated = "UserNameUpdated";
         public const string EmailUpdated = "EmailUpdated";
         public const string UserNameAndEmailUpdated = "UserNameAndEmailUpdated";

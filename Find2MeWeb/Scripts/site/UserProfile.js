@@ -56,4 +56,22 @@
                 $('input[name="SubmitAction"]').removeAttr("disabled");
             });
     };
+
+    self.SendEmailConfirmationLink = function (email) {
+        return self._F2M_Utilities.Ajax("/en/account/sendconfirmemail?email=" + email, "GET", null)
+            .done(function (data) {
+                //enable form Submit Buttons
+                $('#send_email_confirm_btn').removeAttr("disabled");
+                $('#send_email_confirm_btn').val("Resend Confirmation Link");
+                if (data) {
+                    if (data.Success) {
+                        $('[data-email-confirmation-alert=""]').show();
+                    }
+                }
+                
+            })
+            .fail(function (data) {
+                $('[data-email-confirmation-alert=""]').hide();
+            });
+    };
 };

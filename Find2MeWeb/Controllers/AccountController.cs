@@ -192,6 +192,38 @@ namespace Find2MeWeb.Controllers
             return View(model);
         }
 
+
+
+        //
+        // GET: /Account/SendConfirmEmail
+        [Authorize]
+        public async Task<ActionResult> SendConfirmEmail(string email)
+        {
+            string currentUserId = User.Identity.GetUserId();
+
+            //Before creating a new token, we need to invalidate the old token.
+            //So, update the security stamp for the user.
+            UserManager.UpdateSecurityStamp(currentUserId);
+
+            string code = await UserManager.GenerateEmailConfirmationTokenAsync(currentUserId);
+            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = currentUserId, code = code }, protocol: Request.Url.Scheme);
+            bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(email, callbackUrl);
+
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new ResponseResult<string>
+                {
+                    Data = callbackUrl,
+                    Success = true,
+                    Message = "Email Confirmation Link is sent successfully."
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         //
         // GET: /Account/ConfirmEmail
         [AllowAnonymous]
@@ -202,7 +234,9 @@ namespace Find2MeWeb.Controllers
                 return View("Error");
             }
             var result = await UserManager.ConfirmEmailAsync(userId, code);
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+            ViewBag.Success = result.Succeeded;
+
+            return View("ConfirmEmail");
         }
 
         //
@@ -403,6 +437,10 @@ namespace Find2MeWeb.Controllers
                     });
                     return RedirectToAction("Index", "Home");
                 }
+
+                //If an Email is returned from the Social Account, then Set the Email as Confirmed.
+                //If an Email is no returned, we need to verify the Email first.
+                user.EmailConfirmed = true;
             }
 
 
