@@ -215,6 +215,7 @@ namespace Find2MeWeb.Controllers
         public ActionResult Step2()
         {
             ViewBag.DisableEmailTextbox = true;
+            ViewBag.ShowResendEmailButton = false;
             _dbContext = new ApplicationDbContext();
 
             //Get Current User's Profile
@@ -232,12 +233,17 @@ namespace Find2MeWeb.Controllers
             {
                 ViewBag.DisableEmailTextbox = false;
             }
+            if (!string.IsNullOrEmpty(userProfileVM.Email))
+            {
+                ViewBag.ShowResendEmailButton = true;
+            }
 
             ViewBag.YearsOfBirth = UtilityExtension.GetYearsList();
             ViewBag.LanguagesList = UtilityExtension.GetLanguagesList();
 
             CurrencyService currencyService = new CurrencyService(_dbContext);
             ViewBag.CurrencyList = currencyService.GetAllCurrencies();
+
 
             return View(userProfileVM);
         }
@@ -251,6 +257,7 @@ namespace Find2MeWeb.Controllers
             try
             {
                 ViewBag.DisableEmailTextbox = true;
+                ViewBag.ShowResendEmailButton = false;
                 _dbContext = new ApplicationDbContext();
                 bool skipValidation = false;
 
@@ -284,7 +291,7 @@ namespace Find2MeWeb.Controllers
                     }
                     /*else if (userUpdateResponse.MessageCode == ResponseResultMessageCode.EmailNotConfirmed)
                     {
-                        ModelState.AddModelError("Email", "You have not confirm your rmail address. Please confirm your email address to continue. Click on the \"Send Confirmation\" to send the confirmation link again.");
+                        ModelState.AddModelError("Email", "You have not confirm your email address. Please confirm your email address to continue. Click on the \"Send Confirmation\" to send the confirmation link again.");
                         ViewBag.DisableEmailTextbox = false;
                     }*/
                     else if (userUpdateResponse.MessageCode == ResponseResultMessageCode.UserNameExists)
@@ -352,15 +359,17 @@ namespace Find2MeWeb.Controllers
                 else
                 {
                     //Before Redirecting to Step 3, send out an email confirmation link mail.
-                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(userProfileVM.Id);
-                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userProfileVM.Id, code = code }, protocol: Request.Url.Scheme);
-                    bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(userProfileVM.Email, callbackUrl);
-                    TempData["ResponseResult"] = new ResponseResult<bool>
+                    if (userProfileVM.EmailConfirmed == false)
                     {
-                        Data = true,
-                        Message = "A email confirmation link is sent to the provided email address via email. Please confirm your email address.",
-                        Success = true
-                    };
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(userProfileVM.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userProfileVM.Id, code = code }, protocol: Request.Url.Scheme);
+                        bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(userProfileVM.Email, callbackUrl);
+                        TempData["ResponseResult"] = new ResponseResult<object>
+                        {
+                            Message = "A email confirmation link is sent to the provided email address via email. Please confirm your email address.",
+                            Success = true
+                        };
+                    }
 
                     return RedirectToAction("Step3");
                 }

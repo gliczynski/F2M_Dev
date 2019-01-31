@@ -96,6 +96,12 @@
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
 
+                    <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
+                        <small class="form-text text-muted">
+                            A email confirmation link is sent to the provided email address via email. Please confirm your email address.
+                        </small>
+                    </div>
+
                     <div class="form-group row mt-3">
                         @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-4 col-xl-3 col-form-label" })
                         <div class="col">
@@ -116,11 +122,6 @@
                                 </small>
                             }
 
-                            <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
-                                <small class="form-text text-muted">
-                                    A email confirmation link is sent to the provided email address via email. Please confirm your email address.
-                                </small>
-                            </div>
 
                         </div>
                     </div>

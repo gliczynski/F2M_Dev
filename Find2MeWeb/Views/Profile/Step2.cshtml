@@ -91,7 +91,7 @@
                             {
                                 <div class="input-group">
                                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
-                                    @if (!string.IsNullOrEmpty(Model.Email))
+                                    @if (ViewBag.ShowResendEmailButton)
                                     {
                                         <span class="input-group-btn">
                                             <button id="send_email_confirm_btn" class="btn btn-dark" type="button" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Resend Confirmation Link</button>
