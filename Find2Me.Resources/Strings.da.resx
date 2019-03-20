@@ -1,0 +1,345 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="CreateAd" xml:space="preserve">
+    <value>&lt;p&gt; html break test &lt;/p&gt; &lt;br/&gt;&lt;p&gt; html break 2&lt;/p&gt;</value>
+  </data>
+  <data name="ProfileAdsOnline" xml:space="preserve">
+    <value>annoncer online</value>
+  </data>
+  <data name="ProfileConfirmationEmailInfoText" xml:space="preserve">
+    <value>Et email-bekræftelseslink sendes til den medfølgende e-mail-adresse via e-mail. Bekræft venligst din email adresse.</value>
+  </data>
+  <data name="ProfileConfirmationEmailInfoText2" xml:space="preserve">
+    <value>Bekræft venligst din email adresse. Der er sendt en email til dig.</value>
+  </data>
+  <data name="ProfileDeleteProfile" xml:space="preserve">
+    <value>Slet profil</value>
+  </data>
+  <data name="ProfileEdit" xml:space="preserve">
+    <value>Redigere</value>
+  </data>
+  <data name="ProfileFindingsCompleted" xml:space="preserve">
+    <value>resultater afsluttet</value>
+  </data>
+  <data name="ProfileFollow" xml:space="preserve">
+    <value>Følge efter</value>
+  </data>
+  <data name="ProfileFollowers" xml:space="preserve">
+    <value>tilhængere</value>
+  </data>
+  <data name="ProfileFollowMe" xml:space="preserve">
+    <value>Følg mig</value>
+  </data>
+  <data name="ProfilePrivateMessage" xml:space="preserve">
+    <value>PRIVAT BESKED</value>
+  </data>
+  <data name="ProfileRegisteredEmailInfoText" xml:space="preserve">
+    <value>Din konto er registreret med denne emailadresse via</value>
+  </data>
+  <data name="ProfileResendEmail" xml:space="preserve">
+    <value>Send igen</value>
+  </data>
+  <data name="ProfileSeeThemHere" xml:space="preserve">
+    <value>se dem her</value>
+  </data>
+  <data name="ProfileSince" xml:space="preserve">
+    <value>har været her siden</value>
+  </data>
+  <data name="ProfileUnFollow" xml:space="preserve">
+    <value>Un Følg</value>
+  </data>
+  <data name="ProfileUpdateProfile" xml:space="preserve">
+    <value>Opdater profil</value>
+  </data>
+  <data name="ProfileYourAds" xml:space="preserve">
+    <value>DINE ADS</value>
+  </data>
+  <data name="SomeLocalisedString" xml:space="preserve">
+    <value>this is danish</value>
+  </data>
+  <data name="EmailAddress" xml:space="preserve">
+    <value>Email adresse</value>
+  </data>
+  <data name="EmailRequired" xml:space="preserve">
+    <value>Angiv en gyldig e-mail-adresse.</value>
+  </data>
+  <data name="Female" xml:space="preserve">
+    <value>kvinde</value>
+  </data>
+  <data name="Fullname" xml:space="preserve">
+    <value>Fulde navn</value>
+  </data>
+  <data name="FullNameRegex" xml:space="preserve">
+    <value>Fuldt navn skal indeholde mindst 2 ord.</value>
+  </data>
+  <data name="FullNameRequired" xml:space="preserve">
+    <value>Angiv et gyldigt fuldt navn.</value>
+  </data>
+  <data name="Male" xml:space="preserve">
+    <value>han-</value>
+  </data>
+  <data name="PreferredCurrency" xml:space="preserve">
+    <value>Foretrukken valuta</value>
+  </data>
+  <data name="PreferredCurrencyRequired" xml:space="preserve">
+    <value>Giv venligst en gyldig valuta.</value>
+  </data>
+  <data name="PreferredLanguage" xml:space="preserve">
+    <value>Foretrukne sprog</value>
+  </data>
+  <data name="PreferredLanguageRequired" xml:space="preserve">
+    <value>Giv venligst et gyldigt sprog.</value>
+  </data>
+  <data name="Sex" xml:space="preserve">
+    <value>Køn</value>
+  </data>
+  <data name="SexRequired" xml:space="preserve">
+    <value>Giv venligst et gyldigt køn.</value>
+  </data>
+  <data name="Username" xml:space="preserve">
+    <value>Brugernavn</value>
+  </data>
+  <data name="UsernameMinLength" xml:space="preserve">
+    <value>Brugernavn skal indeholde mindst 5 tegn.</value>
+  </data>
+  <data name="UsernameRequired" xml:space="preserve">
+    <value>Angiv venligst et gyldigt brugernavn.</value>
+  </data>
+  <data name="YearOfBirth" xml:space="preserve">
+    <value>Fødsels år</value>
+  </data>
+  <data name="YearOfBirthRequired" xml:space="preserve">
+    <value>Angiv venligst et gyldigt fødselsår.</value>
+  </data>
+  <data name="Back" xml:space="preserve">
+    <value>Tilbage</value>
+  </data>
+  <data name="Next" xml:space="preserve">
+    <value>Næste</value>
+  </data>
+  <data name="ProfileEnterUsernamePlaceHolder" xml:space="preserve">
+    <value>Indtast et brugernavn</value>
+  </data>
+  <data name="ProfileUsernameInvalidText" xml:space="preserve">
+    <value>Brugernavn er ugyldigt.</value>
+  </data>
+  <data name="ProfileUsernameValidText" xml:space="preserve">
+    <value>Brugernavn er gyldigt.</value>
+  </data>
+  <data name="ProfileWizard_ProfileStep1" xml:space="preserve">
+    <value>Profilbillede</value>
+  </data>
+  <data name="ProfileWizard_ProfileStep2" xml:space="preserve">
+    <value>Profil info</value>
+  </data>
+  <data name="ProfileWizard_ProfileStep3" xml:space="preserve">
+    <value>Færdig</value>
+  </data>
+  <data name="Step1_CropperModalCancelBtn" xml:space="preserve">
+    <value>Afbestille</value>
+  </data>
+  <data name="Step1_CropperModalUpdateBtn" xml:space="preserve">
+    <value>Opdatering</value>
+  </data>
+  <data name="Step1_CropView" xml:space="preserve">
+    <value>Beskær visning</value>
+  </data>
+  <data name="Step1_EditProfilePicBtn" xml:space="preserve">
+    <value>Rediger billede</value>
+  </data>
+  <data name="Step1_ImageNotUploadedAlertText" xml:space="preserve">
+    <value>Du har ikke uploadet noget profilbillede endnu. Upload venligst først et billede!</value>
+  </data>
+  <data name="Step1_ImageRequired" xml:space="preserve">
+    <value>Upload venligst et profilbillede.</value>
+  </data>
+  <data name="Step1_OriginalImage" xml:space="preserve">
+    <value>Originalbillede</value>
+  </data>
+  <data name="Step1_ProfileDescriptionText1" xml:space="preserve">
+    <value>Din profil er næsten klar.</value>
+  </data>
+  <data name="Step1_ProfileDescriptionText2" xml:space="preserve">
+    <value>Tilføj venligst dit profilbillede til din profil. Du vil altid kunne ændre det senere.</value>
+  </data>
+  <data name="Step1_ProfileDescriptionText3" xml:space="preserve">
+    <value>Profilbilledet vises sammen med din annonce, kommentarer og andre ting.</value>
+  </data>
+  <data name="Step1_ProfileImageUpdatedInfoText" xml:space="preserve">
+    <value>Færdig! Profilbillede er opdateret med succes!</value>
+  </data>
+  <data name="Step1_ProfileImageUpdateFailedInfoText" xml:space="preserve">
+    <value>Ups! Der opstod en fejl under opdatering af profilbillede.</value>
+  </data>
+  <data name="Step1_UploadImageBtn" xml:space="preserve">
+    <value>Upload profilbillede</value>
+  </data>
+  <data name="Step1_UploadImageModalHeading" xml:space="preserve">
+    <value>Rediger profilbillede</value>
+  </data>
+  <data name="Step2_ExternalProviderInfoText" xml:space="preserve">
+    <value>Din konto er registreret med denne emailadresse via</value>
+  </data>
+  <data name="Step2_ProfileDescriptionText1" xml:space="preserve">
+    <value>Profiloplysninger</value>
+  </data>
+  <data name="Step2_ProfileDescriptionText2" xml:space="preserve">
+    <value>Tilføj venligst dine profildata. Du vil altid kunne ændre det senere.</value>
+  </data>
+  <data name="Step2_ResendConfirmationLinkBtn" xml:space="preserve">
+    <value>Send bekræftelseslink igen</value>
+  </data>
+  <data name="Step3_GoToFrontPageLinkTxt" xml:space="preserve">
+    <value>Gå til forsiden</value>
+  </data>
+  <data name="Step3_GoToProfilePageLinkTxt" xml:space="preserve">
+    <value>Gå til din profilside</value>
+  </data>
+  <data name="Step3_ProfileDescriptionText1" xml:space="preserve">
+    <value>Tak skal du have</value>
+  </data>
+  <data name="Step3_ProfileDescriptionText2" xml:space="preserve">
+    <value>Din konto er nu klar.</value>
+  </data>
+  <data name="Step3_ProfileDescriptionText3" xml:space="preserve">
+    <value>Hvad vil du gerne gøre først?</value>
+  </data>
+  <data name="Wizard_PageHeading" xml:space="preserve">
+    <value>Profil opsætningsguide</value>
+  </data>
+  <data name="Lookup_Select" xml:space="preserve">
+    <value>Vælg</value>
+  </data>
+  <data name="Step3_EmailConfirmationLinkText" xml:space="preserve">
+    <value>Et email-bekræftelseslink sendes til den medfølgende e-mail-adresse via e-mail. Bekræft venligst din email adresse.</value>
+  </data>
+  <data name="ProfileFullnamePlaceholder" xml:space="preserve">
+    <value>Skriv dit fulde navn</value>
+  </data>
+  <data name="ProfileHeaderText" xml:space="preserve">
+    <value>Din profil</value>
+  </data>
+  <data name="ProfileImageCrop_UploadBtnText" xml:space="preserve">
+    <value>Upload</value>
+  </data>
+  <data name="ConfirmationEmailSubject" xml:space="preserve">
+    <value>Bekræft din e-mail-adresse - Find2Me</value>
+  </data>
+</root>

@@ -23,7 +23,7 @@
 
             <div class="col-12 d-flex justify-content-md-between align-items-center">
                 <div>
-                    <h1 class="d-inline-flex pr-3">Profile setup wizard</h1>
+                    <h1 class="d-inline-flex pr-3">@Strings.Wizard_PageHeading</h1>
                 </div>
             </div>
         </div>
@@ -47,15 +47,15 @@
 
                     <div class="col-4 col-xl-2 stepwizard-step">
                         <a href="#step-1" class="btn btn-default btn-circle" disabled="disabled">1</a>
-                        <p>Profile image</p>
+                        <p>@Strings.ProfileWizard_ProfileStep1</p>
                     </div>
                     <div class="col-4 col-xl-2 stepwizard-step">
                         <a href="#step-2" class="btn btn-dark btn-circle">2</a>
-                        <p>Profile data</p>
+                        <p>@Strings.ProfileWizard_ProfileStep2</p>
                     </div>
                     <div class="col-4 col-xl-2 stepwizard-step ">
                         <a href="#step-3" type="class=" btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>Done</p>
+                        <p>@Strings.ProfileWizard_ProfileStep3</p>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                 <div class="row mt-1">
                     <div class="col text-center">
                         <p>
-                            <strong>Profile information</strong><br />Please add your profile data. You will allways be able to change it later.<br />
+                            <strong>@Strings.Step2_ProfileDescriptionText1</strong><br />@Strings.Step2_ProfileDescriptionText2<br />
                         </p>
 
                     </div>
@@ -84,7 +84,7 @@
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 <small id="headlineHelpBlock" class="form-text text-muted">
-                                    Your account is registered with this email address, through @ExternalProviderType
+                                    @Strings.Step2_ExternalProviderInfoText @ExternalProviderType
                                 </small>
                             }
                             else
@@ -94,7 +94,7 @@
                                     @if (ViewBag.ShowResendEmailButton)
                                     {
                                         <span class="input-group-btn">
-                                            <button id="send_email_confirm_btn" class="btn btn-dark" type="button" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">Resend Confirmation Link</button>
+                                            <button id="send_email_confirm_btn" class="btn btn-dark" type="button" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">@Strings.Step2_ResendConfirmationLinkBtn</button>
                                         </span>
                                     }
                                 </div>
@@ -102,7 +102,7 @@
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
                                     <small class="form-text text-muted">
-                                        A email confirmation link is sent to the provided email address via email. Please confirm your email address.
+                                        @Strings.ProfileConfirmationEmailInfoText
                                     </small>
                                 </div>
                             }
@@ -124,12 +124,12 @@
 
                     <div class="form-group row d-flex justify-content-center mt-3">
                         <label for="UrlUsername" class="col-sm-4 col-xl-2 col-form-label">
-                            Username
-                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="Username is valid." id="valid_username_icon" style="display: none;"></i>
-                            <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="invalid_username_icon" style="display: none;"></i>
+                            @Strings.Username
+                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameValidText" id="valid_username_icon" style="display: none;"></i>
+                            <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameInvalidText" id="invalid_username_icon" style="display: none;"></i>
                         </label>
                         <div class="col-sm-8 col-xl-6">
-                            @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter a username" } })
+                            @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = Strings.ProfileEnterUsernamePlaceHolder } })
                             <small id="fullnameHelpBlock" class="form-text text-muted">
 
                             </small>
@@ -141,9 +141,9 @@
                     </div>
 
                     <div class="form-group row d-flex justify-content-center mt-3">
-                        <label for="YearOfBirth" class="col-sm-4 col-xl-2 col-form-label">Year of birth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
+                        <label for="YearOfBirth" class="col-sm-4 col-xl-2 col-form-label">@Strings.YearOfBirth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
                         <div class="col-sm-8 col-xl-6">
-                            @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), "Select", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -153,11 +153,11 @@
                         <div class="col-sm-8 col-xl-6">
                             <div class="form-check">
                                 @Html.RadioButtonFor(model => model.Sex, _EnSex.Female, new { @class = "form-check-input", id = "radio_sex_female" })
-                                @Html.Label("radio_sex_female", "Female", new { @class = "form-check-label" })
+                                @Html.Label("radio_sex_female", Strings.Female, new { @class = "form-check-label" })
                             </div>
                             <div class="form-check">
                                 @Html.RadioButtonFor(model => model.Sex, _EnSex.Male, new { @class = "form-check-input", id = "radio_sex_male" })
-                                @Html.Label("radio_sex_male", "Male", new { @class = "form-check-label" })
+                                @Html.Label("radio_sex_male", Strings.Male, new { @class = "form-check-label" })
                             </div>
                             @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
                         </div>
@@ -166,7 +166,7 @@
                     <div class="form-group row d-flex justify-content-center mt-3">
                         @Html.LabelFor(model => model.PreferredCurrency, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
                         <div class="col-sm-8 col-xl-6">
-                            @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), "Select", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), Strings.Lookup_Select, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.PreferredCurrency, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -174,7 +174,7 @@
                     <div class="form-group row d-flex justify-content-center mt-3">
                         @Html.LabelFor(model => model.PreferredLanguage, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
                         <div class="col-sm-8 col-xl-6">
-                            @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), "Select", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.PreferredLanguage, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -186,8 +186,9 @@
                     <div class="form-group row d-flex justify-content-center">
                         @*<a href="profile_start_wizard_page_1.html" class="btn btn-dark mr-3" role="button">Back</a>*@
                         @*<a href="profile_start_wizard_page_3.html" class="btn btn-dark" role="button">Next</a>*@
-                        <input type="submit" name="SubmitAction" class="btn btn-dark mr-3" formnovalidate="formnovalidate" role="button" value="Back" />
-                        <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="Next" />
+                        @*<input type="submit" name="SubmitAction" class="btn btn-dark mr-3 cancel" formnovalidate="formnovalidate" role="button" value="@Strings.Back" />*@
+                        @Html.ActionLink(Strings.Back, "Step1", "Profile", new { @class = "btn btn-dark mr-3 cancel" })
+                        <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="@Strings.Next" />
                     </div>
                 }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -538,13 +539,22 @@ namespace Find2Me.Infrastructure
             return emailHtml;
         }
 
-        /*************************************************************************************/
-        /*************************************************************************************/
-
-        public bool SendEmailConfirmationTokenMail(string _RecEmail, string _CallbackUrl)
+        public bool SendEmailConfirmationTokenMail(string email, string callbackUrl, string confirmationEmailSubject)
         {
+            throw new NotImplementedException();
+        }
 
-            string bodyText = @"
+        /*************************************************************************************/
+        /*************************************************************************************/
+
+        public bool SendEmailConfirmationTokenMail(string _RecEmail, string _CallbackUrl, string subject, string langCode)
+        {            
+            StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath("~/Templates/Email/ConfirmationEmail-" + langCode + ".html"));
+            string bodyText = sr.ReadToEnd();
+            sr.Close();
+            bodyText = bodyText.Replace("###_CallbackUrl###", _CallbackUrl);
+
+            /*        string bodyText = @"
                         <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
                             Hello,
                         </p>
@@ -561,8 +571,8 @@ namespace Find2Me.Infrastructure
                             Find2Me
                         </p>
                         ";
-
-            string subject = "Confirm your Email Address - Find2Me";
+                        string subject = "Confirm your Email Address - Find2Me";
+            */           
 
             return SendEmail(subject, bodyText, new List<MailAddress>
             {

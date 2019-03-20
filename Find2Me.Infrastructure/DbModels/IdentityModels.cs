@@ -84,6 +84,8 @@ namespace Find2Me.Infrastructure.DbModels
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<UserFollower> UserFollowers { get; set; }
 
+        public DbSet<UserAd> UserAds { get; set; }
+
         public DbSet<Logs> Logs { get; set; }
 
         public static ApplicationDbContext Create()

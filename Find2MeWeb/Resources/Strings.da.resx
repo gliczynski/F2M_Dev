@@ -117,10 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmationEmailSubject" xml:space="preserve">
+    <value>Bekræft din e-mail-adresse - Find2Me</value>
+  </data>
   <data name="CreateAd" xml:space="preserve">
     <value>&lt;p&gt; html break test &lt;/p&gt; &lt;br/&gt;&lt;p&gt; html break 2&lt;/p&gt;</value>
   </data>
+  <data name="ProfileAdsOnline" xml:space="preserve">
+    <value>annoncer online</value>
+  </data>
+  <data name="ProfileFindingsCompleted" xml:space="preserve">
+    <value>resultater afsluttet</value>
+  </data>
+  <data name="ProfileFollowers" xml:space="preserve">
+    <value>tilhængere</value>
+  </data>
+  <data name="ProfileFollowMe" xml:space="preserve">
+    <value>Følg mig</value>
+  </data>
+  <data name="ProfilePrivateMessage" xml:space="preserve">
+    <value>PRIVAT BESKED</value>
+  </data>
+  <data name="ProfileSeeThemHere" xml:space="preserve">
+    <value>se dem her</value>
+  </data>
+  <data name="ProfileSince" xml:space="preserve">
+    <value>har været her siden</value>
+  </data>
+  <data name="ProfileUnFollow" xml:space="preserve">
+    <value>Un Følg</value>
+  </data>
   <data name="SomeLocalisedString" xml:space="preserve">
     <value>this is danish</value>
+  </data>
+  <data name="ProfileConfirmationEmailInfoText" xml:space="preserve">
+    <value>Et email-bekræftelseslink sendes til den medfølgende e-mail-adresse via e-mail. Bekræft venligst din email adresse.</value>
+  </data>
+  <data name="ProfileConfirmationEmailInfoText2" xml:space="preserve">
+    <value>Bekræft venligst din email adresse. Der er sendt en email til dig.</value>
+  </data>
+  <data name="ProfileDeleteProfile" xml:space="preserve">
+    <value>Slet profil</value>
+  </data>
+  <data name="ProfileEdit" xml:space="preserve">
+    <value>Redigere</value>
+  </data>
+  <data name="ProfileFollow" xml:space="preserve">
+    <value>Følge efter</value>
+  </data>
+  <data name="ProfileRegisteredEmailInfoText" xml:space="preserve">
+    <value>Din konto er registreret med denne emailadresse via</value>
+  </data>
+  <data name="ProfileResendEmail" xml:space="preserve">
+    <value>Send igen</value>
+  </data>
+  <data name="ProfileUpdateProfile" xml:space="preserve">
+    <value>Opdater profil</value>
+  </data>
+  <data name="ProfileYourAds" xml:space="preserve">
+    <value>DINE ADS</value>
   </data>
 </root>

@@ -1,17 +1,24 @@
-﻿using Find2MeWeb.ActionFilters;
-using Find2MeWeb.Resources;
+﻿using Find2Me.Infrastructure.DbModels;
+using Find2MeWeb.ActionFilters;
+using Find2Me.Resources;
 using Find2MeWeb.ViewModels;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Find2Me.Services;
+using Find2Me.Infrastructure.ViewModels;
+using System.Globalization;
 
 namespace Find2MeWeb.Controllers
 {
     [Internationalization]
     public class AdController : Controller
     {
+        private ApplicationDbContext _dbContext;
         // GET: Ad
         public ActionResult Index()
         {
@@ -27,12 +34,20 @@ namespace Find2MeWeb.Controllers
         // GET: Ad/Create
        // [Internationalization]
         public ActionResult Create()
-        { // Get string from strongly typed localzation resources
-            var vm = new FullViewModel { CreateAd = Strings.CreateAd ,LocalisedString = Strings.SomeLocalisedString};
+        {
+            _dbContext = new ApplicationDbContext();
+            UserAdService userAdService = new UserAdService(_dbContext);
+            var userAdList = new List<UserAdVM>();
 
+            var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_dbContext));
+            var currentUser = manager.FindById(User.Identity.GetUserId());
 
-            return View(vm);
-            //return View();
+            if (currentUser != null)
+            {
+                userAdList = userAdService.GetAllUserAds(currentUser.UserName);
+            }
+
+            return View(userAdList);
         }
 
         // POST: Ad/Create
@@ -41,9 +56,19 @@ namespace Find2MeWeb.Controllers
         {
             try
             {
-                // TODO: Add insert logic here
+                _dbContext = new ApplicationDbContext();
+                UserAdService userAdService = new UserAdService(_dbContext);
 
-                return RedirectToAction("Index");
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_dbContext));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+
+                userAdService.CreateAd(new UserAdVM
+                {
+                    CreatedOn = DateTime.UtcNow,
+                    UserId = User.Identity.GetUserName()
+                });
+
+                return RedirectToAction("Create");
             }
             catch
             {

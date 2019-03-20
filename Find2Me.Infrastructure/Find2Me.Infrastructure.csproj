@@ -67,6 +67,7 @@
     <Compile Include="DbModels\Currency.cs" />
     <Compile Include="DbModels\Logs.cs" />
     <Compile Include="DbModels\StoredProcedureResponses.cs" />
+    <Compile Include="DbModels\UserAd.cs" />
     <Compile Include="DbModels\UserFollower.cs" />
     <Compile Include="EmailHelperService.cs" />
     <Compile Include="Enums.cs" />
@@ -112,6 +113,10 @@
     <Compile Include="Migrations\201811011553187_sp_delete_userprofile_data.Designer.cs">
       <DependentUpon>201811011553187_sp_delete_userprofile_data.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201903180023579_userad_tbl.cs" />
+    <Compile Include="Migrations\201903180023579_userad_tbl.Designer.cs">
+      <DependentUpon>201903180023579_userad_tbl.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OAuthReponses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -123,6 +128,7 @@
     </Compile>
     <Compile Include="UtilityExtension.cs" />
     <Compile Include="ViewModels\CurrencyVM.cs" />
+    <Compile Include="ViewModels\UserAdVM.cs" />
     <Compile Include="ViewModels\UserFollowerVM.cs" />
     <Compile Include="ViewModels\UserProfileVM.cs" />
   </ItemGroup>
@@ -133,7 +139,12 @@
     <Content Include="SqlScripts\2018-11-01_DeleteUserProfileData.sql" />
     <Content Include="SqlScripts\2018-10-18_GetFollowerCount.sql" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\Find2Me.Resources\Find2Me.Resources.csproj">
+      <Project>{112f436a-5390-4815-8f1f-0fb3bcfdc57e}</Project>
+      <Name>Find2Me.Resources</Name>
+    </ProjectReference>
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201809221312434_db_init_identity_tables.resx">
       <DependentUpon>201809221312434_db_init_identity_tables.cs</DependentUpon>
@@ -164,6 +175,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201811011553187_sp_delete_userprofile_data.resx">
       <DependentUpon>201811011553187_sp_delete_userprofile_data.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201903180023579_userad_tbl.resx">
+      <DependentUpon>201903180023579_userad_tbl.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlScripts\SqlScripts.resx">
       <Generator>ResXFileCodeGenerator</Generator>

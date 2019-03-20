@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="LogsRepository.cs" />
+    <Compile Include="UserAdRepository.cs" />
     <Compile Include="UserFollowerRepository.cs" />
     <Compile Include="UserProfileImageDataRepository.cs" />
     <Compile Include="ApplicationUserRepository.cs" />

@@ -13,40 +13,40 @@ namespace Find2Me.Infrastructure.ViewModels
     {
         public string Id { get; set; }
 
-        [Display(Name = "Email address")]
-        [Required(ErrorMessage ="Please provide a valid email address.")]
-        [EmailAddress(ErrorMessage = "Please provide a valid email address.")]
-        [DataType(DataType.EmailAddress, ErrorMessage = "Please provide a valid email address.")]
+        [Display(Name = "EmailAddress", ResourceType =typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName ="EmailRequired")]
+        [EmailAddress(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "EmailRequired")]
+        [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "EmailRequired")]
         public string Email { get; set; }
 
         public string UserName { get; set; }
 
-        [Display(Name = "Fullname")]
-        [Required(ErrorMessage = "Please provide a valid full name.")]
-        [MinLength(2, ErrorMessage = "Full name should contain minimum 2 characters.")]
+        [Display(Name = "Fullname", ResourceType = typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "FullNameRequired")]
+        [RegularExpression(@"^((\b[a-zA-Z]{2,40}\b)\s*){2,}$", ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "FullNameRegex")]
         public string FullName { get; set; }
 
-        [Display(Name = "Year of birth")]
-        [Required(ErrorMessage = "Please provide a valid year of birth.")]
+        [Display(Name = "YearOfBirth", ResourceType = typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "YearOfBirthRequired")]
         public int YearOfBirth { get; set; }
 
-        [Display(Name = "Sex")]
-        [Required(ErrorMessage = "Please provide a valid sex.")]
+        [Display(Name = "Sex", ResourceType = typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "SexRequired")]
         public _EnSex Sex { get; set; }
 
         public CurrencyVM Currency { get; set; }
-        [Display(Name = "Preferred currency")]
-        [Required(ErrorMessage = "Please provide a valid currency.")]
+        [Display(Name = "PreferredCurrency", ResourceType = typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "PreferredCurrencyRequired")]
         public string PreferredCurrency { get; set; }
 
-        [Display(Name = "Preferred language")]
-        [Required(ErrorMessage = "Please provide a valid language.")]
+        [Display(Name = "PreferredLanguage", ResourceType = typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "PreferredLanguageRequired")]
         public string PreferredLanguage { get; set; }
 
         //Username for URL
-        [Display(Name = "Username")]
-        [Required(ErrorMessage = "Please provide a valid username.")]
-        [MinLength(5, ErrorMessage = "Username must contains atleast 5 characters.")]
+        [Display(Name = "Username", ResourceType = typeof(Find2Me.Resources.Strings))]
+        [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "UsernameRequired")]
+        [MinLength(5, ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "UsernameMinLength")]
         public string UrlUsername { get; set; }
 
         public bool EmailConfirmed { get; set; }

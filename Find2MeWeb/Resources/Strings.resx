@@ -117,10 +117,64 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ConfirmationEmailSubject" xml:space="preserve">
+    <value>Confirm your Email Address - Find2Me</value>
+  </data>
   <data name="CreateAd" xml:space="preserve">
     <value>Here you can create add</value>
   </data>
+  <data name="ProfileAdsOnline" xml:space="preserve">
+    <value>ads online</value>
+  </data>
+  <data name="ProfileFindingsCompleted" xml:space="preserve">
+    <value>findings completed</value>
+  </data>
+  <data name="ProfileFollowers" xml:space="preserve">
+    <value>followers</value>
+  </data>
+  <data name="ProfileFollowMe" xml:space="preserve">
+    <value>Follow me</value>
+  </data>
+  <data name="ProfilePrivateMessage" xml:space="preserve">
+    <value>PRIVATE MESSAGE</value>
+  </data>
+  <data name="ProfileSeeThemHere" xml:space="preserve">
+    <value>see them here</value>
+  </data>
+  <data name="ProfileSince" xml:space="preserve">
+    <value>has been here since</value>
+  </data>
+  <data name="ProfileUnFollow" xml:space="preserve">
+    <value>Un Follow</value>
+  </data>
   <data name="SomeLocalisedString" xml:space="preserve">
     <value>This English</value>
+  </data>
+  <data name="ProfileConfirmationEmailInfoText" xml:space="preserve">
+    <value>A email confirmation link is sent to the provided email address via email. Please confirm your email address.</value>
+  </data>
+  <data name="ProfileConfirmationEmailInfoText2" xml:space="preserve">
+    <value>Please confirm your email address. An email has been sent to you.</value>
+  </data>
+  <data name="ProfileDeleteProfile" xml:space="preserve">
+    <value>Delete profile</value>
+  </data>
+  <data name="ProfileEdit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="ProfileFollow" xml:space="preserve">
+    <value>Follow</value>
+  </data>
+  <data name="ProfileRegisteredEmailInfoText" xml:space="preserve">
+    <value>Your account is registered with this email address, through </value>
+  </data>
+  <data name="ProfileResendEmail" xml:space="preserve">
+    <value>Resend</value>
+  </data>
+  <data name="ProfileUpdateProfile" xml:space="preserve">
+    <value>Update profile</value>
+  </data>
+  <data name="ProfileYourAds" xml:space="preserve">
+    <value>YOUR ADS</value>
   </data>
 </root>

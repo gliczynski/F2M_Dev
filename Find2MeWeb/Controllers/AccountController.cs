@@ -14,6 +14,10 @@ using Find2Me.Infrastructure;
 using Find2Me.Services;
 using System.Collections.Generic;
 using Find2MeWeb.ActionFilters;
+using Find2Me.Resources;
+using System.Threading;
+using System.IO;
+using System.Web.Routing;
 
 namespace Find2MeWeb.Controllers
 {
@@ -207,7 +211,9 @@ namespace Find2MeWeb.Controllers
 
             string code = await UserManager.GenerateEmailConfirmationTokenAsync(currentUserId);
             var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = currentUserId, code = code }, protocol: Request.Url.Scheme);
-            bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(email, callbackUrl);
+            
+            string langCode = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+            bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(email, callbackUrl, Strings.ConfirmationEmailSubject, langCode);
 
             if (Request.IsAjaxRequest())
             {
@@ -590,6 +596,14 @@ namespace Find2MeWeb.Controllers
 
             //Add User Action Log
             new LogsSerivce().RunAddLogTask(_LogActionType.UserLogin, User.Identity.GetUserId());
+
+            #region Set user preferred language
+            if (User != null && User.Identity != null && User.Identity.GetClaim("PreferredLanguage") != null)
+            {
+                var userPreferredLanguageCode = User.Identity.GetClaim("PreferredLanguage").Value;
+                returnUrl = returnUrl.Replace(returnUrl.Substring(returnUrl.IndexOf('/') + 1, 2), userPreferredLanguageCode);
+            }
+            #endregion
 
             return RedirectToLocal(returnUrl);
         }

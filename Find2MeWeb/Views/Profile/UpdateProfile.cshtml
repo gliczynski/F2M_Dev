@@ -22,8 +22,8 @@
         <div class="row">
             <div class="col-12 d-flex justify-content-md-between align-items-center">
                 <div>
-                    <h1 class="d-inline-flex pr-3 mb-0">Your profile</h1>
-                    <small class="text-muted d-inline-flex">You've been here since @Model.CreatedOn.ToString("MMMM yyyy")</small>
+                    <h1 class="d-inline-flex pr-3 mb-0">@Strings.ProfileHeaderText</h1>
+                    <small class="text-muted d-inline-flex">@Strings.ProfileSince @Model.CreatedOn.ToString("MMMM yyyy")</small>
                 </div>
             </div>
         </div>
@@ -57,23 +57,22 @@
                     <div class="w-100"></div>
 
                     <div class="col-12 d-flex justify-content-center mt-2">
-                        <button class="btn btn-default" id="edit_image_btn" role="button">Edit</button>
+                        <button class="btn btn-default" id="edit_image_btn" role="button">@Strings.ProfileEdit</button>
                     </div>
 
                     <div class="w-100 mb-4"></div>
 
                     <div class="col-12 d-inline-flex justify-content-center mt-5">
                         <div class="row">
-                            <div class="col text-center"><h3><strong data-control="follower-count"></strong></h3>Followers</div>
-                            <div class="col text-center"><h3><strong data-control="followed-count"></strong></h3>Follow</div>
-
+                            <div class="col text-center"><h3><strong data-control="follower-count"></strong></h3>@Strings.ProfileFollowers</div>
+                            <div class="col text-center"><h3><strong data-control="followed-count"></strong></h3>@Strings.ProfileFollow</div>
                         </div>
                     </div>
 
                     <div class="w-100"></div>
 
                     <div class="col-12 d-inline-flex justify-content-center mt-5">
-                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteprofileModal">Delete profile</button>
+                        <button class="btn btn-danger" data-toggle="modal" data-target="#deleteprofileModal">@Strings.ProfileDeleteProfile</button>
                     </div>
 
                     <div class="w-100 d-md-none d-lg-none d-xl-none"></div>
@@ -98,7 +97,7 @@
 
                     <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
                         <small class="form-text text-muted">
-                            A email confirmation link is sent to the provided email address via email. Please confirm your email address.
+                            @Strings.ProfileConfirmationEmailInfoText
                         </small>
                     </div>
 
@@ -110,7 +109,7 @@
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 <small id="headlineHelpBlock" class="form-text text-muted">
-                                    Your account is registered with this email address, through @ExternalProviderType
+                                    @Strings.ProfileRegisteredEmailInfoText @ExternalProviderType
                                 </small>
                             }
                             else
@@ -118,7 +117,7 @@
                                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
                                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
                                 <small id="headlineHelpBlock" class="form-text text-muted">
-                                    Please confirm your email address. An email has been sent to you. <a id="send_email_confirm_btn" href="javascript:void(0);">Resend</a>
+                                    @Strings.ProfileConfirmationEmailInfoText2 <a id="send_email_confirm_btn" href="javascript:void(0);">@Strings.ProfileResendEmail</a>
                                 </small>
                             }
 
@@ -129,7 +128,7 @@
                     <div class="form-group row  mt-3">
                         @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "col-12 col-xl-3 col-form-label" })
                         <div class="col">
-                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your full name" } })
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = Strings.ProfileFullnamePlaceholder } })
                             <small id="fullnameHelpBlock" class="form-text text-muted">
 
                             </small>
@@ -139,12 +138,12 @@
 
                     <div class="form-group row  mt-3">
                         <label for="UrlUsername" class="col-12 col-xl-3 col-form-label">
-                            Username
-                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="valid_username_icon" style="display: none;"></i>
-                            <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="Username is invalid." id="invalid_username_icon" style="display: none;"></i>
+                            @Strings.Username
+                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameValidText" id="valid_username_icon" style="display: none;"></i>
+                            <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameInvalidText" id="invalid_username_icon" style="display: none;"></i>
                         </label>
                         <div class="col">
-                            @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter a username" } })
+                            @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = Strings.ProfileEnterUsernamePlaceHolder } })
                             <small id="fullnameHelpBlock" class="form-text text-muted">
 
                             </small>
@@ -156,9 +155,9 @@
                     </div>
 
                     <div class="form-group row mt-5">
-                        <label for="YearOfBirth" class="col-12 col-xl-3 col-form-label">Year of birth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
+                        <label for="YearOfBirth" class="col-12 col-xl-3 col-form-label">@Strings.YearOfBirth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
                         <div class="col col-md-4">
-                            @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), "Select", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
                             <small id="birthHelpBlock" class="form-text text-muted">
 
                             </small>
@@ -171,11 +170,11 @@
                         <div class="col">
                             <div class="form-check">
                                 @Html.RadioButtonFor(model => model.Sex, _EnSex.Female, new { @class = "form-check-input", id = "radio_sex_female" })
-                                @Html.Label("radio_sex_female", "Female", new { @class = "form-check-label" })
+                                @Html.Label("radio_sex_female", Strings.Female, new { @class = "form-check-label" })
                             </div>
                             <div class="form-check">
                                 @Html.RadioButtonFor(model => model.Sex, _EnSex.Male, new { @class = "form-check-input", id = "radio_sex_male" })
-                                @Html.Label("radio_sex_male", "Male", new { @class = "form-check-label" })
+                                @Html.Label("radio_sex_male", Strings.Male, new { @class = "form-check-label" })
                             </div>
                             @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
                         </div>
@@ -184,7 +183,7 @@
                     <div class="form-group row mt-5">
                         @Html.LabelFor(model => model.PreferredCurrency, htmlAttributes: new { @class = "col-12 col-xl-3 col-form-label" })
                         <div class="col col-md-4">
-                            @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), "Select", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), Strings.Lookup_Select, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.PreferredCurrency, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -192,7 +191,7 @@
                     <div class="form-group row mt-5">
                         @Html.LabelFor(model => model.PreferredLanguage, htmlAttributes: new { @class = "col-12 col-xl-3 col-form-label" })
                         <div class="col col-md-4">
-                            @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), "Select", new { @class = "form-control" })
+                            @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
                             @Html.ValidationMessageFor(model => model.PreferredLanguage, "", new { @class = "text-danger" })
                         </div>
                     </div>
@@ -200,7 +199,7 @@
                     <hr class="mt-5" />
 
                     <div class="form-group row d-flex justify-content-center">
-                        <input type="submit" class="btn btn-dark" role="button" value="Update profile" />
+                        <input type="submit" class="btn btn-dark" role="button" value="@Strings.ProfileUpdateProfile" />
                     </div>
                 }
 
@@ -215,8 +214,8 @@
 
         <nav id="tabs" class="mt-5">
             <div class="nav navi" role="tablist">
-                <a class="flex-sm-fill text-sm-center items lead active ml-3 ml-sm-3" id="nav-ad-tab" data-toggle="tab" href="#nav-ads" role="tab" aria-controls="nav-ads" aria-selected="true">YOUR ADS</a>
-                <a class="flex-sm-fill text-sm-center items lead ml-0 text-muted" id="nav-pmsg-tab" data-toggle="tab" href="#nav-pmsg" role="tab" aria-controls="nav-pmsg" aria-selected="false">PRIVATE MESSAGE</a>
+                <a class="flex-sm-fill text-sm-center items lead active ml-3 ml-sm-3" id="nav-ad-tab" data-toggle="tab" href="#nav-ads" role="tab" aria-controls="nav-ads" aria-selected="true">@Strings.ProfileYourAds</a>
+                <a class="flex-sm-fill text-sm-center items lead ml-0 text-muted" id="nav-pmsg-tab" data-toggle="tab" href="#nav-pmsg" role="tab" aria-controls="nav-pmsg" aria-selected="false">@Strings.ProfilePrivateMessage</a>
             </div>
         </nav>
 
@@ -479,7 +478,7 @@
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="modalLabel">Edit Profile Image</h4>
+                <h4 class="modal-title" id="modalLabel">@Strings.Step1_UploadImageModalHeading</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -493,7 +492,7 @@
                         <div class="row">
                             <div class="col col-8">
                                 <p>
-                                    <strong>Original Image</strong>
+                                    <strong>@Strings.Step1_OriginalImage</strong>
                                 </p>
                                 <div class="cropper-container" style="height: 400px;">
                                     <img id="cropper_image" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageOriginal" title="@Model.FullName" alt="@Model.FullName" data-parent-source="@_FileSavingPaths.ProfileImage/" />
@@ -501,7 +500,7 @@
                             </div>
                             <div class="col col-4">
                                 <p>
-                                    <strong>Crop View</strong>
+                                    <strong>@Strings.Step1_CropView</strong>
                                 </p>
                                 <div class="preview" id="crop_preview">
                                 </div>
@@ -518,7 +517,7 @@
                 else
                 {
                     <div class="alert alert-danger" role="alert">
-                        <i class="fa fa-info-circle fa-fw"></i> You haven't uploaded any profile picture yet. Please upload a picture first!
+                        <i class="fa fa-info-circle fa-fw"></i> @Strings.Step1_ImageNotUploadedAlertText
                     </div>
                 }
 
@@ -535,14 +534,14 @@
                 {
                     @Html.AntiForgeryToken()
                     <i class="fa fa-spinner fa-spin fa-lg fa-fw" id="image_upload_loader" style="display:none;"></i>
-                    <button type="button" class="btn btn-primary" id="upload_image_btn">Upload</button>
+                    <button type="button" class="btn btn-primary" id="upload_image_btn">@Strings.ProfileImageCrop_UploadBtnText</button>
                     <input type="file" id="profile_picture_input" name="profileimage" accept="image/*" style="display: none;">
                 }
 
-                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">@Strings.Step1_CropperModalCancelBtn</button>
                 @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
                 {
-                    <button type="button" class="btn btn-dark" id="crop">Update</button>
+                    <button type="button" class="btn btn-dark" id="crop">@Strings.Step1_CropperModalUpdateBtn</button>
                 }
             </div>
         </div>

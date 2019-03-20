@@ -1,6 +1,6 @@
 ﻿using Find2Me.Infrastructure;
 using Find2MeWeb.ActionFilters;
-using Find2MeWeb.Resources;
+using Find2Me.Resources;
 using Find2MeWeb.ViewModels;
 using Microsoft.AspNet.Identity;
 using System;

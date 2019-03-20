@@ -108,5 +108,6 @@ namespace Find2Me.Infrastructure
         public static string ExternalProviderType = "ExternalProviderType";
         public static string ExternalProviderAccessToken = "ExternalProviderAccessToken";
         public static string HasCompletedProfileWizard = "HasCompletedProfileWizard";
+        public static string PreferredLanguage = "PreferredLanguage";
     }
 }

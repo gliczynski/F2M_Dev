@@ -1,4 +1,5 @@
-﻿@model Find2MeWeb.ViewModels.FullViewModel
+﻿@model IEnumerable<Find2Me.Infrastructure.ViewModels.UserAdVM>
+@using System.Globalization
 
 @{
     ViewBag.Title = "Create";
@@ -8,8 +9,45 @@
 
 <div>
 
-    
-  @Html.Raw(@Model.CreateAd)
+    @using (Html.BeginForm("Create", "Ad"))
+    {
+        <input type="submit" value="Add Timestamp" class="btn btn-success" />
+    }
+    <br />
+    <br />
 
-<p>@Model.CreationDateTime.ToString()</p>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>System Date (UTC)</th>
+                <th>Client Date (Your time zone)</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@item.CreatedOn.ToString("yyyy/MM/dd h:mm tt", CultureInfo.InvariantCulture)</th>
+                    <td data-utcTime="@item.CreatedOn.ToString(CultureInfo.InvariantCulture)" class="td-client-time"></td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    @section Scripts{
+        <script src="~/Scripts/moment.min.js"></script>
+        <script>
+
+            $('.td-client-time').each(function () {
+                var utcTimestamp = $(this).data('utctime') + ' UTC';
+                console.log(utcTimestamp);
+                $(this).html(moment(utcTimestamp).format('YYYY/MM/DD h:mm a'));
+            });
+
+        @*var localTime = new Date('@Model.CreationDateTime.ToString("o")');
+        document.getElementById('span-localtime').innerText = localTime;*@
+
+        </script>
+    }
+
 </div>

@@ -16,6 +16,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ResourcesForFuture", "Resou
 		Links.txt = Links.txt
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Find2Me.Resources", "Find2Me.Resources\Find2Me.Resources.csproj", "{112F436A-5390-4815-8F1F-0FB3BCFDC57E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -38,6 +40,10 @@ Global
 		{8C7A09DD-453C-497F-8124-9FC84E2FEC27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8C7A09DD-453C-497F-8124-9FC84E2FEC27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8C7A09DD-453C-497F-8124-9FC84E2FEC27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{112F436A-5390-4815-8F1F-0FB3BCFDC57E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{112F436A-5390-4815-8F1F-0FB3BCFDC57E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{112F436A-5390-4815-8F1F-0FB3BCFDC57E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{112F436A-5390-4815-8F1F-0FB3BCFDC57E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

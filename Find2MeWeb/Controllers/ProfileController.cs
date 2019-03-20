@@ -3,6 +3,7 @@ using Find2Me.Infrastructure.DbModels;
 using Find2Me.Infrastructure.ViewModels;
 using Find2Me.Services;
 using Find2MeWeb.ActionFilters;
+using Find2Me.Resources;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
@@ -12,6 +13,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Claims;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
@@ -27,7 +29,7 @@ namespace Find2MeWeb.Controllers
         [ProfileWizardCompletionCheck]
         public ActionResult Index([Bind(Prefix = "id")] string username)
         {
-
+            
             _dbContext = new ApplicationDbContext();
             //Update the User Profile Details
             UserAccountService userAccountService = new UserAccountService(_dbContext);
@@ -144,6 +146,15 @@ namespace Find2MeWeb.Controllers
                         newClaimsList.Add(new Claim(_ClaimTypes.UrlUserName, userProfileVM.UrlUsername));
                     }
 
+                    //Update preferred language code if changed
+                    var preferredLangClaim = User.Identity.GetClaim(_ClaimTypes.PreferredLanguage);
+                    if (!preferredLangClaim.Value.ToLower().Equals(userProfileVM.PreferredLanguage))
+                    {
+                        UserManager.RemoveClaim(userProfileVM.Id, preferredLangClaim);
+                        UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.PreferredLanguage, userProfileVM.PreferredLanguage));
+                        newClaimsList.Add(new Claim(_ClaimTypes.PreferredLanguage, userProfileVM.PreferredLanguage));
+                    }
+
                     //Update Current Identity Claim and Login User Again
                     if (newClaimsList.Count > 0)
                     {
@@ -152,9 +163,17 @@ namespace Find2MeWeb.Controllers
                 }
 
                 //User update was successfull
+                #region Set user preferred language
+                string userPreferredLanguageCode = "en";
+                if (User != null && User.Identity != null && User.Identity.GetClaim("PreferredLanguage") != null)
+                {
+                    userPreferredLanguageCode = User.Identity.GetClaim("PreferredLanguage").Value;
+                }
+                #endregion
+
                 //Now Check If Next button is clicked, goto Step 3
                 //If Back button is clicked, goto Step 1
-                return RedirectToAction("Index", new { id = User.Identity.GetUrlUserName() });
+                return RedirectToAction("Index", new { id = User.Identity.GetUrlUserName(), lang = userPreferredLanguageCode });
             }
             catch (Exception err)
             {
@@ -340,7 +359,10 @@ namespace Find2MeWeb.Controllers
                 }
 
                 UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.HasCompletedProfileWizard, true.ToString()));
+                UserManager.AddClaim(userProfileVM.Id, new Claim(_ClaimTypes.PreferredLanguage, userProfileVM.PreferredLanguage));
+
                 newClaimsList.Add(new Claim(_ClaimTypes.HasCompletedProfileWizard, true.ToString()));
+                newClaimsList.Add(new Claim(_ClaimTypes.PreferredLanguage, userProfileVM.PreferredLanguage));
 
 
                 //Update Current Identity Claim and Login User Again
@@ -363,15 +385,27 @@ namespace Find2MeWeb.Controllers
                     {
                         string code = await UserManager.GenerateEmailConfirmationTokenAsync(userProfileVM.Id);
                         var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = userProfileVM.Id, code = code }, protocol: Request.Url.Scheme);
-                        bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(userProfileVM.Email, callbackUrl);
+
+                        string langCode = Thread.CurrentThread.CurrentCulture.TwoLetterISOLanguageName;
+                        bool isSent = new EmailHelperService().SendEmailConfirmationTokenMail(userProfileVM.Email, callbackUrl, Strings.ConfirmationEmailSubject, langCode);
+
                         TempData["ResponseResult"] = new ResponseResult<object>
                         {
-                            Message = "A email confirmation link is sent to the provided email address via email. Please confirm your email address.",
+                            Message = Strings.Step3_EmailConfirmationLinkText,
                             Success = true
                         };
                     }
 
-                    return RedirectToAction("Step3");
+
+                    #region Set user preferred language
+                    string userPreferredLanguageCode = "en";
+                    if (User != null && User.Identity != null && User.Identity.GetClaim("PreferredLanguage") != null)
+                    {
+                        userPreferredLanguageCode = User.Identity.GetClaim("PreferredLanguage").Value;
+                    }
+                    #endregion
+
+                    return RedirectToAction("Step3", "Profile", new { lang = userPreferredLanguageCode });
                 }
             }
             catch (Exception err)

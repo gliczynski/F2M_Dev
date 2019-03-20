@@ -1,6 +1,7 @@
 ﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM
 @using Microsoft.AspNet.Identity;
 @using Find2Me.Infrastructure;
+@using Find2Me.Resources;
 @{
     ViewBag.Title = "Index";
 }
@@ -13,7 +14,7 @@
                 <div>
                     <input type="hidden" value="@Model.FullName" data-profile="title" />
                     <h1 class="d-inline-flex pr-3 mb-0">@Model.FullName</h1>
-                    <small class="text-muted d-inline-flex">has been here since @Model.CreatedOn.ToString("MMMM yyyy") </small>
+                    <small class="text-muted d-inline-flex">@Strings.ProfileSince @Model.CreatedOn.ToString("MMMM yyyy") </small>
                 </div>
             </div>
         </div>
@@ -27,7 +28,7 @@
 
             @*Page Alerts Partial*@
             @Html.Partial("_PageAlertsPartial")
-
+            
             <!-- Profile image-->
             <div class="col-sm-auto col-md-4 d-inline-flex justify-content-center mt-4">
                 <a class="avatar">
@@ -47,11 +48,11 @@
                 <div class="container mt-4">
                     <dl class="row">
                         <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">13</dt>
-                        <dd class="col-9 col-sm-11 mb-3">ads online <a href="" class="ml-3">see them here</a></dd>
+                        <dd class="col-9 col-sm-11 mb-3">@Strings.ProfileAdsOnline <a href="" class="ml-3">@Strings.ProfileSeeThemHere</a></dd>
                         <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0" data-control="follower-count"></dt>
-                        <dd class="col-9 col-sm-11 mb-3 ">followers</dd>
+                        <dd class="col-9 col-sm-11 mb-3 ">@Strings.ProfileFollowers</dd>
                         <dt class="col-2 col-sm-1 mb-3 text-right ml-0 pl-0 mr-0 pr-0">15</dt>
-                        <dd class="col-9 col-sm-11 mb-3 ">findings completed</dd>
+                        <dd class="col-9 col-sm-11 mb-3 ">@Strings.ProfileFindingsCompleted</dd>
                     </dl>
                     <script>
                     </script>
@@ -81,18 +82,18 @@
                         if (ViewBag.HasUserFollowed)
                         {
                             @Html.Hidden("DoFollow", false)
-                            <button type="submit" class="btn btn-dark" data-button="follow-btn">Un Follow</button>
+                            <button type="submit" class="btn btn-dark" data-button="follow-btn">@Strings.ProfileUnFollow</button>
                         }
                         else
                         {
                             @Html.Hidden("DoFollow", true)
-                            <button type="submit" class="btn btn-dark" data-button="follow-btn">Follow me</button>
+                            <button type="submit" class="btn btn-dark" data-button="follow-btn">@Strings.ProfileFollowMe</button>
                         }
                     }
                 }
                 else
                 {
-                    <button class="btn btn-dark" disabled="disabled">Follow me</button>
+                    <button class="btn btn-dark" disabled="disabled">@Strings.ProfileFollowMe</button>
                 }
             </div>
 
@@ -107,7 +108,7 @@
         <nav id="tabs" class="mt-5">
             <div class="nav navi" role="tablist">
                 <a class="flex-sm-fill text-sm-center items lead active ml-3 ml-sm-3" id="nav-ad-tab" data-toggle="tab" href="#nav-ads" role="tab" aria-controls="nav-ads" aria-selected="true">JOHN DOES ADS</a>
-                <a class="flex-sm-fill text-sm-center items lead ml-0 text-muted" id="nav-pmsg-tab" data-toggle="tab" href="#nav-pmsg" role="tab" aria-controls="nav-pmsg" aria-selected="false">PRIVATE MESSAGE</a>
+                <a class="flex-sm-fill text-sm-center items lead ml-0 text-muted" id="nav-pmsg-tab" data-toggle="tab" href="#nav-pmsg" role="tab" aria-controls="nav-pmsg" aria-selected="false">@Strings.ProfilePrivateMessage</a>
             </div>
         </nav>
 

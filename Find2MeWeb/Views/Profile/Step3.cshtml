@@ -11,7 +11,7 @@
             <div class="col-12 d-flex justify-content-md-between align-items-center">
                 <div>
                     <!-- Headline of the page -->
-                    <h1 class="d-inline-flex pr-3">Profile setup wizard</h1>
+                    <h1 class="d-inline-flex pr-3">@Strings.Wizard_PageHeading</h1>
                 </div>
             </div>
         </div>
@@ -33,15 +33,15 @@
 
                     <div class="col-4 col-xl-2 stepwizard-step">
                         <a href="#step-1" class="btn btn-default btn-circle" disabled="disabled">1</a>
-                        <p>Profile image</p>
+                        <p>@Strings.ProfileWizard_ProfileStep1</p>
                     </div>
                     <div class="col-4 col-xl-2 stepwizard-step">
                         <a href="#step-2" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                        <p>Profile data</p>
+                        <p>@Strings.ProfileWizard_ProfileStep2</p>
                     </div>
                     <div class="col-4 col-xl-2 stepwizard-step ">
                         <a href="#step-3" class="btn btn-dark btn-circle">3</a>
-                        <p>Done</p>
+                        <p>@Strings.ProfileWizard_ProfileStep3</p>
                     </div>
                 </div>
 
@@ -54,7 +54,7 @@
 
                     <div class="col text-center">
                         <p>
-                            <h3><strong>Thank You</strong></h3><br />Your account is now ready.<br /><br />
+                            <h3><strong>@Strings.Step3_ProfileDescriptionText1</strong></h3><br />@Strings.Step3_ProfileDescriptionText2<br /><br />
                         </p>
 
                     </div>
@@ -63,7 +63,7 @@
                     <div class="col text-center">
                         <p>
 
-                            <strong><h3>What would you like to do first?</h3></strong>
+                            <strong><h3>@Strings.Step3_ProfileDescriptionText3</h3></strong>
 
                         </p>
 
@@ -167,8 +167,8 @@
                         <div class="col text-center">
                             <p>
                                 <br /><br />
-                                <a href="" class="mr-5">Go to frontpage</a>
-                                <a href="@Url.Action("Index", "Profile", new { id= User.Identity.GetUrlUserName() })">Go to your profile page</a>
+                                <a href="" class="mr-5">@Strings.Step3_GoToFrontPageLinkTxt</a>
+                                <a href="@Url.Action("Index", "Profile", new { id= User.Identity.GetUrlUserName() })">@Strings.Step3_GoToProfilePageLinkTxt</a>
                             </p>
                         </div>
                     </div>

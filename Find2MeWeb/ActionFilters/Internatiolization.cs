@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Globalization;
 using System.Threading;
+using Find2Me.Infrastructure;
 
 namespace Find2MeWeb.ActionFilters
 {
@@ -33,10 +34,10 @@ namespace Find2MeWeb.ActionFilters
         }
 
         public override void OnActionExecuting(ActionExecutingContext filterContext)
-        {
+        {           
             // Get locale from route values
             string lang = (string)filterContext.RouteData.Values["lang"] ?? _defaultLang;
-
+          
             // If we haven't found appropriate culture - seet default locale then
             if (!_supportedLocales.Contains(lang))
                 lang = _defaultLang;

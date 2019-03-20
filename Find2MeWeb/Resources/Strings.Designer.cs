@@ -22,7 +22,7 @@ namespace Find2MeWeb.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Strings {
+    public class Strings {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace Find2MeWeb.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Find2MeWeb.Resources.Strings", typeof(Strings).Assembly);
@@ -51,7 +51,7 @@ namespace Find2MeWeb.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -61,18 +61,180 @@ namespace Find2MeWeb.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm your Email Address - Find2Me.
+        /// </summary>
+        public static string ConfirmationEmailSubject {
+            get {
+                return ResourceManager.GetString("ConfirmationEmailSubject", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Here you can create add.
         /// </summary>
-        internal static string CreateAd {
+        public static string CreateAd {
             get {
                 return ResourceManager.GetString("CreateAd", resourceCulture);
             }
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ads online.
+        /// </summary>
+        public static string ProfileAdsOnline {
+            get {
+                return ResourceManager.GetString("ProfileAdsOnline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A email confirmation link is sent to the provided email address via email. Please confirm your email address..
+        /// </summary>
+        public static string ProfileConfirmationEmailInfoText {
+            get {
+                return ResourceManager.GetString("ProfileConfirmationEmailInfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please confirm your email address. An email has been sent to you..
+        /// </summary>
+        public static string ProfileConfirmationEmailInfoText2 {
+            get {
+                return ResourceManager.GetString("ProfileConfirmationEmailInfoText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete profile.
+        /// </summary>
+        public static string ProfileDeleteProfile {
+            get {
+                return ResourceManager.GetString("ProfileDeleteProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string ProfileEdit {
+            get {
+                return ResourceManager.GetString("ProfileEdit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to findings completed.
+        /// </summary>
+        public static string ProfileFindingsCompleted {
+            get {
+                return ResourceManager.GetString("ProfileFindingsCompleted", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow.
+        /// </summary>
+        public static string ProfileFollow {
+            get {
+                return ResourceManager.GetString("ProfileFollow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to followers.
+        /// </summary>
+        public static string ProfileFollowers {
+            get {
+                return ResourceManager.GetString("ProfileFollowers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Follow me.
+        /// </summary>
+        public static string ProfileFollowMe {
+            get {
+                return ResourceManager.GetString("ProfileFollowMe", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to PRIVATE MESSAGE.
+        /// </summary>
+        public static string ProfilePrivateMessage {
+            get {
+                return ResourceManager.GetString("ProfilePrivateMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your account is registered with this email address, through .
+        /// </summary>
+        public static string ProfileRegisteredEmailInfoText {
+            get {
+                return ResourceManager.GetString("ProfileRegisteredEmailInfoText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resend.
+        /// </summary>
+        public static string ProfileResendEmail {
+            get {
+                return ResourceManager.GetString("ProfileResendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to see them here.
+        /// </summary>
+        public static string ProfileSeeThemHere {
+            get {
+                return ResourceManager.GetString("ProfileSeeThemHere", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to has been here since.
+        /// </summary>
+        public static string ProfileSince {
+            get {
+                return ResourceManager.GetString("ProfileSince", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Un Follow.
+        /// </summary>
+        public static string ProfileUnFollow {
+            get {
+                return ResourceManager.GetString("ProfileUnFollow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update profile.
+        /// </summary>
+        public static string ProfileUpdateProfile {
+            get {
+                return ResourceManager.GetString("ProfileUpdateProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to YOUR ADS.
+        /// </summary>
+        public static string ProfileYourAds {
+            get {
+                return ResourceManager.GetString("ProfileYourAds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to This English.
         /// </summary>
-        internal static string SomeLocalisedString {
+        public static string SomeLocalisedString {
             get {
                 return ResourceManager.GetString("SomeLocalisedString", resourceCulture);
             }
