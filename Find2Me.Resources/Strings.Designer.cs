@@ -19,7 +19,7 @@ namespace Find2Me.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Strings {
@@ -84,6 +84,51 @@ namespace Find2Me.Resources {
         public static string CreateAd {
             get {
                 return ResourceManager.GetString("CreateAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Close.
+        /// </summary>
+        public static string DeleteProfileModalCloseBtn {
+            get {
+                return ResourceManager.GetString("DeleteProfileModalCloseBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DELETE MY PROFILE.
+        /// </summary>
+        public static string DeleteProfileModalConfirmDeleteBtn {
+            get {
+                return ResourceManager.GetString("DeleteProfileModalConfirmDeleteBtn", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes, i&apos;m sure that i want to delete my profile..
+        /// </summary>
+        public static string DeleteProfileModalConfirmMessage {
+            get {
+                return ResourceManager.GetString("DeleteProfileModalConfirmMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete profile.
+        /// </summary>
+        public static string DeleteProfileModalHeader {
+            get {
+                return ResourceManager.GetString("DeleteProfileModalHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This will delete your profile and can&apos;t be reestablished..
+        /// </summary>
+        public static string DeleteProfileModalMessage {
+            get {
+                return ResourceManager.GetString("DeleteProfileModalMessage", resourceCulture);
             }
         }
         

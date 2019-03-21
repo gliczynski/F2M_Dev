@@ -554,7 +554,7 @@
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="exampleModalLabel">Delete profile</h4>
+                <h4 class="modal-title" id="exampleModalLabel">@Strings.DeleteProfileModalHeader</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -565,18 +565,18 @@
 
                 <div class="modal-body">
                     <p>
-                        This will delete your profile and can't be reestablished.
+                        @Strings.DeleteProfileModalMessage
                     </p>
                     <div class="form-check">
                         @Html.CheckBox("ConfirmDelete", false, new { @class = "form-check-input", reuquired = "required" })
-                        @Html.Label("ConfirmDelete", "Yes, i'm sure that i want to delete my profile.", new { @class = "form-check-label" })
+                        @Html.Label("ConfirmDelete", Strings.DeleteProfileModalConfirmMessage, new { @class = "form-check-label" })
                         @*<input type="checkbox" class="form-check-input" id="exampleCheck1">*@
                         @*<label class="form-check-label" for="exampleCheck1">Yes, i'm sure that i want to delete my profile.</label>*@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-danger">DELETE MY PROFILE</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">@Strings.DeleteProfileModalCloseBtn</button>
+                    <button type="submit" class="btn btn-danger">@Strings.DeleteProfileModalConfirmDeleteBtn</button>
                 </div>
             }
         </div>

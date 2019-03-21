@@ -342,4 +342,19 @@
   <data name="ConfirmationEmailSubject" xml:space="preserve">
     <value>Bekræft din e-mail-adresse - Find2Me</value>
   </data>
+  <data name="DeleteProfileModalCloseBtn" xml:space="preserve">
+    <value>Tæt</value>
+  </data>
+  <data name="DeleteProfileModalConfirmDeleteBtn" xml:space="preserve">
+    <value>Slet min profil</value>
+  </data>
+  <data name="DeleteProfileModalConfirmMessage" xml:space="preserve">
+    <value>Ja, jeg er sikker på, at jeg vil slette min profil.</value>
+  </data>
+  <data name="DeleteProfileModalHeader" xml:space="preserve">
+    <value>Slet profil</value>
+  </data>
+  <data name="DeleteProfileModalMessage" xml:space="preserve">
+    <value>Dette vil slette din profil og kan ikke genoprettes.</value>
+  </data>
 </root>

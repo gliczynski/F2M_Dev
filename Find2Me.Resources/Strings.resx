@@ -342,4 +342,19 @@
   <data name="ProfileImageCrop_UploadBtnText" xml:space="preserve">
     <value>Upload</value>
   </data>
+  <data name="DeleteProfileModalCloseBtn" xml:space="preserve">
+    <value>Close</value>
+  </data>
+  <data name="DeleteProfileModalConfirmDeleteBtn" xml:space="preserve">
+    <value>DELETE MY PROFILE</value>
+  </data>
+  <data name="DeleteProfileModalConfirmMessage" xml:space="preserve">
+    <value>Yes, i'm sure that i want to delete my profile.</value>
+  </data>
+  <data name="DeleteProfileModalHeader" xml:space="preserve">
+    <value>Delete profile</value>
+  </data>
+  <data name="DeleteProfileModalMessage" xml:space="preserve">
+    <value>This will delete your profile and can't be reestablished.</value>
+  </data>
 </root>
