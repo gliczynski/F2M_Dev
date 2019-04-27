@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Find2Me - My ads</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,500|Lato:300,400,700">
+    <link rel="stylesheet" href="/css/font-awesome4/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/magicsuggest.css">
+
+    <style>
+    .greenTxt {
+        color: #28a745;
+    }
+    .grayTxt {
+        color: #5a6268;
+    }
+    .redTxt {
+      color: #c82333;
+    }
+    </style>
+  </head>
+  <body>
+  <div class="qq"></div>
+<div class="container-fluid mb-md-5 nav-background sticky-top">
+    <div class="row">
+        <div class="container">
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <a class="navbar-brand d-lg-none" href="#"><img src="/img/logo@1x.png" width="75%" alt="Find2Me Logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active mr-3">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto ">
+          <li class="nav-item mr-3">
+            <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
+          </li>
+          <li class="nav-item mr-3">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-book fa-1x" aria-hidden="true" style="display: none;"></i> My ads</a>
+          </li>
+          <li class="nav-item dropdown justify-content-end mr-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              John Doe
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown  justify-content-end">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+      </div>
+  </div>
+</div>
+
+  <section class="adlist-section">
+    <div class="container mt-3">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-md-between align-items-center">
+            <div>
+              <h1 class="d-inline-flex pr-3">My Ads</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <hr class="pt-0 mt-0 mb-0"/>
+          </div>
+        </div>
+
+
+
+        <div class="row mt-1">
+          <div class="col-xs-12 col-lg-7 text-left d-flex align-items-center">
+              <p>
+                Here is all your ads<br/>
+                Click on an ad for editing or deletion.
+              </p>
+          </div>
+          <div class="col-xs-12 col-lg-5 mt-2">
+            <div class="form-group row align-items-right">
+              <label for="exampleFormControlSelect1" class="col-sm-4 col-md-4 pt-1 text-right">Sort by:</label>
+              <select class="form-control col-sm-6 col-md-5 col-xl-4" id="exampleFormControlSelect1">
+                <option>Lateste</option>
+                <option>Finder(s) Attached</option>
+                <option>Expired</option>
+                <option>Active ads</option>
+                <option>Has new messages</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="container mt-3">
+            <div class="row">
+              <div class="col-12">
+
+
+
+                <!-- card layout -->
+                <div class="row">
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+
+                    <!-- <div class="card-deck"> -->
+                      <!-- a card -->
+
+                      <div class="card mb-3">
+                        <div class="row no-gutters">
+                          <div class="col-md-6 col-lg-12 col-xl-5">
+                            <img src="img/Thumbnail5@2x.png" width="100%" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-6 col-lg-12 col-xl-7">
+                            <div class="card-body pb-xl-0">
+                              <h4 class="card-title mb-0">Beer bottles with closure tab</h4>
+                              <small>Home & Garten</small>
+                              <div class="row mt-2">
+                                <div class="col-6">
+                                  <small class="text-muted align-top">Reward:</small><br />
+                                  <span class="badge badge-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;19h</span>
+                                  <span class="badge badge-secondary">40.00 €</span>
+
+                                  <!-- <button class="btn btn-secondary expire p-1" data-toggle="popover" data-placement="top" title="Reward ends" data-content="When the time runs out, the reward is no longer rewarded.">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h
+                                  </button>
+                                  <button class="btn btn-secondary reward p-1">100,00 kr.</button> -->
+                                </div>
+                                <div class="col-3">
+                                  <small class="text-muted align-top">Views:</small><br />
+                                  1.312
+                                </div>
+                                <div class="col-3">
+                                  <small class="text-muted align-top">Likes:</small><br />
+                                  2.312
+                                </div>
+                              </div>
+                              <div class="row mt-2">
+                                <div class="col-6">
+                                  <small class="text-muted align-top pb-0">Staus:</small><br />
+                                  <p class="p-0 greenTxt">
+                                    Active
+                                  </p>
+                                  <small class="text-muted align-top pb-0">Messages:</small><br />
+                                  <h4 class="d-flex justify-content-left">
+                                    <span class="badge badge-success">2 new messages</span>
+                                  </h4>
+                                </div>
+                                <div class="col-6">
+
+                                    <small class="text-muted align-top pb-0">Expire:</small><br />
+                                    <p class="p-0">2019-04-30 &nbsp;(23d)</p>
+                                    <small class="text-muted align-top pb-0">Finders attached:</small><br />
+                                    <h4 class="d-flex justify-content-left">
+                                      <span class="badge badge-info">2</span>
+                                    </h4>
+
+
+
+                                </div>
+
+
+                              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- a card end -->
+                    </div>
+
+                  </div>
+
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+
+                    <!-- <div class="card-deck"> -->
+                      <!-- a card -->
+
+                      <div class="card mb-3">
+                        <div class="row no-gutters">
+                          <div class="col-md-6 col-lg-12 col-xl-5">
+                            <img src="img/Thumbnail6@2x.png" width="100%" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-6 col-lg-12 col-xl-7">
+                            <div class="card-body pb-xl-0">
+                              <h4 class="card-title mb-0">Beer bottles with closure tab</h4>
+                              <small>Home & Garten</small>
+                              <div class="row mt-2">
+                                <div class="col-6">
+                                  <small class="text-muted align-top">Reward:</small><br />
+                                  <span class="badge badge-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;19h</span>
+                                  <span class="badge badge-secondary">40.00 €</span>
+
+                                  <!-- <button class="btn btn-secondary expire p-1" data-toggle="popover" data-placement="top" title="Reward ends" data-content="When the time runs out, the reward is no longer rewarded.">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h
+                                  </button>
+                                  <button class="btn btn-secondary reward p-1">100,00 kr.</button> -->
+                                </div>
+                                <div class="col-3">
+                                  <small class="text-muted align-top">Views:</small><br />
+                                  1.312
+                                </div>
+                                <div class="col-3">
+                                  <small class="text-muted align-top">Likes:</small><br />
+                                  2.312
+                                </div>
+                              </div>
+                              <div class="row mt-2">
+                                <div class="col-6">
+                                  <small class="text-muted align-top pb-0">Staus:</small><br />
+                                  <p class="p-0 grayTxt">
+                                    Draft
+                                  </p>
+                                  <small class="text-muted align-top pb-0">Messages:</small><br />
+                                  <h4 class="d-flex justify-content-left">
+                                    <span class="badge badge-success">2 new messages</span>
+                                  </h4>
+                                </div>
+                                <div class="col-6">
+
+                                    <small class="text-muted align-top pb-0">Expire:</small><br />
+                                    <p class="p-0">2019-04-30 &nbsp;(23d)</p>
+                                    <small class="text-muted align-top pb-0">Finders attached:</small><br />
+                                    <h4 class="d-flex justify-content-left">
+                                      <span class="badge badge-info">2</span>
+                                    </h4>
+
+
+
+                                </div>
+
+
+                              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- a card end -->
+                    </div>
+
+                  </div>
+
+                  <div class="col-sm-12 col-md-12 col-lg-6">
+
+                    <!-- <div class="card-deck"> -->
+                      <!-- a card -->
+
+                      <div class="card mb-3">
+                        <div class="row no-gutters">
+                          <div class="col-md-6 col-lg-12 col-xl-5">
+                            <img src="img/Thumbnail3@2x.png" width="100%" class="card-img" alt="...">
+                          </div>
+                          <div class="col-md-6 col-lg-12 col-xl-7">
+                            <div class="card-body pb-xl-0">
+                              <h4 class="card-title mb-0">Beer bottles with closure tab</h4>
+                              <small>Home & Garten</small>
+                              <div class="row mt-2">
+                                <div class="col-6">
+                                  <small class="text-muted align-top">Reward:</small><br />
+                                  <span class="badge badge-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;19h</span>
+                                  <span class="badge badge-secondary">40.00 €</span>
+
+                                  <!-- <button class="btn btn-secondary expire p-1" data-toggle="popover" data-placement="top" title="Reward ends" data-content="When the time runs out, the reward is no longer rewarded.">
+                                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h
+                                  </button>
+                                  <button class="btn btn-secondary reward p-1">100,00 kr.</button> -->
+                                </div>
+                                <div class="col-3">
+                                  <small class="text-muted align-top">Views:</small><br />
+                                  1.312
+                                </div>
+                                <div class="col-3">
+                                  <small class="text-muted align-top">Likes:</small><br />
+                                  2.312
+                                </div>
+                              </div>
+                              <div class="row mt-2">
+                                <div class="col-6">
+                                  <small class="text-muted align-top pb-0">Staus:</small><br />
+                                  <p class="p-0 redTxt">
+                                    Expired &nbsp;<a href="">(renew)</a>
+                                  </p>
+                                  <small class="text-muted align-top pb-0">Messages:</small><br />
+                                  <p class="d-flex justify-content-left p-0 m-0">
+                                    No messages
+                                  </p>
+                                </div>
+                                <div class="col-6">
+
+                                    <small class="text-muted align-top pb-0">Expired:</small><br />
+                                    <p class="p-0">2019-04-01</p>
+                                    <small class="text-muted align-top pb-0">Finders attached:</small><br />
+                                    <h4 class="d-flex justify-content-left p-0">
+                                      <span class="badge badge-info">5</span>
+                                    </h4>
+
+
+
+                                </div>
+
+
+                              <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- a card end -->
+                    </div>
+
+                  </div>
+
+
+
+              <!-- </div> <!-- Card deck -->
+            </div>
+
+    </div> <!-- container -->
+  </section><!-- adwizard-section -->
+
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+  </div>
+</section>
+<style>
+footer { background-color: rgba(0,0,0,.03); border-top: 1px solid #979797;border-bottom: 1px solid #979797; }
+footer a { color: #212529; line-height: 2rem}
+</style>
+<footer class="mt-5">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col">
+        <h6>Categories</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Fashion</a></small></li>
+          <li><small><a href="">Electronics</a></small></li>
+          <li><small><a href="">Collectibles & Art</a></small></li>
+          <li><small><a href="">Home & Garden</a></small></li>
+          <li><small><a href="">Sporting Goods</a></small></li>
+          <li><small><a href="">Motors</a></small></li>
+          <li><small><a href="">Relation</a></small></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Relations</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Bla Bla</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Make Mooney With Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+        </ul>
+        <h6 class="mt-3">Find With Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+
+        </ul>
+        <h6 class="mt-3">Find2Me Agent Service</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Let Us Help You</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Your Account</a></small></li>
+          <li><small><a href="">Your Ads</a></small></li>
+          <li><small><a href="">Your connection and rewards</a></small></li>
+
+        </ul>
+        <h6 class="mt-3">Get To Know Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">About Find2Me</a></small></li>
+          <li><small><a href="">Contact</a></small></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</footer>
+<div class="container mt-3 mb-3">
+  <div class="row justify-content-sm-center">
+    <div class="col-md-auto">
+      <small>Conditions of Use</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Privacy Notice</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Cookies</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Copyright © 2017, find2me.org  All Rights Reserved.</small>
+    </div>
+  </div>
+</div>
+<!--
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/js/magicsuggest.js"></script>
+
+<script>
+$(function() {
+    $('#inputTags').magicSuggest({
+      placeholder: 'Select or create your tags',
+      allowFreeEntries: true,
+      autoSelect: true,
+      hideTrigger: true,
+      maxSuggestions: 10,
+      minChars: 2,
+      queryParam: 'q',
+      infoMsgCls: 'No tag found! You may create it',
+      data: function(q){
+        var e = q || '', r=[], c = ['Paris', 'New York', 'Gotham'];
+        for(var i=0; i<c.length; i++){
+          if(c[i].toLowerCase().indexOf(e.toLowerCase()) > -1)
+            r.push({id: i, name: c[i]});
+        }
+        return r;},
+      resultsField: 'cities',
+      typeDelay: 200,
+      useTabKey: true,
+      useCommaKey: true,
+      useZebraStyle: true
+
+    });
+});
+
+</script> -->
+</body>
+</html>

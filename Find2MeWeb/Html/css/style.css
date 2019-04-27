@@ -91,7 +91,7 @@ h6 {
 
 }
 
-//Extra large devices (large desktops, 75em and up)
+// Extra large devices (large desktops, 75em and up)
 @media (min-width: 75em) {
     html, body
 
@@ -153,7 +153,7 @@ h6 {
 Navigation
 
 */
-nav.navbar a, input, select {
+nav.navbar a, input, select, textarea {
     font-family: 'Lato light', sans-serif !important;
 }
 
@@ -178,7 +178,7 @@ hr {
 
 /*
 
-Ad section 
+Ad section
 
 */
 .ad-section a.avatar {
@@ -194,7 +194,7 @@ Ad section
     flex: 0 0 auto;
     overflow: hidden;
     position: relative;
-    width: 30px;
+    width: 30;
     height: 30px;
 }
 
@@ -265,8 +265,7 @@ button.btn.reward {
     height: 100%;
 }
 
-
-.addetail-section a.avatar {
+a.avatar {
     background-color: #fafafa;
     border-radius: 50%;
     -webkit-box-sizing: border-box;
@@ -284,13 +283,14 @@ button.btn.reward {
 }
 
 @media (max-width: 575px) {
-    .addetail-section a.avatar {
+    a.avatar {
         width: 45px;
         height: 45px;
     }
 }
 
-.addetail-section a img {
+.addetail-section a img,
+.adlist a img {
     width: 100%;
     height: 100%;
 }
@@ -349,11 +349,6 @@ button.btn.reward {
     border-color: #ccc;
 }
 
-.stepwizard-step .btn-circle {
-    border-radius: 100% !important;
-    background-image: none;
-}
-
 .stepwizard-row:before {
     top: 14px;
     bottom: 0;
@@ -382,8 +377,7 @@ button.btn.reward {
 }
 
 /* registration wizard */
-.regwizard-section label .fa.fa-check-circle.green,
-.profile-section label .fa.fa-check-circle.green {
+.regwizard-section label .fa.fa-check-circle.green {
     position: absolute;
     display: inline;
     right: 0px;
@@ -391,14 +385,19 @@ button.btn.reward {
     color: forestgreen;
 }
 
-.regwizard-section label .fa.fa-times-circle.red,
-.profile-section label .fa.fa-times-circle.red {
+.regwizard-section label .fa.fa-times-circle.red {
     position: absolute;
     display: inline;
     right: 0px;
     top: 10px;
     color: red;
     display: none;
+}
+
+/* Ad wizard */
+.adwizard-section .jumbotron {
+  background-color: #fff;
+  border: 1px solid rgba(0,0,87,0.4);
 }
 
 
@@ -433,7 +432,7 @@ button.btn.reward {
     color: #000;
 }
 
-#tabs .items.active, #tabs .items.active.text-muted  {
+#tabs .items.active, #tabs .items.active.text-mutedï¿½ {
     font-weight: 800;
 }
 
@@ -456,7 +455,7 @@ button.btn.reward {
             text-decoration: none;
         }
 
-        #tabs .navi .items.active, #tabs .navi .items.active.text-muted  {
+        #tabs .navi .items.active, #tabs .navi .items.active.text-mutedï¿½ {
             border-bottom: 1px solid #34495E;
             padding-bottom: 5px;
             font-weight: 600;
@@ -466,7 +465,6 @@ button.btn.reward {
 #loginModal a.btn {
     color: white;
 }
-
 #msg .tread-item {
 }
 
@@ -531,16 +529,4 @@ footer {
     .qq:before {
         content: "xl (min-width: 1200px)"
     }
-}
-
-/***************Form Validation ***************/
-.field-validation-error {
-    width: 100%;
-    margin-top: .25rem;
-    font-size: 80%;
-    color: #dc3545;
-}
-
-.input-validation-error {
-    border-color: #dc3545;
 }

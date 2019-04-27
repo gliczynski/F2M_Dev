@@ -1,0 +1,440 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <title>Find2Me - Ad wizard step 2</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css" integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Kanit:400,500|Lato:300,400,700">
+    <link rel="stylesheet" href="/css/font-awesome4/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="/css/magicsuggest.css">
+
+    <style>
+
+
+    </style>
+  </head>
+  <body>
+  <div class="qq"></div>
+<div class="container-fluid mb-md-5 nav-background sticky-top">
+    <div class="row">
+        <div class="container">
+
+
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+      <a class="navbar-brand d-lg-none" href="#"><img src="/img/logo@1x.png" width="75%" alt="Find2Me Logo"></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active mr-3">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-plus-square-o fa-1x" aria-hidden="true" style="display: none;"></i> Create Ad</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-item nav-link" href="#"><i class="fa fa-compass fa-1x" aria-hidden="true" style="display: none;"></i> Explorer</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto ">
+          <li class="nav-item mr-3">
+            <a class="nav-item nav-link" href="#"><i class="fa fa fa-bell-o fa-1x" aria-hidden="true" style="display: none;"></i> Notification</a>
+          </li>
+          <li class="nav-item dropdown justify-content-end mr-3">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              John Doe
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+          <li class="nav-item dropdown  justify-content-end">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Menu
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+      </div>
+  </div>
+</div>
+
+  <section class="adwizard-section">
+    <div class="container mt-3">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-md-between align-items-center">
+            <div>
+              <h1 class="d-inline-flex pr-3">New ad</h1>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col">
+              <hr class="pt-0 mt-0 mb-0"/>
+          </div>
+        </div>
+<style media="screen">
+.stepwizard-step p {
+  margin-top: 10px;
+}
+.stepwizard-row {
+  display: table-row;
+}
+.stepwizard {
+  display: table;
+  width: 75%;
+  position: relative;
+}
+.stepwizard-step a[disabled] {
+  opacity: 1 !important;
+  filter: alpha(opacity=100) !important;
+  background-color: #fff;
+  border-color: #ccc;
+}
+.stepwizard-row:before {
+  top: 14px;
+  bottom: 0;
+  position: absolute;
+  content: " ";
+  width: 100%;
+  height: 1px;
+  background-color: #ccc;
+  z-order: 0;
+}
+.stepwizard-step {
+  display: table-cell;
+  text-align: center;
+  position: relative;
+
+}
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+}
+</style>
+
+        <div class="row mt-5">
+          <div class="col">
+            <div class="row">
+              <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
+                <div class="stepwizard-row"> </div>
+              </div>
+            </div>
+            <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
+
+              <div class="col-3 col-xl-2 stepwizard-step">
+                <a href="#step-1" type="button" class="btn btn-default btn-circle" disabled="disabled">1</a>
+                <p>Images</p>
+              </div>
+              <div class="col-3 col-xl-2 stepwizard-step">
+                <a href="#step-2" type="button" class="btn btn-dark btn-circle" >2</a>
+                <p>Info & Tags</p>
+              </div>
+              <div class="col-3 col-xl-2 stepwizard-step ">
+                <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                <p>Price & reward</p>
+              </div>
+              <div class="col-3 col-xl-2 stepwizard-step ">
+                <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                <p>Summary</p>
+              </div>
+            </div>
+
+            <div class="row mt-1">
+              <div class="col text-center">
+                  <p>
+                    You need to tell everything about the item that you are searching form.<br/>
+                    Fill out the form, and click the info icon for more information.
+                  </p>
+              </div>
+            </div>
+
+
+            <form class="mt-xl-5 mt-sm-4" action="adwizard2.html" method="get">
+
+              <div class="form-group row d-flex justify-content-center">
+                <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">Category:
+                  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Category" data-content="Select the category that fits your product best."></i></label>
+                <div class="col-sm-8 col-xl-6">
+
+                  <select class="form-control">
+                    <option selected>Select category</option>
+                    <option>Fashion</option>
+                    <option>Electronics</option>
+                    <option>Collectibles & Art</option>
+                    <option>Home & Garden</option>
+                    <option>Sporting Goods</option>
+                    <option>Motors</option>
+                    <option>Relation</option>
+                  </select>
+                  <!-- <small id="categoryHelpBlock" class="form-text text-muted">
+                   Select the category that fits your product best.
+                 </small> -->
+                </div>
+              </div>
+
+              <div class="form-group row d-flex justify-content-center">
+                <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">Original:
+                  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="State" data-content="Select witch state you need the your item. "></i>
+                </label>
+                <div class="col-sm-8 col-xl-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios3" id="exampleRadios3" value="option3" checked>
+                      Original - The product needs to an original product
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios4" id="exampleRadios4" value="option4">
+                      Fake - the product may be a fake or a copy
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group row d-flex justify-content-center">
+                <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">State:
+                  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="State" data-content="Select witch state you need the your item. "></i>
+                </label>
+                <div class="col-sm-8 col-xl-6">
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+                      New - original product not used
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <label class="form-check-label">
+                      <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+                      Used - the product has been used
+                    </label>
+                  </div>
+                </div>
+              </div>
+
+
+
+              <div class="form-group row d-flex justify-content-center mt-3">
+                <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">Headline:
+                    <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Item headline" data-content="Enter a exact and catchy headline for your product."></i>
+                </label>
+                <div class="col-sm-8 col-xl-6">
+                  <input type="text" class="form-control" id="inputHeadline" placeholder="Headline of the ad">
+                  <!-- <small id="headlineHelpBlock" class="form-text text-muted"> -->
+                   <!--  -->
+                 <!-- </small> -->
+                </div>
+              </div>
+
+              <div class="form-group row d-flex justify-content-center">
+                <label for="inputDescription" class="col-sm-4 col-xl-2 col-form-label">Description
+                  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Description" data-content="Describe the product as detailed as possible, so your finders are able to find the exact item you are searching for."></i>
+                </label>
+                <div class="col-sm-8 col-xl-6">
+                  <textarea class="form-control" id="inputDescription" placeholder="Describe the product in details"></textarea>
+                  <!-- <small id="descriptionHelpBlock" class="form-text text-muted">
+
+                 </small> -->
+                </div>
+              </div>
+
+              <div class="form-group row d-flex justify-content-center">
+                <label for="inputTags" class="col-sm-4 col-xl-2 col-form-label">Tags:
+                  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Tags" data-content="Create or add tags about your item/product. Start with typing #."></i>
+                </label>
+                <div class="col-sm-8 col-xl-6">
+                  <input class="form-control" id="inputTags" data-role="tagsinput" placeholder="Please tag your item/product. Start by typing #."/>
+                  <small id="tagsHelpBlock" class="form-text text-muted">
+                    Please add or create tags for others to find or for matching there needs. <br />
+                    A tag is added/created by typing a # follow by the word or words with no spaces.  <br/>
+                    e.g. #carSpeakers #carFrontSpeakers #blaupunktMX-10 <br/>
+                    By typing you'll get suggestions to pick from or if not found, a space is added, and the tag will be stored when saving the ad <br />
+
+                 </small>
+                </div>
+              </div>
+
+
+
+              <hr class="mt-5" />
+              <div class="form-group row d-flex justify-content-center">
+                <a href="ad_wizard1.html" class="btn btn-secondary mr-2" role="button">Back</a>
+                <a href="ad_wizard3.html" class="btn btn-dark" role="button">Next</a>
+              </div>
+<!--
+              Kategori
+              beskrivelse
+              radius
+              reward
+              billeder
+              Nyt og brugt
+              Hvad man vil give for produktet
+              Tags
+-->
+
+
+            </form>
+          </div>
+
+        </div>
+
+    </div> <!-- container -->
+  </section><!-- adwizard-section -->
+
+  <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+  </div>
+</section>
+<style>
+footer { background-color: rgba(0,0,0,.03); border-top: 1px solid #979797;border-bottom: 1px solid #979797; }
+footer a { color: #212529; line-height: 2rem}
+</style>
+<footer class="mt-5">
+  <div class="container">
+    <div class="row mt-5">
+      <div class="col">
+        <h6>Categories</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Fashion</a></small></li>
+          <li><small><a href="">Electronics</a></small></li>
+          <li><small><a href="">Collectibles & Art</a></small></li>
+          <li><small><a href="">Home & Garden</a></small></li>
+          <li><small><a href="">Sporting Goods</a></small></li>
+          <li><small><a href="">Motors</a></small></li>
+          <li><small><a href="">Relation</a></small></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Relations</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Bla Bla</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Make Mooney With Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+          <li><small><a href=""></a></small></li>
+        </ul>
+        <h6 class="mt-3">Find With Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+
+        </ul>
+        <h6 class="mt-3">Find2Me Agent Service</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Our concept</a></small></li>
+          <li><small><a href="">Bla bla</a></small></li>
+
+        </ul>
+      </div>
+      <div class="col">
+        <h6>Let Us Help You</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">Your Account</a></small></li>
+          <li><small><a href="">Your Ads</a></small></li>
+          <li><small><a href="">Your connection and rewards</a></small></li>
+
+        </ul>
+        <h6 class="mt-3">Get To Know Us</h6>
+        <ul class="list-unstyled">
+          <li><small><a href="">About Find2Me</a></small></li>
+          <li><small><a href="">Contact</a></small></li>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+
+
+</footer>
+<div class="container mt-3 mb-3">
+  <div class="row justify-content-sm-center">
+    <div class="col-md-auto">
+      <small>Conditions of Use</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Privacy Notice</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Cookies</small>
+    </div>
+    <div class="col-md-auto">
+      <small>Copyright © 2017, find2me.org  All Rights Reserved.</small>
+    </div>
+  </div>
+</div>
+
+<!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js" integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4" crossorigin="anonymous"></script>
+
+<script type="text/javascript" src="/js/magicsuggest.js"></script>
+
+<script>
+$(function() {
+  $('[data-toggle="popover"]').popover( {trigger: 'hover' });
+
+    $('#inputTags').magicSuggest({
+      placeholder: 'Select or create your tags',
+      allowFreeEntries: true,
+      autoSelect: true,
+      hideTrigger: true,
+      maxSuggestions: 10,
+      minChars: 2,
+      queryParam: 'q',
+      infoMsgCls: 'No tag found! You may create it',
+      data: function(q){
+        var e = q || '', r=[], c = ['Paris', 'New York', 'Gotham'];
+        for(var i=0; i<c.length; i++){
+          if(c[i].toLowerCase().indexOf(e.toLowerCase()) > -1)
+            r.push({id: i, name: c[i]});
+        }
+        return r;},
+      resultsField: 'cities',
+      typeDelay: 200,
+      useTabKey: true,
+      useCommaKey: true,
+      useZebraStyle: true
+
+    });
+});
+
+</script> -->
+</body>
+</html>
