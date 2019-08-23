@@ -36,6 +36,13 @@ namespace Find2Me.Infrastructure.Migrations
             };
             context.Currencies.AddOrUpdate(x=> x.Code, currencies);
 
+            var configurations = new DbModels.Configuration[]
+            {
+                new DbModels.Configuration { Name = "wiz_ad_p1_min_image_upload_req", Value="1",Description="Minimum limit of images allowed for a ad to be added on step 1 of Ad Wizard", ValueType="int", CreateTime=DateTime.UtcNow },
+                new DbModels.Configuration { Name = "wiz_ad_p1_max_images_allowed", Value="10",Description="Maximum limit of images allowed for a ad to be added on step 1 of Ad Wizard", ValueType="int", CreateTime=DateTime.UtcNow }
+            };
+            context.Configurations.AddOrUpdate(x => x.Name, configurations);
+
             //  You can use the DbSet<T>.AddOrUpdate() helper extension method 
             //  to avoid creating duplicate seed data. E.g.
             //

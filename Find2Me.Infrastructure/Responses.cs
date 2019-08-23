@@ -36,6 +36,8 @@ namespace Find2Me.Infrastructure
         public const string EmailUpdated = "EmailUpdated";
         public const string UserNameAndEmailUpdated = "UserNameAndEmailUpdated";
         public const string ProfileImageUploaded = "ProfileImageUploaded";
+        public const string UserAdImageUploaded = "UserAdImageUploaded";
+
 
         public static string GetMessageFromCode(string message)
         {

@@ -357,4 +357,34 @@
   <data name="DeleteProfileModalMessage" xml:space="preserve">
     <value>This will delete your profile and can't be reestablished.</value>
   </data>
+  <data name="Cmn_Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Cmn_OK" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="CreateAdLoginModalDescription" xml:space="preserve">
+    <value>Please create a new profile or login with an existing account.</value>
+  </data>
+  <data name="AdWizard_Step1_DescriptionText" xml:space="preserve">
+    <value>Add images, illustration, drawings of what ever you are searching for. The more the better.</value>
+  </data>
+  <data name="AdWizard_Step1_IconText" xml:space="preserve">
+    <value>Images</value>
+  </data>
+  <data name="AdWizard_Step1_ImageUploadedCountText" xml:space="preserve">
+    <value>Image uploaded</value>
+  </data>
+  <data name="AdWizard_Step1_PageHeader" xml:space="preserve">
+    <value>New ad</value>
+  </data>
+  <data name="AdWizard_Step2_IconText" xml:space="preserve">
+    <value>Info &amp; Tags</value>
+  </data>
+  <data name="AdWizard_Step3_IconText" xml:space="preserve">
+    <value>Price &amp; reward</value>
+  </data>
+  <data name="AdWizard_Step4_IconText" xml:space="preserve">
+    <value>Summary</value>
+  </data>
 </root>

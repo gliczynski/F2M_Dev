@@ -12,5 +12,24 @@ namespace Find2Me.DAL
         public UserAdRepository(ApplicationDbContext context) : base(context)
         {
         }
+
+        public List<UserAdImage> GetUserAdImages(int adID)
+        {
+            return dbContext.UserAdImages.Where(w => w.AdID == adID).ToList();
+        }
+
+        public int CreateUserAd(UserAd userAd)
+        {
+            dbContext.UserAds.Add(userAd);
+
+            dbContext.SaveChanges();
+
+            return userAd.Id;
+        }
+
+        public void AddUserAdImage(UserAdImage userAdImage)
+        {
+            dbContext.UserAdImages.Add(userAdImage);
+        }
     }
 }

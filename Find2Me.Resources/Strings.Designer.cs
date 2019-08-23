@@ -61,11 +61,92 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add images, illustration, drawings of what ever you are searching for. The more the better..
+        /// </summary>
+        public static string AdWizard_Step1_DescriptionText {
+            get {
+                return ResourceManager.GetString("AdWizard_Step1_DescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Images.
+        /// </summary>
+        public static string AdWizard_Step1_IconText {
+            get {
+                return ResourceManager.GetString("AdWizard_Step1_IconText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Image uploaded.
+        /// </summary>
+        public static string AdWizard_Step1_ImageUploadedCountText {
+            get {
+                return ResourceManager.GetString("AdWizard_Step1_ImageUploadedCountText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New ad.
+        /// </summary>
+        public static string AdWizard_Step1_PageHeader {
+            get {
+                return ResourceManager.GetString("AdWizard_Step1_PageHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Info &amp; Tags.
+        /// </summary>
+        public static string AdWizard_Step2_IconText {
+            get {
+                return ResourceManager.GetString("AdWizard_Step2_IconText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Price &amp; reward.
+        /// </summary>
+        public static string AdWizard_Step3_IconText {
+            get {
+                return ResourceManager.GetString("AdWizard_Step3_IconText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Summary.
+        /// </summary>
+        public static string AdWizard_Step4_IconText {
+            get {
+                return ResourceManager.GetString("AdWizard_Step4_IconText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back.
         /// </summary>
         public static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cmn_Cancel {
+            get {
+                return ResourceManager.GetString("Cmn_Cancel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        public static string Cmn_OK {
+            get {
+                return ResourceManager.GetString("Cmn_OK", resourceCulture);
             }
         }
         
@@ -84,6 +165,15 @@ namespace Find2Me.Resources {
         public static string CreateAd {
             get {
                 return ResourceManager.GetString("CreateAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please create a new profile or login with an existing account..
+        /// </summary>
+        public static string CreateAdLoginModalDescription {
+            get {
+                return ResourceManager.GetString("CreateAdLoginModalDescription", resourceCulture);
             }
         }
         

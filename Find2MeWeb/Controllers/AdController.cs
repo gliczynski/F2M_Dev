@@ -12,6 +12,7 @@ using System.Web.Mvc;
 using Find2Me.Services;
 using Find2Me.Infrastructure.ViewModels;
 using System.Globalization;
+using Find2Me.Infrastructure;
 
 namespace Find2MeWeb.Controllers
 {
@@ -60,7 +61,6 @@ namespace Find2MeWeb.Controllers
                 UserAdService userAdService = new UserAdService(_dbContext);
 
                 var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(_dbContext));
-                var currentUser = manager.FindById(User.Identity.GetUserId());
 
                 userAdService.CreateAd(new UserAdVM
                 {
@@ -117,6 +117,109 @@ namespace Find2MeWeb.Controllers
             catch
             {
                 return View();
+            }
+        }
+
+        public ActionResult AdWizardStep1()
+        {
+            return View();
+        }
+
+        public ActionResult UploadAdImage(HttpPostedFileBase adImage, string returnUrl, int adImageNumber)
+        {
+            string newAdImageFilename = "";
+            int adID = 0;
+            if (adImage != null)
+            {
+                if (adImage.ContentLength > 0)
+                {
+                    _dbContext = new ApplicationDbContext();
+                    var userAdService = new UserAdService(_dbContext);
+
+                    //Save an Ad first and get newly created Ad's ID
+                    var userAdVM = new UserAdVM();
+                    userAdVM.UserId = User.Identity.GetUserId();
+                    userAdVM.CreatedOn = DateTime.UtcNow;
+                    adID = userAdService.CreateAd(userAdVM);
+
+
+                    var userAdImage = userAdService.GetUserAdImages(adID).Where(w => w.ImageNumber == adImageNumber).FirstOrDefault();
+
+                    //Save New Ad Image and Remove Old Image
+                    string adImageName = DateTime.UtcNow.ToString("yyyyddmmhhmmss") + "_ad_original.jpg";
+                    string adImagePath = Server.MapPath("~" + _FileSavingPaths.UserAdsPath + "/" + adImageName);
+
+                    //Save New Image
+                    if (!System.IO.File.Exists(adImagePath))
+                    {
+                        adImage.SaveAs(adImagePath);
+                    }
+
+                    //Remove Old Image
+                    if (userAdImage != null)
+                    {
+                        try
+                        {
+                            //Delete Original and Selected Images 
+
+                            if (System.IO.File.Exists(Server.MapPath("~" + _FileSavingPaths.UserAdsPath + "/" + userAdImage.AdImageOriginal)))
+                            {
+                                System.IO.File.Delete(Server.MapPath("~" + _FileSavingPaths.UserAdsPath + "/" + userAdImage.AdImageOriginal));
+                            }
+                            if (System.IO.File.Exists(Server.MapPath("~" + _FileSavingPaths.UserAdsPath + "/" + userAdImage.AdImageSelected)))
+                            {
+                                System.IO.File.Delete(Server.MapPath("~" + _FileSavingPaths.UserAdsPath + "/" + userAdImage.AdImageSelected));
+                            }
+
+                        }
+                        catch { }
+                    }
+                    //Add user Ad image in database
+                    var userAdImageVM = new UserAdImageVM();
+                    userAdImageVM.AdImageOriginal = adImageName;
+                    userAdImageVM.AdImageSelected = adImageName;
+                    userAdImageVM.ImageNumber = adImageNumber;
+                    userAdImageVM.CreatedOn = DateTime.UtcNow;
+                    userAdImageVM.AdID = adID;
+                    userAdService.AddUserAdImage(userAdImageVM);
+
+                    newAdImageFilename = adImageName;
+
+
+                    //userProfile.ProfileImageOriginal = profileImageName;
+                    //userProfile.ProfileImageSelected = profileImageName;
+                    //newProfileImageFilename = profileImageName;
+                    //userAccountService.UpdateUserProfileImage(userProfile, false);
+
+                    //Set the Image Uploaded 
+                    TempData["ImageUploaded"] = true;
+                    TempData["ResponseResult"] = new ResponseResult<object>
+                    {
+                        Success = true,
+                        Message = "Ad Image is uploaded successfully.",
+                        MessageCode = ResponseResultMessageCode.ProfileImageUploaded,
+                    };
+                }
+            }
+
+            if (Request.IsAjaxRequest())
+            {
+                return Json(new ResponseResult<string>
+                {
+                    Success = true,
+                    Data = newAdImageFilename
+                }, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                if (!string.IsNullOrEmpty(returnUrl))
+                {
+                    return Redirect(returnUrl);
+                }
+                else
+                {
+                    return RedirectToAction("Index");
+                }
             }
         }
     }

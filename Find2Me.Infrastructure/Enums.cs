@@ -94,6 +94,7 @@ namespace Find2Me.Infrastructure
     public class _FileSavingPaths
     {
         public static string ProfileImage = "/images/user/profile";
+        public static string UserAdsPath = "/images/user/ad";
     }
 
     public class _CookieNameStrings

@@ -85,8 +85,13 @@ namespace Find2Me.Infrastructure.DbModels
         public DbSet<UserFollower> UserFollowers { get; set; }
 
         public DbSet<UserAd> UserAds { get; set; }
+        public DbSet<UserAdImage> UserAdImages { get; set; }
 
         public DbSet<Logs> Logs { get; set; }
+
+        public DbSet<Configuration> Configurations { get; set; }
+
+        public DbSet<UserConfiguration> UserConfigurations { get; set; }
 
         public static ApplicationDbContext Create()
         {

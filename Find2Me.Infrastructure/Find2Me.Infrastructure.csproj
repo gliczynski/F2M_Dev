@@ -64,10 +64,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbModels\UserAdImage.cs" />
+    <Compile Include="DbModels\Configuration.cs" />
     <Compile Include="DbModels\Currency.cs" />
     <Compile Include="DbModels\Logs.cs" />
     <Compile Include="DbModels\StoredProcedureResponses.cs" />
     <Compile Include="DbModels\UserAd.cs" />
+    <Compile Include="DbModels\UserConfiguration.cs" />
     <Compile Include="DbModels\UserFollower.cs" />
     <Compile Include="EmailHelperService.cs" />
     <Compile Include="Enums.cs" />
@@ -116,6 +119,26 @@
     <Compile Include="Migrations\201903180023579_userad_tbl.cs" />
     <Compile Include="Migrations\201903180023579_userad_tbl.Designer.cs">
       <DependentUpon>201903180023579_userad_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907110302326_configuration_tbl.cs" />
+    <Compile Include="Migrations\201907110302326_configuration_tbl.Designer.cs">
+      <DependentUpon>201907110302326_configuration_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907110305457_configuration_tbl_AddValueColumn.cs" />
+    <Compile Include="Migrations\201907110305457_configuration_tbl_AddValueColumn.Designer.cs">
+      <DependentUpon>201907110305457_configuration_tbl_AddValueColumn.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201907110318172_userConfig_tbl.cs" />
+    <Compile Include="Migrations\201907110318172_userConfig_tbl.Designer.cs">
+      <DependentUpon>201907110318172_userConfig_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908040414597_userAds_tbl.cs" />
+    <Compile Include="Migrations\201908040414597_userAds_tbl.Designer.cs">
+      <DependentUpon>201908040414597_userAds_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201908040504122_userAds_add_image_number.cs" />
+    <Compile Include="Migrations\201908040504122_userAds_add_image_number.Designer.cs">
+      <DependentUpon>201908040504122_userAds_add_image_number.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OAuthReponses.cs" />
@@ -178,6 +201,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201903180023579_userad_tbl.resx">
       <DependentUpon>201903180023579_userad_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907110302326_configuration_tbl.resx">
+      <DependentUpon>201907110302326_configuration_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907110305457_configuration_tbl_AddValueColumn.resx">
+      <DependentUpon>201907110305457_configuration_tbl_AddValueColumn.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201907110318172_userConfig_tbl.resx">
+      <DependentUpon>201907110318172_userConfig_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908040414597_userAds_tbl.resx">
+      <DependentUpon>201908040414597_userAds_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201908040504122_userAds_add_image_number.resx">
+      <DependentUpon>201908040504122_userAds_add_image_number.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlScripts\SqlScripts.resx">
       <Generator>ResXFileCodeGenerator</Generator>

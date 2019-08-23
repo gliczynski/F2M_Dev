@@ -357,4 +357,34 @@
   <data name="DeleteProfileModalMessage" xml:space="preserve">
     <value>Dette vil slette din profil og kan ikke genoprettes.</value>
   </data>
+  <data name="Cmn_Cancel" xml:space="preserve">
+    <value>Afbestille</value>
+  </data>
+  <data name="Cmn_OK" xml:space="preserve">
+    <value>Okay</value>
+  </data>
+  <data name="CreateAdLoginModalDescription" xml:space="preserve">
+    <value>Opret en ny profil eller log ind med en eksisterende konto.</value>
+  </data>
+  <data name="AdWizard_Step1_DescriptionText" xml:space="preserve">
+    <value>Tilføj billeder, illustrationer, tegninger af hvad du nogensinde søger efter. Jo flere jo bedre.</value>
+  </data>
+  <data name="AdWizard_Step1_IconText" xml:space="preserve">
+    <value>Billeder</value>
+  </data>
+  <data name="AdWizard_Step1_ImageUploadedCountText" xml:space="preserve">
+    <value>Billede uploadet</value>
+  </data>
+  <data name="AdWizard_Step1_PageHeader" xml:space="preserve">
+    <value>Ny annonce</value>
+  </data>
+  <data name="AdWizard_Step2_IconText" xml:space="preserve">
+    <value>Info &amp; Tags</value>
+  </data>
+  <data name="AdWizard_Step3_IconText" xml:space="preserve">
+    <value>Pris og belønning</value>
+  </data>
+  <data name="AdWizard_Step4_IconText" xml:space="preserve">
+    <value>Resumé</value>
+  </data>
 </root>

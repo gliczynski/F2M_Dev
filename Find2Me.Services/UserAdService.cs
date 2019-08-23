@@ -13,32 +13,57 @@ namespace Find2Me.Services
     public interface IUserAdService
     {
         List<UserAdVM> GetAllUserAds(string user);
+        List<UserAdImageVM> GetUserAdImages(int adID);
     }
 
     public class UserAdService : IUserAdService
     {
-        private UserAdRepository userAdRepository;
+        private UserAdRepository _userAdRepository;
         public UserAdService(ApplicationDbContext dbContext)
         {
-            userAdRepository = new UserAdRepository(dbContext);
+            _userAdRepository = new UserAdRepository(dbContext);
         }
 
         public List<UserAdVM> GetAllUserAds(string user)
         {
-            List<UserAd> userAds = userAdRepository.GetAll().ToList();
+            List<UserAd> userAds = _userAdRepository.GetAll().ToList();
             List<UserAdVM> userAdsVM = new List<UserAdVM>();
             Mapper.Map(userAds, userAdsVM);
             return userAdsVM;
         }
 
-        public void CreateAd(UserAdVM userAd)
+        public int CreateAd(UserAdVM userAd)
         {
-            userAdRepository.Insert(new UserAd
+            var newlyCraetedAdID = _userAdRepository.CreateUserAd(new UserAd
             {
                 CreatedOn = userAd.CreatedOn,
                 UserId = userAd.UserId
             });
-            userAdRepository.SaveChanges();
+
+            return newlyCraetedAdID;
+        }
+
+        public List<UserAdImageVM> GetUserAdImages(int adID)
+        {
+            var userAdImages = _userAdRepository.GetUserAdImages(adID);
+
+            var userAdImagesVM = new List<UserAdImageVM>();
+            Mapper.Map(userAdImages, userAdImagesVM);
+            return userAdImagesVM;
+        }
+
+        public void AddUserAdImage(UserAdImageVM userAdImageVM)
+        {
+            _userAdRepository.AddUserAdImage(new UserAdImage
+            {
+                AdID = userAdImageVM.AdID,
+                AdImageOriginal = userAdImageVM.AdImageOriginal,
+                AdImageSelected = userAdImageVM.AdImageSelected,
+                ImageNumber = userAdImageVM.ImageNumber,
+                CreatedOn = userAdImageVM.CreatedOn
+            });
+            _userAdRepository.SaveChanges();
+
         }
     }
 }

@@ -1,0 +1,339 @@
+﻿@using Find2Me.Infrastructure;
+@{
+    ViewBag.Title = "Ad Wizard Step1";
+}
+
+<section class="adwizard-section">
+    <div class="container mt-3">
+        <div class="row">
+            <div class="col-12 d-flex justify-content-md-between align-items-center">
+                <div>
+                    <h1 class="d-inline-flex pr-3">@Strings.AdWizard_Step1_PageHeader</h1>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <hr class="pt-0 mt-0 mb-0" />
+            </div>
+        </div>
+        <style media="screen">
+            .stepwizard-step p {
+                margin-top: 10px;
+            }
+
+            .stepwizard-row {
+                display: table-row;
+            }
+
+            .stepwizard {
+                display: table;
+                width: 75%;
+                position: relative;
+            }
+
+            .stepwizard-step a[disabled] {
+                opacity: 1 !important;
+                filter: alpha(opacity=100) !important;
+                background-color: #fff;
+                border-color: #ccc;
+            }
+
+            .stepwizard-row:before {
+                top: 14px;
+                bottom: 0;
+                position: absolute;
+                content: " ";
+                width: 100%;
+                height: 1px;
+                background-color: #ccc;
+                z-order: 0;
+            }
+
+            .stepwizard-step {
+                display: table-cell;
+                text-align: center;
+                position: relative;
+            }
+
+            .btn-circle {
+                width: 30px;
+                height: 30px;
+                text-align: center;
+                padding: 6px 0;
+                font-size: 12px;
+                line-height: 1.428571429;
+                border-radius: 15px;
+            }
+        </style>
+
+        <div class="row mt-5">
+            <div class="col">
+                <div class="row">
+                    <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
+                        <div class="stepwizard-row"> </div>
+                    </div>
+                </div>
+                <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
+
+                    <div class="col-3 col-xl-2 stepwizard-step">
+                        <a href="#step-1" type="button" class="btn btn-dark btn-circle">1</a>
+                        <p>@Strings.AdWizard_Step1_IconText</p>
+                    </div>
+                    <div class="col-3 col-xl-2 stepwizard-step">
+                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+                        <p>@Strings.AdWizard_Step2_IconText</p>
+                    </div>
+                    <div class="col-3 col-xl-2 stepwizard-step ">
+                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+                        <p>@Strings.AdWizard_Step3_IconText</p>
+                    </div>
+                    <div class="col-3 col-xl-2 stepwizard-step ">
+                        <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+                        <p>@Strings.AdWizard_Step4_IconText</p>
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="col text-center">
+                        <p>
+                            @Strings.AdWizard_Step1_DescriptionText
+                        </p>
+                    </div>
+                </div>
+                <div class="row mt-1">
+                    <div class="col text-center">
+                        <small>@Strings.AdWizard_Step1_ImageUploadedCountText : 1/10</small>
+                    </div>
+                </div>
+                @using (Html.BeginForm("UploadAdImage", "Ad", new { returnUrl = Url.Action() }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload_ad_image_form", style = "display: inline-block;" }))
+                {
+                    <div class="container">
+                        <div class="row text-center text-lg-left">
+                            <div class="col-lg-3 col-md-4 col-xs-6">
+                                <a href="#" class="d-block mb-0 h-100" role="button" id="upload_image_btn">
+                                    <img class="img-fluid img-thumbnail" src="/html/img/ThumbUploadImage.png" alt="">
+                                </a>
+                            </div>
+                        </div>
+                        @Html.AntiForgeryToken()
+                    </div>
+                    <hr class="mt-5" />
+                    <div class="form-group row d-flex justify-content-center">
+                        <a href="ad_wizard2.html" class="btn btn-dark" role="button">@Strings.Next</a>
+                    </div>
+                    <input type="file" id="ad_picture_input" name="adimage" accept="image/*" style="display: none;">
+                    <input type="hidden" id="adImageNumber" name="adImageNumber" value="1" >
+                }
+            </div>
+        </div>
+    </div> <!-- container -->
+</section><!-- adwizard-section -->
+<!-- adwizard-section -->
+<!-- Image Cropper for Edit/Cropping Of Image -->
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+    <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
+
+    <script>
+        var cropData = "";
+
+        $('#upload_image_btn').click(function () {
+            $('#ad_picture_input').click();
+        });
+
+        $('#ad_picture_input').on('change', function () {
+            $('#upload_ad_image_form').submit();
+        });
+
+        window.addEventListener('DOMContentLoaded', function () {
+            var image = document.querySelector('#cropper_image');
+            var previews = document.querySelectorAll('.preview');
+            var avatar = document.getElementById('profile_avatar');
+            var $progress = $('.progress');
+            var $progressBar = $('.progress-bar');
+            var $alert = $('.alert');
+            $modal = $('#edit_crop_image_modal');
+
+            var cropper;
+
+            @if(Model.ProfileImageData != null)
+            {
+                <text>
+            cropData = @Html.Raw(Model.ProfileImageData.GetCroppingDataString());
+                </text>
+            }
+
+            @if (ViewBag.OpenEditProfileImageModel)
+            {
+                <text>
+                    $modal.modal('show');
+                </text>
+            }
+
+            function ConstructCropper() {
+                cropper = new Cropper(image, {
+                    aspectRatio: 1 / 1,
+                    viewMode: 1,
+                    zoomable: false,
+                    responsive: true,
+
+                    built: function () {
+                        setTimeout(function () {
+                            if (cropData) {
+                                cropper.setCanvasData(cropData.ImageCanvasData);
+                                cropper.setCropBoxData(cropData.ImageCropBoxData);
+                            }
+                        }, 1000);
+                    },
+
+                    ready: function () {
+                        var clone = this.cloneNode();
+
+                        clone.className = '';
+                        clone.style.cssText = (
+                            'display: block;' +
+                            'width: 100%;' +
+                            'min-width: 0;' +
+                            'min-height: 0;' +
+                            'max-width: none;' +
+                            'max-height: none;'
+                        );
+
+                        each(previews, function (elem) {
+                            elem.appendChild(clone.cloneNode());
+                        });
+
+                        setTimeout(function () {
+                            if (cropData) {
+                                cropper.setCanvasData(cropData.ImageCanvasData);
+                                cropper.setCropBoxData(cropData.ImageCropBoxData);
+                            }
+                            // And then
+                            this.cropper.move(0);
+
+                        }, 1000);
+                    },
+
+                    crop: function (event) {
+
+                        var data = event.detail;
+                        var cropper = this.cropper;
+                        var imageData = cropper.getImageData();
+                        var previewAspectRatio = data.width / data.height;
+
+                        each(previews, function (elem) {
+                            var previewImage = elem.getElementsByTagName('img').item(0);
+                            var previewWidth = elem.offsetWidth;
+                            var previewHeight = previewWidth / previewAspectRatio;
+                            var imageScaledRatio = data.width / previewWidth;
+
+                            elem.style.height = previewHeight + 'px';
+                            if (previewImage) {
+                                previewImage.style.width = imageData.naturalWidth / imageScaledRatio + 'px';
+                                previewImage.style.height = imageData.naturalHeight / imageScaledRatio + 'px';
+                                previewImage.style.marginLeft = -data.x / imageScaledRatio + 'px';
+                                previewImage.style.marginTop = -data.y / imageScaledRatio + 'px';
+                            }
+                        });
+                    },
+                });
+            }
+
+            $('#edit_image_btn').click(function () {
+                $modal.modal('show');
+            });
+
+            $modal.on('shown.bs.modal', function () {
+                ConstructCropper();
+            }).on('hidden.bs.modal', function () {
+                cropper.destroy();
+                cropper = null;
+            });
+
+            $('.cropper-container').on('load', '.cropper-canvas img', function () {
+                alert('a')
+            });
+
+            document.getElementById('crop').addEventListener('click', function () {
+                var initialAvatarURL;
+                var canvas;
+
+                if (cropper) {
+                    $('#crop').attr("disabled", "disabled");
+
+                    canvas = cropper.getCroppedCanvas();
+                    initialAvatarURL = avatar.src;
+
+                    $progress.show();
+                    $alert.removeClass('alert-success alert-warning');
+
+                    canvas.toBlob(function (blob) {
+                        var formData = new FormData();
+
+                        var data = {
+                            ImageCanvasData: cropper.getCanvasData(),
+                            ImageCropBoxData: cropper.getCropBoxData()
+                        }
+
+                        formData.append('ImageCropped', blob, 'avatar.jpg');
+                        formData.append('CropData', JSON.stringify(data));
+
+
+                        debugger;
+                        $.ajax('@Url.Action("CropProfileImage", "Profile")', {
+                            method: 'POST',
+                            data: formData,
+                            processData: false,
+                            //dataType: "json",
+                            //contentType: "application/json",
+                            contentType: false,
+                            xhr: function () {
+                                var xhr = new XMLHttpRequest();
+
+                                xhr.upload.onprogress = function (e) {
+                                    var percent = '0';
+                                    var percentage = '0%';
+
+                                    if (e.lengthComputable) {
+                                        percent = Math.round((e.loaded / e.total) * 100);
+                                        percentage = percent + '%';
+                                        $progressBar.width(percentage).attr('aria-valuenow', percent).text(percentage);
+                                    }
+                                };
+
+                                return xhr;
+                            },
+                            success: function (data) {
+                                $modal.modal('hide');
+                                if (data) {
+                                    if (data.Success) {
+                                        avatar.src = canvas.toDataURL();
+                                        cropData.ImageCanvasData = cropper.getCanvasData();
+                                        cropData.ImageCropBoxData = cropper.getCropBoxData();
+
+                                        $alert.show().addClass('alert-success').empty().html('<i class="fa fa-check-circle fa-fw"></i> @Strings.Step1_ProfileImageUpdatedInfoText');
+                                    }
+                                    else {
+                                        $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i>@Strings.Step1_ProfileImageUpdateFailedInfoText'+ data.Message);
+                                    }
+                                }
+                            },
+
+                            error: function () {
+                                avatar.src = initialAvatarURL;
+                                $alert.show().addClass('alert-warning').empty().html('<i class="fa fa-exclamation-circle fa-fw"></i>@Strings.Step1_ProfileImageUpdateFailedInfoText');
+                            },
+
+                            complete: function () {
+                                $('#crop').removeAttr("disabled");
+                                $progress.hide();
+                            },
+                        });
+                    });
+                }
+            });
+        });
+    </script>
+}
