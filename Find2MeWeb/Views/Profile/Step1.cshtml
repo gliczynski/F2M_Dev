@@ -1,191 +1,191 @@
 ﻿@model Find2Me.Infrastructure.ViewModels.UserProfilePictureVM
 @using Find2Me.Infrastructure;
 @{
-    ViewBag.Title = "Step1";
+  ViewBag.Title = "Step1";
 }
 
 @section Styles{
-    <link href="~/Content/plugins/cropperjs-master/dist/cropper.min.css" rel="stylesheet" />
-    <style>
-        .img-container,
-        .preview {
-            overflow: hidden;
-        }
-    </style>
+  <link href="~/Content/plugins/cropperjs-master/dist/cropper.min.css" rel="stylesheet" />
+  <style>
+    .img-container,
+    .preview {
+      overflow: hidden;
+    }
+  </style>
 }
 
 
 <section class="adwizard-section">
-    <div class="container mt-3">
+  <div class="container mt-3">
+    <div class="row">
+
+      <!-- Headline of the page -->
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">@Strings.Wizard_PageHeading</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+
+
+    <div class="row mt-5">
+      <div class="col">
+
+        <!-- TABS FOR WIZARD -->
+
         <div class="row">
-
-            <!-- Headline of the page -->
-            <div class="col-12 d-flex justify-content-md-between align-items-center">
-                <div>
-                    <h1 class="d-inline-flex pr-3">@Strings.Wizard_PageHeading</h1>
-                </div>
-            </div>
+          <div class="col-11 mr-0 col-xl-6 offset-xl-3">
+            <div class="stepwizard-row"> </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <hr class="pt-0 mt-0 mb-0" />
-            </div>
-        </div>
+        <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
 
-
-        <div class="row mt-5">
-            <div class="col">
-
-                <!-- TABS FOR WIZARD -->
-
-                <div class="row">
-                    <div class="col-11 mr-0 col-xl-6 offset-xl-3">
-                        <div class="stepwizard-row"> </div>
-                    </div>
-                </div>
-                <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
-
-                    <div class="col-4 col-xl-2 stepwizard-step">
-                        <a href="#step-1" class="btn btn-dark btn-circle">1</a>
-                        <p>@Strings.ProfileWizard_ProfileStep1</p>
-                    </div>
-                    <div class="col-4 col-xl-2 stepwizard-step">
-                        <a href="#step-2" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                        <p>@Strings.ProfileWizard_ProfileStep2</p>
-                    </div>
-                    <div class="col-4 col-xl-2 stepwizard-step ">
-                        <a href="#step-3" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>@Strings.ProfileWizard_ProfileStep3</p>
-                    </div>
-                </div>
-
-                <!-- Upload profile image section -->
-                <div class="row mt-1">
-
-                    @*Page Alerts Partial*@
-                    @Html.Partial("_PageAlertsPartial")
-
-                    <div class="col text-center">
-                        <p>
-                            <strong>@Strings.Step1_ProfileDescriptionText1</strong><br />@Strings.Step1_ProfileDescriptionText2<br />
-                            @Strings.Step1_ProfileDescriptionText3
-                        </p>
-                        <p class="profile-section d-flex justify-content-center mt-5">
-                            <a class="avatar" title="@Model.FullName">
-                                @if (!string.IsNullOrEmpty(Model.ProfileImageSelected))
-                                {
-                                    <img id="profile_avatar" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageSelected" title="@Model.FullName" alt="@Model.FullName" />
-                                }
-                                else
-                                {
-                                    <img id="profile_avatar" src="~/Html/img/default-profile.png" title="@Model.FullName" alt="@Model.FullName" />
-                                }
-                            </a>
-                        </p>
-                        <p class="mt-2">
-                            @using (Html.BeginForm("UploadProfileImage", "Profile", new { returnUrl = Url.Action() }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload_profile_image_form", style = "display: inline-block;" }))
-                            {
-                                if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
-                                {
-                                    <button type="button" class="btn btn-dark" id="edit_image_btn">@Strings.Step1_EditProfilePicBtn</button>
-                                }
-                                @*else
-                                    {
-                                        <button type="button" class="btn btn-dark disabled" disabled="disabled">Edit image</button>
-                                    }*@
-
-                                @Html.AntiForgeryToken()
-                                <button type="button" class="btn btn-dark" id="upload_image_btn">@Strings.Step1_UploadImageBtn</button>
-                                <input type="file" id="profile_picture_input" name="profileimage" accept="image/*" style="display: none;">
-                            }
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Navigation of the wizard -->
-                <hr class="mt-5" />
-
-                <div class="form-group row d-flex justify-content-center">
-                    @using (Html.BeginForm("Step1", "Profile", new { }, FormMethod.Post, new { }))
-                    {
-                        <input type="hidden" id="ProfileImage" name="ProfileImage" value="@Model.ProfileImageOriginal" data-val="true" data-val-required="@Strings.Step1_ImageRequired" />
-                        <span class="text-danger field-validation-valid" data-valmsg-for="ProfileImage" data-valmsg-replace="true"></span>
-
-                        <button type="submit" class="btn btn-dark">@Strings.Next</button>
-                    }
-                </div>
-
-            </div>
-
+          <div class="col-4 col-xl-2 stepwizard-step">
+            <a href="#step-1" class="btn btn-dark btn-circle">1</a>
+            <p>@Strings.ProfileWizard_ProfileStep1</p>
+          </div>
+          <div class="col-4 col-xl-2 stepwizard-step">
+            <a href="#step-2" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>@Strings.ProfileWizard_ProfileStep2</p>
+          </div>
+          <div class="col-4 col-xl-2 stepwizard-step ">
+            <a href="#step-3" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>@Strings.ProfileWizard_ProfileStep3</p>
+          </div>
         </div>
 
-    </div> <!-- container -->
+        <!-- Upload profile image section -->
+        <div class="row mt-1">
+
+          @*Page Alerts Partial*@
+          @Html.Partial("_PageAlertsPartial")
+
+          <div class="col text-center">
+            <p>
+              <strong>@Strings.Step1_ProfileDescriptionText1</strong><br />@Strings.Step1_ProfileDescriptionText2<br />
+              @Strings.Step1_ProfileDescriptionText3
+            </p>
+            <p class="profile-section d-flex justify-content-center mt-5">
+              <a class="avatar" title="@Model.FullName">
+                @if (!string.IsNullOrEmpty(Model.ProfileImageSelected))
+                {
+                  <img id="profile_avatar" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageSelected" title="@Model.FullName" alt="@Model.FullName" />
+                }
+                else
+                {
+                  <img id="profile_avatar" src="~/Html/img/default-profile.png" title="@Model.FullName" alt="@Model.FullName" />
+                }
+              </a>
+            </p>
+            <p class="mt-2">
+              @using (Html.BeginForm("UploadProfileImage", "Profile", new { returnUrl = Url.Action() }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload_profile_image_form", style = "display: inline-block;" }))
+              {
+                if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
+                {
+                  <button type="button" class="btn btn-dark" id="edit_image_btn">@Strings.Step1_EditProfilePicBtn</button>
+                }
+                @*else
+                  {
+                      <button type="button" class="btn btn-dark disabled" disabled="disabled">Edit image</button>
+                  }*@
+
+                @Html.AntiForgeryToken()
+                <button type="button" class="btn btn-dark" id="upload_image_btn">@Strings.Step1_UploadImageBtn</button>
+                <input type="file" id="profile_picture_input" name="profileimage" accept="image/*" style="display: none;">
+              }
+            </p>
+          </div>
+        </div>
+
+        <!-- Navigation of the wizard -->
+        <hr class="mt-5" />
+
+        <div class="form-group row d-flex justify-content-center">
+          @using (Html.BeginForm("Step1", "Profile", new { }, FormMethod.Post, new { }))
+          {
+            <input type="hidden" id="ProfileImage" name="ProfileImage" value="@Model.ProfileImageOriginal" data-val="true" data-val-required="@Strings.Step1_ImageRequired" />
+            <span class="text-danger field-validation-valid" data-valmsg-for="ProfileImage" data-valmsg-replace="true"></span>
+
+            <button type="submit" class="btn btn-dark">@Strings.Next</button>
+          }
+        </div>
+
+      </div>
+
+    </div>
+
+  </div> <!-- container -->
 </section>
 <!-- adwizard-section -->
 <!-- Image Cropper for Edit/Cropping Of Image -->
 <div class="modal fade" id="edit_crop_image_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="modalLabel">@Strings.Step1_UploadImageModalHeading</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalLabel">@Strings.Step1_UploadImageModalHeading</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
+        {
+          <div class="img-container">
+            <div class="row">
+              <div class="col col-8">
+                <p>
+                  <strong>@Strings.Step1_OriginalImage</strong>
+                </p>
+                <div class="cropper-container" style="height: 400px;">
+                  <img id="cropper_image" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageOriginal" title="@Model.FullName" alt="@Model.FullName" />
+                </div>
+              </div>
+              <div class="col col-4">
+                <p>
+                  <strong>@Strings.Step1_CropView</strong>
+                </p>
+                <div class="preview">
+                </div>
+
+                <br />
+                <div class="progress" style="display: none;">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                </div>
+              </div>
             </div>
-            <div class="modal-body">
+          </div>
 
-                @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
-                {
-                    <div class="img-container">
-                        <div class="row">
-                            <div class="col col-8">
-                                <p>
-                                    <strong>@Strings.Step1_OriginalImage</strong>
-                                </p>
-                                <div class="cropper-container" style="height: 400px;">
-                                    <img id="cropper_image" src="@_FileSavingPaths.ProfileImage/@Model.ProfileImageOriginal" title="@Model.FullName" alt="@Model.FullName" />
-                                </div>
-                            </div>
-                            <div class="col col-4">
-                                <p>
-                                    <strong>@Strings.Step1_CropView</strong>
-                                </p>
-                                <div class="preview">
-                                </div>
+        }
+        else
+        {
+          <div class="alert alert-danger" role="alert">
+            <i class="fa fa-info-circle fa-fw"></i> @Strings.Step1_ImageNotUploadedAlertText
+          </div>
+        }
 
-                                <br />
-                                <div class="progress" style="display: none;">
-                                    <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                }
-                else
-                {
-                    <div class="alert alert-danger" role="alert">
-                        <i class="fa fa-info-circle fa-fw"></i> @Strings.Step1_ImageNotUploadedAlertText
-                    </div>
-                }
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">@Strings.Step1_CropperModalCancelBtn</button>
-                @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
-                {
-                    <button type="button" class="btn btn-dark" id="crop">@Strings.Step1_CropperModalUpdateBtn</button>
-                }
-            </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Strings.Step1_CropperModalCancelBtn</button>
+        @if (!string.IsNullOrEmpty(Model.ProfileImageOriginal))
+        {
+          <button type="button" class="btn btn-dark" id="crop">@Strings.Step1_CropperModalUpdateBtn</button>
+        }
+      </div>
     </div>
+  </div>
 </div>
 
 @section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
+  @Scripts.Render("~/bundles/jqueryval")
+  <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
 
-    <script>
+  <script>
         var cropData = "";
 
         $('#upload_image_btn').click(function () {
@@ -398,5 +398,5 @@
 
 
         });
-    </script>
+  </script>
 }

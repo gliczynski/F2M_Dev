@@ -1,0 +1,389 @@
+﻿@using Microsoft.AspNet.Identity;
+@using Find2Me.Infrastructure;
+@using Find2Me.Resources;
+@{
+  ViewBag.Title = "Ad Wizard Step4";
+}
+
+<section class="adwizard-section">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">New ad - Summary</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+
+    <style media="screen">
+      .stepwizard-step p {
+        margin-top: 10px;
+      }
+
+      .stepwizard-row {
+        display: table-row;
+      }
+
+      .stepwizard {
+        display: table;
+        width: 75%;
+        position: relative;
+      }
+
+      .stepwizard-step a[disabled] {
+        opacity: 1 !important;
+        filter: alpha(opacity=100) !important;
+        background-color: #fff;
+        border-color: #ccc;
+      }
+
+      .stepwizard-row:before {
+        top: 14px;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        z-order: 0;
+      }
+
+      .stepwizard-step {
+        display: table-cell;
+        text-align: center;
+        position: relative;
+      }
+
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+    </style>
+
+    <div class="row mt-5">
+      <div class="col">
+        <div class="row">
+          <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
+            <div class="stepwizard-row"> </div>
+          </div>
+        </div>
+        <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
+
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-1" type="button" class="btn btn-default btn-circle" disabled="disabled">1</a>
+            <p>Images</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>Info & Tags</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>Price & reward</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-4" type="button" class="btn btn-dark btn-circle">4</a>
+            <p>Summary</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+
+    <div class="row mt-1">
+      <div class="col text-center">
+        <p>
+          Here is your ad<br />
+          Please verify that everything is as it should be. Next submit the ad.
+        </p>
+      </div>
+    </div>
+
+
+    <div class="row mt-xl-5 mt-sm-4 justify-content-lg-center">
+      <div class="col-lg-8">
+        <div class="jumbotron">
+
+          <section class="addetail-section">
+            <div class="container mt-3">
+              <div class="row">
+                <div class="col-12 d-flex justify-content-md-between align-items-center">
+                  <div>
+                    <h1 class="d-inline-flex pr-3">@ViewBag.AdInfo.Headline</h1>
+                  </div>
+                  <div class="d-none d-sm-block">
+                    <p class="p-0 m-0">
+                      Added @ViewBag.AdPriceReward.AdStartDate.Date
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <hr class="pt-0 mt-0 mb-0" />
+                </div>
+              </div>
+              <div class="row mt-2">
+                <div class="col-9 col-md-6">
+                  <div class="">
+                    <h4 class="d-inline-flex pr-3">Home & Garten</h4>
+                  </div>
+                </div>
+
+                <div class="col-3 col-md-6 d-block d-sm-none pl-0 text-right">
+
+                  <small class="text-muted ">03.01.2018</small>
+
+                </div>
+
+                <div class="col-12 col-md-6 text-right">
+                  <small class="text-muted align-top">Reward:</small>
+                  <button class="btn btn-secondary expire" data-toggle="popover" data-placement="top" title="Reward ends" data-content="When the time runs out, the reward is no longer rewarded.">
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h
+                  </button>
+                  <button class="btn btn-secondary reward ">@ViewBag.AdPriceReward.Price @ViewBag.Currency.</button>
+                </div>
+
+                <!-- <div class="col-12 col-md-6 text-right">
+                  Reward:<span class="badge badge-pill badge-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h</span>
+                </div> -->
+
+              </div>
+              <div class="row mt-5">
+                <div class="col-md-6">
+                  <img src="@_FileSavingPaths.UserAdsPath/@ViewBag.AdInfoImages.AdImageSelected" alt="" class="responsive img-fluid" style="border:1px solid #DDDDDD;">
+                  @*<img src="/html/img/Thumbnail1@2x.png" alt="" class="responsive img-fluid" style="border:1px solid #DDDDDD;">*@
+                  <p class="text-right"><small class="text-muted">Image 1 of 3</small></p>
+                  <div class="row d-flex justify-content-center">
+                    <div class="col-1 col-xl-2">
+                      <i class="fa fa-heart-o fa-2x text-muted  " aria-hidden="true"></i>
+                    </div>
+                    <div class="col-1 col-xl-2">
+                      <i class="fa fa-plus fa-2x text-muted  " aria-hidden="true"></i>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="container">
+                    <div class="row mt-2 align-items-center">
+                      <div class="col-auto p-0 col-sm-auto col-md-auto col-lg-auto pr-lg-0 col-xl-auto">
+                        @if (!string.IsNullOrEmpty(ViewBag.User.ProfileImageSelected))
+                        {
+                          <a class="avatar">
+                            <img src="@_FileSavingPaths.ProfileImage/@ViewBag.User.ProfileImageSelected" alt="@ViewBag.User.FullName" />
+                          </a>
+                        }
+                        else
+                        {<a class="avatar">
+                            <img src="~/Html/img/default-profile.png" alt="@ViewBag.User.FullName" />
+                          </a>
+                        }
+                      </div>
+                      <div class="col-7 col-sm-8 col-md-7 col-lg-7 col-xl-8 mr-lg-2 pr-xl-0 mr-xl-0">
+                        <small class="text-muted align-top">ad by</small><br />
+                        <h3>@ViewBag.User.FullName</h3>
+                      </div>
+                      <!-- <div class="col-3 pl-3 pr-0 col-sm-2 col-md-12 col-lg-2 col-xl-1 pr-md-0 pl-xl-4 ml-xl-1 text-center">
+                          <button class="btn btn-dark">Follow me</button>
+                      </div> -->
+                    </div>
+                  </div>
+
+                  <div class="container mt-2 pl-0 mt-4">
+                    <div class="row">
+                      <div class="col-12">
+                        <small class="text-muted align-top">Description</small><br />
+                        <p class="">
+                          @ViewBag.AdInfo.Description
+                          @*Nulla luctus dui in ultricies molestie. Duis tortor tellus, dapibus sit amet commodo dignissim, venenatis id orci. Aenean ac urna quis dui porttitor consequat id ac dolor. <br />
+
+                          </br/>
+                          Nam interdum, nisl a faucibus pellentesque, leo augue mollis libero, nec imperdiet enim nisi id dui. Cras pellentesque elit et varius imperdiet.
+                          <br />
+
+                          </br/>
+                          Proin gravida massa ac gravida semper. Etiam molestie tincidunt quam eget semper.*@
+
+
+                        </p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                        <span class="badge badge-dark mr-1">Info</span><span class="badge badge-dark mr-1">Grasshop</span><span class="badge badge-dark mr-1">Glassbottle</span><span class="badge badge-dark mr-1">Opener</span>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div> <!-- container -->
+          </section>
+        </div>
+      </div>
+
+    </div>
+    @using (Html.BeginForm("AdWizardStep4", "Ad", FormMethod.Post, new { id = "ad_wizard_step_4_form", @class = "mt-xl-5 mt-sm-4" }))
+    {
+      @Html.AntiForgeryToken()
+      @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+
+      <div class="form-group row d-flex justify-content-center">
+
+        <div class="col-sm-8 col-xl-8 pt-2">
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" id="gridCheck1">
+            <label class="form-check-label" for="gridCheck1">
+              I accept Find2Me Terms of <a href="">Use</a> and <a href="">Payment Terms</a> and is aware that my ad will be activated immediately. This may have a bearing on the right of withdrawal, which you can read more about <a href="">here</a>.
+            </label>
+          </div>
+        </div>
+      </div>
+
+
+      <style>
+
+        .summary {
+          border-top: 2px solid #ced4da;
+          ;
+          background-color: rgba(0, 0, 0, 0.05);
+          height: 100%;
+          padding: 30px;
+        }
+
+
+          .summary .summary-item:not(:last-of-type) {
+            padding-bottom: 10px;
+            padding-top: 10px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+          }
+
+          .summary .summary-item:(:last-of-type) {
+            border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+          }
+
+          .summary .text {
+            font-size: 1em;
+            font-weight: 600;
+          }
+
+            .summary .text:(:last-of-type) {
+              font-size: 1.5em;
+            }
+
+          .summary .price {
+            font-size: 1em;
+            float: right;
+          }
+      </style>
+
+      <div class="form-group row d-flex justify-content-center">
+        <div class="col-sm-8 col-xl-8 pt-2">
+          <h3>Payment</h3>
+        </div>
+      </div>
+      <div class="form-group row d-flex justify-content-center mt-5">
+        <label for="" class="col-sm-4 col-xl-2 col-form-label">
+          Cost of your ad:
+        </label>
+        <div class="col-sm-8 col-xl-6">
+          <div class="summary">
+            <div class="summary-item"><span class="text">Ad</span><span class="price">0.00 €</span></div>
+            <div class="summary-item"><span class="text">Exclusive ad ([period])</span><span class="price">4.00 €</span></div>
+            <!-- <div class="summary-item"><span class="text">Transaction & Administration (4.25%)  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Ad duration" data-content="Select a duration of your ad. Remember if your item is very special, the finder maybe need extra time for finding it for you. A few days before the ad period ends, you will receive an email."></i></span><span class="price">4.42 €</span></div> -->
+            <div class="summary-item pb-5"><span class="text"><strong>Total ad price</strong></span><span class="price"><strong>4.00 €</strong></span></div>
+
+            <div class="summary-item"><span class="text">Reward</span><span class="price">100.00 €</span></div>
+            <small>The reward is payed out, to the helper, when the item/porduct has been founded. The payout is a seperate transaction.</small>
+
+          </div>
+
+          <!-- <button type="button" class="btn btn-info">Total ad price: <strong>4.00€</strong></button>
+          <br/> -->
+          <!-- <small class="text-muted">incl. 4,25% transaction and administration fee.
+            <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Transaction and administration" data-content="For using our service we charge for the transaction fee withs covers the transaction costs and a administration fee witch covers the cost of administrating the site. "></i>
+
+          </small> -->
+        </div>
+      </div>
+
+
+      <!-- Creditcard section -->
+      <div class="form-group row d-flex justify-content-center mt-5">
+        <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+          Creditcard info:
+          <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Creditcard info" data-content="Add your creditcard infomation from where the reward etc. will be withdrawed."></i>
+          <br />
+          <img src="/html/img/visa.png" width="50" class="mr-1" />
+          <img src="/html/img/mastercard.png" width="50" class="mr-1" />
+        </label>
+        <div class="col-sm-8 col-xl-6">
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <label for="cc-name">Name on card</label>
+              <input type="text" class="form-control" id="cc-name" placeholder="" required="">
+              <small class="text-muted">Full name as displayed on card</small>
+              <div class="invalid-feedback">
+                Name on card is required
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <label for="cc-number">Credit card number</label>
+              <input type="text" class="form-control" id="cc-number" placeholder="" required="">
+              <div class="invalid-feedback">
+                Credit card number is required
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-8 col-sm-6">
+              <div class="form-group">
+                <label><span class="hidden-xs">Expiration</span> </label>
+                <div class="input-group">
+                  <input type="number" class="form-control" placeholder="MM" name="">
+                  <input type="number" class="form-control" placeholder="YY" name="">
+                </div>
+              </div>
+            </div>
+            <div class="col-4 col-sm-4">
+              <div class="form-group">
+                <label data-toggle="tooltip" title="" data-original-title="3 digits code on back side of the card">CVV <i class="fa fa-question-circle"></i></label>
+                <input type="number" class="form-control" required="">
+              </div> <!-- form-group.// -->
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr class="mt-5" />
+      <input type="hidden" id="adID" name="AdId" value="@ViewBag.AdId">
+      <div class="form-group row d-flex justify-content-center">
+        <input type="submit" name="SubmitAction" class="btn btn-secondary mr-2" role="button" value="@Strings.Back" />
+        <a href="/Ad/MyAds" class="btn btn-secondary mr-2" role="button">@Strings.SaveAdAsDraft</a>
+        <a href="/Ad/AdWizardStep5?adID=@ViewBag.AdId" class="btn btn-dark" role="button">@Strings.PayAndPublishAd</a>
+      </div>
+
+
+    }
+
+
+  </div>
+
+  </div>
+
+  </div> <!-- container -->
+</section><!-- adwizard-section -->

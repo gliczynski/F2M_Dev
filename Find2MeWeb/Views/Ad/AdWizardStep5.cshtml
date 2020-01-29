@@ -1,0 +1,166 @@
+﻿
+@{
+  ViewBag.Title = "Ad Wizard Step5";
+}
+
+<section class="adwizard-section">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">@Strings.Ad_Wizard_Step5_Thank_You</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+
+    <div class="row mt-xl-5 mt-sm-4 justify-content-lg-center mt-3">
+      <div class="col-sm-12 col-lg-6">
+        <div class="jumbotron">
+          <h3 class="display-5"><i class="fa fa-check" style="color:green"></i>&nbsp;&nbsp;@Strings.Ad_Wizard_Step5_Success</h3>
+          <p class="lead">@Strings.Ad_Wizard_Step5_Email_Confirmation</p>
+          <hr class="my-4">
+          <p>
+            <strong>@Strings.Ad_Wizard_Step5_What_Happens_Now?</strong><br />
+
+
+            <!-- If the ad is set to come online right now, this line is displayed -->
+            @Strings.Ad_Wizard_Step5_Description1 <a href="/Ad/MyAds">@Strings.Go_To_Ad</a>
+          </p>
+          <br />
+          <p>
+            <!-- If the ad is set to a start date in the future, show this line -->
+            @Strings.Ad_Wizard_Step5_Description2 2019/03/13 @Strings.Ad_Wizard_Step5_Description3
+          </p>
+
+          <p>
+            @Strings.Ad_Wizard_Step5_Description4
+          </p>
+          <br /><br />
+          <!-- Always show this section -->
+          <p>
+            @Strings.Ad_Wizard_Step5_Description5 <strong>@Strings.My_Ad</strong>. <a href="/Ad/MyAds">@Strings.Go_To_Ad</a>
+          </p>
+
+
+          <br /><br />
+          <!-- Always show this section -->
+          <p>
+            @Strings.Ad_Wizard_Step5_Description1
+          </p>
+          <br /><br />
+          Find2Me
+
+
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- container -->
+  <!-- 4 Navigation titles -->
+  <div class="container">
+    <div class="row justify-content-lg-center">
+      <div class="col-12 col-md-4 offset-md-2 col-xs-4 col-xl-3 offset-xl-0 p- mb-3">
+        <div class="card">
+          <div class="card-body pt-3 pb-3">
+            <div class="contaimer">
+
+              <div class="row">
+                <div class="col-2 no-gutters text-center">
+                  <img src="/html/img/icon-ad.png" class="responsive img-fluid" alt="">
+                </div>
+                <div class="col-10 pl-0 no-gutters">
+                  <h6 class="mb-0">CREATE ANOTHER AD</h6>
+                  <p class="mb-1" style="line-height:1.1">
+                    <small class="text-muted">So easy easy and so helpfull. Let other people help you.</small>
+                  </p>
+                  <a href="#">Create another ad here</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-4 offset-md-1 col-xs-4 col-xl-3 offset-xl-0 p- mb-3">
+        <div class="card">
+          <div class="card-body pt-3 pb-3">
+            <div class="contaimer">
+
+              <div class="row">
+                <div class="col-2 no-gutters text-center">
+                  <img src="/html/img/icon-spy.png" class="responsive img-fluid" alt="">
+                </div>
+                <div class="col-10 pl-0 no-gutters">
+                  <h6 class="mb-0">CREATE YOUR OWN AGENT</h6>
+                  <p class="mb-1" style="line-height:1.1">
+                    <small class="text-muted">Let your agent notify you, when someone are looking for what you have </small>
+                  </p>
+                  <a href="#">Create your agent here</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-4 offset-md-1 col-xs-4 col-xl-3 offset-xl-0 p- mb-3">
+        <div class="card">
+          <div class="card-body pt-3 pb-3">
+            <div class="contaimer">
+
+              <div class="row">
+                <div class="col-2 no-gutters text-center">
+                  <img src="/html/img/icon-money.png" class="responsive img-fluid" alt="">
+
+                </div>
+                <div class="col-10 pl-0 no-gutters">
+                  <h6 class="mb-0">EXPLORER ITEM TO FIND</h6>
+                  <p class="mb-1" style="line-height:1.1">
+                    <small class="text-muted">Help your fellows and find what they are looing for and earn money</small>
+                  </p>
+                  <a href="#">Go to reward given ads</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- <div class="col-12 col-md-4 offset-md-1 col-xs-4 col-xl-4 p-0 mb-3">
+          <div class="card">
+              <div class="card-body pt-3 pb-3">
+                  <div class="contaimer">
+
+                      <div class="row">
+                          <div class="col-2 no-gutters text-center">
+                              <img src="img/icon-shape.png" class="responsive img-fluid" alt="">
+                          </div>
+                          <div class="col-10 pl-0 no-gutters">
+                              <h6 class="mb-0">FIND A RELATION</h6>
+                              <p class="mb-1" style="line-height:1.1">
+                                  <small class="text-muted">Looking for a shopping friend, a nanny, a study body or another kind of relation</small>
+                              </p>
+                              <a href="#">Find one here</a>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div> -->
+    </div>
+    <!-- Other links front og profile page -->
+    <div class="row mt-1">
+      <div class="col text-center">
+        <p>
+          <br /><br />
+          <a href="" class="mr-5">Go to frontpage</a>
+          <a href="">Go to your profile page</a>
+        </p>
+      </div>
+    </div>
+
+
+</section><!-- adwizard-section -->

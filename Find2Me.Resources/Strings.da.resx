@@ -387,4 +387,124 @@
   <data name="AdWizard_Step4_IconText" xml:space="preserve">
     <value>Resumé</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>Kategori</value>
+  </data>
+  <data name="CategoryRequired" xml:space="preserve">
+    <value>Vælg en kategori.</value>
+  </data>
+  <data name="Fake" xml:space="preserve">
+    <value>Falske</value>
+  </data>
+  <data name="FakeDescription" xml:space="preserve">
+    <value>Falske - produktet kan være en falsk eller en kopi</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="OriginalDescription" xml:space="preserve">
+    <value>Original - Produktet skal til et originalt produkt</value>
+  </data>
+  <data name="OriginalRequired" xml:space="preserve">
+    <value>Vælg om produktet er originalt eller falsk</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NewDescription" xml:space="preserve">
+    <value>Nyt - originalt produkt ikke brugt</value>
+  </data>
+  <data name="StateRequired" xml:space="preserve">
+    <value>Vælg produktets tilstand</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="UsedDescription" xml:space="preserve">
+    <value>Brugt - produktet er brugt</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Beskrivelse</value>
+  </data>
+  <data name="DescriptionPlaceholder" xml:space="preserve">
+    <value>Beskriv produktet i detaljer</value>
+  </data>
+  <data name="EnterHeadlinePlaceholder" xml:space="preserve">
+    <value>Overskrift af annoncen</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Overskrift</value>
+  </data>
+  <data name="HeadlineDescriptionRequired" xml:space="preserve">
+    <value>Indtast beskrivelsen af ​​annoncen.</value>
+  </data>
+  <data name="HeadlineRequired" xml:space="preserve">
+    <value>Angiv en overskrift for annoncen.</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>Stat</value>
+  </data>
+  <data name="SupportedImageTypeAndSize" xml:space="preserve">
+    <value>Upload den understøttede filtype som jpeg, giff, png eller tiff, og størrelsen skal være</value>
+  </data>
+  <data name="Ad_Wizard_Step3_Description_Text1" xml:space="preserve">
+    <value>Navngiv din pris, som du er villig til at betale, hvis nogen finder din vare.</value>
+  </data>
+  <data name="Ad_Wizard_Step3_Description_Text2" xml:space="preserve">
+    <value>Du kan også vælge at betale en belønning til finderen på din vare. Udfyld nedenstående formular.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description1" xml:space="preserve">
+    <value>Din annonce er online lige nu og kan ses af alle. Du kan gå og se det lige her.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description2" xml:space="preserve">
+    <value>Din annonce kommer online på</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description3" xml:space="preserve">
+    <value>for alle at se.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description4" xml:space="preserve">
+    <value>Du får besked med en e-mail, hver gang nogen finder eller stiller spørgsmål om din vare / produkt.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description5" xml:space="preserve">
+    <value>Du kan se alle dine annoncer og følge, hvad der sker på dem. I din profilsektion har vi oprettet et afsnit kaldet</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description6" xml:space="preserve">
+    <value>Håber, at din vare / produkt bliver fundet meget snart.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Email_Confirmation" xml:space="preserve">
+    <value>Der er sendt en e-mail til [bruger-e-mail-adresse] med bekræftelse på din annonce.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Success" xml:space="preserve">
+    <value>Din annonce er blevet oprettet.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Thank_You" xml:space="preserve">
+    <value>Tak for din annonce</value>
+  </data>
+  <data name="Ad_Wizard_Step5_What_Happens_Now" xml:space="preserve">
+    <value>Hvad sker der nu?</value>
+  </data>
+  <data name="Go_To_Ad" xml:space="preserve">
+    <value>Gå til annonce</value>
+  </data>
+  <data name="Go_To_My_Ads" xml:space="preserve">
+    <value>Gå til mine annoncer</value>
+  </data>
+  <data name="My_Ad" xml:space="preserve">
+    <value>Mine annoncer</value>
+  </data>
+  <data name="PayAndPublishAd" xml:space="preserve">
+    <value>Betal og offentliggør annonce</value>
+  </data>
+  <data name="SaveAdAsDraft" xml:space="preserve">
+    <value>Gem som kladde</value>
+  </data>
+  <data name="Ad_Wizard_Step_3_Your_Price" xml:space="preserve">
+    <value>Din pris</value>
+  </data>
+  <data name="Please_Select" xml:space="preserve">
+    <value>Vælg venligst</value>
+  </data>
 </root>

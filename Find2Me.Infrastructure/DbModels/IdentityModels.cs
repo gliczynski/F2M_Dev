@@ -82,10 +82,13 @@ namespace Find2Me.Infrastructure.DbModels
 
         public DbSet<UserProfileImageData> UserProfileImageDatas { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<UserFollower> UserFollowers { get; set; }
 
         public DbSet<UserAd> UserAds { get; set; }
         public DbSet<UserAdImage> UserAdImages { get; set; }
+        public DbSet<UserAdInformation> UserAdInformation { get; set; }
+        public DbSet<UserAdPriceReward> UserAdPriceReward { get; set; }
 
         public DbSet<Logs> Logs { get; set; }
 

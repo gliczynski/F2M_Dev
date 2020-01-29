@@ -1,0 +1,631 @@
+﻿@model Find2Me.Infrastructure.ViewModels.UserAdPriceRewardVM
+@using Find2Me.Infrastructure;
+@{
+  // Page Tilte
+  ViewBag.Title = "Ad Wizard Step3";
+
+  // Drop Downs Definations
+
+  // adCategoryDD
+  var adCategory = new List<SelectListItem>();
+  adCategory.Add(new SelectListItem { Text = Strings.Please_Select, Value = "0", Selected = true });
+  adCategory.Add(new SelectListItem { Text = "Free of chare", Value = "1" });
+  adCategory.Add(new SelectListItem { Text = "Price range", Value = "2" });
+  adCategory.Add(new SelectListItem { Text = "Fixed price", Value = "3" });
+
+  // ad duration
+  var adDuration = new List<SelectListItem>();
+  adDuration.Add(new SelectListItem { Text = "Choose duration period", Value = "0", Selected = true });
+  adDuration.Add(new SelectListItem { Text = "1 month", Value = "30" });
+  adDuration.Add(new SelectListItem { Text = "2 months", Value = "60" });
+  adDuration.Add(new SelectListItem { Text = "3 months", Value = "90" });
+  adDuration.Add(new SelectListItem { Text = "6 months", Value = "180" });
+  adDuration.Add(new SelectListItem { Text = "1 year", Value = "365" });
+
+  // reward expiration
+  var rewardExpiration = new List<SelectListItem>();
+  rewardExpiration.Add(new SelectListItem { Text = "Choose reward expiration", Value = "0", Selected = true });
+  rewardExpiration.Add(new SelectListItem { Text = "No expiration (recommended)", Value = "1" });
+  rewardExpiration.Add(new SelectListItem { Text = "24 hours", Value = "2" });
+  rewardExpiration.Add(new SelectListItem { Text = "48 hours", Value = "3" });
+  rewardExpiration.Add(new SelectListItem { Text = "5 days", Value = "4" });
+  rewardExpiration.Add(new SelectListItem { Text = "1 month", Value = "5" });
+
+  // exclusive ad period
+  var exclusiveAdPeriod = new List<SelectListItem>();
+  exclusiveAdPeriod.Add(new SelectListItem { Text = "Choose exclusive period", Value = "0", Selected = true });
+  exclusiveAdPeriod.Add(new SelectListItem { Text = "1 day", Value = ViewBag.ExclusiveAdPriceOneDay });
+  exclusiveAdPeriod.Add(new SelectListItem { Text = "2 days", Value = ViewBag.ExclusiveAdPriceTwoDays });
+  exclusiveAdPeriod.Add(new SelectListItem { Text = "1 week", Value = ViewBag.ExclusiveAdPriceOneWeek });
+  exclusiveAdPeriod.Add(new SelectListItem { Text = "1 month", Value = ViewBag.ExclusiveAdPriceTwoWeeks });
+}
+
+
+
+<section class="adwizard-section">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">New ad</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+    <style media="screen">
+      .stepwizard-step p {
+        margin-top: 10px;
+      }
+
+      .stepwizard-row {
+        display: table-row;
+      }
+
+      .stepwizard {
+        display: table;
+        width: 75%;
+        position: relative;
+      }
+
+      .stepwizard-step a[disabled] {
+        opacity: 1 !important;
+        filter: alpha(opacity=100) !important;
+        background-color: #fff;
+        border-color: #ccc;
+      }
+
+      .stepwizard-row:before {
+        top: 14px;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        z-order: 0;
+      }
+
+      .stepwizard-step {
+        display: table-cell;
+        text-align: center;
+        position: relative;
+      }
+
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+
+      .pricefixed, .pricerange {
+        display: none !important;
+      }
+
+      .setreward, .rewardamount {
+        display: none !important;
+      }
+
+      .exclusiveperiod {
+        display: none !important;
+      }
+    </style>
+
+    <div class="row mt-5">
+      <div class="col">
+        <div class="row">
+          <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
+            <div class="stepwizard-row"> </div>
+          </div>
+        </div>
+        <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
+
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-1" type="button" class="btn btn-default btn-circle" disabled="disabled">1</a>
+            <p>@Strings.AdWizard_Step1_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>@Strings.AdWizard_Step2_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-3" type="button" class="btn btn-dark btn-circle">3</a>
+            <p>@Strings.AdWizard_Step3_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+            <p>@Strings.AdWizard_Step4_IconText</p>
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col text-center">
+            <p>
+              @Strings.Ad_Wizard_Step3_Description_Text1<br />	@Strings.Ad_Wizard_Step3_Description_Text2
+            </p>
+          </div>
+        </div>
+
+
+        @using (Html.BeginForm("AdWizardStep3", "Ad", FormMethod.Post, new { id = "ad_wizard_step_3_form", @class = "mt-xl-5 mt-sm-4" }))
+        {
+          @Html.AntiForgeryToken()
+          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+          <!-- Ad Category -->
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              @Strings.Ad_Wizard_Step_3_Your_Price:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top"
+                 title="@Strings.Category" data-content="Select the category that fits your product best."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.PriceCategoryId, adCategory, new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.PriceCategoryId, "", new { @class = "text-danger price_category_id" })
+            </div>
+          </div>
+
+          <!-- Price Range -->
+          <div class="form-group hide-element row justify-content-center mt-3 pricerange" id="">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+
+              <!-- <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Item headline" data-content="Enter a exact and catchy headline for your product."></i> -->
+            </label>
+            <div class="col-sm-8 col-xl-6">
+
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Price range:</span>
+                  <span class="input-group-text">€</span>
+                </div>
+                @Html.EditorFor(model => model.PriceMin, new { htmlAttributes = new { @class = "form-control", placeholder = "Min Price" } })
+                @Html.EditorFor(model => model.PriceMax, new { htmlAttributes = new { @class = "form-control", placeholder = "Max Price" } })
+
+                @*<input type="text" name="PriceMin" value="0" aria-label="First name" class="form-control" placeholder="From">
+                  <input type="text" name="PriceMax" value="0" aria-label="Last name" class="form-control" placeholder="To">*@
+              </div>
+              <div style="display: block">
+                @Html.ValidationMessageFor(model => model.PriceMin, "", new { @class = "text-danger price_min" })
+              </div>
+              <div style="display: block">
+                @Html.ValidationMessageFor(model => model.PriceMax, "", new { @class = "text-danger price_max" })
+              </div>
+            </div>
+          </div>
+
+          <!-- Price Fixed -->
+          <div class="form-group row d-flex justify-content-center mt-3 pricefixed">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+
+              <!-- <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Item headline" data-content="Enter a exact and catchy headline for your product."></i> -->
+            </label>
+            <div class="col-sm-8 col-xl-6">
+
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Fixed price:</span>
+                  <span class="input-group-text">€</span>
+                </div>
+                @Html.EditorFor(model => model.Price, new { htmlAttributes = new { @class = "form-control", placeholder = "Fixed Price" } })
+                @*<input type="text" aria-label="fixedPrice" value="0" name="Price" class="form-control" placeholder="Price">*@
+              </div>
+              @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger fixed_price" })
+            </div>
+          </div>
+
+          <!-- Ad StartDate -->
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              Ad startdate:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top"
+                 title="Ad startdate"
+                 data-content="Pick a startdate. The default startdate will be today. Both the start and end date is included in the period."></i>
+
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              <div class="row">
+                <div class="col-sm-4 col-lg-3 ">
+                  <div class="date">
+                    @Html.EditorFor(model => model.AdStartDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.Price, "", new { @class = "text-danger" })
+                    @*<input type="text" name="AdStartDate" class="form-control input-append">*@<span class="input-group-addon">
+                      <i class="glyphicon glyphicon-th"></i>
+                    </span>
+                  </div>
+                </div>
+                <div class="col-sm-4 col-lg-6 pt-2 d-flex">
+                  Ad end date will be: <span class="adend"></span>
+                  <input type="text" id="ad_end_date_server_value" name="AdEndDate" hidden value="" />
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Ad Duration -->
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              Ad duration:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top"
+                 title="Ad duration"
+                 data-content="Select a duration of your ad. Remember if your item is very special, the finder maybe need extra time for finding it for you. A few days before the ad period ends, you will receive an email."></i>
+
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.AdDuration, adDuration, new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.AdDuration, "", new { @class = "text-danger ad_duration" })
+            </div>
+          </div>
+
+          <!-- Is Reward Check -->
+          <div class="form-group row d-flex justify-content-center">
+            <label for="gridCheck1" class="col-sm-4 col-xl-2 col-form-label">
+              Reward: <i class="fa fa-question-circle"
+                         aria-hidden="true" data-toggle="popover" data-placement="top" title="Reward"
+                         data-content="To speed up your findings - add an reward. The reward is payout when you accept a finding. An reward can't be cancel upon creation."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6 pt-2">
+              <div class="form-check ">
+                @Html.CheckBoxFor(model => model.IsReward, htmlAttributes: new { @checked = false, @class = "form-check-input" })
+                @*<input value="true" class="form-check-input" name="IsReward" type="checkbox" id="rewardcheck">*@
+                <label class="form-check-label" for="IsReward">
+                  Yes, I will grant a reward to the finder
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Reward Amount -->
+          <div class="form-group row d-flex justify-content-center mt-3 rewardamount">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+
+              <!-- <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Item headline" data-content="Enter a exact and catchy headline for your product."></i> -->
+            </label>
+            <div class="col-sm-8 col-xl-6">
+
+
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Reward amount:</span>
+                  <span class="input-group-text">€</span>
+                </div>
+                @Html.EditorFor(model => model.RewardAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter Reward Amount" } })
+                @*<input type="number" name="RewardAmount" aria-label="rewardamount" id="reward_amount" class="form-control" placeholder="Reward amount">*@
+                <div class="">
+                </div>
+
+              </div>
+              @Html.ValidationMessageFor(model => model.RewardAmount, "", new { @class = "text-danger reward_amount" })
+
+              <small id="categoryHelpBlock" class="form-text text-muted">
+                What reward are you willing to pay to the finder. <br /><strong>Note</strong>: The reward can't be
+                cancel after creation.
+              </small>
+            </div>
+          </div>
+
+          <!-- Reward Duration -->
+          <div class="form-group row d-flex justify-content-center mt-3 setreward">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+
+              <!-- <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Item headline" data-content="Enter a exact and catchy headline for your product."></i> -->
+            </label>
+            <div class="col-sm-8 col-xl-6">
+
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <label class="input-group-text" for="inputGroupSelect01">
+                    Set reward expiration
+                    &nbsp;<i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover"
+                             data-placement="top" title="Reward expiration"
+                             data-content="Select a reward expiration period. Remember that, if your item is very special, the finder maybe need extra time for finding it for you. We recommend to set no expiration period, only if the you really need to find the item fast. When 'No expiration' is selected, the reward is given no matter what. "></i>
+
+                  </label>
+                </div>
+                @Html.DropDownListFor(model => model.RewardExpiration, rewardExpiration, new { @class = "custom-select" })
+              </div>
+              @Html.ValidationMessageFor(model => model.RewardExpiration, "", new { @class = "text-danger reward_expiration" })
+
+              <!-- <small id="categoryHelpBlock" class="form-text text-muted">
+                Note: When "No expiration" is selected, the reward is given no matter what.
+              </small> -->
+            </div>
+          </div>
+
+          <!-- Is Exclusive Ad -->
+          <div class="form-group row d-flex justify-content-center">
+            <label for="exclusivecheck" class="col-sm-4 col-xl-2 col-form-label">
+              Exclusive ad:
+              &nbsp;<i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top"
+                       title="Exclusive ad"
+                       data-content="Get your ad displayed in a large format randomly in the exclusive ad section on the frontpage and when people explorer the ad category. Select a period."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6 pt-2">
+              <div class="form-check">
+                @Html.CheckBoxFor(model => model.IsExclusiveAd, htmlAttributes: new { @checked = true, @class = "form-check-input" })
+                @*<input class="form-check-input" name="IsExclusiveAd" type="checkbox" id="exclusivecheck">*@
+                <label class="form-check-label" for="exclusivecheck">
+                  Yes, show my ad randomly in the exclusive section.
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <!-- Exclusive Ad Duration -->
+          <div class="form-group row d-flex justify-content-center exclusiveperiod">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              Select exclusive period:
+              <!-- <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Ad duration" data-content="Select a duration of your ad. Remember if your item is very special, the finder maybe need extra time for finding it for you. A few days before the ad period ends, you will receive an email."></i> -->
+
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.ExclusiveAdPeriod, exclusiveAdPeriod, new { @class = "custom-select" })
+              @Html.ValidationMessageFor(model => model.ExclusiveAdPeriod, "", new { @class = "text-danger exclusive_ad_period" })
+            </div>
+          </div>
+
+          <style>
+            .summary {
+              border-top: 2px solid #ced4da;
+              ;
+              background-color: rgba(0, 0, 0, 0.05);
+              height: 100%;
+              padding: 30px;
+            }
+
+
+              .summary .summary-item:not(:last-of-type) {
+                padding-bottom: 10px;
+                padding-top: 10px;
+                border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+              }
+
+              .summary .summary-item:(:last-of-type) {
+                border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+              }
+
+              .summary .text {
+                font-size: 1em;
+                font-weight: 600;
+              }
+
+                .summary .text:(:last-of-type) {
+                  font-size: 1.5em;
+                }
+
+              .summary .price {
+                font-size: 1em;
+                float: right;
+                margin-left: 6px;
+              }
+          </style>
+
+          <div class="form-group row d-flex justify-content-center mt-5">
+            <label for="" class="col-sm-4 col-xl-2 col-form-label">
+              Cost of your ad
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              <div class="summary">
+                <div class="summary-item"><span class="text">Ad</span><span class="price">@ViewBag.Currency &nbsp;</span><span class="price" id="ad_price"> @ViewBag.AdPrice </span></div>
+                <div class="summary-item"><span class="text">Exclusive ad [<span id="period_ad_exclusive"></span>]</span><span class="price">@ViewBag.Currency &nbsp;</span><span class="price" id="period_ad_price">0.00 </span></div>
+                <!-- <div class="summary-item"><span class="text">Transaction & Administration (4.25%)  <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Ad duration" data-content="Select a duration of your ad. Remember if your item is very special, the finder maybe need extra time for finding it for you. A few days before the ad period ends, you will receive an email."></i></span><span class="price">4.42 €</span></div> -->
+                <div class="summary-item pb-5"><span class="text"><strong>Total ad price</strong><span class="price">@ViewBag.Currency &nbsp;</span></span><span class="price"><strong id="total_ad_price">0.00 </strong></span></div>
+
+                <div class="summary-item"><span class="text">Reward</span><span class="price">@ViewBag.Currency &nbsp;</span><span class="price" id="reward_price_amount">0.00 </span></div>
+                <small>The reward is payed out, to the helper, when the item/porduct has been founded.  The payout is a seperate transaction.</small>
+
+              </div>
+            </div>
+          </div>
+          <hr class="mt-5" />
+          <input type="hidden" id="adID" name="AdId" value="@ViewBag.AdId">
+          <div class="form-group row d-flex justify-content-center">
+            <input type="submit" name="SubmitAction" class="btn btn-secondary mr-2" role="button" value="@Strings.Back" />
+            @*<a href="ad_wizard3.html" class="btn btn-dark" role="button">Next</a>*@
+            <input type="submit" name="SubmitAction" id="save_btn" class="btn btn-dark" role="button" value="@Strings.Next" />
+          </div>
+
+        }
+      </div>
+
+    </div>
+
+  </div> <!-- container -->
+</section><!-- adwizard-section -->
+
+@section Scripts{
+  @Scripts.Render("~/bundles/jqueryval")
+
+  <script src="~/Scripts/adwizardstep3.js"></script>
+  <script>
+    // validation on blur
+    $('#PriceCategoryId').blur((e) => {
+      if (e.target.value == 0) {
+        $('.price_category_id').html('Please select ad category');
+      }
+    });
+
+    $('#PriceMin').blur((e) => {
+      if (e.target.value == 0) {
+        $('.price_min').html('Please enter min price (must be atleast 1)');
+      }
+    });
+
+    $('#PriceMax').blur((e) => {
+      if (e.target.value == 0) {
+        $('.price_max').html('Please enter max price (must be greater then min price)');
+      }
+    });
+
+    $('#Price').blur((e) => {
+      if (e.target.value == 0) {
+        $('.fixed_price').html('Please enter fixed price');
+      }
+    });
+
+    $('#AdDuration').blur((e) => {
+      if (e.target.value == 0) {
+        $('.ad_duration').html('Please select ad duration');
+      }
+    });
+
+    $('#RewardAmount').blur((e) => {
+      if (e.target.value == 0) {
+        $('.reward_amount').html('Please enter reward amount');
+      }
+    });
+
+    $('#RewardExpiration').blur((e) => {
+      if (e.target.value == 0) {
+        $('.reward_expiration').html('Please select reward expiration');
+      }
+    });
+
+    $('#ExclusiveAdPeriod').blur((e) => {
+      if (e.target.value === '0') {
+        $('.exclusive_ad_period').html('Please select exclusive ad period');
+      }
+    });
+
+    // when next btn is pressed then perform onclick event
+    $('#save_btn').click((e) => {
+      e.preventDefault();
+
+      let priceCategoryId = $('#PriceCategoryId').val();
+      let priceMin = $('#PriceMin').val();
+      let priceMax = $('#PriceMax').val();
+      let priceFixed = $('#Price').val();
+      let adDuration = $('#AdDuration').val();
+      let isRewardCheck = $('#IsReward').is(":checked") ? true : false;
+      let rewardAmount = $('#RewardAmount').val();
+      let rewardExpiration = $('#RewardExpiration').val();
+      let isExclusiveCheck = $('#IsExclusiveAd').is(":checked") ? true : false;
+      let exclusiveAdPeriod = $('#ExclusiveAdPeriod').val();
+      let isValidated = true;
+
+      // validate ad category for range and fixed price
+      if (priceCategoryId == 0) {
+        $('.price_category_id').html('Please select ad category');
+        isValidated = false;
+      } else if (priceCategoryId == 2) {
+        if (priceMin != 1) {
+          $('.price_min').html('Please enter min price (must be atleast 1)');
+          isValidated = false;
+        }
+
+        if (priceMax == '' || priceMax == 0) {
+          $('.price_max').html('Please enter max price (must be greater then min price)');
+          isValidated = false;
+        }
+
+        if (priceMax <= priceMin) {
+          $('.price_max').html('The max price should be greater then the min price');
+          isValidated = false;
+        }
+      } else if (priceCategoryId == 3) {
+        if (priceFixed == '' || priceFixed == 0) {
+          $('.fixed_price').html('Please enter fixed price');
+          isValidated = false;
+        }
+      }
+
+      // validate ad duration
+      if (adDuration == 0) {
+        $('.ad_duration').html('Please select ad duration');
+        isValidated = false;
+      }
+
+      // validate is reward check
+      if (isRewardCheck) {
+        if (rewardAmount == '' || rewardAmount == 0) {
+          $('.reward_amount').html('Please enter reward amount');
+          isValidated = false;
+        }
+
+        if (rewardExpiration == 0) {
+          $('.reward_expiration').html('Please select reward expiration');
+          isValidated = false;
+        }
+      }
+
+      // validate is exclusive check
+      if (isExclusiveCheck) {
+        if (exclusiveAdPeriod === '0') {
+          $('.exclusive_ad_period').html('Please select exclusive ad period');
+          isValidated = false;
+        }
+      }
+
+      // complete valiadte by checking that all fields are properly validated or not
+      if (isValidated == false) {
+        return false;
+      }
+
+      // submit the form after all validations
+      $('#ad_wizard_step_3_form').submit();
+
+    });
+
+    //// Exclusive Ad Append Accordingly to Ad Duration
+    //const exclusiveslect = document.querySelector("#ExclusiveAdPeriod");
+    //const timePeriod = document.querySelector("#AdDuration");
+    //const adend = document.querySelector(".adend");
+
+    timePeriod.addEventListener("change", (e) => {
+
+      adend.textContent = addDays($("#AdStartDate").val(), parseInt(e.target.value));
+
+      if (e.target.value === "30") {
+        exclusiveslect.innerHTML = `<option value="0">Select period</option><option value="@ViewBag.ExclusiveAdPriceOneDay">1 day</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoDays">2 days</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneWeek">1 week</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoWeeks">2 weeks</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneMonth">1 month</option>`;
+      } else if (e.target.value === "60") {
+        exclusiveslect.innerHTML = `<option value="0">Select period</option><option value="@ViewBag.ExclusiveAdPriceOneDay">1 day</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoDays">2 days</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneWeek">1 week</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoWeeks">2 weeks</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneMonth">1 month</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoMonths">2 months</option>`;
+      } else if (e.target.value === "90") {
+        exclusiveslect.innerHTML = `<option value="0">Select period</option><option value="@ViewBag.ExclusiveAdPriceOneDay">1 day</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoDays">2 days</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneWeek">1 week</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoWeeks">2 weeks</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneMonth">1 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoMonths">2 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceThreeMonths">3 months</option>`;
+      } else if (e.target.value === "180") {
+        exclusiveslect.innerHTML = `<option value="0">Select period</option><option value="@ViewBag.ExclusiveAdPriceOneDay">1 day</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoDays">2 days</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneWeek">1 week</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoWeeks">2 weeks</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneMonth">1 month</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoMonths">2 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceThreeMonths">3 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceSixMonths">6 months</option>`;
+      } else if (e.target.value === "365") {
+        exclusiveslect.innerHTML = `<option value="0">Select period</option><option value="@ViewBag.ExclusiveAdPriceOneDay">1 day</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoDays">2 days</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneWeek">1 week</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoWeeks">2 weeks</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneMonth">1 month</option>
+            <option value="@ViewBag.ExclusiveAdPriceTwoMonths">2 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceThreeMonths">3 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceSixMonths">6 months</option>
+            <option value="@ViewBag.ExclusiveAdPriceOneYear">1 year</option>`;
+      }
+
+    });
+  </script>
+
+}

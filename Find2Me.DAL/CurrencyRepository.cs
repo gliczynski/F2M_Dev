@@ -7,12 +7,10 @@ using System.Threading.Tasks;
 
 namespace Find2Me.DAL
 {
-    public class CurrencyRepository : DbRepository<Currency>
+  public class CurrencyRepository : DbRepository<Currency>
+  {
+    public CurrencyRepository(ApplicationDbContext context) : base(context)
     {
-        public CurrencyRepository(ApplicationDbContext context) : base(context)
-        {
-        }
-
-
     }
+  }
 }

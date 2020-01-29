@@ -1,0 +1,150 @@
+﻿
+@{
+  ViewBag.Title = "MyAds";
+}
+
+<section class="adlist-section">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">My Ads</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+
+
+
+    <div class="row mt-1">
+      <div class="col-xs-12 col-lg-7 text-left d-flex align-items-center">
+        <p>
+          Here is all your ads<br />
+          Click on an ad for editing or deletion.
+        </p>
+      </div>
+      <div class="col-xs-12 col-lg-5 mt-2">
+        <div class="form-group row align-items-right">
+          <label for="exampleFormControlSelect1" class="col-sm-4 col-md-4 pt-1 text-right">Sort by:</label>
+          <select class="form-control col-sm-6 col-md-5 col-xl-4" id="exampleFormControlSelect1">
+            <option>Lateste</option>
+            <option>Finder(s) Attached</option>
+            <option>Expired</option>
+            <option>Active ads</option>
+            <option>Has new messages</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="container mt-3">
+
+      <!-- card layout -->
+      <div class="row">
+        @if (ViewBag.UserAds.Count != 0)
+        {
+          foreach (var item in ViewBag.UserAds)
+          {
+            <div class="col-sm-12 col-md-12 col-lg-6">
+
+              <!-- <div class="card-deck"> -->
+              <!-- a card -->
+
+              <div class="card mb-3">
+                <div class="row no-gutters">
+                  <div class="col-md-6 col-lg-12 col-xl-5">
+                    <img src="/html/img/Thumbnail5@2x.png" width="100%" class="card-img" alt="...">
+                  </div>
+                  <div class="col-md-6 col-lg-12 col-xl-7">
+                    <div class="card-body pb-xl-0">
+                      <h4 class="card-title mb-0">Beer bottles with closure tab</h4>
+                      <small>Home & Garten</small>
+                      <div class="row mt-2">
+                        <div class="col-6">
+                          <small class="text-muted align-top">Reward:</small><br />
+                          <span class="badge badge-secondary"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;19h</span>
+                          <span class="badge badge-secondary">40.00 €</span>
+
+                          <!-- <button class="btn btn-secondary expire p-1" data-toggle="popover" data-placement="top" title="Reward ends" data-content="When the time runs out, the reward is no longer rewarded.">
+                            <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;24h
+                          </button>
+                          <button class="btn btn-secondary reward p-1">100,00 kr.</button> -->
+                        </div>
+                        <div class="col-3">
+                          <small class="text-muted align-top">Views:</small><br />
+                          1.312
+                        </div>
+                        <div class="col-3">
+                          <small class="text-muted align-top">Likes:</small><br />
+                          2.312
+                        </div>
+                      </div>
+                      <div class="row mt-2">
+                        <div class="col-6">
+                          <small class="text-muted align-top pb-0">Staus:</small><br />
+                          @if (item.IsDraft)
+                          {
+                            <p class="p-0 greenTxt">
+                              Draft
+                            </p>
+                          }
+                          else
+                          {
+                            <p class="p-0 greenTxt">
+                              Active
+                            </p>
+                          }
+                          <small class="text-muted align-top pb-0">Messages:</small><br />
+                          <h4 class="d-flex justify-content-left">
+                            <span class="badge badge-success">2 new messages</span>
+                          </h4>
+                        </div>
+                        <div class="col-6">
+
+                          <small class="text-muted align-top pb-0">Expire:</small><br />
+                          <p class="p-0">2019-04-30 &nbsp;(23d)</p>
+                          <small class="text-muted align-top pb-0">Finders attached:</small><br />
+                          <h4 class="d-flex justify-content-left">
+                            <span class="badge badge-info">2</span>
+                          </h4>
+
+
+
+                        </div>
+
+
+                        <!-- <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                        <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> -->
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- a card end -->
+              </div>
+
+            </div>
+          }
+        }
+        else
+        {
+          <div class="col-sm-12 col-md-12 col-lg-12">
+            <div class="card mb-3">
+              <div class="row no-gutters">
+                <div class="col-md-12 col-lg-12 col-xl-12 text-center">
+                  <p>You have no ads at the moment.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        }
+        <!-- </div> <!-- Card deck -->
+      </div>
+
+    </div> <!-- container -->
+</section><!-- adwizard-section -->

@@ -1,213 +1,209 @@
 ﻿@model Find2Me.Infrastructure.ViewModels.UserProfileVM
 @using Find2Me.Infrastructure;
 @{
-    ViewBag.Title = "Step2";
-    string ExternalProviderType = User.Identity.GetExternalProviderType();
+  ViewBag.Title = "Step2";
+  string ExternalProviderType = User.Identity.GetExternalProviderType();
 }
 
 @section Styles{
-    <link href="~/Content/plugins/cropperjs-master/dist/cropper.min.css" rel="stylesheet" />
-    <style>
-        .img-container,
-        .preview {
-            overflow: hidden;
-        }
-    </style>
+  <link href="~/Content/plugins/cropperjs-master/dist/cropper.min.css" rel="stylesheet" />
+  <style>
+    .img-container,
+    .preview {
+      overflow: hidden;
+    }
+  </style>
 }
 
 <section class="regwizard-section">
-    <div class="container mt-3">
+  <div class="container mt-3">
+    <div class="row">
+
+      <!-- Headline of the page -->
+
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">@Strings.Wizard_PageHeading</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+
+
+    <div class="row mt-5">
+      <div class="col">
+
+        <!-- TABS FOR WIZARD -->
         <div class="row">
-
-            <!-- Headline of the page -->
-
-            <div class="col-12 d-flex justify-content-md-between align-items-center">
-                <div>
-                    <h1 class="d-inline-flex pr-3">@Strings.Wizard_PageHeading</h1>
-                </div>
-            </div>
+          <div class="col-11 mr-0 col-xl-6 offset-xl-3">
+            <div class="stepwizard-row"> </div>
+          </div>
         </div>
-        <div class="row">
-            <div class="col">
-                <hr class="pt-0 mt-0 mb-0" />
-            </div>
+        <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
+
+          <div class="col-4 col-xl-2 stepwizard-step">
+            <a href="#step-1" class="btn btn-default btn-circle" disabled="disabled">1</a>
+            <p>@Strings.ProfileWizard_ProfileStep1</p>
+          </div>
+          <div class="col-4 col-xl-2 stepwizard-step">
+            <a href="#step-2" class="btn btn-dark btn-circle">2</a>
+            <p>@Strings.ProfileWizard_ProfileStep2</p>
+          </div>
+          <div class="col-4 col-xl-2 stepwizard-step ">
+            <a href="#step-3" type="class=" btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>@Strings.ProfileWizard_ProfileStep3</p>
+          </div>
         </div>
 
+        <!-- Text section -->
+        <div class="row mt-1">
+          <div class="col text-center">
+            <p>
+              <strong>@Strings.Step2_ProfileDescriptionText1</strong><br />@Strings.Step2_ProfileDescriptionText2<br />
+            </p>
 
-        <div class="row mt-5">
-            <div class="col">
+          </div>
+        </div>
 
-                <!-- TABS FOR WIZARD -->
-                <div class="row">
-                    <div class="col-11 mr-0 col-xl-6 offset-xl-3">
-                        <div class="stepwizard-row"> </div>
-                    </div>
+        <!-- Form for collecting user information -->
+        @using (Html.BeginForm("Step2", "Profile", FormMethod.Post, new { id = "profile_info_form" }))
+        {
+          @Html.AntiForgeryToken()
+          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+          @*<form class="needs-validation" novalidate id="form">*@
+          <div class="form-group row d-flex justify-content-center mt-3">
+            @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
+            <div class="col-sm-8 col-xl-6">
+              @if (ViewBag.DisableEmailTextbox)
+              {
+                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "" } })
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <small id="headlineHelpBlock" class="form-text text-muted">
+                  @Strings.Step2_ExternalProviderInfoText @ExternalProviderType
+                </small>
+              }
+              else
+              {
+                <div class="input-group">
+                  @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
+                  @if (ViewBag.ShowResendEmailButton)
+                  {
+                    <span class="input-group-btn">
+                      <button id="send_email_confirm_btn" class="btn btn-dark" type="button" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">@Strings.Step2_ResendConfirmationLinkBtn</button>
+                    </span>
+                  }
                 </div>
-                <div class="row pl-xl-3 pr-xl-3 offset-xl-4">
 
-                    <div class="col-4 col-xl-2 stepwizard-step">
-                        <a href="#step-1" class="btn btn-default btn-circle" disabled="disabled">1</a>
-                        <p>@Strings.ProfileWizard_ProfileStep1</p>
-                    </div>
-                    <div class="col-4 col-xl-2 stepwizard-step">
-                        <a href="#step-2" class="btn btn-dark btn-circle">2</a>
-                        <p>@Strings.ProfileWizard_ProfileStep2</p>
-                    </div>
-                    <div class="col-4 col-xl-2 stepwizard-step ">
-                        <a href="#step-3" type="class=" btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>@Strings.ProfileWizard_ProfileStep3</p>
-                    </div>
+                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
+                  <small class="form-text text-muted">
+                    @Strings.ProfileConfirmationEmailInfoText
+                  </small>
                 </div>
-
-                <!-- Text section -->
-                <div class="row mt-1">
-                    <div class="col text-center">
-                        <p>
-                            <strong>@Strings.Step2_ProfileDescriptionText1</strong><br />@Strings.Step2_ProfileDescriptionText2<br />
-                        </p>
-
-                    </div>
-                </div>
-
-                <!-- Form for collecting user information -->
-                @using (Html.BeginForm("Step2", "Profile", FormMethod.Post, new { id = "profile_info_form" }))
-                {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-
-                    @*<form class="needs-validation" novalidate id="form">*@
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
-                        <div class="col-sm-8 col-xl-6">
-                            @if (ViewBag.DisableEmailTextbox)
-                            {
-                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", @readonly = "readonly", placeholder = "" } })
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                <small id="headlineHelpBlock" class="form-text text-muted">
-                                    @Strings.Step2_ExternalProviderInfoText @ExternalProviderType
-                                </small>
-                            }
-                            else
-                            {
-                                <div class="input-group">
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "" } })
-                                    @if (ViewBag.ShowResendEmailButton)
-                                    {
-                                        <span class="input-group-btn">
-                                            <button id="send_email_confirm_btn" class="btn btn-dark" type="button" style="border-top-left-radius: 0;border-bottom-left-radius: 0;">@Strings.Step2_ResendConfirmationLinkBtn</button>
-                                        </span>
-                                    }
-                                </div>
-
-                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                                <div class="alert alert-success" data-email-confirmation-alert="" style="display:none; padding:5px 10px;margin-top:5px;margin-bottom:0px;">
-                                    <small class="form-text text-muted">
-                                        @Strings.ProfileConfirmationEmailInfoText
-                                    </small>
-                                </div>
-                            }
-
-
-                        </div>
-                    </div>
-
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
-                        <div class="col-sm-8 col-xl-6">
-                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your full name" } })
-                            <small id="fullnameHelpBlock" class="form-text text-muted">
-
-                            </small>
-                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        <label for="UrlUsername" class="col-sm-4 col-xl-2 col-form-label">
-                            @Strings.Username
-                            <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameValidText" id="valid_username_icon" style="display: none;"></i>
-                            <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameInvalidText" id="invalid_username_icon" style="display: none;"></i>
-                        </label>
-                        <div class="col-sm-8 col-xl-6">
-                            @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = Strings.ProfileEnterUsernamePlaceHolder } })
-                            <small id="fullnameHelpBlock" class="form-text text-muted">
-
-                            </small>
-                            <div class="" id="usernames_suggestion_wrapper">
-
-                            </div>
-                            @Html.ValidationMessageFor(model => model.UrlUsername, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        <label for="YearOfBirth" class="col-sm-4 col-xl-2 col-form-label">@Strings.YearOfBirth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
-                        <div class="col-sm-8 col-xl-6">
-                            @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
-                        <div class="col-sm-8 col-xl-6">
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.Sex, _EnSex.Female, new { @class = "form-check-input", id = "radio_sex_female" })
-                                @Html.Label("radio_sex_female", Strings.Female, new { @class = "form-check-label" })
-                            </div>
-                            <div class="form-check">
-                                @Html.RadioButtonFor(model => model.Sex, _EnSex.Male, new { @class = "form-check-input", id = "radio_sex_male" })
-                                @Html.Label("radio_sex_male", Strings.Male, new { @class = "form-check-label" })
-                            </div>
-                            @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        @Html.LabelFor(model => model.PreferredCurrency, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
-                        <div class="col-sm-8 col-xl-6">
-                            @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), Strings.Lookup_Select, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PreferredCurrency, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-                    <div class="form-group row d-flex justify-content-center mt-3">
-                        @Html.LabelFor(model => model.PreferredLanguage, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
-                        <div class="col-sm-8 col-xl-6">
-                            @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
-                            @Html.ValidationMessageFor(model => model.PreferredLanguage, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-
-
-                    <hr class="mt-5" />
-                    @*</form>*@
-                    <!-- Navigation of the wizard -->
-                    <div class="form-group row d-flex justify-content-center">
-                        @*<a href="profile_start_wizard_page_1.html" class="btn btn-dark mr-3" role="button">Back</a>*@
-                        @*<a href="profile_start_wizard_page_3.html" class="btn btn-dark" role="button">Next</a>*@
-                        @*<input type="submit" name="SubmitAction" class="btn btn-dark mr-3 cancel" formnovalidate="formnovalidate" role="button" value="@Strings.Back" />*@
-                        @Html.ActionLink(Strings.Back, "Step1", "Profile", new { @class = "btn btn-dark mr-3 cancel" })
-                        <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="@Strings.Next" />
-                    </div>
-                }
-
-
+              }
 
 
             </div>
+          </div>
 
-        </div>
+          <div class="form-group row d-flex justify-content-center mt-3">
+            @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
+            <div class="col-sm-8 col-xl-6">
+              @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", placeholder = "Enter your full name" } })
+              <small id="fullnameHelpBlock" class="form-text text-muted">
 
-    </div> <!-- container -->
+              </small>
+              @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center mt-3">
+            <label for="UrlUsername" class="col-sm-4 col-xl-2 col-form-label">
+              @Strings.Username
+              <i class="fa fa-check-circle green" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameValidText" id="valid_username_icon" style="display: none;"></i>
+              <i class="fa fa-times-circle red" data-toggle="tooltip" data-placement="top" title="@Strings.ProfileUsernameInvalidText" id="invalid_username_icon" style="display: none;"></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.EditorFor(model => model.UrlUsername, new { htmlAttributes = new { @class = "form-control", placeholder = Strings.ProfileEnterUsernamePlaceHolder } })
+              <small id="fullnameHelpBlock" class="form-text text-muted">
+
+              </small>
+              <div class="" id="usernames_suggestion_wrapper">
+
+              </div>
+              @Html.ValidationMessageFor(model => model.UrlUsername, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center mt-3">
+            <label for="YearOfBirth" class="col-sm-4 col-xl-2 col-form-label">@Strings.YearOfBirth:  <i class="fa fa-question-circle" aria-hidden="true"></i></label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.YearOfBirth, new SelectList(ViewBag.YearsOfBirth, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.YearOfBirth, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center mt-3">
+            @Html.LabelFor(model => model.Sex, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
+            <div class="col-sm-8 col-xl-6">
+              <div class="form-check">
+                @Html.RadioButtonFor(model => model.Sex, _EnSex.Female, new { @class = "form-check-input", id = "radio_sex_female" })
+                @Html.Label("radio_sex_female", Strings.Female, new { @class = "form-check-label" })
+              </div>
+              <div class="form-check">
+                @Html.RadioButtonFor(model => model.Sex, _EnSex.Male, new { @class = "form-check-input", id = "radio_sex_male" })
+                @Html.Label("radio_sex_male", Strings.Male, new { @class = "form-check-label" })
+              </div>
+              @Html.ValidationMessageFor(model => model.Sex, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center mt-3">
+            @Html.LabelFor(model => model.PreferredCurrency, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.PreferredCurrency, new SelectList(ViewBag.CurrencyList, "Code", "Code"), Strings.Lookup_Select, new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.PreferredCurrency, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center mt-3">
+            @Html.LabelFor(model => model.PreferredLanguage, htmlAttributes: new { @class = "col-sm-4 col-xl-2 col-form-label" })
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.PreferredLanguage, new SelectList(ViewBag.LanguagesList, "Value", "Key"), Strings.Lookup_Select, new { @class = "form-control" })
+              @Html.ValidationMessageFor(model => model.PreferredLanguage, "", new { @class = "text-danger" })
+            </div>
+          </div>
+
+
+          <hr class="mt-5" />
+          @*</form>*@
+          <!-- Navigation of the wizard -->
+          <div class="form-group row d-flex justify-content-center">
+            @*<a href="profile_start_wizard_page_1.html" class="btn btn-dark mr-3" role="button">Back</a>*@
+            @*<a href="profile_start_wizard_page_3.html" class="btn btn-dark" role="button">Next</a>*@
+            @*<input type="submit" name="SubmitAction" class="btn btn-dark mr-3 cancel" formnovalidate="formnovalidate" role="button" value="@Strings.Back" />*@
+            @Html.ActionLink(Strings.Back, "Step1", "Profile", new { @class = "btn btn-dark mr-3 cancel" })
+            <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="@Strings.Next" />
+          </div>
+        }
+      </div>
+
+    </div>
+
+  </div> <!-- container -->
 </section><!-- registration-section -->
 
 @section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Scripts/site/Utilities.js"></script>
-    <script src="~/Scripts/site/UserProfile.js"></script>
+  @Scripts.Render("~/bundles/jqueryval")
+  <script src="~/Scripts/site/Utilities.js"></script>
+  <script src="~/Scripts/site/UserProfile.js"></script>
 
-    <script>
+  <script>
         var _F2M_Utilities = new F2M_Utilities();
         var _UserProfile = new UserProfile(_F2M_Utilities);
 
@@ -296,6 +292,6 @@
                 }
             })
         });
-    </script>
+  </script>
 
 }

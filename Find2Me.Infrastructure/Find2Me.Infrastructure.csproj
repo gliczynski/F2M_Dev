@@ -64,12 +64,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbModels\Category.cs" />
     <Compile Include="DbModels\UserAdImage.cs" />
     <Compile Include="DbModels\Configuration.cs" />
     <Compile Include="DbModels\Currency.cs" />
     <Compile Include="DbModels\Logs.cs" />
     <Compile Include="DbModels\StoredProcedureResponses.cs" />
     <Compile Include="DbModels\UserAd.cs" />
+    <Compile Include="DbModels\UserAdInformation.cs" />
+    <Compile Include="DbModels\UserAdPriceReward.cs" />
     <Compile Include="DbModels\UserConfiguration.cs" />
     <Compile Include="DbModels\UserFollower.cs" />
     <Compile Include="EmailHelperService.cs" />
@@ -140,6 +143,26 @@
     <Compile Include="Migrations\201908040504122_userAds_add_image_number.Designer.cs">
       <DependentUpon>201908040504122_userAds_add_image_number.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201910311251328_10312019550PM_isdraft_column_userad.cs" />
+    <Compile Include="Migrations\201910311251328_10312019550PM_isdraft_column_userad.Designer.cs">
+      <DependentUpon>201910311251328_10312019550PM_isdraft_column_userad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911011219062_useradinformation_tbl.cs" />
+    <Compile Include="Migrations\201911011219062_useradinformation_tbl.Designer.cs">
+      <DependentUpon>201911011219062_useradinformation_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201911011954385_useradinformation_categoryId_foreign_key_category_tbl.cs" />
+    <Compile Include="Migrations\201911011954385_useradinformation_categoryId_foreign_key_category_tbl.Designer.cs">
+      <DependentUpon>201911011954385_useradinformation_categoryId_foreign_key_category_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001081921283_userAdPriceReward_tbl.cs" />
+    <Compile Include="Migrations\202001081921283_userAdPriceReward_tbl.Designer.cs">
+      <DependentUpon>202001081921283_userAdPriceReward_tbl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001081932439_db-upadate.cs" />
+    <Compile Include="Migrations\202001081932439_db-upadate.Designer.cs">
+      <DependentUpon>202001081932439_db-upadate.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="OAuthReponses.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -150,6 +173,8 @@
       <DesignTime>True</DesignTime>
     </Compile>
     <Compile Include="UtilityExtension.cs" />
+    <Compile Include="ViewModels\CategoryVM.cs" />
+    <Compile Include="ViewModels\ConfigurationVM.cs" />
     <Compile Include="ViewModels\CurrencyVM.cs" />
     <Compile Include="ViewModels\UserAdVM.cs" />
     <Compile Include="ViewModels\UserFollowerVM.cs" />
@@ -216,6 +241,21 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201908040504122_userAds_add_image_number.resx">
       <DependentUpon>201908040504122_userAds_add_image_number.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201910311251328_10312019550PM_isdraft_column_userad.resx">
+      <DependentUpon>201910311251328_10312019550PM_isdraft_column_userad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911011219062_useradinformation_tbl.resx">
+      <DependentUpon>201911011219062_useradinformation_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201911011954385_useradinformation_categoryId_foreign_key_category_tbl.resx">
+      <DependentUpon>201911011954385_useradinformation_categoryId_foreign_key_category_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001081921283_userAdPriceReward_tbl.resx">
+      <DependentUpon>202001081921283_userAdPriceReward_tbl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001081932439_db-upadate.resx">
+      <DependentUpon>202001081932439_db-upadate.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SqlScripts\SqlScripts.resx">
       <Generator>ResXFileCodeGenerator</Generator>
