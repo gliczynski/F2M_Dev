@@ -1,151 +1,288 @@
-﻿@using Find2Me.Infrastructure;
+﻿@model Find2Me.Infrastructure.ViewModels.UserAdImageVM
+@using Find2Me.Infrastructure;
 @{
-    ViewBag.Title = "Ad Wizard Step1";
+  ViewBag.Title = "Ad Wizard Step1";
 }
 
 <section class="adwizard-section">
-    <div class="container mt-3">
-        <div class="row">
-            <div class="col-12 d-flex justify-content-md-between align-items-center">
-                <div>
-                    <h1 class="d-inline-flex pr-3">@Strings.AdWizard_Step1_PageHeader</h1>
-                </div>
-            </div>
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">@Strings.AdWizard_Step1_PageHeader</h1>
         </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+    <style media="screen">
+      .stepwizard-step p {
+        margin-top: 10px;
+      }
+
+      .stepwizard-row {
+        display: table-row;
+      }
+
+      .stepwizard {
+        display: table;
+        width: 75%;
+        position: relative;
+      }
+
+      .stepwizard-step a[disabled] {
+        opacity: 1 !important;
+        filter: alpha(opacity=100) !important;
+        background-color: #fff;
+        border-color: #ccc;
+      }
+
+      .stepwizard-row:before {
+        top: 14px;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        z-order: 0;
+      }
+
+      .stepwizard-step {
+        display: table-cell;
+        text-align: center;
+        position: relative;
+      }
+
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+
+      .img_frame {
+        max-height: 247.5px;
+        max-width: 247.5px;
+      }
+    </style>
+
+    <div class="row mt-5">
+      @*Page Alerts Partial*@
+      @Html.Partial("_PageAlertsPartial")
+      <div class="col">
         <div class="row">
-            <div class="col">
-                <hr class="pt-0 mt-0 mb-0" />
-            </div>
+          <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
+            <div class="stepwizard-row"> </div>
+          </div>
         </div>
-        <style media="screen">
-            .stepwizard-step p {
-                margin-top: 10px;
-            }
+        <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
 
-            .stepwizard-row {
-                display: table-row;
-            }
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-1" type="button" class="btn btn-dark btn-circle">1</a>
+            <p>@Strings.AdWizard_Step1_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
+            <p>@Strings.AdWizard_Step2_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>@Strings.AdWizard_Step3_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+            <p>@Strings.AdWizard_Step4_IconText</p>
+          </div>
+        </div>
 
-            .stepwizard {
-                display: table;
-                width: 75%;
-                position: relative;
-            }
-
-            .stepwizard-step a[disabled] {
-                opacity: 1 !important;
-                filter: alpha(opacity=100) !important;
-                background-color: #fff;
-                border-color: #ccc;
-            }
-
-            .stepwizard-row:before {
-                top: 14px;
-                bottom: 0;
-                position: absolute;
-                content: " ";
-                width: 100%;
-                height: 1px;
-                background-color: #ccc;
-                z-order: 0;
-            }
-
-            .stepwizard-step {
-                display: table-cell;
-                text-align: center;
-                position: relative;
-            }
-
-            .btn-circle {
-                width: 30px;
-                height: 30px;
-                text-align: center;
-                padding: 6px 0;
-                font-size: 12px;
-                line-height: 1.428571429;
-                border-radius: 15px;
-            }
-        </style>
-
-        <div class="row mt-5">
-            <div class="col">
-                <div class="row">
-                    <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
-                        <div class="stepwizard-row"> </div>
-                    </div>
-                </div>
-                <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
-
-                    <div class="col-3 col-xl-2 stepwizard-step">
-                        <a href="#step-1" type="button" class="btn btn-dark btn-circle">1</a>
-                        <p>@Strings.AdWizard_Step1_IconText</p>
-                    </div>
-                    <div class="col-3 col-xl-2 stepwizard-step">
-                        <a href="#step-2" type="button" class="btn btn-default btn-circle" disabled="disabled">2</a>
-                        <p>@Strings.AdWizard_Step2_IconText</p>
-                    </div>
-                    <div class="col-3 col-xl-2 stepwizard-step ">
-                        <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
-                        <p>@Strings.AdWizard_Step3_IconText</p>
-                    </div>
-                    <div class="col-3 col-xl-2 stepwizard-step ">
-                        <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
-                        <p>@Strings.AdWizard_Step4_IconText</p>
-                    </div>
-                </div>
-
-                <div class="row mt-1">
-                    <div class="col text-center">
-                        <p>
-                            @Strings.AdWizard_Step1_DescriptionText
-                        </p>
-                    </div>
-                </div>
-                <div class="row mt-1">
-                    <div class="col text-center">
-                        <small>@Strings.AdWizard_Step1_ImageUploadedCountText : 1/10</small>
-                    </div>
-                </div>
-                @using (Html.BeginForm("UploadAdImage", "Ad", new { returnUrl = Url.Action() }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload_ad_image_form", style = "display: inline-block;" }))
+        <div class="row mt-1">
+          <div class="col text-center">
+            <p>
+              @Strings.AdWizard_Step1_DescriptionText
+            </p>
+          </div>
+        </div>
+        <div class="row mt-1">
+          <div class="col text-center">
+            <small>@Strings.AdWizard_Step1_ImageUploadedCountText : @ViewBag.TotalImagesUploaded/10</small>
+          </div>
+        </div>
+        @using (Html.BeginForm("UploadAdImage", "Ad", new { returnUrl = Url.Action() }, FormMethod.Post, new { enctype = "multipart/form-data", id = "upload_ad_image_form", style = "margin-top: 2rem" }))
+        {
+          <div class="container">
+            <div id="items">
+              <div class="row text-center text-lg-left" style="margin: 0!important;">
+                @if (ViewBag.AdImages != null)
                 {
-                    <div class="container">
-                        <div class="row text-center text-lg-left">
-                            <div class="col-lg-3 col-md-4 col-xs-6">
-                                <a href="#" class="d-block mb-0 h-100" role="button" id="upload_image_btn">
-                                    <img class="img-fluid img-thumbnail" src="/html/img/ThumbUploadImage.png" alt="">
-                                </a>
-                            </div>
-                        </div>
-                        @Html.AntiForgeryToken()
+                  foreach (var item in ViewBag.AdImages)
+                  {
+                    <div class="col-lg-3 col-md-4 col-xs-6 img-box" id="image_container_@item.Id">
+                      <a href="#/" data-target="#delete_image" data-toggle="modal" onclick="DeleteImagePopup(@item.Id)"><i class="fa fa-trash-o"></i></a>
+                      <a href="#/" class="d-block h-100" role="button" id="uploaded_image_@item.Id">
+                        <img class="img-fluid img-thumbnail" src="@_FileSavingPaths.UserAdsPath/@item.AdImageSelected" alt="">
+                      </a>
                     </div>
-                    <hr class="mt-5" />
-                    <div class="form-group row d-flex justify-content-center">
-                        <a href="ad_wizard2.html" class="btn btn-dark" role="button">@Strings.Next</a>
-                    </div>
-                    <input type="file" id="ad_picture_input" name="adimage" accept="image/*" style="display: none;">
-                    <input type="hidden" id="adImageNumber" name="adImageNumber" value="1" >
+                  }
                 }
+                @if (ViewBag.TotalImagesUploaded < 10)
+                {
+                  <div class="col-lg-3 col-md-4 col-xs-6 img-box nosort">
+                    <a href="#" class="d-block mb-0 h-100" role="button" id="upload_image_btn">
+                      <img class="img-fluid img-thumbnail" src="/html/img/ThumbUploadImage.png" alt="">
+                    </a>
+                  </div>
+                }
+              </div>
             </div>
-        </div>
-    </div> <!-- container -->
+            @Html.AntiForgeryToken()
+          </div>
+          <hr class="mt-5" />
+          <div class="form-group row d-flex justify-content-center">
+            <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="@Strings.Next" />
+            @*<a href="ad_wizard2.html" class="btn btn-dark" role="button">@Strings.Next</a>*@
+          </div>
+          <input type="file" id="ad_picture_input" name="adimage" accept="image/*" style="display: none;" />
+          <input type="hidden" id="adImageNumber" name="adImageNumber" value="@ViewBag.ImageNumber">
+          <input type="hidden" id="adID" name="adID" value="@ViewBag.AdId">
+        }
+      </div>
+    </div>
+  </div> <!-- container -->
 </section><!-- adwizard-section -->
 <!-- adwizard-section -->
 <!-- Image Cropper for Edit/Cropping Of Image -->
+<div class="modal fade" id="edit_crop_image_modal" tabindex="-1" role="dialog" aria-labelledby="modalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="modalLabel">@Strings.Step1_UploadImageModalHeading</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        @if (!string.IsNullOrEmpty(Model.AdImageOriginal))
+        {
+          <div class="img-container">
+            <div class="row">
+              <div class="col col-8">
+                <p>
+                  <strong>@Strings.Step1_OriginalImage</strong>
+                </p>
+                <div class="cropper-container" style="height: 400px;">
+                  <img id="cropper_image" src="@_FileSavingPaths.UserAdsPath/@Model.AdImageOriginal" />
+                </div>
+              </div>
+              <div class="col col-4">
+                <p>
+                  <strong>@Strings.Step1_CropView</strong>
+                </p>
+                <div class="preview">
+                </div>
+
+                <br />
+                <div class="progress" style="display: none;">
+                  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">0%</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        }
+        else
+        {
+          <div class="alert alert-danger" role="alert">
+            <i class="fa fa-info-circle fa-fw"></i> @Strings.Step1_ImageNotUploadedAlertText
+          </div>
+        }
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">@Strings.Step1_CropperModalCancelBtn</button>
+        @if (!string.IsNullOrEmpty(Model.AdImageOriginal))
+        {
+          <button type="button" class="btn btn-dark" id="crop">@Strings.Step1_CropperModalUpdateBtn</button>
+        }
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="delete_image_popup_container"></div>
+
 
 @section Scripts{
-    @Scripts.Render("~/bundles/jqueryval")
-    <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
+  @Scripts.Render("~/bundles/jqueryval")
+  @Scripts.Render("~/bundles/site")
+  <script src="~/Content/plugins/cropperjs-master/dist/cropper.min.js"></script>
+  <script src="https://raw.githack.com/SortableJS/Sortable/master/Sortable.js"></script>
 
-    <script>
-        var cropData = "";
+  <script>
+    var cropData = "";
 
-        $('#upload_image_btn').click(function () {
-            $('#ad_picture_input').click();
-        });
+    $('#upload_image_btn').click(function () {
+        $('#ad_picture_input').click();
+    });
 
-        $('#ad_picture_input').on('change', function () {
+    $('#ad_picture_input').on('change', function () {
+      debugger;
+      let files = $('#ad_picture_input').get(0).files;
+      let isSupportedFileType = true;
+      // let the configuration size
+      // TODO: Add to Configuration
+      let imageSize = 2;
+
+      for (var i = 0; i < files.length; i++) {
+        // let the iamge size in mb
+        let fileSize = files[i].size / 1024 / 1024;
+
+        if ((files[i].type == "image/jpeg" || files[i].type == "image/png" || files[i].type == "image/gif") && fileSize <= imageSize ) {
+          isSupportedFileType = true;
+        } else {
+          isSupportedFileType = false;
+        }
+      }
+
+      if (isSupportedFileType == false) {
+        $.notify({
+            message: '@Strings.SupportedImageTypeAndSize' + ' ' + imageSize + ' MB'
+          },
+          {
+            type: 'danger',
+            position: 'absolute',
+            placement: {
+              from: 'top',
+              align: 'center'
+            },
+
+            timer: 1500,
+            z_index: 10000
+          });
+
+        return false;
+      }
+
             $('#upload_ad_image_form').submit();
-        });
+    });
+
+        function each(arr, callback) {
+          var length = arr.length;
+          var i;
+
+          for (i = 0; i < length; i++) {
+              callback.call(arr, arr[i], i, arr);
+          }
+
+          return arr;
+        }
 
         window.addEventListener('DOMContentLoaded', function () {
             var image = document.querySelector('#cropper_image');
@@ -158,19 +295,19 @@
 
             var cropper;
 
-            @if(Model.ProfileImageData != null)
+            @*@if(Model.AdImageOriginal != null)
             {
                 <text>
-            cropData = @Html.Raw(Model.ProfileImageData.GetCroppingDataString());
+            cropData = @Html.Raw(Model.AdImageOriginal.GetCroppingDataString());
                 </text>
-            }
+            }*@
 
-            @if (ViewBag.OpenEditProfileImageModel)
+            @*@if (ViewBag.OpenEditProfileImageModel)
             {
                 <text>
                     $modal.modal('show');
                 </text>
-            }
+            }*@
 
             function ConstructCropper() {
                 cropper = new Cropper(image, {
@@ -335,5 +472,52 @@
                 }
             });
         });
-    </script>
+
+    function DeleteImagePopup(imageId) {
+      $('#delete_image_popup_container').html('');
+      $('#delete_image_popup_container').html(`
+        <div class="modal fade show" id="delete_image" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exampleModalLabel">Delete Ad Image</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">×</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <p>
+                  Are you sure you want to delete the image?
+                </p>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">No</ button>
+                <button type="submit" class="btn btn-danger" id="delete_image_yes" onclick="DeleteImage(${imageId})">Yes</ button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `);
+    }
+
+    function DeleteImage(imageId) {
+      $('#delete_image_yes').prop('data-dismiss', 'modal');
+      $('#image_container_' + imageId).remove();
+      location.href = "/en/Ad/DeleteImage?imageId=" + imageId
+    }
+  </script>
+
+  <script>
+    var el = document.querySelector('#items .row');
+    var el2 = document.querySelector('#items .nosort')
+    var sortable = Sortable.create(el, {
+      animation: 200,
+      ghostClass: 'placeholder',
+    });
+    var sortable = Sortable.create(el2, {
+      animation: 200,
+      // Do not allow items to be put into this list
+      sort: false
+    });
+  </script>
 }

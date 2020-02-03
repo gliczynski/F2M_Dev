@@ -1,29 +1,29 @@
 ﻿@using Find2Me.Infrastructure;
 @{
-    var showAlertStyle = "display: none";
-    var alertClass = "";
-    var alertMessage = "";
-    if (TempData["ResponseResult"] != null)
+  var showAlertStyle = "display: none";
+  var alertClass = "";
+  var alertMessage = "";
+  if (TempData["ResponseResult"] != null)
+  {
+    ResponseResult<Object> responseResult = (ResponseResult<Object>)TempData["ResponseResult"];
+    if (responseResult != null)
     {
-        ResponseResult<Object> responseResult = (ResponseResult<Object>)TempData["ResponseResult"];
-        if (responseResult != null)
-        {
-            showAlertStyle = "display : block";
-            if (responseResult.Success)
-            {
-                alertClass = "alert-success";
-                alertMessage = "<i class='fa fa-check-circle fa-fw'></i> " + responseResult.Message;
-            }
-            else
-            {
-                alertClass = "alert-danger";
-                alertMessage = "<i class='fa fa-exclamation-circle fa-fw'></i> " + responseResult.Message;
-            }
-        }
+      showAlertStyle = "display : block";
+      if (responseResult.Success)
+      {
+        alertClass = "alert-success";
+        alertMessage = "<i class='fa fa-check-circle fa-fw'></i> " + responseResult.Message;
+      }
+      else
+      {
+        alertClass = "alert-danger";
+        alertMessage = "<i class='fa fa-exclamation-circle fa-fw'></i> " + responseResult.Message;
+      }
     }
+  }
 }
 
 <!-- Page Alert for Success and Error Messages -->
 <div class="col-sm-12 col-md-12 mt-12">
-    <div class="alert @alertClass" id="page_message_alert" role="alert" style="@showAlertStyle;">@Html.Raw(alertMessage)</div>
+  <div class="alert @alertClass" id="page_message_alert" role="alert" style="@showAlertStyle;">@Html.Raw(alertMessage)</div>
 </div>

@@ -1,0 +1,351 @@
+﻿@model Find2Me.Infrastructure.ViewModels.UserAdInformationVM
+@using Find2Me.Infrastructure;
+@{
+  ViewBag.Title = "Ad Wizard Step2";
+}
+
+@section Styles{
+
+  <style>
+
+    .label {
+      display: inline !important;
+      padding: .2em .6em .3em !important;
+      font-size: 75% !important;
+      font-weight: 700 !important;
+      line-height: 1 !important;
+      color: #fff !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      vertical-align: baseline !important;
+      border-radius: .25em !important;
+    }
+
+    .bootstrap-tagsinput .tag {
+      margin-right: 0 !important;
+    }
+
+    .label-info {
+      background-color: #5bc0de !important;
+    }
+
+    .bootstrap-tagsinput {
+      width: 100% !important;
+      box-shadow: none !important;
+    }
+
+      .bootstrap-tagsinput input {
+        font-size: 12px;
+        padding: 0 !important;
+      }
+  </style>
+
+}
+
+<section class="adwizard-section">
+  <div class="container mt-3">
+    <div class="row">
+      <div class="col-12 d-flex justify-content-md-between align-items-center">
+        <div>
+          <h1 class="d-inline-flex pr-3">New ad</h1>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col">
+        <hr class="pt-0 mt-0 mb-0" />
+      </div>
+    </div>
+    <style media="screen">
+      .stepwizard-step p {
+        margin-top: 10px;
+      }
+
+      .stepwizard-row {
+        display: table-row;
+      }
+
+      .stepwizard {
+        display: table;
+        width: 75%;
+        position: relative;
+      }
+
+      .stepwizard-step a[disabled] {
+        opacity: 1 !important;
+        filter: alpha(opacity=100) !important;
+        background-color: #fff;
+        border-color: #ccc;
+      }
+
+      .stepwizard-row:before {
+        top: 14px;
+        bottom: 0;
+        position: absolute;
+        content: " ";
+        width: 100%;
+        height: 1px;
+        background-color: #ccc;
+        z-order: 0;
+      }
+
+      .stepwizard-step {
+        display: table-cell;
+        text-align: center;
+        position: relative;
+      }
+
+      .btn-circle {
+        width: 30px;
+        height: 30px;
+        text-align: center;
+        padding: 6px 0;
+        font-size: 12px;
+        line-height: 1.428571429;
+        border-radius: 15px;
+      }
+
+      #Description {
+        resize: none;
+        min-height: 80px;
+        padding: 5px;
+        overflow: hidden;
+        box-sizing: border-box;
+      }
+    </style>
+
+    <div class="row mt-5">
+      <div class="col">
+        <div class="row">
+          <div class="col-11 mr-0 col-xl-6 offset-xl-3  ">
+            <div class="stepwizard-row"> </div>
+          </div>
+        </div>
+        <div class="row pl-xl-3 pr-xl-3 offset-xl-3">
+
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-1" type="button" class="btn btn-default btn-circle" disabled="disabled">1</a>
+            <p>@Strings.AdWizard_Step1_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step">
+            <a href="#step-2" type="button" class="btn btn-dark btn-circle">2</a>
+            <p>@Strings.AdWizard_Step2_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-3" type="button" class="btn btn-default btn-circle" disabled="disabled">3</a>
+            <p>@Strings.AdWizard_Step3_IconText</p>
+          </div>
+          <div class="col-3 col-xl-2 stepwizard-step ">
+            <a href="#step-4" type="button" class="btn btn-default btn-circle" disabled="disabled">4</a>
+            <p>@Strings.AdWizard_Step4_IconText</p>
+          </div>
+        </div>
+
+        <div class="row mt-1">
+          <div class="col text-center">
+            <p>
+              @Strings.AdWizard_Step2_DescriptionText1 <br />
+              @Strings.AdWizard_Step2_DescriptionText2
+            </p>
+          </div>
+        </div>
+        @using (Html.BeginForm("AdWizardStep2", "Ad", FormMethod.Post, new { id = "ad_wizard_step_2_form", @class = "mt-xl-5 mt-sm-4" }))
+        {
+          @Html.AntiForgeryToken()
+          @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              Category:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Category" data-content="Select the category that fits your product best."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.DropDownListFor(model => model.CategoryId, new SelectList(ViewBag.Category, "Id", "Name"), Strings.Lookup_Select, new { @class = "form-control" })
+              <!-- <small id="categoryHelpBlock" class="form-text text-muted">
+                Select the category that fits your product best.
+              </small> -->
+              @Html.ValidationMessageFor(model => model.CategoryId, "", new { @class = "text-danger category_validation" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              Original:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="State" data-content="Select witch state you need the your item. "></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              <div class="form-check">
+                @Html.RadioButtonFor(model => model.IsOriginal, _EnOriginal.Original, new { @class = "form-check-input", id = "radio_original", @checked = "true" })
+                @Html.Label("radio_original", Strings.OriginalDescription, new { @class = "form-check-label" })
+              </div>
+              <div class="form-check">
+                @Html.RadioButtonFor(model => model.IsOriginal, _EnOriginal.Fake, new { @class = "form-check-input", id = "radio_fake" })
+                @Html.Label("radio_fake", Strings.FakeDescription, new { @class = "form-check-label" })
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              State:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="State" data-content="Select witch state you need the your item. "></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              <div class="form-check">
+                @Html.RadioButtonFor(model => model.IsState, _EnState.New, new { @class = "form-check-input", id = "radio_new", @checked = "true" })
+                @Html.Label("radio_new", Strings.NewDescription, new { @class = "form-check-label" })
+              </div>
+              <div class="form-check">
+                @Html.RadioButtonFor(model => model.IsState, _EnState.Used, new { @class = "form-check-input", id = "radio_used" })
+                @Html.Label("radio_used", Strings.UsedDescription, new { @class = "form-check-label" })
+              </div>
+            </div>
+          </div>
+          <div class="form-group row d-flex justify-content-center mt-3">
+            <label for="inputHeadline" class="col-sm-4 col-xl-2 col-form-label">
+              Headline:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Item headline" data-content="Enter a exact and catchy headline for your product."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.EditorFor(model => model.Headline, new { htmlAttributes = new { @class = "form-control", placeholder = Strings.EnterHeadlinePlaceholder } })
+              <!-- <small id="headlineHelpBlock" class="form-text text-muted"> -->
+              <!--  -->
+              <!-- </small> -->
+              @Html.ValidationMessageFor(model => model.Headline, "", new { @class = "text-danger headline_validation" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputDescription" class="col-sm-4 col-xl-2 col-form-label">
+              Description
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Description" data-content="Describe the product as detailed as possible, so your finders are able to find the exact item you are searching for."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              @Html.TextAreaFor(model => model.Description, new { @class = "form-control", placeholder = Strings.DescriptionPlaceholder })
+              <small id="descriptionHelpBlock" class="form-text text-muted">
+
+              </small>
+              @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger description_validation" })
+            </div>
+          </div>
+
+          <div class="form-group row d-flex justify-content-center">
+            <label for="inputTags" class="col-sm-4 col-xl-2 col-form-label">
+              Tags:
+              <i class="fa fa-question-circle" aria-hidden="true" data-toggle="popover" data-placement="top" title="Tags" data-content="Create or add tags about your item/product. Start with typing #."></i>
+            </label>
+            <div class="col-sm-8 col-xl-6">
+              <input class="form-control" id="tagsInput" />
+              <small id="tagsHelpBlock" class="form-text text-muted">
+                Please add or create tags for others to find or for matching there needs. <br />
+                A tag is added/created by typing a # follow by the word or words with no spaces.  <br />
+                e.g. #carSpeakers #carFrontSpeakers #blaupunktMX-10 <br />
+                By typing you'll get suggestions to pick from or if not found, a space is added, and the tag will be stored when saving the ad <br />
+
+              </small>
+            </div>
+          </div>
+          <hr class="mt-5" />
+          <input type="hidden" id="adID" name="AdId" value="@ViewBag.AdId">
+          <div class="form-group row d-flex justify-content-center">
+            <input type="submit" name="SubmitAction" class="btn btn-secondary mr-2" role="button" value="@Strings.Back" />
+            @*<a href="ad_wizard3.html" class="btn btn-dark" role="button">Next</a>*@
+            <input type="submit" name="SubmitAction" class="btn btn-dark" role="button" value="@Strings.Next" />
+          </div>
+        }
+      </div>
+
+    </div>
+
+  </div> <!-- container -->
+</section><!-- adwizard-section -->
+
+@section Scripts{
+  @Scripts.Render("~/bundles/jqueryval")
+
+  <script>
+    var data = ["Amsterdam",
+    "London",
+    "Paris",
+    "Washington",
+    "New York",
+    "New Jersey",
+    "New Orleans",
+    "Los Angeles",
+    "Sydney",
+    "Melbourne",
+    "Canberra",
+    "Beijing",
+    "New Delhi",
+    "Kathmandu",
+    "Cairo",
+    "Cape Town",
+    "Kinshasa"];
+    var citynames = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('name'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: $.map(data, function (city) {
+            return {
+                name: city
+            };
+        })
+    });
+    citynames.initialize();
+
+    $(document).ready(function () {
+      $('#tagsInput').tagsinput({
+        maxTags: 15, //TODO: Add to configuration
+        confirmKeys: [13, 9, 32],
+        trimValue: true,
+        cancelConfirmKeysOnEmpty: true,
+      });
+
+      var max = 250;
+      $('#descriptionHelpBlock').html(max + ' characters remaining');
+      $('#Description').prop('maxlength', max);
+      $('#Description').keyup(function () {
+        var text_length = $('#Description').val().length;
+        var text_remaining = max - text_length;
+
+        $('#descriptionHelpBlock').html(text_remaining + ' characters remaining');
+      });
+    });
+
+    function ExpandBox(e) {
+      $(e).css({'height':'40','overflow-y':'hidden'}).height(e.scrollHeight);
+    }
+    $('textarea').each(function () {
+      ExpandBox(this);
+    }).on('input', function () {
+      ExpandBox(this);
+    });
+
+    $('#CategoryId').blur((e) => {
+      if (e.target.value == 0) {
+        $('.category_validation').html('@Strings.CategoryRequired');
+      }
+    });
+
+    $('#Headline').blur((e) => {
+      if (e.target.value == '') {
+        $('.headline_validation').html('@Strings.HeadlineRequired');
+      }
+    });
+
+    $('#Description').blur((e) => {
+      if (e.target.value == '') {
+        $('.description_validation').html('@Strings.HeadlineDescriptionRequired');
+      }
+    });
+
+    $('#tagsInput').on('click', (e) => {
+      console.log(e.target.value);
+    });
+
+    let aa = $('#tagsInput').val().split(',');
+
+    console.log($('#tagsInput').val());
+    console.log(aa);
+    console.log(aa);
+
+  </script>
+}

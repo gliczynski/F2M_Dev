@@ -53,6 +53,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CategoryRepository.cs" />
+    <Compile Include="ConfigurationRepository.cs" />
     <Compile Include="LogsRepository.cs" />
     <Compile Include="UserAdRepository.cs" />
     <Compile Include="UserFollowerRepository.cs" />

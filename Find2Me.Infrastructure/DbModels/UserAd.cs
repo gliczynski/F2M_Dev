@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace Find2Me.Infrastructure.DbModels
 {
-    public class UserAd
-    {
-        [Key]
-        public int Id { get; set; }
+  public class UserAd
+  {
+    [Key]
+    public int Id { get; set; }
 
-        public string UserId { get; set; }
+    public string UserId { get; set; }
 
-        public DateTime CreatedOn { get; set; }
-    }
+    public DateTime CreatedOn { get; set; }
+
+    public bool IsDraft { get; set; }
+  }
 }

@@ -13,10 +13,10 @@ namespace Find2Me.Infrastructure.ViewModels
     {
         public string Id { get; set; }
 
-        [Display(Name = "EmailAddress", ResourceType =typeof(Find2Me.Resources.Strings))]
+        [Display(Name = "EmailAddress", ResourceType =typeof(Resources.Strings))]
         [Required(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName ="EmailRequired")]
         [EmailAddress(ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "EmailRequired")]
-        [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(Find2Me.Resources.Strings), ErrorMessageResourceName = "EmailRequired")]
+        [DataType(DataType.EmailAddress, ErrorMessageResourceType = typeof(Resources.Strings), ErrorMessageResourceName = "EmailRequired")]
         public string Email { get; set; }
 
         public string UserName { get; set; }

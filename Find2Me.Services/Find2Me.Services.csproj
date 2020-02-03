@@ -62,6 +62,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AutoMapperConfig.cs" />
+    <Compile Include="CategoryService.cs" />
+    <Compile Include="ConfigurationService.cs" />
     <Compile Include="CurrencyService.cs" />
     <Compile Include="LogsSerivce.cs" />
     <Compile Include="UserAccountService.cs" />

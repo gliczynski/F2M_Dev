@@ -11,69 +11,69 @@ using System.Web;
 
 namespace Find2Me.Infrastructure
 {
-    public class EmailHelperService
+  public class EmailHelperService
+  {
+    internal bool SendEmail(string Subject, string Body, List<MailAddress> Receivers, List<MailAddress> BCC)
     {
-        internal bool SendEmail(string Subject, string Body, List<MailAddress> Receivers, List<MailAddress> BCC)
+      try
+      {
+
+        string SmtpServer = ConfigurationManager.AppSettings["EmailSMTPServer"];
+        int SmtpPort = Convert.ToInt32(ConfigurationManager.AppSettings["EmailSMTPPort"]);
+        string SmtpUser = ConfigurationManager.AppSettings["EmailSMTPUser"];
+        string SmtpPassword = ConfigurationManager.AppSettings["EmailSMTPPassword"];
+
+        string FromEmail = ConfigurationManager.AppSettings["EmailFrom"];
+        string FromEmailTitle = ConfigurationManager.AppSettings["FromEmailTitle"];
+
+        SmtpClient smtp = new SmtpClient(SmtpServer, SmtpPort);
+        smtp.EnableSsl = false;
+        smtp.Credentials = new NetworkCredential(SmtpUser, SmtpPassword);
+
+        MailMessage message = new MailMessage();
+        message.From = new MailAddress(FromEmail, FromEmailTitle);
+
+        if (Receivers != null)
         {
-            try
-            {
-
-                string SmtpServer = ConfigurationManager.AppSettings["EmailSMTPServer"];
-                int SmtpPort = Convert.ToInt32(ConfigurationManager.AppSettings["EmailSMTPPort"]);
-                string SmtpUser = ConfigurationManager.AppSettings["EmailSMTPUser"];
-                string SmtpPassword = ConfigurationManager.AppSettings["EmailSMTPPassword"];
-
-                string FromEmail = ConfigurationManager.AppSettings["EmailFrom"];
-                string FromEmailTitle = ConfigurationManager.AppSettings["FromEmailTitle"];
-
-                SmtpClient smtp = new SmtpClient(SmtpServer, SmtpPort);
-                smtp.EnableSsl = false;
-                smtp.Credentials = new NetworkCredential(SmtpUser, SmtpPassword);
-
-                MailMessage message = new MailMessage();
-                message.From = new MailAddress(FromEmail, FromEmailTitle);
-
-                if (Receivers != null)
-                {
-                    foreach (var rec in Receivers)
-                    {
-                        message.To.Add(rec);
-                    }
-                }
-
-                if (BCC != null)
-                {
-                    foreach (var bcc in BCC)
-                    {
-                        message.Bcc.Add(bcc);
-                    }
-                }
-
-                message.Subject = Subject;
-
-                message.Body = HtmlEmailBody(Subject, Body);
-
-                message.IsBodyHtml = true;
-
-                try
-                {
-                    smtp.Send(message);
-                    return true;
-                }
-                catch (Exception e)
-                {
-                    return false;
-                }
-            }
-            catch (Exception e)
-            {
-                return false;
-            }
+          foreach (var rec in Receivers)
+          {
+            message.To.Add(rec);
+          }
         }
 
-        internal string HtmlEmailBody(string preHeaderText, string middleMessageBody)
+        if (BCC != null)
         {
-            string emailHtml = @"<!doctype html>
+          foreach (var bcc in BCC)
+          {
+            message.Bcc.Add(bcc);
+          }
+        }
+
+        message.Subject = Subject;
+
+        message.Body = HtmlEmailBody(Subject, Body);
+
+        message.IsBodyHtml = true;
+
+        try
+        {
+          smtp.Send(message);
+          return true;
+        }
+        catch (Exception e)
+        {
+          return false;
+        }
+      }
+      catch (Exception e)
+      {
+        return false;
+      }
+    }
+
+    internal string HtmlEmailBody(string preHeaderText, string middleMessageBody)
+    {
+      string emailHtml = @"<!doctype html>
 <html>
 
 <head>
@@ -536,49 +536,49 @@ namespace Find2Me.Infrastructure
 
 </html>";
 
-            return emailHtml;
-        }
+      return emailHtml;
+    }
 
-        public bool SendEmailConfirmationTokenMail(string email, string callbackUrl, string confirmationEmailSubject)
-        {
-            throw new NotImplementedException();
-        }
+    public bool SendEmailConfirmationTokenMail(string email, string callbackUrl, string confirmationEmailSubject)
+    {
+      throw new NotImplementedException();
+    }
 
-        /*************************************************************************************/
-        /*************************************************************************************/
+    /*************************************************************************************/
+    /*************************************************************************************/
 
-        public bool SendEmailConfirmationTokenMail(string _RecEmail, string _CallbackUrl, string subject, string langCode)
-        {            
-            StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath("~/Templates/Email/ConfirmationEmail-" + langCode + ".html"));
-            string bodyText = sr.ReadToEnd();
-            sr.Close();
-            bodyText = bodyText.Replace("###_CallbackUrl###", _CallbackUrl);
+    public bool SendEmailConfirmationTokenMail(string _RecEmail, string _CallbackUrl, string subject, string langCode)
+    {
+      StreamReader sr = new StreamReader(HttpContext.Current.Server.MapPath("~/Templates/Email/ConfirmationEmail-" + langCode + ".html"));
+      string bodyText = sr.ReadToEnd();
+      sr.Close();
+      bodyText = bodyText.Replace("###_CallbackUrl###", _CallbackUrl);
 
-            /*        string bodyText = @"
-                        <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
-                            Hello,
-                        </p>
-                        <br>
-                        <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
-                            Please click the link below or click <a href=" + _CallbackUrl + @">here</a> to confirm your email address:
-                            <br />
-                            <br />
-                            <a href='" + _CallbackUrl + "'>" + _CallbackUrl + @"</a>
-                        </p>
-                        <br>
-                        <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
-                            Thank you, <br> 
-                            Find2Me
-                        </p>
-                        ";
-                        string subject = "Confirm your Email Address - Find2Me";
-            */           
+      /*        string bodyText = @"
+                  <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
+                      Hello,
+                  </p>
+                  <br>
+                  <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
+                      Please click the link below or click <a href=" + _CallbackUrl + @">here</a> to confirm your email address:
+                      <br />
+                      <br />
+                      <a href='" + _CallbackUrl + "'>" + _CallbackUrl + @"</a>
+                  </p>
+                  <br>
+                  <p style='font-family: 'Poppins', sans-serif;font-size: 14px;line-height: 26.8px;font-weight: 300;margin: 0;margin-bottom: 15px;'>
+                      Thank you, <br> 
+                      Find2Me
+                  </p>
+                  ";
+                  string subject = "Confirm your Email Address - Find2Me";
+      */
 
-            return SendEmail(subject, bodyText, new List<MailAddress>
+      return SendEmail(subject, bodyText, new List<MailAddress>
             {
                 new MailAddress(_RecEmail),
             }, null);
-            //throw new NotImplementedException();
-        }
+      //throw new NotImplementedException();
     }
+  }
 }

@@ -387,4 +387,127 @@
   <data name="AdWizard_Step4_IconText" xml:space="preserve">
     <value>Summary</value>
   </data>
+  <data name="AdWizard_Step2_DescriptionText1" xml:space="preserve">
+    <value>You need to tell everything about the item that you are searching form.</value>
+  </data>
+  <data name="AdWizard_Step2_DescriptionText2" xml:space="preserve">
+    <value>Fill out the form, and click the info icon for more information.</value>
+  </data>
+  <data name="Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CategoryRequired" xml:space="preserve">
+    <value>Please select a category.</value>
+  </data>
+  <data name="Fake" xml:space="preserve">
+    <value>Fake</value>
+  </data>
+  <data name="FakeDescription" xml:space="preserve">
+    <value>Fake - the product may be a fake or a copy</value>
+  </data>
+  <data name="New" xml:space="preserve">
+    <value>New</value>
+  </data>
+  <data name="NewDescription" xml:space="preserve">
+    <value>New - Original product not used</value>
+  </data>
+  <data name="Original" xml:space="preserve">
+    <value>Original</value>
+  </data>
+  <data name="OriginalDescription" xml:space="preserve">
+    <value>Original - The product needs to an original product</value>
+  </data>
+  <data name="Used" xml:space="preserve">
+    <value>Used</value>
+  </data>
+  <data name="UsedDescription" xml:space="preserve">
+    <value>Used - The product has been used</value>
+  </data>
+  <data name="OriginalRequired" xml:space="preserve">
+    <value>Please select if the product is original or fake</value>
+  </data>
+  <data name="StateRequired" xml:space="preserve">
+    <value>Please select the state of the product</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="DescriptionPlaceholder" xml:space="preserve">
+    <value>Describe the product in details</value>
+  </data>
+  <data name="EnterHeadlinePlaceholder" xml:space="preserve">
+    <value>Headline of the ad</value>
+  </data>
+  <data name="Headline" xml:space="preserve">
+    <value>Headline</value>
+  </data>
+  <data name="HeadlineDescriptionRequired" xml:space="preserve">
+    <value>Please enter the description of the ad.</value>
+  </data>
+  <data name="HeadlineRequired" xml:space="preserve">
+    <value>Please enter a headline for the ad.</value>
+  </data>
+  <data name="State" xml:space="preserve">
+    <value>State</value>
+  </data>
+  <data name="SupportedImageTypeAndSize" xml:space="preserve">
+    <value>Please upload the supported file type such as jpeg, giff, png or tiff and size should be</value>
+  </data>
+  <data name="Ad_Wizard_Step3_Description_Text1" xml:space="preserve">
+    <value>Please name your price that you are willing to pay, if someone finds your item.</value>
+  </data>
+  <data name="Ad_Wizard_Step3_Description_Text2" xml:space="preserve">
+    <value>You can also choose to pay a reward, to the finder of your item. Fill out the form below.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description1" xml:space="preserve">
+    <value>Your ad is online right now, and can be seen by everyone. You can go and see it right here.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description2" xml:space="preserve">
+    <value>Your ad will come online on the</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description3" xml:space="preserve">
+    <value>for everyone to see.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description4" xml:space="preserve">
+    <value>You will get notified with an email, each time someone finds or ask question about your item/product.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description5" xml:space="preserve">
+    <value>You can see all your ads and follow what happens on them. In your profile section, we have created a section called</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Description6" xml:space="preserve">
+    <value>Hope your item/product will be found very soon.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Email_Confirmation" xml:space="preserve">
+    <value>An email has been sent to [user email address] with confirmation on your ad.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Success" xml:space="preserve">
+    <value>Your ad has been succesfully created.</value>
+  </data>
+  <data name="Ad_Wizard_Step5_Thank_You" xml:space="preserve">
+    <value>Thank you for your ad</value>
+  </data>
+  <data name="Ad_Wizard_Step5_What_Happens_Now" xml:space="preserve">
+    <value>What happens now?</value>
+  </data>
+  <data name="Go_To_Ad" xml:space="preserve">
+    <value>Go to ad</value>
+  </data>
+  <data name="Go_To_My_Ads" xml:space="preserve">
+    <value>Go To My Ads</value>
+  </data>
+  <data name="My_Ad" xml:space="preserve">
+    <value>My Ads</value>
+  </data>
+  <data name="PayAndPublishAd" xml:space="preserve">
+    <value>Pay and Publish Ad</value>
+  </data>
+  <data name="SaveAdAsDraft" xml:space="preserve">
+    <value>Save as Draft</value>
+  </data>
+  <data name="Ad_Wizard_Step_3_Your_Price" xml:space="preserve">
+    <value>Your price</value>
+  </data>
+  <data name="Please_Select" xml:space="preserve">
+    <value>Please select</value>
+  </data>
 </root>

@@ -61,6 +61,123 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your price.
+        /// </summary>
+        public static string Ad_Wizard_Step_3_Your_Price {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step_3_Your_Price", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please name your price that you are willing to pay, if someone finds your item..
+        /// </summary>
+        public static string Ad_Wizard_Step3_Description_Text1 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step3_Description_Text1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can also choose to pay a reward, to the finder of your item. Fill out the form below..
+        /// </summary>
+        public static string Ad_Wizard_Step3_Description_Text2 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step3_Description_Text2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your ad is online right now, and can be seen by everyone. You can go and see it right here..
+        /// </summary>
+        public static string Ad_Wizard_Step5_Description1 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your ad will come online on the.
+        /// </summary>
+        public static string Ad_Wizard_Step5_Description2 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for everyone to see..
+        /// </summary>
+        public static string Ad_Wizard_Step5_Description3 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Description3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will get notified with an email, each time someone finds or ask question about your item/product..
+        /// </summary>
+        public static string Ad_Wizard_Step5_Description4 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Description4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can see all your ads and follow what happens on them. In your profile section, we have created a section called.
+        /// </summary>
+        public static string Ad_Wizard_Step5_Description5 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Description5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hope your item/product will be found very soon..
+        /// </summary>
+        public static string Ad_Wizard_Step5_Description6 {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Description6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An email has been sent to [user email address] with confirmation on your ad..
+        /// </summary>
+        public static string Ad_Wizard_Step5_Email_Confirmation {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Email_Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your ad has been succesfully created..
+        /// </summary>
+        public static string Ad_Wizard_Step5_Success {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Success", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank you for your ad.
+        /// </summary>
+        public static string Ad_Wizard_Step5_Thank_You {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_Thank_You", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What happens now?.
+        /// </summary>
+        public static string Ad_Wizard_Step5_What_Happens_Now {
+            get {
+                return ResourceManager.GetString("Ad_Wizard_Step5_What_Happens_Now", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add images, illustration, drawings of what ever you are searching for. The more the better..
         /// </summary>
         public static string AdWizard_Step1_DescriptionText {
@@ -97,6 +214,24 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to You need to tell everything about the item that you are searching form..
+        /// </summary>
+        public static string AdWizard_Step2_DescriptionText1 {
+            get {
+                return ResourceManager.GetString("AdWizard_Step2_DescriptionText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fill out the form, and click the info icon for more information..
+        /// </summary>
+        public static string AdWizard_Step2_DescriptionText2 {
+            get {
+                return ResourceManager.GetString("AdWizard_Step2_DescriptionText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Info &amp; Tags.
         /// </summary>
         public static string AdWizard_Step2_IconText {
@@ -129,6 +264,24 @@ namespace Find2Me.Resources {
         public static string Back {
             get {
                 return ResourceManager.GetString("Back", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string Category {
+            get {
+                return ResourceManager.GetString("Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select a category..
+        /// </summary>
+        public static string CategoryRequired {
+            get {
+                return ResourceManager.GetString("CategoryRequired", resourceCulture);
             }
         }
         
@@ -223,6 +376,24 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string Description {
+            get {
+                return ResourceManager.GetString("Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Describe the product in details.
+        /// </summary>
+        public static string DescriptionPlaceholder {
+            get {
+                return ResourceManager.GetString("DescriptionPlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email address.
         /// </summary>
         public static string EmailAddress {
@@ -237,6 +408,33 @@ namespace Find2Me.Resources {
         public static string EmailRequired {
             get {
                 return ResourceManager.GetString("EmailRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headline of the ad.
+        /// </summary>
+        public static string EnterHeadlinePlaceholder {
+            get {
+                return ResourceManager.GetString("EnterHeadlinePlaceholder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fake.
+        /// </summary>
+        public static string Fake {
+            get {
+                return ResourceManager.GetString("Fake", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fake - the product may be a fake or a copy.
+        /// </summary>
+        public static string FakeDescription {
+            get {
+                return ResourceManager.GetString("FakeDescription", resourceCulture);
             }
         }
         
@@ -277,6 +475,51 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Go to ad.
+        /// </summary>
+        public static string Go_To_Ad {
+            get {
+                return ResourceManager.GetString("Go_To_Ad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Go To My Ads.
+        /// </summary>
+        public static string Go_To_My_Ads {
+            get {
+                return ResourceManager.GetString("Go_To_My_Ads", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Headline.
+        /// </summary>
+        public static string Headline {
+            get {
+                return ResourceManager.GetString("Headline", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter the description of the ad..
+        /// </summary>
+        public static string HeadlineDescriptionRequired {
+            get {
+                return ResourceManager.GetString("HeadlineDescriptionRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please enter a headline for the ad..
+        /// </summary>
+        public static string HeadlineRequired {
+            get {
+                return ResourceManager.GetString("HeadlineRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select.
         /// </summary>
         public static string Lookup_Select {
@@ -295,11 +538,83 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to My Ads.
+        /// </summary>
+        public static string My_Ad {
+            get {
+                return ResourceManager.GetString("My_Ad", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New.
+        /// </summary>
+        public static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New - Original product not used.
+        /// </summary>
+        public static string NewDescription {
+            get {
+                return ResourceManager.GetString("NewDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Next.
         /// </summary>
         public static string Next {
             get {
                 return ResourceManager.GetString("Next", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original.
+        /// </summary>
+        public static string Original {
+            get {
+                return ResourceManager.GetString("Original", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Original - The product needs to an original product.
+        /// </summary>
+        public static string OriginalDescription {
+            get {
+                return ResourceManager.GetString("OriginalDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select if the product is original or fake.
+        /// </summary>
+        public static string OriginalRequired {
+            get {
+                return ResourceManager.GetString("OriginalRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pay and Publish Ad.
+        /// </summary>
+        public static string PayAndPublishAd {
+            get {
+                return ResourceManager.GetString("PayAndPublishAd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select.
+        /// </summary>
+        public static string Please_Select {
+            get {
+                return ResourceManager.GetString("Please_Select", resourceCulture);
             }
         }
         
@@ -574,6 +889,15 @@ namespace Find2Me.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save as Draft.
+        /// </summary>
+        public static string SaveAdAsDraft {
+            get {
+                return ResourceManager.GetString("SaveAdAsDraft", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Sex.
         /// </summary>
         public static string Sex {
@@ -597,6 +921,24 @@ namespace Find2Me.Resources {
         public static string SomeLocalisedString {
             get {
                 return ResourceManager.GetString("SomeLocalisedString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to State.
+        /// </summary>
+        public static string State {
+            get {
+                return ResourceManager.GetString("State", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please select the state of the product.
+        /// </summary>
+        public static string StateRequired {
+            get {
+                return ResourceManager.GetString("StateRequired", resourceCulture);
             }
         }
         
@@ -813,6 +1155,33 @@ namespace Find2Me.Resources {
         public static string Step3_ProfileDescriptionText3 {
             get {
                 return ResourceManager.GetString("Step3_ProfileDescriptionText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please upload the supported file type such as jpeg, giff, png or tiff and size should be.
+        /// </summary>
+        public static string SupportedImageTypeAndSize {
+            get {
+                return ResourceManager.GetString("SupportedImageTypeAndSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Used.
+        /// </summary>
+        public static string Used {
+            get {
+                return ResourceManager.GetString("Used", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Used - The product has been used.
+        /// </summary>
+        public static string UsedDescription {
+            get {
+                return ResourceManager.GetString("UsedDescription", resourceCulture);
             }
         }
         
